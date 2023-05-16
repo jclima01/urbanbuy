@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const ClientAdminSchema = new Schema(
   {
     fullName: { type: String },
-    users: { type: Array, default: [] },
+    users: { type: Schema.Types.ObjectId, ref: "User" },
     logo: { type: String },
     optionsDesing: { type: Array, default: [] },
     catalogue: [{ type: Schema.Types.ObjectId, ref: "Product" }],
