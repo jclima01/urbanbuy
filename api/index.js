@@ -3,11 +3,11 @@ const  dbConnect  = require('./config/db');
 require('dotenv').config()
 const app = express()
 const PORT = process.env.PORT || 5001 // Port Server
-
+const mainRouter = require("./src/routes/index.js");
 // Middleware 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
+app.use(mainRouter)
 
 //Server Listen
 app.listen(PORT , () => {
