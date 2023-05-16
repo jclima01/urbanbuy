@@ -1,19 +1,15 @@
 const { Router } = require ('express');
 const clientAdminRouter = Router();
 const {
-    getClientAdminHandlers,
-    postClientAdminHandler,
+  loginClientAdminHandler,
+  registerClientAdminHandler, 
   } = require("../handlers/ClientAdminHandlers.js");
   
 
-//GET
-
-clientAdminRouter.get('/', getClientAdminHandlers)
 
 
-//POST
-
-clientAdminRouter.post('/', postClientAdminHandler)
+clientAdminRouter.post('/login', loginClientAdminHandler)
+clientAdminRouter.post('/register', registerClientAdminHandler)
 
 //PUT   
 

@@ -1,6 +1,6 @@
 //import controllers
 
-const getClientAdminHandlers = async (req, res) => {
+const loginClientAdminHandler = async (req, res) => {
     try {
 
     } catch (error) {
@@ -8,7 +8,7 @@ const getClientAdminHandlers = async (req, res) => {
     }
   };
 
-  const postClientAdminHandler = async (req, res) => {
+  const registerClientAdminHandler = async (req, res) => {
     try {
 
     } catch (error) {
@@ -17,7 +17,7 @@ const getClientAdminHandlers = async (req, res) => {
   };
   
   module.exports = {
-    getClientAdminHandlers,
-    postClientAdminHandler
+    loginClientAdminHandler,
+    registerClientAdminHandler,
   };
   

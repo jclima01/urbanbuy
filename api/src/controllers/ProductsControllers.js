@@ -1,10 +1,15 @@
 //GETS
 
 //All products
-const getAllProducts = {
 
-    
-};
+const getAllProducts = async () => {
+    try {
+       
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  };
+
 
 const getProductName = {
 

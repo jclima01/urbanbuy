@@ -1,24 +1,20 @@
-const { Router } = require ('express');
+const { Router } = require("express");
 const adminRouter = Router();
 const {
-    getAdminHandlers,
-    postAdminHandler,
-  } = require("../handlers/AdminHandlers.js");
-  
+  loginHandler,
+  registerHandler,
+} = require("../handlers/AdminHandlers.js");
 
 //GET
 
-adminRouter.get('/', getAdminHandlers)
-
-
 //POST
 
-adminRouter.post('/', postAdminHandler)
+adminRouter.post("/register" , registerHandler);
+adminRouter.post("/login", loginHandler);
 
-//PUT   
+//PUT
 
 // adminRouter.put('/',)
-
 
 //DELETE
 
