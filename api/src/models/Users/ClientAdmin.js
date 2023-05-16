@@ -3,12 +3,11 @@ const Schema = mongoose.Schema;
 
 const ClientAdminSchema = new Schema(
   {
-    fullName: { type: String},
+    fullName: { type: String },
     users: { type: Array, default: [] },
-    logo: { type: String},
+    logo: { type: String },
     optionsDesing: { type: Array, default: [] },
-    catalogue: { type: Array, default: [] },
-
+    catalogue: [{ type: Schema.Types.ObjectId, ref: "Product" }],
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     permissions: { type: String },

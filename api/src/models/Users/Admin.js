@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const AdminSchema = new Schema(
   {
     fullName: { type: String },
-    clients: { type: Array, default: [] },
+    clients: [{ type: Schema.Types.ObjectId, ref: "ClientAdmin" }],
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     permissions: { type: String },
