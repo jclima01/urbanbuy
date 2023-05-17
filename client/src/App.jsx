@@ -1,12 +1,17 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import "./App.css";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import DashBoard from "./pages/DashBoard/DashBoard";
+import SideBarDashBoard from "./Components/SideBarDashBoard/SideBarDashBoard";
+import NavBarDashBoard from "./Components/NavBarDashBoard/NavBarDashBoard";
+import DashBoardUser from "./pages/DashBoardUser/DashBoardUser";
+import DashBoardEdit from "./pages/DashBoardEdit/DashBoardEdit";
+import DashBoardProducts from "./pages/DashBoardProducts/DashBoardProducts";
+import DashBoardShipping from "./pages/DashBoardShipping/DashBoardShipping";
+import DashBoardSettings from "./pages/DashBoardSettings/DashBoardSettings";
 import SearchBar from './SearchBar'
-import data from './data.js'
-import './App.css'
-
+  
 function App() {
-  const [count, setCount] = useState(0)
+  const clientAdmin = true;
   const [searches, setSearches] = useState([])
 
   function handleSearch(searchTerm) {
@@ -16,34 +21,46 @@ function App() {
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <SearchBar onSearch={handleSearch}/>
+    <BrowserRouter>
+      {location.pathname.includes("/dashboard") && clientAdmin ? (
+        <div className="d-flex vh-100 vw-100 ">
+          <SideBarDashBoard />
+          <div className="d-flex flex-column">
+            <NavBarDashBoard />
+            <Routes>
+              <Route path="/dashBoard/home" element={<DashBoard />} />
+              <Route path="/dashBoard/User" element={<DashBoardUser />} />
+              <Route path="/dashBoard/Edit" element={<DashBoardEdit />} />
+              <Route
+                path="/dashBoard/Products"
+                element={<DashBoardProducts />}
+              />
+              <Route
+                path="/dashBoard/Shipping"
+                element={<DashBoardShipping />}
+              />
+              <Route
+                path="/dashBoard/Settings"
+                element={<DashBoardSettings />}
+              />
+            </Routes>
+          </div>
+        </div>
+      ) : (
+        <Routes>
+          
+          <Route path="/" element={<DashBoard />} />   {/* LadingPage */}
+        </Routes>
+      )}
+    </BrowserRouter>
+          <SearchBar onSearch={handleSearch}/>
       <ul>
         {searches.map(p => (
           <li key={p.id}>{p.productName}</li>
         ))}
       </ul>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+</>  
+);
 }
 
-export default App
+export default App;

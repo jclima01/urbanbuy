@@ -6,7 +6,7 @@ const UserSchema = new Schema(
     fullName: { type: String },
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
-    permissions: { type: String },
+    permissions: { type: String , default: "User"},
     orders: [{ type: Schema.Types.ObjectId, ref: "Order" }],
   },
   { timestamps: true }
