@@ -11,10 +11,18 @@
    color: whitesmoke;
 }
 
-.SingIn{
+.SingIn {
    background-color: rgb(23, 32, 42);
-   color:white;
+   color: white;
    padding: 8px;
    border: none;
    border-radius: 5px;
+   margin-right: 10px;
+   transition: background-color 0.3s, color 0.3s, transform 0.3s;
+}
+
+.SingIn:hover {
+   background-color: white;
+   color: rgb(23, 32, 42);
+   transform: scale(1.1);
 }
