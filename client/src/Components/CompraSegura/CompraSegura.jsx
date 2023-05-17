@@ -8,7 +8,7 @@ function CompraSegura() {
   return (
     <div className="image-container">
       <div className="cardA">
-        <img src={compra1} className="card-img-top" alt="..." />
+        <img src={compra1} className="card-img-top" alt="..."  />
         <div className="card-body">
           <p className="card-text">
             Some quick example text to build on the card title and make up the bulk of the card's content.

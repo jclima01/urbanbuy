@@ -1,4 +1,20 @@
-.logo{
+.logo-nav{
    max-width: 300px;
    height: auto;
+}
+.button-nav{
+   background-color: rgb(235, 152, 78);
+   border: none;
+   margin-left: 150px;
+   padding: 5px;
+   border-radius: 5px;
+   color: whitesmoke;
+}
+
+.SingIn{
+   background-color: rgb(23, 32, 42);
+   color:white;
+   padding: 8px;
+   border: none;
+   border-radius: 5px;
 }

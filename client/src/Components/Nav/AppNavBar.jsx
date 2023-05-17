@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Navbar, Container } from "react-bootstrap";
 import logo from '../../Img/logo.png';
+import logo2 from '../../Img/logo2.png';
 import './AppNavbar.css'
 
 function AppNavbar() {
@@ -32,12 +33,12 @@ function AppNavbar() {
     >
       <Container>
         <Navbar.Brand>
-          <img src={logo} className="logo"/>
-          <button style={{marginLeft:'150px', backgroundColor:'rgb(235, 152, 78)'}}>Comienza tu prueba hoy</button>
+          <img src={ scrolled ? logo : logo2} className="logo-nav"/>
+          <button className="button-nav">Comienza tu prueba hoy</button>
         </Navbar.Brand>
         <div >
-       <button>Sing in</button>
-       <button >Login</button>
+       <button className="SingIn">Sing in</button>
+       <button className="SingIn">Login</button>
        </div>
       </Container>
     </Navbar>

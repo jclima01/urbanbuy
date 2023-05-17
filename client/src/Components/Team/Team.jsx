@@ -5,7 +5,9 @@ import avatar3 from "../../Img/avatar3.png";
 import avatar4 from "../../Img/avatar4.png";
 import avatar5 from "../../Img/avatar5.png";
 import avatar6 from "../../Img/avatar6.png";
-import style from '../Team/Team.module.css'
+import avatar7 from "../../Img/avatar7.png";
+import avatar8 from "../../Img/avatar8.png"
+import style from "../Team/Team.module.css";
 
 const Team = () => {
   return (
@@ -22,113 +24,62 @@ const Team = () => {
       >
         Team
       </h1>
-      <h6
-        style={{ marginTop: "10px", color: "whitesmoke", width: "100% auto" }}
-      >
-        <strong>
-          Team: Same Business School, different backgrounds, shared purpose.
-        </strong>
-        <br />
-        <br /> Maiz Ventures was funded out of the desire to identify
-        outstanding opportunities for a better world by three friends while
-        completing their MBAs at IE and Brown University. Get to know us.
-      </h6>
-      <div
-        style={{ display: "flex", justifyContent: "center", marginTop: "50px" }}
-      >
-        <div className={style.cardB} >
-          <img
-            src={avatar1}
-           
-            alt="mujer"
-            style={{ width: "100%" }}
-          />
+      
+        
+      <div className={style.cardContainerB}>
+        <div className={style.cardB}>
+          <img src={avatar1} alt="mujer" style={{ width: "100%",borderRadius:'20px' }} />
           <div className="card-body">
-            <h5 className="card-title">Paras Daryani</h5>
+            <h5 className="card-title">Ale </h5>
+            <p className="card-text">Partner</p>
+          </div>
+        </div>
+        <div className={style.cardB}>
+          <img src={avatar2} alt="mujer" style={{ width: "100%",borderRadius:'20px' }} />
+          <div className="card-body">
+            <h5 className="card-title">Henry</h5>
+            <p className="card-text">Partner</p>
+          </div>
+        </div>
+        <div className={style.cardB}>
+          <img src={avatar3} alt="mujer" style={{ width: "100%",borderRadius:'20px' }} />
+          <div className="card-body">
+            <h5 className="card-title">Ricardo</h5>
+            <p className="card-text">Partner</p>
+          </div>
+        </div>
+        <div className={style.cardB}>
+          <img src={avatar4} alt="mujer" style={{ width: "100%",borderRadius:'20px' }} />
+          <div className="card-body">
+            <h5 className="card-title">Jose</h5>
             <p className="card-text">Partner</p>
           </div>
         </div>
         <div className={style.cardB} >
-          <img
-            src={avatar2}
-           
-            alt="mujer"
-            style={{ width: "100%" }}
-          />
+          <img src={avatar5} alt="mujer" style={{ width: "100%",borderRadius:'20px' }} />
           <div className="card-body">
-            <h5 className="card-title">Darío Pérez Principi</h5>
+            <h5 className="card-title">Ema</h5>
             <p className="card-text">Partner</p>
           </div>
         </div>
-        <div className={style.cardB} >
-          <img
-            src={avatar3}
-           
-            alt="mujer"
-            style={{ width: "100%" }}
-          />
+        <div className={style.cardB}>
+          <img src={avatar6} alt="mujer" style={{ width: "100%",borderRadius:'20px' }} />
           <div className="card-body">
-            <h5 className="card-title">Gloria Alvarez</h5>
+            <h5 className="card-title">Juan</h5>
             <p className="card-text">Partner</p>
           </div>
         </div>
-        <div className={style.cardB} >
-          <img
-            src={avatar4}
-          
-            alt="mujer"
-            style={{ width: "100%" }}
-          />
+        <div className={style.cardB}>
+          <img src={avatar7} alt="mujer" style={{ width: "100%",borderRadius:'20px' }} />
           <div className="card-body">
-            <h5 className="card-title">Gloria Alvarez</h5>
+            <h5 className="card-title">Eze</h5>
             <p className="card-text">Partner</p>
           </div>
         </div>
-        <div className={style.cardB} >
-          <img
-            src={avatar5}
-           
-            alt="mujer"
-            style={{ width: "100%" }}
-          />
+        <div className={style.cardB}>
+          <img src={avatar8} alt="mujer" style={{ width: "100%", borderRadius:'20px' }} />
           <div className="card-body">
-            <h5 className="card-title">Gloria Alvarez</h5>
-            <p className="card-text">Partner</p>
-          </div>
-        </div>
-        <div className={style.cardB} >
-          <img
-            src={avatar6}
-           
-            alt="mujer"
-            style={{ width: "100%" }}
-          />
-          <div className="card-body">
-            <h5 className="card-title">Gloria Alvarez</h5>
-            <p className="card-text">Partner</p>
-          </div>
-        </div>
-        <div className={style.cardB} >
-          <img
-            src={avatar6}
-           
-            alt="mujer"
-            style={{ width: "100%" }}
-          />
-          <div className="card-body">
-            <h5 className="card-title">Gloria Alvarez</h5>
-            <p className="card-text">Partner</p>
-          </div>
-        </div>
-        <div className={style.cardB} >
-          <img
-            src={avatar6}
-          
-            alt="mujer"
-            style={{ width: "100%" }}
-          />
-          <div className="card-body">
-            <h5 className="card-title">Gloria Alvarez</h5>
+            <h5 className="card-title">Tamy</h5>
             <p className="card-text">Partner</p>
           </div>
         </div>

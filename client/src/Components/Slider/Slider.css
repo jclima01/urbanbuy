@@ -10,4 +10,10 @@
 
 .button-slider{
     margin-top: 50px;
+    margin-left: 100px;
+    border: none;
+    padding: 8px;
+    border-radius: 5px;
+    background-color: rgb(23, 32, 42);
+    color: whitesmoke;
 }
