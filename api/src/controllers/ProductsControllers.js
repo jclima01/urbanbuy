@@ -1,28 +1,27 @@
+const Product = require("../models/Product");
+const mongoose = require('mongoose');
+
+
 //GETS
 
 //All products
+const getAllProducts = {
 
-const getAllProducts = async () => {
-    try {
-       
-    } catch (error) {
-      throw new Error(error.message);
-    }
-  };
-
+    
+};
 
 const getProductName = {
 
 };
 
 
-const getProductForId = {};
 
 
 //POST
 
-const creteNewProduct = {
-
+const createNewProduct = async (productName, description, categories, stocks, imageUrl, price, rating, clientAdmin) => {
+    const newProduct = await new Product({ productName, description, categories, stocks, imageUrl, price, rating, clientAdmin })
+    return newProduct;
 };
 
 
@@ -42,8 +41,8 @@ const deleteProduct = {
 module.exports = {
     getAllProducts,
     getProductName,
-    getProductForId,
-    creteNewProduct,
+    getProductById,
+    createNewProduct,
     updateProduct,
     deleteProduct
 }
