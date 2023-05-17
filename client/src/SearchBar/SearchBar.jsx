@@ -1,16 +1,24 @@
 import { useState } from "react";
 
-function SearchBar() {
-  const [name, setName] = useState('') 
+function SearchBar({ onSearch }) {
+  const [searchTerm, setSearchTerm] = useState('') 
+  
+  function handleInputChange(e){
+    setSearchTerm(e.target.value)
+  }
+
+  function handleSearch(){
+    onSearch(searchTerm)
+  }
 
 return(
   <>
-    <form>
+    <form onSubmit={handleSearch}>
       <input
       type='search'
       placeholder="Enter product"
-      name={name}
-      onChange={e => setName(e.target.value)}
+      value={searchTerm}
+      onChange={handleInputChange}
       />
     </form>
   </>

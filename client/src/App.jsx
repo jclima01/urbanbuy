@@ -7,10 +7,11 @@ import './App.css'
 
 function App() {
   const [count, setCount] = useState(0)
+  const [searches, setSearches] = useState([])
 
   function handleSearch(searchTerm) {
-    const result = data.filter(p => data.name.includes(searchTerm))
-    return result
+    const result = data.filter(p => p.Produtcs.productName.includes(searchTerm))
+    setSearches(result)
  }
 
   return (
@@ -25,6 +26,11 @@ function App() {
       </div>
       <h1>Vite + React</h1>
       <SearchBar onSearch={handleSearch}/>
+      <ul>
+        {searches.map(p => (
+          <li key={p.id}>{p.productName}</li>
+        ))}
+      </ul>
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
