@@ -1,23 +1,35 @@
+const Product = require("../models/Product");
+const mongoose = require('mongoose');
+
+
 //GETS
 
 //All products
-const getAllProducts = {
-
-    
+const getAllProducts = async () => {
+    const dataBaseProducts = await Product.find({});
+    return dataBaseProducts.map(product => product.toJSON());
 };
 
-const getProductName = {
+//By Name
+const getProductName = async (name) => {
+    const dataBaseProducts = await Product.find({ productName: name });
+    return dataBaseProducts.map(product => product.toJSON());
+};
 
+//By Id
+const getProductById = async (id) => {
+    const dataBaseProducts = await Product.findById(id);
+    return dataBaseProducts.toJSON();
 };
 
 
-const getProductForId = {};
 
 
 //POST
 
-const creteNewProduct = {
-
+const createNewProduct = async (productName, description, categories, stocks, imageUrl, price, rating, clientAdmin) => {
+    const newProduct = await new Product({ productName, description, categories, stocks, imageUrl, price, rating, clientAdmin })
+    return newProduct;
 };
 
 
@@ -37,8 +49,8 @@ const deleteProduct = {
 module.exports = {
     getAllProducts,
     getProductName,
-    getProductForId,
-    creteNewProduct,
+    getProductById,
+    createNewProduct,
     updateProduct,
     deleteProduct
 }
