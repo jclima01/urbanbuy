@@ -21,7 +21,7 @@ const AdminRegister = async (email, password) => {
   }
 };
 
-const AdminLogin = async (email, category) => {
+const AdminLogin = async (email, password) => {
   try {
     if (!email) throw new Error("Email is required");
     const admin = await Admin.findOne({ email });
@@ -33,7 +33,7 @@ const AdminLogin = async (email, category) => {
     const token = jwt.sign({ id: admin._id }, process.env.KEY_JWT, {
       expiresIn: "1h",
     });
-    return token;
+    return { token, ...admin._doc };
   } catch (error) {
     throw new Error(error.message);
   }
