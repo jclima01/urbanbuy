@@ -15,13 +15,6 @@ adminRouter.get('/', getAdminHandlers)
 
 adminRouter.post('/', postAdminHandler)
 
-//PUT   
 
-// adminRouter.put('/',)
-
-
-//DELETE
-
-// adminRouter.delete('/delete/:id', )
 
 module.exports = adminRouter;
