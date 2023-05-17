@@ -33,7 +33,7 @@ const ClientAdminLogin = async (email, password) => {
     const token = jwt.sign({ id: clientAdmin._id }, process.env.KEY_JWT, {
       expiresIn: "1h",
     });
-    return token;
+    return { token, ...clientAdmin._doc };
   } catch (error) {
     throw new Error(error.message);
   }

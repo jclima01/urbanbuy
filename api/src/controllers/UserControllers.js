@@ -33,7 +33,7 @@ const UserLogin = async (email, password) => {
     const token = jwt.sign({ id: user._id }, process.env.KEY_JWT, {
       expiresIn: "1h",
     });
-    return token;
+    return { token, ...user._doc };
   } catch (error) {
     throw new Error(error.message);
   }
