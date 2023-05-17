@@ -7,7 +7,7 @@ const AdminSchema = new Schema(
     clients: [{ type: Schema.Types.ObjectId, ref: "ClientAdmin" }],
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
-    permissions: { type: String },
+    permissions: { type: String, default: "Admin"},
   },
   { timestamps: true }
 );
