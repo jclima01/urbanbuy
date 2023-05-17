@@ -55,8 +55,10 @@ const updateProduct = async (productId, updateData) => {
 
 //DELETE
 
-const deleteProduct = {
+const deleteProduct = async (productId) => {
 
+    const deletedProduct = await Product.findByIdAndDelete(productId);
+    return deletedProduct;
 };
 
 module.exports = {
