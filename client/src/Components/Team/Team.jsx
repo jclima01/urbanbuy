@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import avatar1 from "../../Img/avatar1.png";
 import avatar2 from "../../Img/avatar2.png";
 import avatar3 from "../../Img/avatar3.png";
@@ -11,19 +11,12 @@ import style from "../Team/Team.module.css";
 
 const Team = () => {
   return (
-    <div className={style.cardContainerB}>
-      <h1
-        style={{
-          marginTop: "100px",
-          display: "flex",
-          justifyContent: "center",
-          padding: "5px",
-          backgroundColor: "rgb(214, 137, 16)",
-          color: "whitesmoke",
-        }}
-      >
+    <>
+      <h1 className={style.h1}>
         Team
       </h1>
+    
+    <div className={style.cardContainerB}>
       
         
       <div className={style.cardContainerB}>
@@ -85,6 +78,7 @@ const Team = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

@@ -44,11 +44,11 @@ function App() {
       ) : (
         <Routes>
           
-          <Route path="/" element={<DashBoard />} />   {/* LadingPage */}
+          <Route path="/" element={<Home/>} />   {/* LadingPage */}
         </Routes>
       )}
         </BrowserRouter>
-        <Home/>
+        
         </>
   );
 }
