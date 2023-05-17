@@ -5,15 +5,12 @@ function SearchBar({ onSearch }) {
   
   function handleInputChange(e){
     setSearchTerm(e.target.value)
-  }
-
-  function handleSearch(){
-    onSearch(searchTerm)
+    onSearch(e.target.value)
   }
 
 return(
   <>
-    <form onSubmit={handleSearch}>
+    <form>
       <input
       type='search'
       placeholder="Enter product"
