@@ -1,7 +1,9 @@
-import { LOGIN_ADMIN, REGISTER_ADMIN } from "../actions/index.js";
+import { LOGIN_ADMIN, LOGIN_CLIENT_ADMIN, LOGIN_USER, REGISTER_ADMIN, REGISTER_CLIENT_ADMIN, REGISTER_USER } from "../actions/index.js";
 
 const initialState = {
-  token: "",
+  admin:{},
+  clientAdmin:{},
+  user:{},
 };
 
 const rootReducer = (state = initialState, { type, payload }) => {
@@ -9,7 +11,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
     case LOGIN_ADMIN:
       return {
         ...state,
-        token: payload.token,
+        admin: {...payload},
       };
     case REGISTER_ADMIN:
       return {
@@ -18,6 +20,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
     case LOGIN_CLIENT_ADMIN:
       return {
         ...state,
+        clientAdmin: {...payload},
       };
     case REGISTER_CLIENT_ADMIN:
       return {
@@ -26,8 +29,9 @@ const rootReducer = (state = initialState, { type, payload }) => {
     case LOGIN_USER:
       return {
         ...state,
+        user: {...payload},
       };
-    case REGISTER_LOGIN_USER:
+    case REGISTER_USER:
       return {
         ...state,
       };
