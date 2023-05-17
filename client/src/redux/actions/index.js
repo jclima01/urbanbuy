@@ -9,7 +9,7 @@ export const REGISTER_USER = "REGISTER_USER";
 export const loginAdmin = (email,password) => {
   try {
     return async function (dispatch) {
-      const { data } = await axios.post("http://localhost:6800/admin/login", {
+      const { data } = await axios.post("http://localhost:2800/admin/login", {
         email,
         password,
       });
@@ -25,7 +25,7 @@ export const loginAdmin = (email,password) => {
 export const loginClientAdmin = (email,password) => {
   try {
     return async function (dispatch) {
-      const { data } = await axios.post("http://localhost:6800/clientAdmin/login", {
+      const { data } = await axios.post("http://localhost:2800/clientAdmin/login", {
         email,
         password,
       });
@@ -41,7 +41,7 @@ export const loginClientAdmin = (email,password) => {
 export const loginUser = (email,password) => {
   try {
     return async function (dispatch) {
-      const { data } = await axios.post("http://localhost:6800/user/login", {
+      const { data } = await axios.post("http://localhost:2800/user/login", {
         email,
         password,
       });
@@ -59,7 +59,7 @@ export const loginUser = (email,password) => {
 export const registerAdmin = (email,password) => {
   try {
     return async function (dispatch) {
-      await axios.post("http://localhost:6800/admin/register", {
+      await axios.post("http://localhost:2800/admin/register", {
         email,
         password,
       });
@@ -75,7 +75,7 @@ export const registerAdmin = (email,password) => {
 export const registerClientAdmin = (email,password) => {
   try {
     return async function (dispatch) {
-      await axios.post("http://localhost:6800/clientAdmin/register", {
+      await axios.post("http://localhost:2800/clientAdmin/register", {
         email,
         password,
       });
