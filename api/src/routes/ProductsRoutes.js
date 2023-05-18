@@ -8,7 +8,7 @@ const {
 
 //GET
 
-productRouter.get('/', getProductsHandler)
+productRouter.get('/:id', getProductsHandler)
 
 
 //POST

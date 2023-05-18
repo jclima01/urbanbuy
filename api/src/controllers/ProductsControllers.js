@@ -28,8 +28,9 @@ const getProductById = async (id) => {
 //POST
 
 const createNewProduct = async (productName, description, categories, stocks, imageUrl, price, rating, clientAdmin) => {
-    const newProduct = await new Product({ productName, description, categories, stocks, imageUrl, price, rating, clientAdmin })
-    return newProduct;
+    const newProduct = new Product({ productName, description, categories, stocks, imageUrl, price, rating, clientAdmin })
+    const savedProduct = await newProduct.save();
+    return savedProduct;
 };
 
 
