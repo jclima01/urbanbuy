@@ -154,16 +154,51 @@ const DashBoard = () => {
               <div style={{ cursor: "pointer" }}>View all</div>
             </div>
 
-            <div style={{
-              display:'flex',
-              width:"100%",
-              height:'220px',
-              backgroundColor:'red'
-            }}>
-              <h1>hola</h1>
-              <h1>hola</h1>
-              <h1>hola</h1>
-              <h1>hola</h1>
+            <div
+              style={{
+                display: "flex",
+                width: "100%",
+                height: "100%",
+                backgroundColor: "red",
+                alignItems: "end",
+                justifyContent: "space-around",
+              }}
+            >
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  justifyContent:'flex-end',                  
+                  width: "250px",
+                  height: "160px",
+                  backgroundColor: "blue",
+                  position: "relative",
+                  borderRadius:15
+                }}
+              >
+                <div
+                  style={{
+                    width: "50%",
+                    height: "120px",
+                    backgroundColor: "green",
+                    position: "absolute",
+                    top:'-50px',
+                    borderRadius:'50%'
+                  }}
+                >
+                  <img src="" alt="" />
+                </div>
+                <h1
+                  style={{
+                    color: "white",
+                    fontSize: "30px",
+                    textAlign: "center",
+                  }}
+                >
+                  tittle
+                </h1>
+              </div>
             </div>
           </div>
           <div
