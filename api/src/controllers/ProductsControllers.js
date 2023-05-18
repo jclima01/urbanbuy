@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 //GETS
 
 //All products
+
 const getAllProducts = async () => {
     const dataBaseProducts = await Product.find({});
     return dataBaseProducts;

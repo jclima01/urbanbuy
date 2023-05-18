@@ -1,8 +1,11 @@
 // import controllers
 const { getAllProducts, getProductName, getProductById, createNewProduct, updateProduct, deleteProduct } = require("../controllers/ProductsControllers")
 
+const { getAllProducts } = require("../controllers/ProductsControllers");
+
 
 const getProductsHandler = async (req, res) => {
+
   const { name } = req.query;
  
   try {
@@ -11,6 +14,7 @@ const getProductsHandler = async (req, res) => {
       result = await getProductName(name);
     } else {
       result = await getAllProducts();
+
     }
     res.status(200).json(result);
 
