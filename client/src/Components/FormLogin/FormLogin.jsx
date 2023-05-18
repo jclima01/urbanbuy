@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import logo2 from '../../Img/logo2.png';
 import style from './FormLogin.module.css'
 import {Link} from 'react-router-dom'
+import ventas from '../../Img/ventas.png';
 
 const FormLogin = () => {
   const [username, setUsername] = useState('');
@@ -24,6 +25,7 @@ const FormLogin = () => {
 
   return (
     <div className={style.container}>
+      <img src={ventas} alt="" className={style.ventas}/>
     <div >
         <Link to='/'>
       <img src={logo2} alt="Logo de la empresa" className={style.logo2} />
@@ -56,9 +58,9 @@ const FormLogin = () => {
         <button type="submit" className={style.buttom}>Iniciar sesión</button>
       </form>
       
-
       </div>
     </div>
+
     </div>
   );
 };
