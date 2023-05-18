@@ -2,6 +2,7 @@ const { Router } = require ('express');
 const productRouter = Router();
 const {
     getProductsHandler,
+    getProductsHandlerById,
     postProductHandler,
   } = require("../handlers/ProductHandlers");
   
@@ -9,6 +10,8 @@ const {
 //GET
 
 productRouter.get('/', getProductsHandler)
+
+productRouter.get('/:id', getProductsHandlerById)
 
 
 //POST

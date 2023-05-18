@@ -1,49 +1,73 @@
+const Product = require("../models/Product");
+const mongoose = require('mongoose');
+
+
 //GETS
 
 //All products
 
 const getAllProducts = async () => {
-    try {
-       
-    } catch (error) {
-      throw new Error(error.message);
-    }
-  };
+    const dataBaseProducts = await Product.find({});
+    return dataBaseProducts;
+};
 
+//By Name
+const getProductName = async (name) => {
+    const dataBaseProducts = await Product.find({ productName: name });
+    return dataBaseProducts;
+};
 
-const getProductName = {
-
+//By Id
+const getProductById = async (id) => {
+    const dataBaseProducts = await Product.findById(id);
+    return dataBaseProducts;
 };
 
 
-const getProductForId = {};
 
 
 //POST
 
-const creteNewProduct = {
-
+const createNewProduct = async (productName, description, categories, stocks, imageUrl, price, rating, clientAdmin) => {
+    const newProduct = new Product({ productName, description, categories, stocks, imageUrl, price, rating, clientAdmin })
+    const savedProduct = await newProduct.save();
+    return savedProduct;
 };
 
 
 //PUT
 
-const updateProduct = {
+const updateProduct = async (productId, updateData) => {
+    const product = await Product.findById(productId);
+    if (product) {
+        product.productName = updatedData.productName;
+        product.description = updatedData.description;
+        product.categories = updatedData.categories;
+        product.stocks = updatedData.stocks;
+        product.imageUrl = updatedData.imageUrl;
+        product.price = updatedData.price;
+        product.rating = updatedData.rating;
+        product.clientAdmin = updatedData.clientAdmin;
+    }
+    const updatedProduct = await product.save();
+    return updatedProduct;
 
 };
 
 
 //DELETE
 
-const deleteProduct = {
+const deleteProduct = async (productId) => {
 
+    const deletedProduct = await Product.findByIdAndDelete(productId);
+    return deletedProduct;
 };
 
 module.exports = {
     getAllProducts,
     getProductName,
-    getProductForId,
-    creteNewProduct,
+    getProductById,
+    createNewProduct,
     updateProduct,
     deleteProduct
 }
