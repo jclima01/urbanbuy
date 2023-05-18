@@ -121,6 +121,8 @@ export const Produtcs = [
   },
 ];
 
+
+export const categoryProducts = ['Pantalla', 'Mouse', 'Teclados','Audifonos', 'CPU','Memoria', 'Procesador']
 /*  DashBoard ClientAdmin  */
 
 /*  Admin  */

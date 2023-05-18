@@ -142,14 +142,17 @@
 }
 
 .freaturedSettion {
+  display: flex;
   background-image: url(./assets/freatured.png);
   background-position: right;
   background-size: cover;
   background-repeat: no-repeat;
+  height: 300px;
   width: 1100px;
   padding: 30px;
   border-radius: 30px;
-  box-shadow: 4px 3px 20px 4px #4644444e;
+  box-shadow: 4px 3px 20px 4px #4644442b;
+  position: relative;
 }
 
 .freaturedSettion2 {

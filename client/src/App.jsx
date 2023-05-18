@@ -21,7 +21,7 @@ function App() {
           <div className="d-flex flex-column">
             <NavBarDashBoard />
             <Routes>
-              <Route path="/dashBoard/" element={<DashBoard />} />
+              <Route path="/dashBoard" element={<DashBoard />} />
               <Route path="/dashBoard/User" element={<DashBoardUser />} />
               <Route path="/dashBoard/Edit" element={<DashBoardEdit />} />
               <Route
