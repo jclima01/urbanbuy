@@ -78,7 +78,7 @@ export const ClientAdmin = [
 export const Produtcs = [
   {
     id: 1,
-    productName: "HP Gamming 24hz",
+    ProductName: "HP Gamming 24hz",
     description: "Esto es una description",
     category: ["Pantalla", "Gaming"],
     stocks: 5,
@@ -142,7 +142,8 @@ export const Admin = [
 
 /*  clients or User  */
 
-export const user = [
+
+export const User = [
     {
         id: `User-${1}`,
         fullName: "Ezequiel Irace",
@@ -151,6 +152,22 @@ export const user = [
         permissions: "user",
         order: []
       },
+      {
+        id: `User-${2}`,
+        fullName: "Ezequiel Irace2",
+        email: "test@ibm.com",
+        password: "123456",
+        permissions: "user",
+        order: []
+      },
+      {
+        id: `User-${3}`,
+        fullName: "Ezequiel Irace3",
+        email: "test@ibm.com",
+        password: "123456",
+        permissions: "user",
+        order: []
+      }
 ]
 
 export const order = [

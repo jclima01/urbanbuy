@@ -1,13 +1,15 @@
 import DashBoardCardCategory from "../../Components/DashBoardCardCategory/DashBoardCardCategory";
+import DashBoardCardProducts from "../../Components/DashBoardCardProducts/DashBoardCardProducts";
+import DashBoardCardsUser from "../../Components/DashBoardCardsUser/DashBoardCardsUser";
 import logo from "../../assets/Logo.jpeg";
 import ilustration from "../../assets/ilustrationhome.png";
-import { categoryProducts } from "../../data";
+import { Produtcs, User, categoryProducts } from "../../data";
 
 const DashBoard = () => {
   return (
-    <div className="vh-100  d-flex justify-content-center">
+    <div className="vh-100 w-100 d-flex justify-content-center overflow-hidden ">
       <div className="contianer-home">
-        <div className="d-flex   h-50 w-100">
+        <div className="d-flex h-100 w-100">
           <div className="freaturedSettion">
             <div
               style={{
@@ -88,20 +90,20 @@ const DashBoard = () => {
         <div
           style={{
             display: "flex",
-            justifyContent: "space-between",
+            alignItems:'center',
             height: "100%",
             width: "100%",
-            marginTop: 10,
-            padding: 10,
+            padding: 20,
           }}
         >
           <div
             style={{
               height: "100%",
-              width: "64%",
+              width: "70%",
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
+
             }}
           >
             <div
@@ -111,6 +113,7 @@ const DashBoard = () => {
                 display: "flex",
                 justifyContent: "space-between",
                 alignItems: "center",
+              
               }}
             >
               <h1 style={{ fontSize: 20, padding: 10, margin: 10 }}>
@@ -142,12 +145,12 @@ const DashBoard = () => {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "space-between",
-                padding: 15,
+                padding: 20,
               }}
             >
               <div className="">
                 <h4>
-                  Bets <strong>Shopping</strong>{" "}
+                  Most Selled <strong>Products.</strong>
                 </h4>
               </div>
 
@@ -159,55 +162,74 @@ const DashBoard = () => {
                 display: "flex",
                 width: "100%",
                 height: "100%",
-                backgroundColor: "red",
                 alignItems: "end",
                 justifyContent: "space-around",
+                
+              }}
+            >
+              {Produtcs?.map((item) => (
+                <DashBoardCardProducts key={item.id} Products={item} />
+              ))}
+            </div>
+          </div>
+          <div
+            style={{
+              height: "100%",
+              width: "35%",
+              display: "flex",
+              alignContent: "center",
+              marginLeft:20,
+              marginRight:-20
+            }}
+          >
+            <div
+              style={{
+                display: "flex",
+                margin: 10,
+                padding: 20,
+                alignContent: "center",
+                width: "100%",
+                height: "100%",
+                boxShadow: "4px 3px 20px 4px #4644442b",
+                flexDirection: "column",
+                borderRadius: 15,
               }}
             >
               <div
                 style={{
                   display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  justifyContent:'flex-end',                  
-                  width: "250px",
-                  height: "160px",
-                  backgroundColor: "blue",
-                  position: "relative",
-                  borderRadius:15
+                  justifyContent: "space-between",
+                  alignContent: "center",
+                  width: "100%",
+                  height: "7%",
                 }}
               >
-                <div
-                  style={{
-                    width: "50%",
-                    height: "120px",
-                    backgroundColor: "green",
-                    position: "absolute",
-                    top:'-50px',
-                    borderRadius:'50%'
-                  }}
-                >
-                  <img src="" alt="" />
-                </div>
-                <h1
-                  style={{
-                    color: "white",
-                    fontSize: "30px",
-                    textAlign: "center",
-                  }}
-                >
-                  tittle
-                </h1>
+                <h4>Recents Users</h4>
+                <p style={{ cursor: "pointer" }}>View All</p>
+              </div>
+              <hr
+                style={{
+                  border: "1px solid #22212193",
+                }}
+              />
+
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-evenly",
+                  width: "100%",
+                  height: "100%",
+                  flexDirection: "column",
+                  padding: 10,
+                  gap: 10,
+                }}
+              >
+                {User?.map(item => (
+                  <DashBoardCardsUser key={item.id} Users={item} />
+                ))}
               </div>
             </div>
-          </div>
-          <div
-            style={{
-              height: "100&",
-              width: "30%",
-            }}
-          >
-            <h1>Recents Users</h1>
           </div>
         </div>
       </div>
