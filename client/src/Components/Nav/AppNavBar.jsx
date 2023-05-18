@@ -3,6 +3,7 @@ import { Navbar, Container } from "react-bootstrap";
 import logo from '../../Img/logo.png';
 import logo2 from '../../Img/logo2.png';
 import './AppNavbar.css'
+import {Link} from 'react-router-dom'
 
 function AppNavbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -37,8 +38,11 @@ function AppNavbar() {
           <button className="button-nav">Comienza tu prueba hoy</button>
         </Navbar.Brand>
         <div >
+        
        <button className="SingIn">Sing in</button>
+     <Link to='login'>
        <button className="SingIn">Login</button>
+       </Link>
        </div>
       </Container>
     </Navbar>

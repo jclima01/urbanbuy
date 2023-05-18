@@ -1,6 +1,6 @@
 import { Container, Row, Col } from "react-bootstrap";
 import { useSpring, animated } from "react-spring";
-import Foto1 from "../../Img/Foto1.jpeg";
+import chica from "../../Img/chica.png";
 
 function Introduction() {
   const slideIn = useSpring({
@@ -21,7 +21,7 @@ function Introduction() {
         <Row>
           <Col xs={8} sm={5}>
             <img
-              src={Foto1}
+              src={chica}
               alt="Mi imagen"
               style={{ maxWidth: "120%", height: "auto" }}
             />

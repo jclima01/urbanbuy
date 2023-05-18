@@ -9,6 +9,7 @@ import DashBoardProducts from "./pages/DashBoardProducts/DashBoardProducts";
 import DashBoardShipping from "./pages/DashBoardShipping/DashBoardShipping";
 import DashBoardSettings from "./pages/DashBoardSettings/DashBoardSettings";
 import Home from "./Components/Home/Home";
+import FormLogin from "./Components/FormLogin/FormLogin";
 
 function App() {
   const clientAdmin = true;
@@ -45,6 +46,7 @@ function App() {
         <Routes>
           
           <Route path="/" element={<Home/>} />   {/* LadingPage */}
+          <Route path="/login" element={<FormLogin />} />
         </Routes>
       )}
         </BrowserRouter>
@@ -52,5 +54,6 @@ function App() {
         </>
   );
 }
+
 
 export default App;
