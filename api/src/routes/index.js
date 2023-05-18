@@ -5,6 +5,7 @@ const UsersRouter = require('./UserRoutes.js');
 const AdminRouter = require('./AdminRoutes.js');
 const ClientAdminRouter = require('./ClientAdminRoutes.js');
 const ReviewRouter = require('./ReviewRoutes.js');
+const OrderRouter = require('./OrderRoutes.js');
 
 
 const mainRouter = Router();
@@ -17,6 +18,7 @@ mainRouter.use('/admin', AdminRouter);
 mainRouter.use('/clientAdmin', ClientAdminRouter);
 mainRouter.use('/user', UsersRouter);
 mainRouter.use('/reviews', ReviewRouter);
+mainRouter.use('/orders', OrderRouter);
 
 
 
