@@ -4,6 +4,8 @@ const {
     getProductsHandler,
     getProductsHandlerById,
     postProductHandler,
+    updateProductHandler,
+    deletedProductHandler,
   } = require("../handlers/ProductHandlers");
   
 
@@ -20,11 +22,11 @@ productRouter.post('/', postProductHandler)
 
 //PUT   
 
-// productRouter.put('/',)
+productRouter.put('/:id', updateProductHandler)
 
 
 //DELETE
 
-// productRouter.delete('/delete/:id', )
+productRouter.delete('/delete/:id', deletedProductHandler)
 
 module.exports = productRouter;

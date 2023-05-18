@@ -1,7 +1,7 @@
 // import controllers
 const { getAllProducts, getProductName, getProductById, createNewProduct, updateProduct, deleteProduct } = require("../controllers/ProductsControllers")
 
-const { getAllProducts } = require("../controllers/ProductsControllers");
+
 
 
 const getProductsHandler = async (req, res) => {
@@ -51,11 +51,11 @@ const postProductHandler = async (req, res) => {
 
 
 const updateProductHandler = async (req, res) => {
-  const { productId } = req.params;
+  const { id } = req.params;
   const updatedData = req.body;
 
   try {
-    const updatedProduct = await updateProduct(productId, updatedData);
+    const updatedProduct = await updateProduct(id, updatedData);
     res.status(200).json(updatedProduct);
   } catch (error) {
     res.status(400).json({ error: "Error al actualizar el producto" })
@@ -63,13 +63,14 @@ const updateProductHandler = async (req, res) => {
 }
 
 const deletedProductHandler = async (req, res) => {
-  const { productId } = req.params;
+  const { id } = req.params;
+  console.log("....idparams:",id)
 
   try {
-    const deletedProduct = await deleteProduct(productId);
+    const deletedProduct = await deleteProduct(id);
     res.status(200).json(deletedProduct);
   } catch (error) {
-    res.status(400).json({ error: "Error al borrar el producto" })
+    res.status(400).json({ message: "Error al borrar el producto", error })
   }
 
 }

@@ -36,17 +36,17 @@ const createNewProduct = async (productName, description, categories, stocks, im
 
 //PUT
 
-const updateProduct = async (productId, updateData) => {
-    const product = await Product.findById(productId);
+const updateProduct = async (id, updateData) => {
+    const product = await Product.findById(id);
     if (product) {
-        product.productName = updatedData.productName;
-        product.description = updatedData.description;
-        product.categories = updatedData.categories;
-        product.stocks = updatedData.stocks;
-        product.imageUrl = updatedData.imageUrl;
-        product.price = updatedData.price;
-        product.rating = updatedData.rating;
-        product.clientAdmin = updatedData.clientAdmin;
+        product.productName = updateData.productName;
+        product.description = updateData.description;
+        product.categories = updateData.categories;
+        product.stocks = updateData.stocks;
+        product.imageUrl = updateData.imageUrl;
+        product.price = updateData.price;
+        product.rating = updateData.rating;
+        product.clientAdmin = updateData.clientAdmin;
     }
     const updatedProduct = await product.save();
     return updatedProduct;
@@ -56,9 +56,9 @@ const updateProduct = async (productId, updateData) => {
 
 //DELETE
 
-const deleteProduct = async (productId) => {
+const deleteProduct = async (id) => {
 
-    const deletedProduct = await Product.findByIdAndDelete(productId);
+    const deletedProduct = await Product.findByIdAndDelete(id);
     return deletedProduct;
 };
 
