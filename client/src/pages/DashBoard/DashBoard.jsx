@@ -118,7 +118,7 @@ const DashBoard = () => {
               </h1>
 
               <p style={{ cursor: "pointer", padding: 10, margin: 10 }}>
-                View All
+                View all
               </p>
             </div>
 
@@ -137,7 +137,6 @@ const DashBoard = () => {
             </div>
             <div
               style={{
-                backgroundColor: "red",
                 width: "100%",
                 height: 40,
                 display: "flex",
@@ -147,9 +146,24 @@ const DashBoard = () => {
               }}
             >
               <div className="">
-                <h4>Bets Shopping</h4>
+                <h4>
+                  Bets <strong>Shopping</strong>{" "}
+                </h4>
               </div>
-              <div className="">View all</div>
+
+              <div style={{ cursor: "pointer" }}>View all</div>
+            </div>
+
+            <div style={{
+              display:'flex',
+              width:"100%",
+              height:'220px',
+              backgroundColor:'red'
+            }}>
+              <h1>hola</h1>
+              <h1>hola</h1>
+              <h1>hola</h1>
+              <h1>hola</h1>
             </div>
           </div>
           <div
