@@ -10,11 +10,14 @@ const getAllProducts = async () => {
     return dataBaseProducts;
 };
 
+
+
 //By Name
 const getProductName = async (name) => {
     const dataBaseProducts = await Product.find({ productName: name });
     return dataBaseProducts;
 };
+
 
 //By Id
 const getProductById = async (id) => {
@@ -24,9 +27,7 @@ const getProductById = async (id) => {
 
 
 
-
 //POST
-
 const createNewProduct = async (productName, description, categories, stocks, imageUrl, price, rating, clientAdmin) => {
     const newProduct = new Product({ productName, description, categories, stocks, imageUrl, price, rating, clientAdmin })
     const savedProduct = await newProduct.save();
@@ -35,7 +36,6 @@ const createNewProduct = async (productName, description, categories, stocks, im
 
 
 //PUT
-
 const updateProduct = async (id, updateData) => {
     const product = await Product.findById(id);
     if (product) {
@@ -55,9 +55,7 @@ const updateProduct = async (id, updateData) => {
 
 
 //DELETE
-
 const deleteProduct = async (id) => {
-
     const deletedProduct = await Product.findByIdAndDelete(id);
     return deletedProduct;
 };
@@ -65,6 +63,8 @@ const deleteProduct = async (id) => {
 module.exports = {
     getAllProducts,
     getProductName,
+    getProductById,
+    createNewProduct,
     getProductById,
     createNewProduct,
     updateProduct,
