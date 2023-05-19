@@ -2,8 +2,12 @@
 
 const DashBoardUser = () => {
   return (
-    <div>
-      <h1>USER</h1>
+    <div style={{
+      width: '100%',
+      height:'100%',
+      backgroundColor:'red'
+    }}>
+      
     </div>
   )
 }

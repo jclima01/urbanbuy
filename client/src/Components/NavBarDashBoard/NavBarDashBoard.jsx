@@ -25,7 +25,7 @@ const NavBarDashBoard = () => {
             <div className="d-flex  w-25  justify-content-evenly align-items-center ">
               <div className="notifications">
                 <IoIosNotificationsOutline
-                  size={25}
+                  size={30}
                   className="position-relative w-100 h-100"
                 />
                 <p className="p-notification ">1</p>

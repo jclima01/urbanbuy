@@ -1,15 +1,27 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat+Alternates:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
-*{
-   font-family: "Montserrat", sans-serif;
+* {
+  font-family: "Montserrat", sans-serif;
 }
 
 .isActive {
   background-color: #ff7f2a;
-  padding: 8px;
+  padding: 10px;
   border-radius: 50%;
   color: white;
   cursor: pointer;
+  transition: 0.5s all ease-in-out;
+}
+.hoverCategory :hover{
+ background-color: #ff7f2a;
+}
+
+.custom-link{
+  text-decoration: none; /* Elimina el subrayado */
+  color: black;
+}
+.custom-link :hover{
+  color: #ff7f2a;
 }
 
 .logo {
@@ -43,8 +55,9 @@
   cursor: pointer;
 }
 
-.contianer-navBar{
-  width: 90vw;
+.contianer-navBar {
+  width: 87vw;
+  height: 80px;
   margin-left: 30px;
 }
 
@@ -95,39 +108,108 @@
   overflow: hidden;
 }
 
-
-.notifications{
-    position: relative;
-    margin-left: 30px;
-    cursor: pointer;
+.notifications {
+  position: relative;
+  margin-left: 30px;
+  cursor: pointer;
 }
 
-.p-notification{
-    position: absolute;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 18px;
-    width: 18px;
-    padding: 5px;
-    background-color: #ff7f2a;
-    color: white;
-    border-radius: 50%;
-    top: -3px;
-    right: -5px;
+.p-notification {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 18px;
+  width: 18px;
+  padding: 5px;
+  background-color: #ff7f2a;
+  color: white;
+  border-radius: 50%;
+  top: -3px;
+  right: -5px;
 }
 
-.user-config{
- display: flex;
- flex-direction: column;
- margin-top: 5px;
+.user-config {
+  display: flex;
+  flex-direction: column;
+  margin-top: 5px;
 }
-.user-config h3{
+.user-config h3 {
   font-size: 20px;
   font-weight: 500;
 }
 
-.user-config h4{
+.user-config h4 {
   font-size: 20px;
   font-weight: 300;
+}
+
+.contianer-home {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+
+}
+
+.freaturedSettion {
+  display: flex;
+  background-image: url(./assets/freatured.png);
+  background-position: right;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 300px;
+  width: 1100px;
+  padding: 30px;
+  border-radius: 30px;
+  box-shadow: 4px 3px 20px 4px #4644442b;
+  position: relative;
+}
+
+.freaturedSettion2 {
+  width: 530px;
+  height: 300px;
+  padding: 30px;
+  border-radius: 30px;
+  margin-left: 40px;
+  box-shadow: 4px 3px 20px 4px #4644442b;
+
+}
+
+.container-image-logo {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 1px 1px 10px 2px #4644442b;
+}
+
+.container-image-logo img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.TextlogoFreatured {
+  font-weight: 700;
+  font-size: 25px;
+}
+
+.Text2Freatured {
+  font-weight: 400;
+  font-size: 20px;
+}
+
+.Todayshoppingvalue {
+  display: flex;
+  height: 70px;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  border-radius: 15px;
+  background-color: #ff7f2a;
+  color: white;
 }

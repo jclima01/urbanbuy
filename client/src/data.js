@@ -78,8 +78,8 @@ export const ClientAdmin = [
 export const Products = [
   {
     id: 1,
-    productName: "HP Gamming 24hz",
-    description: "Esto es una description",
+    ProductName: "HP Gamming 24hz",
+    description: "El monitor del computador, también conocido como pantalla, muestra la información de tu equipo como imágenes y textos, que son generados gracias a una tarjeta de video que se encuentra en el interior de la torre del computador.",
     category: ["Pantalla", "Gaming"],
     stocks: 5,
     imageUrl:
@@ -121,6 +121,8 @@ export const Products = [
   },
 ];
 
+
+export const categoryProducts = ['Pantalla', 'Mouse', 'Memoria', 'Procesador']
 /*  DashBoard ClientAdmin  */
 
 /*  Admin  */
@@ -140,16 +142,35 @@ export const Admin = [
 
 /*  clients or User  */
 
-export const user = [
-  {
-    id: `User-${1}`,
-    fullName: "Ezequiel Irace",
-    email: "test@ibm.com",
-    password: "123456",
-    permissions: "user",
-    order: [],
-  },
-];
+
+
+export const User = [
+    {
+        id: `User-${1}`,
+        fullName: "Ezequiel Irace",
+        email: "test@ibm.com",
+        password: "123456",
+        permissions: "user",
+        order: []
+      },
+      {
+        id: `User-${2}`,
+        fullName: "Ezequiel Irace2",
+        email: "test@ibm.com",
+        password: "123456",
+        permissions: "user",
+        order: []
+      },
+      {
+        id: `User-${3}`,
+        fullName: "Ezequiel Irace3",
+        email: "test@ibm.com",
+        password: "123456",
+        permissions: "user",
+        order: []
+      }
+]
+
 
 export const order = [
   {

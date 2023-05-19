@@ -1,9 +1,10 @@
 import React from 'react';
-import {Produtcs} from '../../data.js'; 
+import {Products} from '../../data.js'; 
+import style from './ProductDetail.module.css'
 
 
 const ProductDetail = ({ productId }) => {
-  const productDetail = Produtcs.find(item => item.id === productId);
+  const productDetail = Products.find(item => item.id === productId);
   console.log(productDetail)
 
 //   if (!product) {
@@ -13,14 +14,16 @@ const ProductDetail = ({ productId }) => {
   const { ProductName, description, category, stocks, imageUrl, price, rating } = productDetail;
 
   return (
-    <div>
-      <h2>{ProductName}</h2>
-      <img src={imageUrl} alt={ProductName} />
-      <p>{description}</p>
-      <p>Category: {category.join(', ')}</p>
+    <div className={style.container}>
+      <h2 className={style.h2}>{ProductName}</h2>
+      <img src={imageUrl} alt={ProductName}  className={style.img}/>
+      <p className={style.description}>{description}</p>
+      <p >Category: {category.join(', ')}</p>
+      <div className={style.hovers}>
       <p>Stocks: {stocks}</p>
       <p>Price: ${price}</p>
       <p>Rating: {rating}</p>
+      </div>
     </div>
   );
 };

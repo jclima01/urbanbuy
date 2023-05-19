@@ -7,12 +7,16 @@ import CompraSegura from '../CompraSegura/CompraSegura'
 import Footer from '../Footer/Footer'
 import Team from '../Team/Team'
 import './Home.css'
-import  Filter from'../Filter/Filter'
+import ProductDetail from '../ProductDetail/ProductDetail'
+
 
 
 
 
 export default function Home() {
+
+
+
   return (
       <div className='home-landing'>
         <AppNavbar/>
@@ -22,7 +26,8 @@ export default function Home() {
         <CompraSegura/>
         <Faq/>
          <Team/>
-        <Filter/>
+       
+    
 <Footer/>
     </div>
   )
