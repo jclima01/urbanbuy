@@ -39,7 +39,35 @@ const AdminLogin = async (email, password) => {
   }
 };
 
+
+const AdminUpdate = async (adminId, fullName, email, password) => {
+  try {
+    const admin = await Admin.findById(adminId);
+    if(admin) {
+      admin.fullName = fullName;
+      admin.email = email;
+      admin.password = password;
+    }
+    const updatedAdmin = await admin.save();
+    return updatedAdmin;
+  } catch (error) {
+    throw new Error(error.message)
+  }
+};
+
+const AdminDelete = async (adminId) => {
+  try {
+    const deletedAdmin = await Admin.findByIdAndDelete(adminId);
+    return deletedAdmin;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+
+
 module.exports = {
   AdminRegister,
   AdminLogin,
+  AdminUpdate,
+  AdminDelete
 };

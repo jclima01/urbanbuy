@@ -39,7 +39,33 @@ const UserLogin = async (email, password) => {
   }
 };
 
+const UserUpdate = async (userId, fullName, email, password) => {
+  try {
+    const user = await User.findById(userId);
+    if(user) {
+      user.fullName = fullName;
+      user.email = email;
+      user.password = password;
+    }
+    const updatedUser = await user.save();
+    return updatedUser;
+  } catch (error) {
+    throw new Error(error.message)
+  }
+};
+
+const UserDelete = async (userId) => {
+  try {
+    const deletedUser = await User.findByIdAndDelete(userId);
+    return deletedUser;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+
 module.exports = {
   UserRegister,
   UserLogin,
+  UserUpdate,
+  UserDelete
 };

@@ -1,5 +1,5 @@
 //import controllers
-const { UserRegister, UserLogin } = require("../controllers/UserControllers.js");
+const { UserRegister, UserLogin, UserUpdate, UserDelete  } = require("../controllers/UserControllers.js");
 
 
 const loginUserHandler = async (req, res) => {
@@ -22,7 +22,32 @@ const registerUserHandler = async (req, res) => {
   }
 };
 
+const UpdateUserHandler = async (req, res) => {
+  try {
+    const {userId} = req.params;
+    const { fullName, email, password } = req.body;
+    const userUpdated = await UserUpdate(fullName, userId, email, password)
+    res.status(200).json(userUpdated);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
+
+const DeleteUserHandler = async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const userDeleted = await UserDelete(userId)
+    res.status(200).json(userDeleted);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
+
+
+
 module.exports = {
   loginUserHandler,
   registerUserHandler,
+  UpdateUserHandler,
+  DeleteUserHandler
 };

@@ -1,5 +1,5 @@
 //import controllers
-const { AdminRegister, AdminLogin } = require("../controllers/AdminControllers");
+const { AdminRegister, AdminLogin, AdminUpdate, AdminDelete } = require("../controllers/AdminControllers");
 
 
 const loginHandler = async (req, res) => {
@@ -21,9 +21,34 @@ const loginHandler = async (req, res) => {
       res.status(400).json({ error: error.message });
     }
   };
+
+  const updateAdminHandler = async (req, res) => {
+    try {
+      const {adminId} = req.params;
+      const { fullName, email, password } = req.body;
+      const adminUpdated = await AdminUpdate(fullName, adminId, email, password)
+      res.status(200).json(adminUpdated);
+    } catch (error) {
+      res.status(400).json({ error: error.message });
+    }
+  };
   
+  const deleteAdminHandler = async (req, res) => {
+    try {
+      const { adminId } = req.params;
+      const adminDeleted = await AdminDelete(adminId)
+      res.status(200).json(adminDeleted);
+    } catch (error) {
+      res.status(400).json({ error: error.message });
+    }
+  };
+  
+
+
   module.exports = {
     registerHandler,
-    loginHandler
+    loginHandler,
+    updateAdminHandler,
+    deleteAdminHandler
   };
   
