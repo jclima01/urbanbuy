@@ -39,7 +39,39 @@ const ClientAdminLogin = async (email, password) => {
   }
 };
 
+const ClientUpdate = async (clientId, fullName, email, password, logo) => {
+  try {
+    const client = await ClientAdmin.findById(clientId);
+    if(client) {
+      client.fullName = fullName;
+      client.email = email;
+      client.password = password;
+      client.logo = logo;
+    }
+    const updatedClient = await ClientAdmin.save();
+    return updatedClient;
+  } catch (error) {
+    throw new Error(error.message)
+  }
+};
+
+const ClientDelete = async (clientId) => {
+  try {
+    const deletedClient = await ClientAdmin.findByIdAndDelete(clientId);
+    return deletedClient;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+
+
+
+
+
+
 module.exports = {
   ClientAdminRegister,
   ClientAdminLogin,
+  ClientUpdate,
+  ClientDelete
 };

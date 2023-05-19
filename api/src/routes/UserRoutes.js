@@ -3,8 +3,8 @@ const usersRouter = Router();
 const {
   loginUserHandler,
   registerUserHandler,
-  UpdateUserHandler,
-  DeleteUserHandler
+  updateUserHandler,
+  deleteUserHandler
 } = require("../handlers/UserHandlers.js");
 
 usersRouter.post("/login", loginUserHandler);
@@ -12,10 +12,10 @@ usersRouter.post("/register", registerUserHandler);
 
 //PUT
 
-usersRouter.put('/:userId', UpdateUserHandler)
+usersRouter.put('/:userId', updateUserHandler)
 
 //DELETE
 
-usersRouter.delete('/:userId', DeleteUserHandler)
+usersRouter.delete('/:userId', deleteUserHandler)
 
 module.exports = usersRouter;

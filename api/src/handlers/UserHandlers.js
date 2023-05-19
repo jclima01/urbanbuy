@@ -22,7 +22,7 @@ const registerUserHandler = async (req, res) => {
   }
 };
 
-const UpdateUserHandler = async (req, res) => {
+const updateUserHandler = async (req, res) => {
   try {
     const {userId} = req.params;
     const { fullName, email, password } = req.body;
@@ -33,7 +33,7 @@ const UpdateUserHandler = async (req, res) => {
   }
 };
 
-const DeleteUserHandler = async (req, res) => {
+const deleteUserHandler = async (req, res) => {
   try {
     const { userId } = req.params;
     const userDeleted = await UserDelete(userId)
@@ -48,6 +48,6 @@ const DeleteUserHandler = async (req, res) => {
 module.exports = {
   loginUserHandler,
   registerUserHandler,
-  UpdateUserHandler,
-  DeleteUserHandler
+  updateUserHandler,
+  deleteUserHandler
 };
