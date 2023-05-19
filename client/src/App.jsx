@@ -15,7 +15,7 @@ function App() {
 
   return (
     <>
-      {location.pathname.includes("/dashboard") && clientAdmin ? (
+      { clientAdmin ? (
         <div className="d-flex vh-100 vw-100 ">
           <SideBarDashBoard />
           <div className="d-flex flex-column">
