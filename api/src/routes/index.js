@@ -21,4 +21,3 @@ mainRouter.use('/category', CategoryRoutes);
 
 
 
-module.exports = mainRouter;
