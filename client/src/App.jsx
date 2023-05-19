@@ -16,6 +16,7 @@ import SignIn from "./Components/SignIn/SignIn"
 import SearchBar from './SearchBar/SearchBar.jsx'
 import { useState } from "react";
 import { Products } from "./data"  
+import HomeEcommerce from "./Components/EcommerceCliente/HomeEcommerce";
 
 
 function App() {
@@ -66,6 +67,7 @@ function App() {
           <Route path="/" element={<Home/>} />   {/* LadingPage */}
           <Route path="/login" element={<FormLogin />} />
           <Route path="/SignIn" element={<SignIn />} />
+          <Route path="/homecliente" element={<HomeEcommerce/>} />
         </Routes>
       )}
 
