@@ -14,3 +14,4 @@ categoryRoutes.put('/', putCategoryHandler)
 categoryRoutes.delete('/', deleteCategoryHandler)
 
 
+module.exports = categoryRoutes;
