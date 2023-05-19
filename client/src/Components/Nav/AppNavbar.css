@@ -1,0 +1,28 @@
+.logo-nav{
+   max-width: 300px;
+   height: auto;
+}
+.button-nav{
+   background-color: rgb(235, 152, 78);
+   border: none;
+   margin-left: 150px;
+   padding: 5px;
+   border-radius: 5px;
+   color: whitesmoke;
+}
+
+.SignIn {
+   background-color: rgb(23, 32, 42);
+   color: white;
+   padding: 8px;
+   border: none;
+   border-radius: 5px;
+   margin-right: 10px;
+   transition: background-color 0.3s, color 0.3s, transform 0.3s;
+}
+
+.SignIn:hover {
+   background-color: white;
+   color: rgb(23, 32, 42);
+   transform: scale(1.1);
+}

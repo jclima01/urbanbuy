@@ -8,9 +8,15 @@ import DashBoardEdit from "./pages/DashBoardEdit/DashBoardEdit";
 import DashBoardProducts from "./pages/DashBoardProducts/DashBoardProducts";
 import DashBoardShipping from "./pages/DashBoardShipping/DashBoardShipping";
 import DashBoardSettings from "./pages/DashBoardSettings/DashBoardSettings";
+
+import Home from "./Components/Home/Home";
+import FormLogin from "./Components/FormLogin/FormLogin";
+import SignIn from "./Components/SignIn/SignIn"
+
 import SearchBar from './SearchBar/SearchBar.jsx'
 import { useState } from "react";
 import { Products } from "./data"  
+
 
 function App() {
   const clientAdmin = true;
@@ -57,9 +63,12 @@ function App() {
       ) : (
         <Routes>
           
-          <Route path="/" element={<DashBoard />} />   {/* LadingPage */}
+          <Route path="/" element={<Home/>} />   {/* LadingPage */}
+          <Route path="/login" element={<FormLogin />} />
+          <Route path="/SignIn" element={<SignIn />} />
         </Routes>
       )}
+
     </BrowserRouter>
           <SearchBar onSearch={handleSearch}/>
       <ul>
@@ -74,5 +83,6 @@ function App() {
 </>  
 );
 }
+
 
 export default App;

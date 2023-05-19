@@ -1,0 +1,41 @@
+.container-footer {
+    padding: 15px;
+    background-color: rgb(202, 103, 11);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+  
+  .copy {
+    color: whitesmoke;
+  }
+  
+  .contacto {
+    color: whitesmoke;
+  }
+  
+  .lista {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .lista li {
+    margin-right: 10px;
+  }
+  
+  .fa-github,
+  .fa-linkedin {
+    margin-right: 10px;
+    color: whitesmoke;
+    text-decoration: none;
+  }
+  
+  .fa-github:hover,
+  .fa-linkedin:hover {
+    color: #ccc;
+  }
+  
