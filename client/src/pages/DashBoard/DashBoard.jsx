@@ -138,7 +138,7 @@ const DashBoard = () => {
               {categoryProducts.map((item, i) => (
                 <DashBoardCardCategory key={i} category={item} />
               ))}
-              {categoryProducts.length <= 7 ? (
+              {categoryProducts.length === 7 ? null : ((
                 <div
                   style={{
                     width: 140,
@@ -153,7 +153,7 @@ const DashBoard = () => {
                 >
                   <IoMdAddCircleOutline size={60} color="white" className="hoverCategory"  cursor={'pointer'} />
                 </div>
-              ) : null}
+              ))}
             </div>
             <div
               style={{
