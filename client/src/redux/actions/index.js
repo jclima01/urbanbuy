@@ -10,10 +10,46 @@ export const GET_PRODUCT_BY_ID = "GET_PRODUCT_BY_ID";
 export const POST_NEW_PRODUCT = "POST_NEW_PRODUCT";
 export const EDIT_PRODUCT = "EDIT_PRODUCT";
 export const DELETE_PRODUCT = "DELETE_PRODUCT";
+export const GET_ORDERS = "GET_ORDERS";
+export const POST_ORDER = "POST_ORDER";
+
+export const postOrder = (cart, userId) => {
+  try {
+    return async function (dispatch) {
+      const { data } = await axios.post(`http://localhost:2800/orders`, {
+        cart,
+        userId,
+      });
+      return dispatch({
+        type: GET_ORDERS,
+        payload: data,
+      });
+    };
+    // eslint-disable-next-line no-unreachable
+  } catch (err) {
+    throw new Error(err.message);
+  }
+};
+export const getOrders = (userId) => {
+  try {
+    return async function (dispatch) {
+      const { data } = await axios.get(`http://localhost:2800/orders`, {
+        userId,
+      });
+      return dispatch({
+        type: GET_ORDERS,
+        payload: data,
+      });
+    };
+    // eslint-disable-next-line no-unreachable
+  } catch (err) {
+    throw new Error(err.message);
+  }
+};
 export const deleteProduct = (productId) => {
   try {
     return async function (dispatch) {
-      const { data } = await axios.post(
+      const { data } = await axios.delete(
         `http://localhost:2800/products/:${productId}`
       );
       return dispatch({
@@ -39,7 +75,7 @@ export const editProduct = (
 ) => {
   try {
     return async function (dispatch) {
-      const { data } = await axios.post(
+      const { data } = await axios.put(
         `http://localhost:2800/products/:${productId}`,
         {
           productName,
@@ -52,7 +88,7 @@ export const editProduct = (
         }
       );
       return dispatch({
-        type: GET_PRODUCT_BY_ID,
+        type: EDIT_PRODUCT,
         payload: data,
       });
     };
