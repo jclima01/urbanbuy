@@ -132,7 +132,7 @@ export const postNewProduct = (
 export const getProductById = (productId) => {
   try {
     return async function (dispatch) {
-      const { data } = await axios.post(
+      const { data } = await axios.get(
         `http://localhost:2800/products/:${productId}`
       );
       return dispatch({
@@ -148,7 +148,7 @@ export const getProductById = (productId) => {
 export const getAllProducts = () => {
   try {
     return async function (dispatch) {
-      const { data } = await axios.post("http://localhost:2800/products");
+      const { data } = await axios.get("http://localhost:2800/products");
       return dispatch({
         type: GET_ALL_PRODUCTS,
         payload: data,
