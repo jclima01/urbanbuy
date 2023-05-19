@@ -1,5 +1,5 @@
 import "./App.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import DashBoard from "./pages/DashBoard/DashBoard";
 import SideBarDashBoard from "./Components/SideBarDashBoard/SideBarDashBoard";
 import NavBarDashBoard from "./Components/NavBarDashBoard/NavBarDashBoard";
@@ -36,14 +36,18 @@ function App() {
   }
   return (
     <>
+
+      { clientAdmin ? (
+
     <BrowserRouter>
       {location.pathname.includes("/dashboard") && clientAdmin ? (
+
         <div className="d-flex vh-100 vw-100 ">
           <SideBarDashBoard />
           <div className="d-flex flex-column">
             <NavBarDashBoard />
             <Routes>
-              <Route path="/dashBoard/home" element={<DashBoard />} />
+              <Route path="/dashBoard" element={<DashBoard />} />
               <Route path="/dashBoard/User" element={<DashBoardUser />} />
               <Route path="/dashBoard/Edit" element={<DashBoardEdit />} />
               <Route
