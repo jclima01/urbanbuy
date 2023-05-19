@@ -21,6 +21,6 @@ mainRouter.use('/category', CategoryRoutes);
 mainRouter.use('/reviews', ReviewRouter);
 mainRouter.use('/orders', OrderRouter);
 
-
+module.exports = mainRouter
 
 
