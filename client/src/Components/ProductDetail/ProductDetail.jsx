@@ -1,10 +1,10 @@
 import React from 'react';
-import {Produtcs} from '../../data.js'; 
+import {Products} from '../../data.js'; 
 import style from './ProductDetail.module.css'
 
 
 const ProductDetail = ({ productId }) => {
-  const productDetail = Produtcs.find(item => item.id === productId);
+  const productDetail = Products.find(item => item.id === productId);
   console.log(productDetail)
 
 //   if (!product) {

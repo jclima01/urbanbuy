@@ -15,7 +15,7 @@ import ProductDetail from '../ProductDetail/ProductDetail'
 
 export default function Home() {
 
-  const productId =1
+
 
   return (
       <div className='home-landing'>
@@ -26,7 +26,7 @@ export default function Home() {
         <CompraSegura/>
         <Faq/>
          <Team/>
-         <ProductDetail productId={productId}/>
+       
     
 <Footer/>
     </div>
