@@ -75,11 +75,11 @@ export const ClientAdmin = [
   },
 ];
 
-export const Produtcs = [
+export const Products = [
   {
     id: 1,
     ProductName: "HP Gamming 24hz",
-    description: "Esto es una description",
+    description: "El monitor del computador, también conocido como pantalla, muestra la información de tu equipo como imágenes y textos, que son generados gracias a una tarjeta de video que se encuentra en el interior de la torre del computador.",
     category: ["Pantalla", "Gaming"],
     stocks: 5,
     imageUrl:
@@ -89,7 +89,7 @@ export const Produtcs = [
   },
   {
     id: 2,
-    ProductName: "Dell Gamming 24hz",
+    productName: "Dell Gamming 24hz",
     description: "Esto es una description",
     category: ["Pantalla", "Gaming"],
     stocks: 2,
@@ -99,7 +99,7 @@ export const Produtcs = [
   },
   {
     id: 3,
-    ProductName: "LG Gamming 24hz",
+    productName: "LG Gamming 24hz",
     description: "Esto es una description",
     category: ["Pantalla", "Gaming"],
     stocks: 8,
@@ -110,7 +110,7 @@ export const Produtcs = [
   },
   {
     id: 4,
-    ProductName: "MacBook",
+    productName: "MacBook",
     description: "Esto es una description",
     category: ["Pantalla", "Gaming"],
     stocks: 5,
@@ -135,12 +135,13 @@ export const Admin = [
     email: "urbanbuy8@gmail.com",
     password: "123456",
     permissions: "Admin",
-  }
+  },
 ];
 
 /*  Admin  */
 
 /*  clients or User  */
+
 
 
 export const User = [
@@ -170,19 +171,19 @@ export const User = [
       }
 ]
 
-export const order = [
-    {
-        id: `Order-${1}`,
-        fullName: "Ezequiel Irace",
-        status: "process",
-        payment: false,
-        permissions: "user",
-        email: "test@ibm.com",
-        cart: [],
-        adrress: 'sanatiago,chile test dirrecion',
-        total: 500
-      },
-]
 
+export const order = [
+  {
+    id: `Order-${1}`,
+    fullName: "Ezequiel Irace",
+    status: "process",
+    payment: false,
+    permissions: "user",
+    email: "test@ibm.com",
+    cart: [],
+    adrress: "sanatiago,chile test dirrecion",
+    total: 500,
+  },
+];
 
 /*  clients or User  */
