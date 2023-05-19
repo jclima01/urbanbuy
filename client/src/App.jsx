@@ -12,6 +12,7 @@ import DashBoardSettings from "./pages/DashBoardSettings/DashBoardSettings";
 import Home from ".././src/Components/Home/Home";
 import FormLogin from ".././src/Components/FormLogin/FormLogin";
 import SignIn from ".././src/Components/SignIn/SignIn";
+import HomeEcommerce from "./Components/EcommerceCliente/HomeEcommerce";
 
 function App() {
   
@@ -26,7 +27,7 @@ function App() {
           <div className="d-flex flex-column">
             <NavBarDashBoard />
             <Routes>
-              <Route path="/dashBoard/Home" element={<DashBoard />} />
+              <Route path="/dashBoard" element={<DashBoard />} />
               <Route path="/dashBoard/User" element={<DashBoardUser />} />
               <Route path="/dashBoard/Edit" element={<DashBoardEdit />} />
               <Route
@@ -49,6 +50,7 @@ function App() {
           <Route path="/" element={<Home />} /> {/* LadingPage */}
           <Route path="/login" element={<FormLogin />} />
           <Route path="/SignIn" element={<SignIn />} />
+          <Route path="/homecliente" element={<HomeEcommerce />} />
         </Routes>
       )}
     </>
