@@ -4,9 +4,9 @@ const initialState = {
   admin:{},
   clientAdmin:{},
   user:{},
+  UserSession: false,
   products:[],
   product:{}
-  
 };
 
 const rootReducer = (state = initialState, { type, payload }) => {
@@ -50,6 +50,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         clientAdmin: {...payload},
+        UserSession: true
       };
     case REGISTER_CLIENT_ADMIN:
       return {

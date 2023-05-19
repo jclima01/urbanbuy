@@ -1,5 +1,6 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
+import { useSelector } from "react-redux";
 import DashBoard from "./pages/DashBoard/DashBoard";
 import SideBarDashBoard from "./Components/SideBarDashBoard/SideBarDashBoard";
 import NavBarDashBoard from "./Components/NavBarDashBoard/NavBarDashBoard";
@@ -14,9 +15,9 @@ import SignIn from "./Components/SignIn/SignIn";
 import HomeEcommerce from "./Components/EcommerceCliente/HomeEcommerce";
 
 function App() {
-  const clientAdmin = true;
-
   
+  const clientAdmin = useSelector((state) => state.UserSession);
+
   return (
     <>
       {clientAdmin ? (

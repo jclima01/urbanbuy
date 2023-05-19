@@ -1,21 +1,27 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import logo2 from '../../Img/logo2.png';
 import style from './FormLogin.module.css'
-import {Link} from 'react-router-dom'
+import { useDispatch} from 'react-redux';
+import {Link, useNavigate} from 'react-router-dom'
 import ventas from '../../Img/ventas.png';
+import { loginClientAdmin } from '../../redux/actions';
 
 // Falta crear una funcion que asocie email y contraseña para dar acceso
 
 const FormLogin = () => {
-  // const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+
   const [email, setEmail] = useState("");
+  const [password, setPassword] = useState('');
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
 
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
   };
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+
+
 
   const validateEmail = (value) => {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -41,9 +47,13 @@ const FormLogin = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Aquí puedes agregar la lógica para procesar el inicio de sesión
-    console.log('Usuario:', username);
-    console.log('Contraseña:', password);
+    dispatch(loginClientAdmin( email , password)).finally(()=> {
+      navigate('/dashboard')
+    } )
   };
+
+
+
 
   return (
     <div className={style.container}>
@@ -57,17 +67,6 @@ const FormLogin = () => {
       <div className={style.form}>
       <h2>Iniciar sesión</h2>
       <form onSubmit={handleSubmit} className={style.form}>
-        {/* <label htmlFor="username">Usuario:</label>
-        <input
-          type="text"
-          id="username"
-          name="username"
-          placeholder="Ingrese su nombre de usuario"
-          value={username}
-          onChange={handleUsernameChange}
-          required
-          className={style.input}
-        /> */}
         <label htmlFor="correo electronico">Correo electrónico:</label>
             <input
               type="email"

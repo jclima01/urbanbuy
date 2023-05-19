@@ -179,13 +179,10 @@ export const loginAdmin = (email, password) => {
 export const loginClientAdmin = (email, password) => {
   try {
     return async function (dispatch) {
-      const { data } = await axios.post(
-        "http://localhost:2800/clientAdmin/login",
-        {
-          email,
-          password,
-        }
-      );
+      const { data } = await axios.post("http://localhost:2800/clientAdmin/login", {
+        email,
+        password,
+      });
       return dispatch({
         type: LOGIN_CLIENT_ADMIN,
         payload: data,
