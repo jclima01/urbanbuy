@@ -3,7 +3,7 @@ import DashBoardCardProducts from "../../Components/DashBoardCardProducts/DashBo
 import DashBoardCardsUser from "../../Components/DashBoardCardsUser/DashBoardCardsUser";
 import logo from "../../assets/Logo.jpeg";
 import ilustration from "../../assets/ilustrationhome.png";
-import { Produtcs, User, categoryProducts } from "../../data";
+import { Products, User, categoryProducts } from "../../data";
 import {IoMdAddCircleOutline} from "react-icons/io";
 
 const DashBoard = () => {
@@ -182,7 +182,7 @@ const DashBoard = () => {
                 justifyContent: "space-around",
               }}
             >
-              {Produtcs?.map((item) => (
+              {Products?.map((item) => (
                 <DashBoardCardProducts key={item.id} Products={item} />
               ))}
             </div>
