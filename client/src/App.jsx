@@ -8,17 +8,25 @@ import DashBoardEdit from "./pages/DashBoardEdit/DashBoardEdit";
 import DashBoardProducts from "./pages/DashBoardProducts/DashBoardProducts";
 import DashBoardShipping from "./pages/DashBoardShipping/DashBoardShipping";
 import DashBoardSettings from "./pages/DashBoardSettings/DashBoardSettings";
-import SearchBar from './SearchBar'
-  
+import SearchBar from './SearchBar/SearchBar.jsx'
+import { useState } from "react";
+import { Products } from "./data"  
+
 function App() {
   const clientAdmin = true;
   const [searches, setSearches] = useState([])
 
   function handleSearch(searchTerm) {
-    const result = data.filter(p => p.Produtcs.productName.includes(searchTerm))
-    setSearches(result)
- }
-
+    const result = Products.some(p => p.productName.toLowerCase().includes(searchTerm.toLowerCase()))
+      if (result){
+        const result = Products.filter(p => p.productName.toLowerCase().includes(searchTerm.toLowerCase()))
+        setSearches(result)
+        console.log('result: ', result)
+        console.log('searchTerm: ', searchTerm)
+      } else {
+        setSearches([])
+      }
+  }
   return (
     <>
     <BrowserRouter>
@@ -55,9 +63,13 @@ function App() {
     </BrowserRouter>
           <SearchBar onSearch={handleSearch}/>
       <ul>
-        {searches.map(p => (
+        {searches.length > 0 ? searches.map(p => (
           <li key={p.id}>{p.productName}</li>
-        ))}
+        )) :
+            Products.map(p => (
+              <li key={p.id}>{p.productName}</li>
+            ))
+        }
       </ul>
 </>  
 );
