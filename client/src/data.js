@@ -78,7 +78,7 @@ export const ClientAdmin = [
 export const Products = [
   {
     id: 1,
-    ProductName: "HP Gamming 24hz",
+    productName: "HP Gamming 24hz",
     description: "Esto es una description",
     category: ["Pantalla", "Gaming"],
     stocks: 5,

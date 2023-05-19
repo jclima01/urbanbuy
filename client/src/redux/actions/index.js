@@ -29,6 +29,7 @@ export const loginClientAdmin = (email,password) => {
         email,
         password,
       });
+      
       return dispatch({
         type: LOGIN_CLIENT_ADMIN,
         payload: data,

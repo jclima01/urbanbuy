@@ -1,16 +1,22 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import logo2 from '../../Img/logo2.png';
 import style from './FormLogin.module.css'
-import {Link} from 'react-router-dom'
+import { useDispatch} from 'react-redux';
+import {Link, useNavigate} from 'react-router-dom'
 import ventas from '../../Img/ventas.png';
+import { loginClientAdmin } from '../../redux/actions';
 
 const FormLogin = () => {
-  const [username, setUsername] = useState('');
+  const [email, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
   };
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+
+
 
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
@@ -19,9 +25,13 @@ const FormLogin = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Aquí puedes agregar la lógica para procesar el inicio de sesión
-    console.log('Usuario:', username);
-    console.log('Contraseña:', password);
+    dispatch(loginClientAdmin( email , password)).finally(()=> {
+      navigate('/dashboard')
+    } )
   };
+
+
+
 
   return (
     <div className={style.container}>
@@ -35,13 +45,13 @@ const FormLogin = () => {
       <div className={style.form}>
       <h2>Iniciar sesión</h2>
       <form onSubmit={handleSubmit} className={style.form}>
-        <label htmlFor="username">Usuario:</label>
+        <label htmlFor="username">Email:</label>
         <input
           type="text"
-          id="username"
-          name="username"
+          id="email"
+          name="email"
           placeholder="Ingrese su nombre de usuario"
-          value={username}
+          value={email}
           onChange={handleUsernameChange}
           required
           className={style.input}
