@@ -1,5 +1,7 @@
 const Product = require("../models/Product");
+const Category = require("../models/Category");
 const mongoose = require("mongoose");
+
 
 //GETS
 
@@ -101,9 +103,9 @@ const updateProduct = async (
 };
 
 //DELETE
-const deleteProduct = async (id) => {
+const deleteProduct = async (productId) => {
   try {
-    const deletedProduct = await Product.findByIdAndDelete(id);
+    const deletedProduct = await Product.findByIdAndDelete(productId);
     return deletedProduct;
   } catch (error) {
     throw new Error(error.message);

@@ -13,7 +13,7 @@ const {
 
 productRouter.get('/', getProductsHandler)
 
-productRouter.get('/:id', getProductsHandlerById)
+productRouter.get('/:productId', getProductsHandlerById)
 
 
 //POST
@@ -22,11 +22,11 @@ productRouter.post('/', postProductHandler)
 
 //PUT   
 
-productRouter.put('/:id', updateProductHandler)
+productRouter.put('/:productId', updateProductHandler)
 
 
 //DELETE
 
-productRouter.delete('/delete/:id', deletedProductHandler)
+productRouter.delete('/delete/:productId', deletedProductHandler)
 
 module.exports = productRouter;
