@@ -1,0 +1,49 @@
+.container{
+    background-color: whitesmoke;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 50%;
+    align-items: center;
+    border-radius: 30px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.6);
+    
+}
+
+.img{
+    width: 40%;
+    height: auto;
+    margin-top: 20px;
+   
+}
+.h2{
+    margin-top: 2vw;
+    background-color: black;
+    color: whitesmoke;
+    padding: 0.7vw;
+    border-radius: 8px;
+}
+
+.hovers{
+    background-color: black;
+    padding: 2vw;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border-radius: 10px;
+    color: white;
+
+}
+
+.hovers:hover{
+    color:rgb(243, 156, 18)
+}
+
+.description{
+    border:black solid 1px;
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    text-align: center;
+    width: 70%;
+    border-radius: 10px;
+}
