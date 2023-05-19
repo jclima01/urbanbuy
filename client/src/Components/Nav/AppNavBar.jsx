@@ -38,10 +38,11 @@ function AppNavbar() {
           <button className="button-nav">Comienza tu prueba hoy</button>
         </Navbar.Brand>
         <div >
-        
-       <button className="SingIn">Sing in</button>
+        <Link to='Signin'>
+       <button className="SignIn">Sign in</button>
+        </Link>
      <Link to='login'>
-       <button className="SingIn">Login</button>
+       <button className="SignIn">Login</button>
        </Link>
        </div>
       </Container>

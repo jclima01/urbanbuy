@@ -11,7 +11,7 @@
    color: whitesmoke;
 }
 
-.SingIn {
+.SignIn {
    background-color: rgb(23, 32, 42);
    color: white;
    padding: 8px;
@@ -21,7 +21,7 @@
    transition: background-color 0.3s, color 0.3s, transform 0.3s;
 }
 
-.SingIn:hover {
+.SignIn:hover {
    background-color: white;
    color: rgb(23, 32, 42);
    transform: scale(1.1);

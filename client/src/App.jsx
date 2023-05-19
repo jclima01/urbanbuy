@@ -10,6 +10,7 @@ import DashBoardShipping from "./pages/DashBoardShipping/DashBoardShipping";
 import DashBoardSettings from "./pages/DashBoardSettings/DashBoardSettings";
 import Home from "./Components/Home/Home";
 import FormLogin from "./Components/FormLogin/FormLogin";
+import SignIn from "./Components/SignIn/SignIn"
 
 function App() {
   const clientAdmin = true;
@@ -47,6 +48,7 @@ function App() {
           
           <Route path="/" element={<Home/>} />   {/* LadingPage */}
           <Route path="/login" element={<FormLogin />} />
+          <Route path="/SignIn" element={<SignIn />} />
         </Routes>
       )}
         </BrowserRouter>
