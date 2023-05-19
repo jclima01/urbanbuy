@@ -10,6 +10,7 @@ import './Home.css'
 
 
 
+
 export default function Home() {
   return (
       <div className='home-landing'>
@@ -19,7 +20,8 @@ export default function Home() {
         <Slider/>
         <CompraSegura/>
         <Faq/>
-         <Team/> 
+         <Team/>
+         
 <Footer/>
     </div>
   )

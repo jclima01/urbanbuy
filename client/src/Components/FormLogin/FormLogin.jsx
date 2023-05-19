@@ -25,7 +25,9 @@ const FormLogin = () => {
 
   return (
     <div className={style.container}>
-      <img src={ventas} alt="" className={style.ventas}/>
+    
+      <img src={ventas} alt="" style={{width:'40vw', marginLeft:'-250px', marginRight:'50px'}}/>
+      
     <div >
         <Link to='/'>
       <img src={logo2} alt="Logo de la empresa" className={style.logo2} />
