@@ -75,7 +75,7 @@ export const ClientAdmin = [
   },
 ];
 
-export const Produtcs = [
+export const Products = [
   {
     id: 1,
     ProductName: "HP Gamming 24hz",
@@ -89,7 +89,7 @@ export const Produtcs = [
   },
   {
     id: 2,
-    ProductName: "Dell Gamming 24hz",
+    productName: "Dell Gamming 24hz",
     description: "Esto es una description",
     category: ["Pantalla", "Gaming"],
     stocks: 2,
@@ -99,7 +99,7 @@ export const Produtcs = [
   },
   {
     id: 3,
-    ProductName: "LG Gamming 24hz",
+    productName: "LG Gamming 24hz",
     description: "Esto es una description",
     category: ["Pantalla", "Gaming"],
     stocks: 8,
@@ -110,7 +110,7 @@ export const Produtcs = [
   },
   {
     id: 4,
-    ProductName: "MacBook",
+    productName: "MacBook",
     description: "Esto es una description",
     category: ["Pantalla", "Gaming"],
     stocks: 5,
@@ -133,7 +133,7 @@ export const Admin = [
     email: "urbanbuy8@gmail.com",
     password: "123456",
     permissions: "Admin",
-  }
+  },
 ];
 
 /*  Admin  */
@@ -141,29 +141,28 @@ export const Admin = [
 /*  clients or User  */
 
 export const user = [
-    {
-        id: `User-${1}`,
-        fullName: "Ezequiel Irace",
-        email: "test@ibm.com",
-        password: "123456",
-        permissions: "user",
-        order: []
-      },
-]
+  {
+    id: `User-${1}`,
+    fullName: "Ezequiel Irace",
+    email: "test@ibm.com",
+    password: "123456",
+    permissions: "user",
+    order: [],
+  },
+];
 
 export const order = [
-    {
-        id: `Order-${1}`,
-        fullName: "Ezequiel Irace",
-        status: "process",
-        payment: false,
-        permissions: "user",
-        email: "test@ibm.com",
-        cart: [],
-        adrress: 'sanatiago,chile test dirrecion',
-        total: 500
-      },
-]
-
+  {
+    id: `Order-${1}`,
+    fullName: "Ezequiel Irace",
+    status: "process",
+    payment: false,
+    permissions: "user",
+    email: "test@ibm.com",
+    cart: [],
+    adrress: "sanatiago,chile test dirrecion",
+    total: 500,
+  },
+];
 
 /*  clients or User  */
