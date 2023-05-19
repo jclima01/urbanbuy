@@ -8,7 +8,6 @@ import {IoMdAddCircleOutline} from "react-icons/io";
 
 const DashBoard = () => {
 
-  console.log(categoryProducts.length)
   return (
     <div className="vh-100 w-100 d-flex justify-content-center overflow-hidden ">
       <div className="contianer-home">
