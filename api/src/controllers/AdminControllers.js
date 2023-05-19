@@ -3,16 +3,17 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 require("dotenv").config();
 
-const AdminRegister = async (email, password) => {
+const AdminRegister = async (fullName, email, password) => {
   try {
     if (!email) throw new Error("Email is required");
     if (!password) throw new Error("Password is required");
+    if (!fullName) throw new Error("FullName is required");
     const admin = await Admin.findOne({ email });
     if (admin) throw new Error("User already registered");
     var salt = bcrypt.genSaltSync(10);
     var hash = bcrypt.hashSync(password, salt);
 
-    const newAdmin = new Admin({ email, password: hash });
+    const newAdmin = new Admin({ fullName, email, password: hash });
 
     const savedAdmin = await newAdmin.save();
     return savedAdmin;
@@ -21,7 +22,7 @@ const AdminRegister = async (email, password) => {
   }
 };
 
-const AdminLogin = async (email, password) => {
+const AdminLogin = async ( email, password) => {
   try {
     if (!email) throw new Error("Email is required");
     const admin = await Admin.findOne({ email });

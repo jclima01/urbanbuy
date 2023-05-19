@@ -3,16 +3,17 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 require("dotenv").config();
 
-const ClientAdminRegister = async (email, password) => {
+const ClientAdminRegister = async (fullName, email, password) => {
   try {
     if (!email) throw new Error("Email is required");
     if (!password) throw new Error("Password is required");
+    if (!fullName) throw new Error("FullName is required");
     const admin = await ClientAdmin.findOne({ email });
     if (admin) throw new Error("User already registered");
     var salt = bcrypt.genSaltSync(10);
     var hash = bcrypt.hashSync(password, salt);
 
-    const newAdmin = new ClientAdmin({ email, password: hash });
+    const newAdmin = new ClientAdmin({ fullName, email, password: hash });
 
     const savedAdmin = await newAdmin.save();
     return savedAdmin;
@@ -48,7 +49,7 @@ const ClientUpdate = async (clientId, fullName, email, password, logo) => {
       client.password = password;
       client.logo = logo;
     }
-    const updatedClient = await ClientAdmin.save();
+    const updatedClient = await client.save();
     return updatedClient;
   } catch (error) {
     throw new Error(error.message)
@@ -63,9 +64,6 @@ const ClientDelete = async (clientId) => {
     throw new Error(error.message);
   }
 };
-
-
-
 
 
 

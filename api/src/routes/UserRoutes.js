@@ -16,6 +16,6 @@ usersRouter.put('/:userId', updateUserHandler)
 
 //DELETE
 
-usersRouter.delete('/:userId', deleteUserHandler)
+usersRouter.delete('/delete/:userId', deleteUserHandler)
 
 module.exports = usersRouter;

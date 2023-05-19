@@ -14,8 +14,8 @@ const loginHandler = async (req, res) => {
 
   const registerHandler = async (req, res) => {
     try {
-      const { email, password } = req.body
-      const newAdmin = await AdminRegister(email, password)
+      const { fullName, email, password } = req.body
+      const newAdmin = await AdminRegister(fullName, email, password)
       res.status(200).json(newAdmin);
     } catch (error) {
       res.status(400).json({ error: error.message });
@@ -26,7 +26,7 @@ const loginHandler = async (req, res) => {
     try {
       const {adminId} = req.params;
       const { fullName, email, password } = req.body;
-      const adminUpdated = await AdminUpdate(fullName, adminId, email, password)
+      const adminUpdated = await AdminUpdate(adminId, fullName, email, password)
       res.status(200).json(adminUpdated);
     } catch (error) {
       res.status(400).json({ error: error.message });
