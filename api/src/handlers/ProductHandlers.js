@@ -27,7 +27,7 @@ const getProductsHandlerById = async (req, res) => {
   try {
     const { productId } = req.params;
     let result;
-    if (id) {
+    if (productId) {
       result = await getProductById(productId);
     }
     res.status(200).json(result);
@@ -94,8 +94,8 @@ const updateProductHandler = async (req, res) => {
 
 const deletedProductHandler = async (req, res) => {
   try {
-    const { id } = req.params;
-    const deletedProduct = await deleteProduct(id);
+    const { productId } = req.params;
+    const deletedProduct = await deleteProduct(productId);
     res.status(200).json(deletedProduct);
   } catch (error) {
     res.status(400).json({ error: error.message });
