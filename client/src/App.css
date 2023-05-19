@@ -12,6 +12,9 @@
   cursor: pointer;
   transition: 0.5s all ease-in-out;
 }
+.hoverCategory :hover{
+ background-color: #ff7f2a;
+}
 
 .custom-link{
   text-decoration: none; /* Elimina el subrayado */

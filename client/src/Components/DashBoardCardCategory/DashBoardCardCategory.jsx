@@ -1,12 +1,10 @@
-
-
 const DashBoardCardCategory = ({ category }) => {
   return (
     <div
       style={{
         width: 140,
         height: 110,
-        backgroundColor: "gray",
+        backgroundColor: "lightgray",
         borderRadius: 15,
         display: "flex",
         alignItems: "end",
@@ -19,12 +17,10 @@ const DashBoardCardCategory = ({ category }) => {
           fontWeight: 600,
           padding: 5,
           backgroundColor: "#2e2c2b30",
-          borderRadius:'7px',
-          color: 'white'
+          borderRadius: "7px",
+          color: "white",
         }}
-      >
-       
-      </p>
+      ></p>
     </div>
   );
 };

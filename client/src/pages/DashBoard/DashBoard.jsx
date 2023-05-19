@@ -4,8 +4,11 @@ import DashBoardCardsUser from "../../Components/DashBoardCardsUser/DashBoardCar
 import logo from "../../assets/Logo.jpeg";
 import ilustration from "../../assets/ilustrationhome.png";
 import { Produtcs, User, categoryProducts } from "../../data";
+import {IoMdAddCircleOutline} from "react-icons/io";
 
 const DashBoard = () => {
+
+  console.log(categoryProducts.length)
   return (
     <div className="vh-100 w-100 d-flex justify-content-center overflow-hidden ">
       <div className="contianer-home">
@@ -90,7 +93,7 @@ const DashBoard = () => {
         <div
           style={{
             display: "flex",
-            alignItems:'center',
+            alignItems: "center",
             height: "100%",
             width: "100%",
             padding: 20,
@@ -103,7 +106,6 @@ const DashBoard = () => {
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
-
             }}
           >
             <div
@@ -113,7 +115,6 @@ const DashBoard = () => {
                 display: "flex",
                 justifyContent: "space-between",
                 alignItems: "center",
-              
               }}
             >
               <h1 style={{ fontSize: 20, padding: 10, margin: 10 }}>
@@ -137,6 +138,22 @@ const DashBoard = () => {
               {categoryProducts.map((item, i) => (
                 <DashBoardCardCategory key={i} category={item} />
               ))}
+              {categoryProducts.length <= 7 ? (
+                <div
+                  style={{
+                    width: 140,
+                    height: 110,
+                    backgroundColor: "lightgray",
+                    borderRadius: 15,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                  
+                >
+                  <IoMdAddCircleOutline size={60} color="white" className="hoverCategory"  cursor={'pointer'} />
+                </div>
+              ) : null}
             </div>
             <div
               style={{
@@ -149,7 +166,7 @@ const DashBoard = () => {
               }}
             >
               <div className="">
-                <h4>
+                <h4 style={{ fontSize: 20 }}>
                   Most Selled <strong>Products.</strong>
                 </h4>
               </div>
@@ -164,7 +181,6 @@ const DashBoard = () => {
                 height: "100%",
                 alignItems: "end",
                 justifyContent: "space-around",
-                
               }}
             >
               {Produtcs?.map((item) => (
@@ -178,8 +194,8 @@ const DashBoard = () => {
               width: "35%",
               display: "flex",
               alignContent: "center",
-              marginLeft:20,
-              marginRight:-20
+              marginLeft: 20,
+              marginRight: -20,
             }}
           >
             <div
@@ -225,7 +241,7 @@ const DashBoard = () => {
                   gap: 10,
                 }}
               >
-                {User?.map(item => (
+                {User?.map((item) => (
                   <DashBoardCardsUser key={item.id} Users={item} />
                 ))}
               </div>
