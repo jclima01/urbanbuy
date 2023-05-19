@@ -72,7 +72,7 @@ function App() {
       )}
 
     </BrowserRouter>
-          <SearchBar onSearch={handleSearch}/>
+          {/* <SearchBar onSearch={handleSearch}/>
       <ul>
         {searches.length > 0 ? searches.map(p => (
           <li key={p.id}>{p.productName}</li>
@@ -81,7 +81,7 @@ function App() {
               <li key={p.id}>{p.productName}</li>
             ))
         }
-      </ul>
+      </ul> */}
 </>  
 );
 }

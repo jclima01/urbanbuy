@@ -1,6 +1,10 @@
 import React from "react";
 import { Navbar, Container } from "react-bootstrap";
 import {Link} from 'react-router-dom'
+import logoClient from '../../Img/logoClient.png'
+import SearchBar from "../../SearchBar/SearchBar";
+import style from './NavEcommerce.module.css'
+
 
 
 
@@ -10,21 +14,19 @@ function NavEcommerce() {
   
 
   return (
-    <Navbar>
+    <Navbar className={style.navEcommerce}>
      
-      <Container>
+      <Container >
         <Navbar.Brand>
-          <img src={logoClient} className="logo-nav"/>
-         <SearchBar/>
+        <h2 className={style.container} >Casa de deportes RH</h2>
+        <img src={logoClient} className={style.logoClient}/>
         </Navbar.Brand>
-        <div >
-        <Link to='Signin'>
-       <button className="SignIn">Sign in</button>
-        </Link>
-     <Link to='login'>
-       <button className="SignIn">Login</button>
-       </Link>
-       </div>
+       
+        <div>
+          
+        <SearchBar />
+        </div>
+        <img src={logoClient} style={{width:'3%'}}/>
       </Container>
     </Navbar>
   );
