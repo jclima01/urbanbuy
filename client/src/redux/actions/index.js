@@ -145,10 +145,10 @@ export const getProductById = (productId) => {
     throw new Error(err.message);
   }
 };
-export const getAllProducts = () => {
+export const getAllProducts = (clientAdminId) => {
   try {
     return async function (dispatch) {
-      const { data } = await axios.get("http://localhost:2800/products");
+      const { data } = await axios.get(`http://localhost:2800/products/:${clientAdminId}`);
       return dispatch({
         type: GET_ALL_PRODUCTS,
         payload: data,
