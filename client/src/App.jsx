@@ -17,6 +17,7 @@ import Card from "./Components/Card/Card";
 import SearchBar from './SearchBar/SearchBar.jsx'
 import { useState } from "react";
 import { Products } from "./data"  
+import HomeEcommerce from "./Components/EcommerceCliente/HomeEcommerce";
 
 
 function App() {
@@ -68,12 +69,12 @@ function App() {
           <Route path="/" element={<Home/>} />   {/* LadingPage */}
           <Route path="/login" element={<FormLogin />} />
           <Route path="/SignIn" element={<SignIn />} />
-          <Route path="/prueba" element={<Card />} />
+          // <Route path="/prueba" element={<Card />} />
         </Routes>
       )}
 
     </BrowserRouter>
-          <SearchBar onSearch={handleSearch}/>
+          {/* <SearchBar onSearch={handleSearch}/>
       <ul>
         {searches.length > 0 ? searches.map(p => (
           <li key={p.id}>{p.productName}</li>
@@ -82,7 +83,7 @@ function App() {
               <li key={p.id}>{p.productName}</li>
             ))
         }
-      </ul>
+      </ul> */}
 </>  
 );
 }

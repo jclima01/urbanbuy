@@ -82,8 +82,8 @@ const Filter = () => {
   }
 
   return (
-    <div style={{width:'20vw'}}>
-      <h1>Filtrado Vertical</h1>
+    <div style={{width:'20vw', marginLeft:'30px'}}>
+   
       <div className="form-group">
         <label htmlFor="categoria">Categoría:</label>
         <select
@@ -139,15 +139,7 @@ const Filter = () => {
         </select>
       </div>
 
-      <h2>Resultados:</h2>
-      <ul>
-        {elementosFiltrados.map((elemento) => (
-          <li key={elemento.id}>
-            {elemento.nombre} - Categoría: {elemento.categoria} - Precio:{" "}
-            {elemento.precio} - Rating: {elemento.rating}
-          </li>
-        ))}
-      </ul>
+      
     </div>
   );
 };
