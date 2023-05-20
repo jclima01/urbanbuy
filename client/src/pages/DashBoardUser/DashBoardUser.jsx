@@ -1,13 +1,10 @@
 
+import "../DashBoardUser/DashBoardUser.css";
 
 const DashBoardUser = () => {
   return (
-    <div style={{
-      width: '100%',
-      height:'100%',
-      backgroundColor:'red'
-    }}>
-      
+    <div className="contentAllUser">
+      <h1>Test User</h1>
     </div>
   )
 }
