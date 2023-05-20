@@ -18,7 +18,7 @@ productRouter.get('/:productId', getProductsHandlerById)
 
 //POST
 
-productRouter.post('/', postProductHandler)
+productRouter.post('/:clientAdminId', postProductHandler)
 
 //PUT   
 
