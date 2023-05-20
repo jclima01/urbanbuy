@@ -11,7 +11,7 @@ const {
 
 //GET
 
-productRouter.get('/', getProductsHandler)
+productRouter.get('/:clientAdminId', getProductsHandler)
 
 productRouter.get('/:productId', getProductsHandlerById)
 
