@@ -12,6 +12,9 @@ export const EDIT_PRODUCT = "EDIT_PRODUCT";
 export const DELETE_PRODUCT = "DELETE_PRODUCT";
 export const GET_ORDERS = "GET_ORDERS";
 export const POST_ORDER = "POST_ORDER";
+export const LOGOUT_ADMIN = "LOGOUT_ADMIN";
+export const LOGOUT_CLIENT_ADMIN = "LOGOUT_CLIENT_ADMIN";
+export const LOGOUT_USER = "LOGOUT_USER";
 
 export const postOrder = (cart, userId) => {
   try {
@@ -166,6 +169,7 @@ export const loginAdmin = (email, password) => {
         email,
         password,
       });
+      localStorage.setItem('dataAdmin', data);
       return dispatch({
         type: LOGIN_ADMIN,
         payload: data,
@@ -183,6 +187,7 @@ export const loginClientAdmin = (email, password) => {
         email,
         password,
       });
+      localStorage.setItem('dataClientAdmin', data);
       return dispatch({
         type: LOGIN_CLIENT_ADMIN,
         payload: data,
@@ -200,6 +205,7 @@ export const loginUser = (email, password) => {
         email,
         password,
       });
+      localStorage.setItem('User', data);
       return dispatch({
         type: LOGIN_USER,
         payload: data,
@@ -262,3 +268,44 @@ export const registerUser = (email, password) => {
     throw new Error(err.message);
   }
 };
+
+
+export const logOutAdmin = () => {
+  try {
+    localStorage.removeItem('dataAdmin');
+    window.location.href = '/';
+
+    return dispatch({
+      type: LOGOUT_ADMIN,
+});
+  } catch (err) {
+    throw new Error(err.message);
+  }
+};
+
+export const logOutClientAdmin = () => {
+  try {
+    localStorage.removeItem('dataClientAdmin');
+    window.location.href = '/';
+
+    return dispatch({
+      type: LOGOUT_CLIENT_ADMIN,
+});
+  } catch (err) {
+    throw new Error(err.message);
+  }
+};
+
+export const logOutUser = () => {
+  try {
+    localStorage.removeItem('dataUser');
+    window.location.href = '/';
+
+    return dispatch({
+      type: LOGOUT_USER,
+});
+  } catch (err) {
+    throw new Error(err.message);
+  }
+};
+

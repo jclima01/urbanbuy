@@ -1,4 +1,4 @@
-import { DELETE_PRODUCT, EDIT_PRODUCT, GET_ALL_PRODUCTS, GET_ORDERS, GET_PRODUCT_BY_ID, LOGIN_ADMIN, LOGIN_CLIENT_ADMIN, LOGIN_USER, POST_NEW_PRODUCT, REGISTER_ADMIN, REGISTER_CLIENT_ADMIN, REGISTER_USER } from "../actions/index.js";
+import { DELETE_PRODUCT, EDIT_PRODUCT, GET_ALL_PRODUCTS, GET_ORDERS, GET_PRODUCT_BY_ID, LOGIN_ADMIN, LOGIN_CLIENT_ADMIN, LOGIN_USER, POST_NEW_PRODUCT, REGISTER_ADMIN, REGISTER_CLIENT_ADMIN, REGISTER_USER, LOGOUT_ADMIN, LOGOUT_CLIENT_ADMIN, LOGOUT_USER } from "../actions/index.js";
 
 const initialState = {
   admin:{},
@@ -60,11 +60,34 @@ const rootReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         user: {...payload},
+
       };
     case REGISTER_USER:
       return {
         ...state,
       };
+
+    case LOGOUT_ADMIN:
+      return {
+        ...state,
+        admin:{},
+        UserSession: false,
+      };
+
+    case LOGOUT_CLIENT_ADMIN:
+      return {
+        ...state,
+        clientAdmin:{},
+        UserSession: false,
+      };
+
+    case LOGOUT_USER:
+      return {
+        ...state,
+        user:{},
+        UserSession: false,
+      };
+
 
     default:
       return {
