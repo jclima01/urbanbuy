@@ -6,13 +6,15 @@ import ventas from '../../Img/ventas.png';
 
 // Falta crear una funcion que asocie email y contraseña para dar acceso
 
+
 const FormLogin = () => {
   // const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
-
+  const [EachError, setEachError] = useState('');
+  
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
   };

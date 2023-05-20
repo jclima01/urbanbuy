@@ -7,7 +7,7 @@ import CompraSegura from '../CompraSegura/CompraSegura'
 import Footer from '../Footer/Footer'
 import Team from '../Team/Team'
 import './Home.css'
-import ProductDetail from '../ProductDetail/ProductDetail'
+// import ProductDetail from '../ProductDetail/ProductDetail'
 
 
 
@@ -15,7 +15,7 @@ import ProductDetail from '../ProductDetail/ProductDetail'
 
 export default function Home() {
 
-
+  // const productId =1
 
   return (
       <div className='home-landing'>
@@ -26,7 +26,7 @@ export default function Home() {
         <CompraSegura/>
         <Faq/>
          <Team/>
-       
+         {/* <ProductDetail productId={productId}/> */}
     
 <Footer/>
     </div>
