@@ -1,6 +1,13 @@
+const cloudinary = require("cloudinary").v2;
 const Product = require("../models/Product");
 const ClientAdmin = require("../models/Users/ClientAdmin");
 const mongoose = require("mongoose");
+
+cloudinary.config({
+  cloud_name: "dhan4gjbn",
+  api_key: "982674615614551",
+  api_secret: "CsN09nf69VN6R_9M9SMTwP021wU",
+});
 
 //GETS
 
@@ -59,12 +66,16 @@ const createNewProduct = async (
   clientAdminId
 ) => {
   try {
+    const uploadResult = await cloudinary.uploader.upload(
+      imageFile.path /*,{optiones}*/
+    );
+
     const newProduct = new Product({
       productName,
       description,
       categories: categoriesIds,
       stocks,
-      imageUrl,
+      imageUrl: uploadResult.secure_url,
       price,
       rating,
       clientAdmin: clientAdminId,
