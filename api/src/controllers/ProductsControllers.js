@@ -7,10 +7,12 @@ const mongoose = require("mongoose");
 //All products
 const getAllProducts = async (clientAdminId) => {
   try {
-    const dataBaseProducts = await Product.find({ clientAdmin: clientAdminId })
+    console.log(typeof clientAdminId)
+    const dataBaseProducts = await Product.find({clientAdmin: clientAdminId})
       .populate("categories") // Popula las categorías
-      .populate("clientAdmin") // Popula el modelo ClientAdmin
+      // .populate("clientAdmin") // Popula el modelo ClientAdmin
       .exec();
+      console.log(dataBaseProducts)
     return dataBaseProducts;
   } catch (error) {
     throw new Error(error.message);
@@ -18,9 +20,9 @@ const getAllProducts = async (clientAdminId) => {
 };
 
 //By Name
-const getProductName = async (name) => {
+const getProductName = async (name , clientAdminId) => {
   try {
-    const dataBaseProducts = await Product.find({ productName: name })
+    const dataBaseProducts = await Product.find({ productName: name, clientAdmin: clientAdminId})
       .populate("categories") // Popula las categorías
       .populate("clientAdmin") // Popula el modelo ClientAdmin
       .exec();

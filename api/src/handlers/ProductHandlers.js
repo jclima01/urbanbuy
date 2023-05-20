@@ -10,11 +10,11 @@ const {
 
 const getProductsHandler = async (req, res) => {
   try {
-    const { name } = req.query;
+    const { name } = req.body;
     const { clientAdminId } = req.params;
     let result;
     if (name) {
-      result = await getProductName(name);
+      result = await getProductName(name,clientAdminId);
     } else {
       result = await getAllProducts(clientAdminId);
     }
@@ -47,8 +47,8 @@ const postProductHandler = async (req, res) => {
       imageUrl,
       price,
       rating,
-      clientAdmin,
     } = req.body;
+    const {clientAdminId} = req.params
     const newProduct = await createNewProduct(
       productName,
       description,
@@ -57,7 +57,7 @@ const postProductHandler = async (req, res) => {
       imageUrl,
       price,
       rating,
-      clientAdmin
+      clientAdminId
     );
     res.status(200).json(newProduct);
   } catch (error) {
