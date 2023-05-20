@@ -78,7 +78,7 @@ export const ClientAdmin = [
 export const Products = [
   {
     id: 1,
-    ProductName: "HP Gamming 24hz",
+    productName: "HP Gamming 24hz",
     description: "El monitor del computador, también conocido como pantalla, muestra la información de tu equipo como imágenes y textos, que son generados gracias a una tarjeta de video que se encuentra en el interior de la torre del computador.",
     category: ["Pantalla", "Gaming"],
     stocks: 5,
