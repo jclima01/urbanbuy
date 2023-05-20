@@ -105,11 +105,11 @@ export const postNewProduct = (
   imageUrl,
   price,
   rating,
-  clientAdmin
+  clientAdminId
 ) => {
   try {
     return async function (dispatch) {
-      const { data } = await axios.post("http://localhost:2800/products", {
+      const { data } = await axios.post(`http://localhost:2800/products/:${clientAdminId}`, {
         productName,
         description,
         categories,
@@ -117,7 +117,6 @@ export const postNewProduct = (
         imageUrl,
         price,
         rating,
-        clientAdmin,
       });
       return dispatch({
         type: POST_NEW_PRODUCT,
