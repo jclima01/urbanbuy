@@ -18,7 +18,7 @@ function NavEcommerce() {
      
       <Container >
         <Navbar.Brand>
-        <h2 className={style.container} >Casa de deportes RH</h2>
+       
         <img src={logoClient} className={style.logoClient}/>
         </Navbar.Brand>
        
