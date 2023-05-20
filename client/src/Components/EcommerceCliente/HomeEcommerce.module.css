@@ -1,0 +1,7 @@
+.h2{
+    display: flex;
+    justify-content: center;
+    margin-top: 70px;
+    background-color: rgb(220, 221, 223);
+    padding: 20px;
+}

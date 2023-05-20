@@ -11,7 +11,8 @@ import DashBoardShipping from "./pages/DashBoardShipping/DashBoardShipping";
 import DashBoardSettings from "./pages/DashBoardSettings/DashBoardSettings";
 import Home from "./Components/Home/Home";
 import FormLogin from "./Components/FormLogin/FormLogin";
-import SignIn from "./Components/SignIn/SignIn";
+import SignIn from "./Components/SignIn/SignIn"
+import Card from "./Components/Card/Card";
 import HomeEcommerce from "./Components/EcommerceCliente/HomeEcommerce";
 
 function App() {
@@ -41,6 +42,7 @@ function App() {
                 path="/dashBoard/Settings"
                 element={<DashBoardSettings />}
               />
+              
             </Routes>
           </div>
         </div>
@@ -49,11 +51,13 @@ function App() {
           <Route path="/" element={<Home />} /> {/* LadingPage */}
           <Route path="/login" element={<FormLogin />} />
           <Route path="/SignIn" element={<SignIn />} />
+
           <Route path="/homecliente" element={<HomeEcommerce />} />
         </Routes>
       )}
     </>
   );
+
 }
 
 export default App;

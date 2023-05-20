@@ -1,0 +1,65 @@
+.cardContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    margin-top: 50px;
+    
+  }
+  
+  .productLink {
+    text-decoration: none;
+    color: inherit;
+    margin: 10px;
+  }
+  
+  .productCard {
+    background-color: #ffffff;;
+    border-radius: 5px;
+    padding: 10px;
+    width: 200px;
+    height: 300px;
+    transition: transform 0.3s; 
+    position: relative;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  }
+
+  .productCard:hover {
+    transform: scale(1.1); /* Aumenta el tamaño de la tarjeta al pasar el mouse */
+  }
+  
+  .productImage {
+    width: 100%;
+    height: 70%; /* Ajusta la altura de la imagen */
+    object-fit: cover;
+    border-radius: 10px;
+
+  }
+  
+  .productPrice {
+    color: white;
+    font-weight: bold;
+    margin: 10px; /* Agregamos margen */
+    position: absolute; /* Agregamos posicionamiento absoluto */
+    top: 0; /* Posicionamos en la parte superior */
+    left: 0; /* Posicionamos en la parte izquierda */
+    background-color: rgba(0, 0, 0, 0.3); /* Fondo gris transparente */
+    padding: 5px; /* Agregamos un pequeño padding */
+  }
+  
+  .productRating {
+    opacity: 0; /* Oculta el rating por defecto */
+    transition: opacity 0.3s; /* Agrega una transición suave para el efecto */
+    color: black
+  }
+  
+  .productCard:hover .productRating {
+    opacity: 1; /* Muestra el rating al pasar el mouse sobre la tarjeta */
+  }
+  
+  
+  .starIcon {
+    color: rgb(0, 0, 0);
+    margin-right: 5px;
+   
+  }

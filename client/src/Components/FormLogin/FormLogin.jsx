@@ -8,19 +8,16 @@ import { loginClientAdmin } from '../../redux/actions';
 
 // Falta crear una funcion que asocie email y contraseña para dar acceso
 
+
 const FormLogin = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState('');
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
-  console.log('passwordError', passwordError)
-
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
-
-
 
   const validateEmail = (value) => {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
