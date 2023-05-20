@@ -1,4 +1,20 @@
+import { CiSearch } from "react-icons/ci";
+import DashBoardTableProducts from "../../Components/DashBoardTableProducts/DashBoardTableProducts";
+import { useEffect } from "react";
+import { useDispatch , useSelector} from "react-redux";
+import { getAllProducts } from "../../redux/actions";
+
 const DashBoardProducts = () => {
+
+
+  const dispatch = useDispatch()
+  const Products = useSelector(state => state.products)
+  const clientAdmin = useSelector(state => state.clientAdmin)
+
+  useEffect(() => {
+    dispatch(getAllProducts(clientAdmin._id))
+  }, []);
+
   return (
     <div
       style={{
@@ -7,6 +23,7 @@ const DashBoardProducts = () => {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
+        overflow:'hidden'
       }}
     >
       <div
@@ -23,9 +40,8 @@ const DashBoardProducts = () => {
       >
         <div
           style={{
-            height: "30%",
+            height: "25%",
             width: "95%",
-            backgroundColor: "red",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
@@ -35,9 +51,9 @@ const DashBoardProducts = () => {
         >
           <div
             style={{
-              width: 300,
-              height: 160,
-              backgroundColor: "blue",
+              width: 400,
+              height: 130,
+              boxShadow: "4px 3px 10px 4px #4644442b",
               borderRadius: 20,
             }}
           >
@@ -45,9 +61,9 @@ const DashBoardProducts = () => {
           </div>
           <div
             style={{
-              width: 300,
-              height: 160,
-              backgroundColor: "blue",
+              width: 400,
+              height: 130,
+              boxShadow: "4px 3px 10px 4px #4644442b",
               borderRadius: 20,
             }}
           >
@@ -56,8 +72,9 @@ const DashBoardProducts = () => {
           <div
             style={{
               width: 500,
-              height: 160,
-              backgroundColor: "blue",
+              height: 130,
+              backgroundColor: "#ff7f2a",
+              boxShadow: "4px 3px 10px 4px #4644442b",
               borderRadius: 20,
             }}
           >
@@ -66,37 +83,109 @@ const DashBoardProducts = () => {
 
           <div
             style={{
-              display:'flex',
-              flexDirection:'column',
-              alignItems:'end',
-              justifyContent:'flex-end',
-              padding:10,
-              width: 500,
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "end",
+              justifyContent: "center",
+              padding: 10,
+              width: 200,
               height: 160,
-              backgroundColor: "blue",
               borderRadius: 20,
             }}
           >
-            <button >TEST</button>
+            <button>Add Product</button>
+            <button>Add Categories</button>
           </div>
         </div>
         <div
           style={{
-            height: "10%",
+            display: "flex",
+            alignContent: "center",
+            justifyContent: "center",
+            height: "8%",
             width: "95%",
-            backgroundColor: "red",
+            padding: 10,
           }}
         >
-          <h1>hola</h1>
+          <div
+            style={{
+              width: "100%",
+              height: "100%",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              padding: 5,
+            }}
+          >
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                width: "10%",
+              }}
+            >
+              <span
+                style={{
+                  padding: "2px 30px",
+                  backgroundColor: "lightgray",
+                  borderRadius: 20,
+                }}
+              >
+                Order
+              </span>
+            </div>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                width: "10%",
+              }}
+            >
+              <span
+                style={{
+                  padding: "2px 30px",
+                  backgroundColor: "lightgray",
+                  borderRadius: 20,
+                }}
+              >
+                filter
+              </span>
+            </div>
+            <div
+              style={{
+                width: "80%",
+                height: "100%",
+                backgroundColor: "lightgray",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-evenly",
+                borderRadius: 10,
+              }}
+            >
+              <input
+                type="text"
+                placeholder="Search Products"
+                className="inputDashboard-Products"
+              />
+              <CiSearch size={23} />
+            </div>
+            <div style={{ width: "20%" }}>
+              <span>- 1 2 3 4 5 -</span>
+            </div>
+          </div>
         </div>
         <div
           style={{
             height: "60%",
             width: "95%",
-            backgroundColor: "red",
+            padding: 15,
+            overflow: "hidden",
+            overflowY: 'auto',
           }}
         >
-          <h1>hola</h1>
+          <DashBoardTableProducts Products={Products}/>
         </div>
       </div>
     </div>

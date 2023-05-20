@@ -213,3 +213,13 @@
   background-color: #ff7f2a;
   color: white;
 }
+
+
+.inputDashboard-Products{
+  background-color: transparent;
+  border: none;
+  width: 95%;
+  height: 70%;
+  outline: none;
+}
+
