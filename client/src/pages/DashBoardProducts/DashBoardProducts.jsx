@@ -10,10 +10,10 @@ const DashBoardProducts = () => {
   const dispatch = useDispatch()
   const Products = useSelector(state => state.products)
   const clientAdmin = useSelector(state => state.clientAdmin)
-
- 
+const clientAdminId = clientAdmin._id
+ console.log(clientAdmin)
   useEffect(() => {
-    dispatch(getAllProducts(clientAdmin._id))
+    dispatch(getAllProducts(clientAdminId))
   }, []);
 
   return (

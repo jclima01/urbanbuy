@@ -1,5 +1,5 @@
 const Product = require("../models/Product");
-const Category = require("../models/Category");
+const ClientAdmin = require("../models/Users/ClientAdmin");
 const mongoose = require("mongoose");
 
 //GETS
@@ -7,22 +7,24 @@ const mongoose = require("mongoose");
 //All products
 const getAllProducts = async (clientAdminId) => {
   try {
-    console.log(typeof clientAdminId)
-    const dataBaseProducts = await Product.find({clientAdmin: clientAdminId})
-      .populate("categories") // Popula las categorías
-      // .populate("clientAdmin") // Popula el modelo ClientAdmin
-      .exec();
-      console.log(dataBaseProducts)
-    return dataBaseProducts;
+    const clientAdmin = await ClientAdmin.findById(clientAdminId)
+    .populate("catalogue") // Popula las categorías
+    // .populate("clientAdmin") // Popula el modelo ClientAdmin
+    .exec();
+
+    return clientAdmin.catalogue;
   } catch (error) {
     throw new Error(error.message);
   }
 };
 
 //By Name
-const getProductName = async (name , clientAdminId) => {
+const getProductName = async (name, clientAdminId) => {
   try {
-    const dataBaseProducts = await Product.find({ productName: name, clientAdmin: clientAdminId})
+    const dataBaseProducts = await Product.find({
+      productName: name,
+      clientAdmin: clientAdminId,
+    })
       .populate("categories") // Popula las categorías
       .populate("clientAdmin") // Popula el modelo ClientAdmin
       .exec();
@@ -68,6 +70,10 @@ const createNewProduct = async (
       clientAdmin: clientAdminId,
     });
     const savedProduct = await newProduct.save();
+    const clientAdmin = await ClientAdmin.findById(clientAdminId);
+    clientAdmin.catalogue.push(savedProduct._id);
+    await clientAdmin.save();
+
     return savedProduct;
   } catch (error) {
     throw new Error(error.message);
