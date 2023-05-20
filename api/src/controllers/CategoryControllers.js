@@ -1,4 +1,4 @@
-const Category = require('../models/Cagetory');
+const Category = require('../models/Category');
 require("dotenv").config();
 
 

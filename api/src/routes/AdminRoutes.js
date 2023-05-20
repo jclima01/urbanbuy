@@ -3,6 +3,8 @@ const adminRouter = Router();
 const {
   loginHandler,
   registerHandler,
+  updateAdminHandler,
+  deleteAdminHandler
 } = require("../handlers/AdminHandlers.js");
 
 //GET
@@ -14,10 +16,10 @@ adminRouter.post("/login", loginHandler);
 
 //PUT
 
-// adminRouter.put('/',)
+adminRouter.put("/:adminId", updateAdminHandler);
 
 //DELETE
 
-// adminRouter.delete('/delete/:id', )
+adminRouter.delete("/delete/:adminId", deleteAdminHandler);
 
 module.exports = adminRouter;

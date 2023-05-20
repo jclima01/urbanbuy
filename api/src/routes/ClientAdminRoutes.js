@@ -2,7 +2,9 @@ const { Router } = require ('express');
 const clientAdminRouter = Router();
 const {
   loginClientAdminHandler,
-  registerClientAdminHandler, 
+  registerClientAdminHandler,
+  updateClientHandler,
+  deleteClientHandler 
   } = require("../handlers/ClientAdminHandlers.js");
   
 
@@ -13,11 +15,11 @@ clientAdminRouter.post('/register', registerClientAdminHandler)
 
 //PUT   
 
-// clientAdminRouter.put('/',)
+clientAdminRouter.put('/:clientId', updateClientHandler)
 
 
 //DELETE
 
-// clientAdminRouter.delete('/delete/:id', )
+clientAdminRouter.delete('/delete/:clientId', deleteClientHandler )
 
 module.exports = clientAdminRouter;

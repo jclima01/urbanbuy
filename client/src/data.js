@@ -121,6 +121,8 @@ export const Products = [
   },
 ];
 
+
+export const categoryProducts = ['Pantalla', 'Mouse', 'Memoria', 'Procesador']
 /*  DashBoard ClientAdmin  */
 
 /*  Admin  */
@@ -140,16 +142,35 @@ export const Admin = [
 
 /*  clients or User  */
 
-export const user = [
-  {
-    id: `User-${1}`,
-    fullName: "Ezequiel Irace",
-    email: "test@ibm.com",
-    password: "123456",
-    permissions: "user",
-    order: [],
-  },
-];
+
+
+export const User = [
+    {
+        id: `User-${1}`,
+        fullName: "Ezequiel Irace",
+        email: "test@ibm.com",
+        password: "123456",
+        permissions: "user",
+        order: []
+      },
+      {
+        id: `User-${2}`,
+        fullName: "Ezequiel Irace2",
+        email: "test@ibm.com",
+        password: "123456",
+        permissions: "user",
+        order: []
+      },
+      {
+        id: `User-${3}`,
+        fullName: "Ezequiel Irace3",
+        email: "test@ibm.com",
+        password: "123456",
+        permissions: "user",
+        order: []
+      }
+]
+
 
 export const order = [
   {
