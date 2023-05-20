@@ -2,13 +2,12 @@ const Product = require("../models/Product");
 const Category = require("../models/Category");
 const mongoose = require("mongoose");
 
-
 //GETS
 
 //All products
-const getAllProducts = async () => {
+const getAllProducts = async (clientAdminId) => {
   try {
-    const dataBaseProducts = await Product.find({})
+    const dataBaseProducts = await Product.find({ clientAdmin: clientAdminId })
       .populate("categories") // Popula las categorías
       .populate("clientAdmin") // Popula el modelo ClientAdmin
       .exec();

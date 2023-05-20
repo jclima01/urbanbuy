@@ -11,11 +11,12 @@ const {
 const getProductsHandler = async (req, res) => {
   try {
     const { name } = req.query;
+    const { clientAdminId } = req.params;
     let result;
     if (name) {
       result = await getProductName(name);
     } else {
-      result = await getAllProducts();
+      result = await getAllProducts(clientAdminId);
     }
     res.status(200).json(result);
   } catch (error) {
