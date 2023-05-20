@@ -13,7 +13,8 @@ const DashBoardProducts = () => {
 
   useEffect(() => {
     dispatch(getAllProducts(clientAdmin._id))
-  }, []);
+// eslint-disable-next-line no-unreachable    
+  }, []); 
 
   return (
     <div
