@@ -14,10 +14,9 @@ const FormLogin = () => {
   const [password, setPassword] = useState('');
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
+  console.log('passwordError', passwordError)
 
-  const handleUsernameChange = (e) => {
-    setUsername(e.target.value);
-  };
+
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
@@ -41,7 +40,7 @@ const FormLogin = () => {
   const handlePasswordChange = (e) => {
     const value = e.target.value;
     setPassword(value);
-    validatePassword(value);
+    setPasswordError(value);
   };
 
   const handleSubmit = (e) => {
