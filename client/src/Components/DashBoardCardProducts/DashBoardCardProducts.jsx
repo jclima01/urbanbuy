@@ -43,7 +43,7 @@ const DashBoardCardProducts = ({ Products }) => {
           
         }}
       >
-        {Products?.ProductName}
+        {Products?.productName}
       </h1>
       <div
         style={{
@@ -63,9 +63,10 @@ const DashBoardCardProducts = ({ Products }) => {
             height: '30px',
             backgroundColor:'orange',
             marginBottom: 20,
-            borderRadius: '50%'
+            borderRadius: '50%',
+            cursor:'pointer'
         }}>
-        <FaSearchPlus />
+        <FaSearchPlus  />
         </div>
         
       </div>
