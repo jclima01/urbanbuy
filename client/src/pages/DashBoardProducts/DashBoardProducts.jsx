@@ -11,17 +11,7 @@ const DashBoardProducts = () => {
   const Products = useSelector(state => state.products)
   const clientAdmin = useSelector(state => state.clientAdmin)
 
-  useEffect(() => {
-    dispatch(getAllProducts(clientAdmin._id))
-// eslint-disable-next-line no-unreachable    
-  }, []); 
-
-
-
-  const dispatch = useDispatch()
-  const Products = useSelector(state => state.products)
-  const clientAdmin = useSelector(state => state.clientAdmin)
-
+ 
   useEffect(() => {
     dispatch(getAllProducts(clientAdmin._id))
   }, []);
