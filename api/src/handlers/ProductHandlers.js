@@ -14,7 +14,7 @@ const getProductsHandler = async (req, res) => {
     const { clientAdminId } = req.params;
     let result;
     if (name) {
-      result = await getProductName(name,clientAdminId);
+      result = await getProductName(name, clientAdminId);
     } else {
       result = await getAllProducts(clientAdminId);
     }
@@ -48,7 +48,7 @@ const postProductHandler = async (req, res) => {
       price,
       rating,
     } = req.body;
-    const {clientAdminId} = req.params
+    const { clientAdminId } = req.params;
     const newProduct = await createNewProduct(
       productName,
       description,

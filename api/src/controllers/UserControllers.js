@@ -43,7 +43,7 @@ const UserLogin = async (email, password) => {
 const UserUpdate = async (userId, fullName, email, password) => {
   try {
     const user = await User.findById(userId);
-    if(user) {
+    if (user) {
       user.fullName = fullName;
       user.email = email;
       user.password = password;
@@ -51,7 +51,7 @@ const UserUpdate = async (userId, fullName, email, password) => {
     const updatedUser = await user.save();
     return updatedUser;
   } catch (error) {
-    throw new Error(error.message)
+    throw new Error(error.message);
   }
 };
 
@@ -68,5 +68,5 @@ module.exports = {
   UserRegister,
   UserLogin,
   UserUpdate,
-  UserDelete
+  UserDelete,
 };

@@ -4,14 +4,14 @@ const {
   loginHandler,
   registerHandler,
   updateAdminHandler,
-  deleteAdminHandler
+  deleteAdminHandler,
 } = require("../handlers/AdminHandlers.js");
 
 //GET
 
 //POST
 
-adminRouter.post("/register" , registerHandler);
+adminRouter.post("/register", registerHandler);
 adminRouter.post("/login", loginHandler);
 
 //PUT

@@ -1,6 +1,13 @@
+const cloudinary = require("cloudinary").v2;
 const Product = require("../models/Product");
 const ClientAdmin = require("../models/Users/ClientAdmin");
 const mongoose = require("mongoose");
+
+cloudinary.config({
+  cloud_name: "dhan4gjbn",
+  api_key: "982674615614551",
+  api_secret: "CsN09nf69VN6R_9M9SMTwP021wU",
+});
 
 //GETS
 
@@ -8,9 +15,9 @@ const mongoose = require("mongoose");
 const getAllProducts = async (clientAdminId) => {
   try {
     const clientAdmin = await ClientAdmin.findById(clientAdminId)
-    .populate("catalogue") // Popula las categorías
-    // .populate("clientAdmin") // Popula el modelo ClientAdmin
-    .exec();
+      .populate("catalogue") // Popula las categorías
+      // .populate("clientAdmin") // Popula el modelo ClientAdmin
+      .exec();
 
     return clientAdmin.catalogue;
   } catch (error) {
@@ -59,12 +66,16 @@ const createNewProduct = async (
   clientAdminId
 ) => {
   try {
+    const uploadResult = await cloudinary.uploader.upload(
+      imagePath /*,{optiones}*/
+    );
+
     const newProduct = new Product({
       productName,
       description,
       categories: categoriesIds,
       stocks,
-      imageUrl,
+      imageUrl: uploadResult.secure_url,
       price,
       rating,
       clientAdmin: clientAdminId,
@@ -92,13 +103,17 @@ const updateProduct = async (
   rating
 ) => {
   try {
+    const uploadResult = await cloudinary.uploader.upload(
+      imageUrl /*,{optiones}*/
+    );
+
     const product = await Product.findById(productId);
     if (product) {
       product.productName = productName;
       product.description = description;
       product.categories = categoriesIds;
       product.stocks = stocks;
-      product.imageUrl = imageUrl;
+      product.imageUrl = uploadResult.secure_url;
       product.price = price;
       product.rating = rating;
     }
