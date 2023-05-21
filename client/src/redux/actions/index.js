@@ -20,7 +20,6 @@ export const ADD_CATEGORY = "ADD_CATEGORY";
 export const EDIT_CATEGORY = "EDIT_CATEGORY";
 export const DELETE_CATEGORY = "DELETE_CATEGORY";
 
-
 export const deleteCategory = (categoryId) => {
   try {
     return async function (dispatch) {
@@ -358,6 +357,7 @@ export const logOutAdmin = () => {
     return dispatch({
       type: LOGOUT_ADMIN,
     });
+    // eslint-disable-next-line no-unreachable
   } catch (err) {
     throw new Error(err.message);
   }
@@ -371,6 +371,7 @@ export const logOutClientAdmin = () => {
     return dispatch({
       type: LOGOUT_CLIENT_ADMIN,
     });
+    // eslint-disable-next-line no-unreachable
   } catch (err) {
     throw new Error(err.message);
   }
@@ -384,6 +385,7 @@ export const logOutUser = () => {
     return dispatch({
       type: LOGOUT_USER,
     });
+    // eslint-disable-next-line no-unreachable
   } catch (err) {
     throw new Error(err.message);
   }

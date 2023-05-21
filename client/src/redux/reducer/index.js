@@ -50,6 +50,10 @@ const rootReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
       };
+    case POST_ORDER:
+      return {
+        ...state,
+      };
     case GET_ORDERS:
       return {
         ...state,
