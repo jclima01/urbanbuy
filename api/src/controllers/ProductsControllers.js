@@ -109,7 +109,7 @@ const updateProduct = async (
       product.description = description;
       product.categories = categoriesIds;
       product.stocks = stocks;
-      product.imgeUrl = imageUrl;
+      product.imageUrl = uploadResult.secure_url;
       product.price = price;
       product.rating = rating;
     }
