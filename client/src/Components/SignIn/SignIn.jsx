@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import logo2 from "../../Img/logo2.png";
 import style from "./SignIn.module.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch} from 'react-redux';
+import {registerClientAdmin} from '../../redux/actions';
 
 const SignIn = () => {
   //   const [username, setUsername] = useState("");
@@ -18,6 +20,9 @@ const SignIn = () => {
   //     validateUsername(value);
   //     setUsername(value);
   //   };
+
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const handleEmailChange = (e) => {
     const value = e.target.value;
@@ -51,10 +56,11 @@ const SignIn = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (password !== confirmPassword) {
-      setConfirmPasswordError("Las contraseñas deben ser idénticas.");
-      return;
-    }
+    const fullname = "jose"
+    console.log(fullname, email, password)
+    dispatch(registerClientAdmin( fullname, email , password)).finally(()=> {
+      navigate('/dashboard')
+    } )
   };
 
   const validateConfirmPassword = (value) => {
