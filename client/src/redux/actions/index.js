@@ -1,10 +1,13 @@
 import axios from "axios";
 export const LOGIN_ADMIN = "LOGIN_ADMIN";
-export const REGISTER_ADMIN = "REGISTER_ADMIN";
 export const LOGIN_CLIENT_ADMIN = "LOGIN_CLIENT_ADMIN";
-export const REGISTER_CLIENT_ADMIN = "REGISTER_CLIENT_ADMIN";
 export const LOGIN_USER = "LOGIN_USER";
+export const REGISTER_ADMIN = "REGISTER_ADMIN";
+export const REGISTER_CLIENT_ADMIN = "REGISTER_CLIENT_ADMIN";
 export const REGISTER_USER = "REGISTER_USER";
+export const LOGOUT_ADMIN = "LOGOUT_ADMIN";
+export const LOGOUT_CLIENT_ADMIN = "LOGOUT_CLIENT_ADMIN";
+export const LOGOUT_USER = "LOGOUT_USER";
 export const GET_ALL_PRODUCTS = "GET_ALL_PRODUCTS";
 export const GET_PRODUCT_BY_ID = "GET_PRODUCT_BY_ID";
 export const POST_NEW_PRODUCT = "POST_NEW_PRODUCT";
@@ -12,18 +15,17 @@ export const EDIT_PRODUCT = "EDIT_PRODUCT";
 export const DELETE_PRODUCT = "DELETE_PRODUCT";
 export const GET_ORDERS = "GET_ORDERS";
 export const POST_ORDER = "POST_ORDER";
-export const LOGOUT_ADMIN = "LOGOUT_ADMIN";
-export const LOGOUT_CLIENT_ADMIN = "LOGOUT_CLIENT_ADMIN";
-export const ADD_CATEGORY = "ADD_CATEGORY";
 export const GET_CATEGORIES = "GET_CATEGORIES";
+export const ADD_CATEGORY = "ADD_CATEGORY";
 export const EDIT_CATEGORY = "EDIT_CATEGORY";
 export const DELETE_CATEGORY = "DELETE_CATEGORY";
+
 
 export const deleteCategory = (categoryId) => {
   try {
     return async function (dispatch) {
       const { data } = await axios.delete(
-        `http://localhost:2800/category/${categoryId}`,
+        `http://localhost:2800/category/${categoryId}`
       );
       return dispatch({
         type: DELETE_CATEGORY,
@@ -34,7 +36,7 @@ export const deleteCategory = (categoryId) => {
     throw new Error(err.message);
   }
 };
-export const editCategory = (categoryId,categoryName) => {
+export const editCategory = (categoryId, categoryName) => {
   try {
     return async function (dispatch) {
       const { data } = await axios.put(
