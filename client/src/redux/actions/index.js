@@ -14,8 +14,25 @@ export const GET_ORDERS = "GET_ORDERS";
 export const POST_ORDER = "POST_ORDER";
 export const LOGOUT_ADMIN = "LOGOUT_ADMIN";
 export const LOGOUT_CLIENT_ADMIN = "LOGOUT_CLIENT_ADMIN";
-export const LOGOUT_USER = "LOGOUT_USER";
+export const ADD_CATEGORY = "ADD_CATEGORY";
 
+export const addCategory = (cart, userId) => {
+  try {
+    return async function (dispatch) {
+      const { data } = await axios.post(`http://localhost:2800/category`, {
+        cart,
+        userId,
+      });
+      return dispatch({
+        type: ADD_CATEGORY,
+        payload: data,
+      });
+    };
+    // eslint-disable-next-line no-unreachable
+  } catch (err) {
+    throw new Error(err.message);
+  }
+};
 export const postOrder = (cart, userId) => {
   try {
     return async function (dispatch) {

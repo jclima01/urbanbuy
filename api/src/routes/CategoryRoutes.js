@@ -8,10 +8,10 @@ const {
     deleteCategoryHandler
 } = require('../handlers/CategoryHandlers.js');
 
-categoryRoutes.get('/', getCategoryHandler)
-categoryRoutes.post('/', postCategoryHandler)
-categoryRoutes.put('/', putCategoryHandler)
-categoryRoutes.delete('/', deleteCategoryHandler)
+categoryRoutes.get('/:clientAdminId', getCategoryHandler)
+categoryRoutes.post('/:clientAdminId', postCategoryHandler)
+categoryRoutes.put('/:categoryId', putCategoryHandler)
+categoryRoutes.delete('/:categoryId', deleteCategoryHandler)
 
 
 module.exports = categoryRoutes;
