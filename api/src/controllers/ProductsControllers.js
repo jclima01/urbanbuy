@@ -67,7 +67,7 @@ const createNewProduct = async (
 ) => {
   try {
     const uploadResult = await cloudinary.uploader.upload(
-      imagePath /*,{optiones}*/
+      imageUrl /*,{optiones}*/
     );
 
     const newProduct = new Product({
