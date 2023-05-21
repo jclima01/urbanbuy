@@ -60,7 +60,7 @@ const createNewProduct = async (
   description,
   categoriesIds,
   stocks,
-  imagePath,
+  imageUrl,
   price,
   rating,
   clientAdminId
@@ -98,13 +98,13 @@ const updateProduct = async (
   description,
   categoriesIds,
   stocks,
-  imagePath,
+  imageUrl,
   price,
   rating
 ) => {
   try {
     const uploadResult = await cloudinary.uploader.upload(
-      imagePath /*,{optiones}*/
+      imageUrl /*,{optiones}*/
     );
 
     const product = await Product.findById(productId);
@@ -113,7 +113,7 @@ const updateProduct = async (
       product.description = description;
       product.categories = categoriesIds;
       product.stocks = stocks;
-      product.imagePath = uploadResult.secure_url;
+      product.imageUrl = uploadResult.secure_url;
       product.price = price;
       product.rating = rating;
     }
