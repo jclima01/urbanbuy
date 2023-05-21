@@ -56,10 +56,10 @@ const SignIn = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const fullname = "jose"
+    const fullname = "User"
     console.log(fullname, email, password)
     dispatch(registerClientAdmin( fullname, email , password)).finally(()=> {
-      navigate('/dashboard')
+      navigate('/login')
     } )
   };
 
