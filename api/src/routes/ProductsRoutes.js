@@ -1,32 +1,30 @@
-const { Router } = require ('express');
+const { Router } = require("express");
 const productRouter = Router();
 const {
-    getProductsHandler,
-    getProductsHandlerById,
-    postProductHandler,
-    updateProductHandler,
-    deletedProductHandler,
-  } = require("../handlers/ProductHandlers");
-  
+  getProductsHandler,
+  getProductsHandlerById,
+  postProductHandler,
+  updateProductHandler,
+  deletedProductHandler,
+} = require("../handlers/ProductHandlers");
 
 //GET
 
-productRouter.get('/:clientAdminId', getProductsHandler)
+productRouter.get("/:clientAdminId", getProductsHandler);
 
-productRouter.get('/:productId', getProductsHandlerById)
-
+productRouter.get("/:productId", getProductsHandlerById);
 
 //POST
 
-productRouter.post('/:clientAdminId', postProductHandler)
+productRouter.post("/:clientAdminId", postProductHandler);
 
-//PUT   
+//PUT
 
-productRouter.put('/:productId', updateProductHandler)
-
+productRouter.put("/:productId", updateProductHandler);
 
 //DELETE
 
-productRouter.delete('/delete/:productId', deletedProductHandler)
+productRouter.delete("/delete/:productId", deletedProductHandler);
 
 module.exports = productRouter;
+

@@ -15,9 +15,9 @@ cloudinary.config({
 const getAllProducts = async (clientAdminId) => {
   try {
     const clientAdmin = await ClientAdmin.findById(clientAdminId)
-    .populate("catalogue") // Popula las categorías
-    // .populate("clientAdmin") // Popula el modelo ClientAdmin
-    .exec();
+      .populate("catalogue") // Popula las categorías
+      // .populate("clientAdmin") // Popula el modelo ClientAdmin
+      .exec();
 
     return clientAdmin.catalogue;
   } catch (error) {
@@ -60,14 +60,14 @@ const createNewProduct = async (
   description,
   categoriesIds,
   stocks,
-  imageUrl,
+  imagePath,
   price,
   rating,
   clientAdminId
 ) => {
   try {
     const uploadResult = await cloudinary.uploader.upload(
-      imageFile.path /*,{optiones}*/
+      imagePath /*,{optiones}*/
     );
 
     const newProduct = new Product({
@@ -109,7 +109,7 @@ const updateProduct = async (
       product.description = description;
       product.categories = categoriesIds;
       product.stocks = stocks;
-      product.imageUrl = imageUrl;
+      product.imgeUrl = imageUrl;
       product.price = price;
       product.rating = rating;
     }
