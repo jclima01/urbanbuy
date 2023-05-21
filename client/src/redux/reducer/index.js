@@ -19,6 +19,7 @@ import {
   ADD_CATEGORY,
   EDIT_CATEGORY,
   DELETE_CATEGORY,
+  GET_SESSION,
 } from "../actions/index.js";
 
 const initialState = {
@@ -124,10 +125,15 @@ const rootReducer = (state = initialState, { type, payload }) => {
       };
 
     case LOGOUT_USER:
+
       return {
         ...state,
         user: {},
         UserSession: false,
+      };
+    case GET_SESSION:
+      return {
+        ...state,
       };
 
     default:

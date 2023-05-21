@@ -19,6 +19,7 @@ export const GET_CATEGORIES = "GET_CATEGORIES";
 export const ADD_CATEGORY = "ADD_CATEGORY";
 export const EDIT_CATEGORY = "EDIT_CATEGORY";
 export const DELETE_CATEGORY = "DELETE_CATEGORY";
+export const GET_SESSION = "GET_SESSION";
 
 export const deleteCategory = (categoryId) => {
   try {
@@ -352,25 +353,33 @@ export const registerUser = (email, password) => {
 export const logOutAdmin = () => {
   try {
     localStorage.removeItem("dataAdmin");
-    window.location.href = "/";
 
-    return dispatch({
-      type: LOGOUT_ADMIN,
-    });
-    // eslint-disable-next-line no-unreachable
+    return async function (dispatch) {
+      dispatch({
+        type: LOGOUT_ADMIN,
+      });
+
+      setTimeout(() => {
+        window.location.href = "/";
+      }, 100);
+    };
   } catch (err) {
     throw new Error(err.message);
   }
 };
-
 export const logOutClientAdmin = () => {
   try {
     localStorage.removeItem("dataClientAdmin");
-    window.location.href = "/";
 
-    return dispatch({
-      type: LOGOUT_CLIENT_ADMIN,
-    });
+    return async function (dispatch) {
+      dispatch({
+        type: LOGOUT_CLIENT_ADMIN,
+      });
+
+      // setTimeout(() => {
+        window.location.href = "/";
+      // }, 100);
+    };
     // eslint-disable-next-line no-unreachable
   } catch (err) {
     throw new Error(err.message);
@@ -380,11 +389,15 @@ export const logOutClientAdmin = () => {
 export const logOutUser = () => {
   try {
     localStorage.removeItem("dataUser");
-    window.location.href = "/";
+    return async function (dispatch) {
+      dispatch({
+        type: LOGOUT_USER,
+      });
 
-    return dispatch({
-      type: LOGOUT_USER,
-    });
+      setTimeout(() => {
+        window.location.href = "/";
+      }, 100);
+    };
     // eslint-disable-next-line no-unreachable
   } catch (err) {
     throw new Error(err.message);
