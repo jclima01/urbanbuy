@@ -142,7 +142,7 @@ export const Admin = [
 
 /*  clients or User  */
 
-
+import avatar from '../src/assets/avatar.jpg'
 
 export const User = [
     {
@@ -151,7 +151,8 @@ export const User = [
         email: "test@ibm.com",
         password: "123456",
         permissions: "user",
-        order: []
+        order: [],
+        avatar: avatar
       },
       {
         id: `User-${2}`,
@@ -159,7 +160,8 @@ export const User = [
         email: "test@ibm.com",
         password: "123456",
         permissions: "user",
-        order: []
+        order: [],
+        avatar: avatar
       },
       {
         id: `User-${3}`,
@@ -167,7 +169,8 @@ export const User = [
         email: "test@ibm.com",
         password: "123456",
         permissions: "user",
-        order: []
+        order: [],
+        avatar: avatar
       }
 ]
 

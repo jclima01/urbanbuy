@@ -1,0 +1,60 @@
+.listUl{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: stretch;
+    align-items: center;
+}
+
+.listUl li{
+    margin-right: 10px;
+}
+
+.listUl li:not(:first-child):not(:nth-child(2)) {
+    margin-right: 180px;
+  }
+
+
+.listUl li a {
+    display: block;
+    color: black;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.datosUser{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: stretch;
+    align-items: center;
+}
+.datosUser li{
+    margin-right: 10px;
+}
+
+.datosUser li:not(:first-child):not(:nth-child(2)) {
+    margin-right: 180px;
+  }
+
+
+.datosUser li a {
+    display: block;
+    color: black;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
