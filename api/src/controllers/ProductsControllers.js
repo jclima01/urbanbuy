@@ -1,28 +1,37 @@
+const cloudinary = require("cloudinary").v2;
 const Product = require("../models/Product");
-const Category = require("../models/Category");
+const ClientAdmin = require("../models/Users/ClientAdmin");
 const mongoose = require("mongoose");
+
+cloudinary.config({
+  cloud_name: "dhan4gjbn",
+  api_key: "982674615614551",
+  api_secret: "CsN09nf69VN6R_9M9SMTwP021wU",
+});
 
 //GETS
 
 //All products
 const getAllProducts = async (clientAdminId) => {
   try {
-    console.log(typeof clientAdminId)
-    const dataBaseProducts = await Product.find({clientAdmin: clientAdminId})
-      .populate("categories") // Popula las categorías
+    const clientAdmin = await ClientAdmin.findById(clientAdminId)
+      .populate("catalogue") // Popula las categorías
       // .populate("clientAdmin") // Popula el modelo ClientAdmin
       .exec();
-      console.log(dataBaseProducts)
-    return dataBaseProducts;
+
+    return clientAdmin.catalogue;
   } catch (error) {
     throw new Error(error.message);
   }
 };
 
 //By Name
-const getProductName = async (name , clientAdminId) => {
+const getProductName = async (name, clientAdminId) => {
   try {
-    const dataBaseProducts = await Product.find({ productName: name, clientAdmin: clientAdminId})
+    const dataBaseProducts = await Product.find({
+      productName: name,
+      clientAdmin: clientAdminId,
+    })
       .populate("categories") // Popula las categorías
       .populate("clientAdmin") // Popula el modelo ClientAdmin
       .exec();
@@ -57,17 +66,25 @@ const createNewProduct = async (
   clientAdminId
 ) => {
   try {
+    const uploadResult = await cloudinary.uploader.upload(
+      imagePath /*,{optiones}*/
+    );
+
     const newProduct = new Product({
       productName,
       description,
       categories: categoriesIds,
       stocks,
-      imageUrl,
+      imageUrl: uploadResult.secure_url,
       price,
       rating,
       clientAdmin: clientAdminId,
     });
     const savedProduct = await newProduct.save();
+    const clientAdmin = await ClientAdmin.findById(clientAdminId);
+    clientAdmin.catalogue.push(savedProduct._id);
+    await clientAdmin.save();
+
     return savedProduct;
   } catch (error) {
     throw new Error(error.message);
@@ -86,13 +103,17 @@ const updateProduct = async (
   rating
 ) => {
   try {
+    const uploadResult = await cloudinary.uploader.upload(
+      imageUrl /*,{optiones}*/
+    );
+
     const product = await Product.findById(productId);
     if (product) {
       product.productName = productName;
       product.description = description;
       product.categories = categoriesIds;
       product.stocks = stocks;
-      product.imageUrl = imageUrl;
+      product.imageUrl = uploadResult.secure_url;
       product.price = price;
       product.rating = rating;
     }

@@ -5,13 +5,19 @@ import logo from "../../assets/urbenbuy.png";
 import containerlogo from "../../assets/formalogo.png";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import { logOutClientAdmin } from "../../redux/actions";
+import { useDispatch } from "react-redux";
 
 const SideBarDashBoard = () => {
   const [isActive, setisActive] = useState("Home");
-
+  const dispatch = useDispatch()
   const handleIsActiveHover = (value) => {
     setisActive(value);
   };
+
+const logout = () => {
+  dispatch(logOutClientAdmin())
+}
 
   return (
     <div>
@@ -80,11 +86,11 @@ const SideBarDashBoard = () => {
               </Link>
             </ul>
           </div>
-          <Link to={"/"}>
+          <div onClick={logout}>
             <div className="mb-5 btn cursor-pointer ">
               <RiLogoutCircleRLine size={30} />
             </div>
-          </Link>
+          </div>
         </div>
       </div>
     </div>

@@ -34,7 +34,8 @@ const ClientAdminLogin = async (email, password) => {
     const token = jwt.sign({ id: clientAdmin._id }, process.env.KEY_JWT, {
       expiresIn: "1h",
     });
-    return { token, ...clientAdmin._doc };
+    console.log({ token, ...clientAdmin._doc})
+    return await ClientAdmin.findOne({ email });
   } catch (error) {
     throw new Error(error.message);
   }

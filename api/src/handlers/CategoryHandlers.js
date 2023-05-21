@@ -1,70 +1,61 @@
-const { 
+const {
   createNewCategory,
   getAllCategory,
   deleteCategory,
-  setCategory
- } = require('../controllers/CategoryControllers');
+  setCategory,
+} = require("../controllers/CategoryControllers");
 
 const getCategoryHandler = async (req, res) => {
-    try {
-      const { clientAdmin } = req.body;
-      if(clientAdmin) {
-        const categories = await getAllCategory(clientAdmin)
-        res.status(200).send(categories);
-        
-      }
+  try {
+    const { clientAdminId } = req.params;
+      const categories = await getAllCategory(clientAdminId);
+      res.status(200).json(categories);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
 
-    } catch (error) {
-      res.status(400).json({ error: error.message });
+const postCategoryHandler = async (req, res) => {
+  try {
+    const { clientAdminId } = req.params;
+    const { categoryName } = req.body;
+    const newCategory = await createNewCategory(
+      clientAdminId,
+      categoryName,
+    );
+    res.status(201).json(newCategory);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
+
+const putCategoryHandler = async (req, res) => {
+  try {
+    const {categoryId} = req.params
+    const { categoryName } = req.body;
+      const editCategory = await setCategory(categoryName, categoryId);
+      res.status(201).json(editCategory);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
+
+const deleteCategoryHandler = async (req, res) => {
+  try {
+    const { categoryId } = req.params;
+    if (categoryId === undefined) return null;
+    if (categoryId) {
+      const categoryDelete = await deleteCategory(categoryId);
+      res.status(204).json(categoryDelete);
     }
-  };
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
 
-  const postCategoryHandler = async (req, res) => {
-    try {
-      const {clientAdmin, categoryName} = req.body;
-      if(clientAdmin && categoryName){ //clientAdmin que exista en la tabla
-        const newCategory = await createNewCategory(clientAdmin, categoryName);
-        res.status(201).send('se creo la categoria exitosamente', newCategory);
-      }
-      
-        } catch (error) {
-      res.status(400).json({ error: error.message });
-    }
-  };
-
-
-  const putCategoryHandler = async (req, res) => {
-    try {
-        const { idCategory, categoryName } = req.body;
-        if(idCategory && categoryName){
-          const editCategory = await setCategory(categoryName, idCategory)
-          res.status(201).send('se actualizo la categoria')
-        } 
-    } catch (error) {
-      res.status(400).json({ error: error.message });
-    }
-  };
-
-
-
-
-  const deleteCategoryHandler = async (req, res) => {
-    try {
-        const {idCategory} = req.body;
-        if(idCategory === undefined) return null; 
-        if(idCategory){
-          const categoryDelete = await deleteCategory(idCategory)
-          res.status(204).send(categoryDelete)
-        }
-    } catch (error) {
-      res.status(400).json({ error: error.message });
-    }
-  };
-
-
-  module.exports = {
-    getCategoryHandler,
-    postCategoryHandler,
-    putCategoryHandler,
-    deleteCategoryHandler
-  };
+module.exports = {
+  getCategoryHandler,
+  postCategoryHandler,
+  putCategoryHandler,
+  deleteCategoryHandler,
+};

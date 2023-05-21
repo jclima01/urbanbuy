@@ -1,9 +1,9 @@
 import React from 'react';
 import { Container, Row, Col, Carousel } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import A from '../../img/A.jpeg';
-import B from '../../img/B.jpeg';
-import C from '../../img/C.jpeg';
+import A from '../../Img/A.jpeg';
+import B from '../../Img/B.jpeg';
+import C from '../../Img/C.jpeg';
 import '../Slider/Slider.css'
 
 function Slider() {

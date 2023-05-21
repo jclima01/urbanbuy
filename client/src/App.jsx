@@ -1,6 +1,6 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import DashBoard from "./pages/DashBoard/DashBoard";
 import SideBarDashBoard from "./Components/SideBarDashBoard/SideBarDashBoard";
 import NavBarDashBoard from "./Components/NavBarDashBoard/NavBarDashBoard";
@@ -16,12 +16,15 @@ import Card from "./Components/Card/Card";
 import HomeEcommerce from "./Components/EcommerceCliente/HomeEcommerce";
 
 function App() {
-  
-  const clientAdmin = useSelector((state) => state.UserSession);
+  // const dispatch = useDispatch()
+  const session = useSelector((state) => state.UserSession);
+// useEffect(() => {
+//   dispatch(getSession())
+// }, [session])
 
   return (
     <>
-      {clientAdmin ? (
+      {session? (
         <div className="d-flex vh-100 vw-100 ">
           <SideBarDashBoard />
           <div className="d-flex flex-column">
