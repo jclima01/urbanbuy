@@ -3,7 +3,7 @@ import { Container, Row, Col, Carousel } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import A from '../../Img/A.jpeg';
 import B from '../../Img/B.jpeg';
-import C from '../../Img/B.jpeg';
+import C from '../../Img/C.jpeg';
 import '../Slider/Slider.css'
 
 function Slider() {
