@@ -5,7 +5,7 @@ const DashBoardNavUsers = () => {
     const contentOrderSearchAndFilters={
         with:"95%",
         height:"100px",
-        backgroundColor:"gray",
+       
         borderRadius:"15px 15px 0px 0px",
         display:"flex",
         flexDirection:"row",
@@ -21,10 +21,10 @@ const DashBoardNavUsers = () => {
         padding:"15px",
         border:"none",
         textAlign:"center",
-        color:"rgb(118, 118, 118)"
+        color:"#474646"
     }
     const filters={
-        backgroundColor:"rgb(255, 127, 42)",
+        backgroundColor:"#ff7f2a",
         width:"150px",
         borderRadius:"10px",
         padding:"15px",
@@ -39,7 +39,9 @@ const DashBoardNavUsers = () => {
         justifyContent: "center",
         borderRadius: "15px",
         padding: "7px",
-        width: "800px"
+        width: "800px",
+        color:"#474646"
+
     }
     {/* 
                     pestañas all users - user detail
@@ -58,8 +60,8 @@ const DashBoardNavUsers = () => {
                   <div style={contentOrderSearchAndFilters}>
                         <div className="contentOrdenamiento">
                         <select style={ordenamiento}>
-                            <option value="A-Z">A-Z</option>
-                            <option value="Z-A">Z-A</option>
+                            <option value="az">A-Z</option>
+                            <option value="za">Z-A</option>
                         </select>
                         </div>
                         <div className="contentSearchUsers">

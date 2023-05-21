@@ -1,10 +1,31 @@
-.contentDashboard{
-  width: 100%;
+.contieneTodoDashboardUsers{
+  width: 90%;
   margin-top: 20px;
 }
+.navegateUser{
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  width: 100%;
+  align-content: center;
+
+}
+.paginationUsers{
+  display: block;
+}
+.paginationUsers .page{
+  padding: 6px 10px 6px 10px;
+  margin-right: 5px;
+  border-radius: 6px;
+}
+.paginationUsers .pageActive{
+  background-color: #ff7f2a;
+}
 .contentDashboardUsers{
-    width: 90%;
-    box-shadow: -1px 1px 5px gray;
+    width: 100%;
+    box-shadow: 4px 3px 20px 4px #4644442b;
     padding: 18px;
     border-radius: 10px;
 }

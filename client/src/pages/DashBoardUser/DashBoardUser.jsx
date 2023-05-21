@@ -2,6 +2,7 @@
 import "../DashBoardUser/DashBoardUser.css";
 import DashBoardListUsers from "../DashBoardUser/ListUsers";
 import DashBoardNavUsers from "./NavUsers";
+import PaginadoUser from "./PaginadoUser";
 
 const DashBoardUser = () => {
   const navTab={
@@ -19,7 +20,7 @@ const DashBoardUser = () => {
 };
 
  const tab={    
-    backgroundColor: "rgb(255, 127, 42)",
+    backgroundColor: "#ff7f2a",
     width:"max-content",
     padding: "11px 20px 11px 20px",
     borderRadius:"10px",
@@ -27,7 +28,7 @@ const DashBoardUser = () => {
     marginRight:"8px",
     cursor:"pointer",
 
-
+    
 }
 const tabActive={
     backgroundColor: "white",
@@ -35,15 +36,20 @@ const tabActive={
     padding: "11px 20px 11px 20px",
     borderRadius:"10px",
     color:"black",
-    border:"2px solid rgb(255, 127, 42)",
+    border:"2px solid #ff7f2a",
     marginRight:"8px",
     
 }
   return (
     <div className="contieneTodoDashboardUsers">
-    <div style={navTab}>
-                    <div style={tabActive}>All Users</div>
-                    <div style={tab}>User Detail</div>
+    <div className="navegateUser">
+        <div style={navTab}>
+                        <div style={tabActive}>All Users</div>
+                        <div style={tab}>User Detail</div>
+        </div>
+        <div className="paginationUsers">
+          <PaginadoUser/>
+        </div>
     </div>
     <div className="contentDashboardUsers">
                   <DashBoardNavUsers/> {/* Eze */}
