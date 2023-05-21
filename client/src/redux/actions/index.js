@@ -1,10 +1,13 @@
 import axios from "axios";
 export const LOGIN_ADMIN = "LOGIN_ADMIN";
-export const REGISTER_ADMIN = "REGISTER_ADMIN";
 export const LOGIN_CLIENT_ADMIN = "LOGIN_CLIENT_ADMIN";
-export const REGISTER_CLIENT_ADMIN = "REGISTER_CLIENT_ADMIN";
 export const LOGIN_USER = "LOGIN_USER";
+export const REGISTER_ADMIN = "REGISTER_ADMIN";
+export const REGISTER_CLIENT_ADMIN = "REGISTER_CLIENT_ADMIN";
 export const REGISTER_USER = "REGISTER_USER";
+export const LOGOUT_ADMIN = "LOGOUT_ADMIN";
+export const LOGOUT_CLIENT_ADMIN = "LOGOUT_CLIENT_ADMIN";
+export const LOGOUT_USER = "LOGOUT_USER";
 export const GET_ALL_PRODUCTS = "GET_ALL_PRODUCTS";
 export const GET_PRODUCT_BY_ID = "GET_PRODUCT_BY_ID";
 export const POST_NEW_PRODUCT = "POST_NEW_PRODUCT";
@@ -12,10 +15,80 @@ export const EDIT_PRODUCT = "EDIT_PRODUCT";
 export const DELETE_PRODUCT = "DELETE_PRODUCT";
 export const GET_ORDERS = "GET_ORDERS";
 export const POST_ORDER = "POST_ORDER";
-export const LOGOUT_ADMIN = "LOGOUT_ADMIN";
-export const LOGOUT_CLIENT_ADMIN = "LOGOUT_CLIENT_ADMIN";
-export const LOGOUT_USER = "LOGOUT_USER";
+export const GET_CATEGORIES = "GET_CATEGORIES";
+export const ADD_CATEGORY = "ADD_CATEGORY";
+export const EDIT_CATEGORY = "EDIT_CATEGORY";
+export const DELETE_CATEGORY = "DELETE_CATEGORY";
 
+export const deleteCategory = (categoryId) => {
+  try {
+    return async function (dispatch) {
+      const { data } = await axios.delete(
+        `http://localhost:2800/category/${categoryId}`
+      );
+      return dispatch({
+        type: DELETE_CATEGORY,
+      });
+    };
+    // eslint-disable-next-line no-unreachable
+  } catch (err) {
+    throw new Error(err.message);
+  }
+};
+export const editCategory = (categoryId, categoryName) => {
+  try {
+    return async function (dispatch) {
+      const { data } = await axios.put(
+        `http://localhost:2800/category/${categoryId}`,
+        {
+          categoryName,
+        }
+      );
+      return dispatch({
+        type: EDIT_CATEGORY,
+        payload: data,
+      });
+    };
+    // eslint-disable-next-line no-unreachable
+  } catch (err) {
+    throw new Error(err.message);
+  }
+};
+export const getCategories = (clientAdminId) => {
+  try {
+    return async function (dispatch) {
+      const { data } = await axios.get(
+        `http://localhost:2800/category/${clientAdminId}`
+      );
+      return dispatch({
+        type: GET_CATEGORIES,
+        payload: data,
+      });
+    };
+    // eslint-disable-next-line no-unreachable
+  } catch (err) {
+    throw new Error(err.message);
+  }
+};
+export const addCategory = (categoryName, clientAdminId) => {
+  try {
+    return async function (dispatch) {
+      const { data } = await axios.post(
+        `http://localhost:2800/category/${clientAdminId}`,
+        {
+          categoryName,
+        }
+      );
+      return dispatch({
+        type: ADD_CATEGORY,
+        payload: data,
+      });
+    };
+    // eslint-disable-next-line no-unreachable
+  } catch (err) {
+    throw new Error(err.message);
+  }
+};
 export const postOrder = (cart, userId) => {
   try {
     return async function (dispatch) {
@@ -112,15 +185,18 @@ export const postNewProduct = (
 ) => {
   try {
     return async function (dispatch) {
-      const { data } = await axios.post(`http://localhost:2800/products/:${clientAdminId}`, {
-        productName,
-        description,
-        categories,
-        stocks,
-        imageUrl,
-        price,
-        rating,
-      });
+      const { data } = await axios.post(
+        `http://localhost:2800/products/:${clientAdminId}`,
+        {
+          productName,
+          description,
+          categories,
+          stocks,
+          imageUrl,
+          price,
+          rating,
+        }
+      );
       return dispatch({
         type: POST_NEW_PRODUCT,
         payload: data,
@@ -150,7 +226,9 @@ export const getProductById = (productId) => {
 export const getAllProducts = (clientAdminId) => {
   try {
     return async function (dispatch) {
-      const { data } = await axios.get(`http://localhost:2800/products/:${clientAdminId}`);
+      const { data } = await axios.get(
+        `http://localhost:2800/products/:${clientAdminId}`
+      );
       return dispatch({
         type: GET_ALL_PRODUCTS,
         payload: data,
@@ -168,7 +246,7 @@ export const loginAdmin = (email, password) => {
         email,
         password,
       });
-      localStorage.setItem('dataAdmin', data);
+      localStorage.setItem("dataAdmin", data);
       return dispatch({
         type: LOGIN_ADMIN,
         payload: data,
@@ -182,11 +260,14 @@ export const loginAdmin = (email, password) => {
 export const loginClientAdmin = (email, password) => {
   try {
     return async function (dispatch) {
-      const { data } = await axios.post("http://localhost:2800/clientAdmin/login", {
-        email,
-        password,
-      });
-      localStorage.setItem('dataClientAdmin', data);
+      const { data } = await axios.post(
+        "http://localhost:2800/clientAdmin/login",
+        {
+          email,
+          password,
+        }
+      );
+      localStorage.setItem("dataClientAdmin", data);
       return dispatch({
         type: LOGIN_CLIENT_ADMIN,
         payload: data,
@@ -204,7 +285,7 @@ export const loginUser = (email, password) => {
         email,
         password,
       });
-      localStorage.setItem('User', data);
+      localStorage.setItem("User", data);
       return dispatch({
         type: LOGIN_USER,
         payload: data,
@@ -268,15 +349,15 @@ export const registerUser = (email, password) => {
   }
 };
 
-
 export const logOutAdmin = () => {
   try {
-    localStorage.removeItem('dataAdmin');
-    window.location.href = '/';
+    localStorage.removeItem("dataAdmin");
+    window.location.href = "/";
 
     return dispatch({
       type: LOGOUT_ADMIN,
-});
+    });
+    // eslint-disable-next-line no-unreachable
   } catch (err) {
     throw new Error(err.message);
   }
@@ -284,12 +365,13 @@ export const logOutAdmin = () => {
 
 export const logOutClientAdmin = () => {
   try {
-    localStorage.removeItem('dataClientAdmin');
-    window.location.href = '/';
+    localStorage.removeItem("dataClientAdmin");
+    window.location.href = "/";
 
     return dispatch({
       type: LOGOUT_CLIENT_ADMIN,
-});
+    });
+    // eslint-disable-next-line no-unreachable
   } catch (err) {
     throw new Error(err.message);
   }
@@ -297,14 +379,14 @@ export const logOutClientAdmin = () => {
 
 export const logOutUser = () => {
   try {
-    localStorage.removeItem('dataUser');
-    window.location.href = '/';
+    localStorage.removeItem("dataUser");
+    window.location.href = "/";
 
     return dispatch({
       type: LOGOUT_USER,
-});
+    });
+    // eslint-disable-next-line no-unreachable
   } catch (err) {
     throw new Error(err.message);
   }
 };
-

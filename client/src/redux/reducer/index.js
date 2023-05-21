@@ -1,16 +1,59 @@
-import { DELETE_PRODUCT, EDIT_PRODUCT, GET_ALL_PRODUCTS, GET_ORDERS, GET_PRODUCT_BY_ID, LOGIN_ADMIN, LOGIN_CLIENT_ADMIN, LOGIN_USER, POST_NEW_PRODUCT, REGISTER_ADMIN, REGISTER_CLIENT_ADMIN, REGISTER_USER, LOGOUT_ADMIN, LOGOUT_CLIENT_ADMIN, LOGOUT_USER } from "../actions/index.js";
+import {
+  LOGIN_ADMIN,
+  LOGIN_CLIENT_ADMIN,
+  LOGIN_USER,
+  REGISTER_ADMIN,
+  REGISTER_CLIENT_ADMIN,
+  REGISTER_USER,
+  LOGOUT_ADMIN,
+  LOGOUT_CLIENT_ADMIN,
+  LOGOUT_USER,
+  GET_ALL_PRODUCTS,
+  GET_PRODUCT_BY_ID,
+  POST_NEW_PRODUCT,
+  EDIT_PRODUCT,
+  DELETE_PRODUCT,
+  GET_ORDERS,
+  POST_ORDER,
+  GET_CATEGORIES,
+  ADD_CATEGORY,
+  EDIT_CATEGORY,
+  DELETE_CATEGORY,
+} from "../actions/index.js";
 
 const initialState = {
-  admin:{},
-  clientAdmin:{},
-  user:{},
+  admin: {},
+  clientAdmin: {},
+  user: {},
   UserSession: false,
-  products:[],
-  product:{}
+  products: [],
+  product: {},
+  categories: [],
 };
 
 const rootReducer = (state = initialState, { type, payload }) => {
   switch (type) {
+    case DELETE_CATEGORY:
+      return {
+        ...state,
+      };
+    case EDIT_CATEGORY:
+      return {
+        ...state,
+      };
+    case GET_CATEGORIES:
+      return {
+        ...state,
+        categories: [...payload],
+      };
+    case ADD_CATEGORY:
+      return {
+        ...state,
+      };
+    case POST_ORDER:
+      return {
+        ...state,
+      };
     case GET_ORDERS:
       return {
         ...state,
@@ -30,7 +73,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
     case GET_PRODUCT_BY_ID:
       return {
         ...state,
-        product: {...payload},
+        product: { ...payload },
       };
     case GET_ALL_PRODUCTS:
       return {
@@ -40,7 +83,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
     case LOGIN_ADMIN:
       return {
         ...state,
-        admin: {...payload},
+        admin: { ...payload },
       };
     case REGISTER_ADMIN:
       return {
@@ -49,8 +92,8 @@ const rootReducer = (state = initialState, { type, payload }) => {
     case LOGIN_CLIENT_ADMIN:
       return {
         ...state,
-        clientAdmin: {...payload},
-        UserSession: true
+        clientAdmin: { ...payload },
+        UserSession: true,
       };
     case REGISTER_CLIENT_ADMIN:
       return {
@@ -59,8 +102,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
     case LOGIN_USER:
       return {
         ...state,
-        user: {...payload},
-
+        user: { ...payload },
       };
     case REGISTER_USER:
       return {
@@ -70,24 +112,23 @@ const rootReducer = (state = initialState, { type, payload }) => {
     case LOGOUT_ADMIN:
       return {
         ...state,
-        admin:{},
+        admin: {},
         UserSession: false,
       };
 
     case LOGOUT_CLIENT_ADMIN:
       return {
         ...state,
-        clientAdmin:{},
+        clientAdmin: {},
         UserSession: false,
       };
 
     case LOGOUT_USER:
       return {
         ...state,
-        user:{},
+        user: {},
         UserSession: false,
       };
-
 
     default:
       return {

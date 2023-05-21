@@ -1,13 +1,16 @@
 const Category = require('../models/Category');
-require("dotenv").config();
+const ClientAdmin = require("../models/Users/ClientAdmin");
 
 
 
 //GET funcionando correctamente
-const getAllCategory = async (clientAdmin) => {
+const getAllCategory = async (clientAdminId) => {
     try {
-        const categorias = await Category.find({clientAdmin: clientAdmin});
-        return categorias;
+      const clientAdmin = await ClientAdmin.findById(clientAdminId)
+      .populate("categories") // Popula las categorías
+      .exec();
+  
+      return clientAdmin.categories;
       } catch (error) {
         console.error('Error al obtener las categorías:', error);
         throw error;
@@ -17,13 +20,17 @@ const getAllCategory = async (clientAdmin) => {
 
 //POST terminado 
 
-const createNewCategory =  async (clientAdmin, categoryName) => {
+const createNewCategory =  async (clientAdminId, categoryName) => {
 
   const category = await Category.findOne({categoryName})
   if(category) throw new Error('category already exists');
   
-  const newCategory = new Category({categoryName, clientAdmin});
+  const newCategory = new Category({categoryName, clientAdmin: clientAdminId});
   const savedCategory = await newCategory.save();
+
+  const clientAdmin = await ClientAdmin.findById(clientAdminId);
+  clientAdmin.categories.push(savedCategory._id);
+  await clientAdmin.save();
   return savedCategory;
 
 };
@@ -31,22 +38,28 @@ const createNewCategory =  async (clientAdmin, categoryName) => {
 
 //PUT
 
-const setCategory = async (newCategoryName, id) => {
+const setCategory = async (categoryName, categoryId) => {
 
-  const category = await Category.findOneAndUpdate( 
-    { _id: id },
-    { categoryName: newCategoryName },
-    )
-    return category;
+  const category = await Category.findByIdAndUpdate(
+    categoryId,
+    { categoryName },
+    { new: true }
+  );
+
+  if (!category) {
+    throw new Error('Categoría no encontrada');
+  }
+
+  return category;
 };
 
 
 //DELETE funcionando
 
-const deleteCategory = async (id) => {
+const deleteCategory = async (categoryId) => {
 
-  const categoryDelete = await Category.findOneAndDelete({_id: id})
-  return categoryDelete;
+  const categoryDelete = await Category.findOneAndDelete({_id: categoryId})
+  return "category deleted";
 };
 
 
