@@ -98,18 +98,22 @@ const updateProduct = async (
   description,
   categoriesIds,
   stocks,
-  imageUrl,
+  imagePath,
   price,
   rating
 ) => {
   try {
+    const uploadResult = await cloudinary.uploader.upload(
+      imagePath /*,{optiones}*/
+    );
+
     const product = await Product.findById(productId);
     if (product) {
       product.productName = productName;
       product.description = description;
       product.categories = categoriesIds;
       product.stocks = stocks;
-      product.imageUrl = uploadResult.secure_url;
+      product.imagePath = uploadResult.secure_url;
       product.price = price;
       product.rating = rating;
     }
