@@ -15,14 +15,69 @@ export const POST_ORDER = "POST_ORDER";
 export const LOGOUT_ADMIN = "LOGOUT_ADMIN";
 export const LOGOUT_CLIENT_ADMIN = "LOGOUT_CLIENT_ADMIN";
 export const ADD_CATEGORY = "ADD_CATEGORY";
+export const GET_CATEGORIES = "GET_CATEGORIES";
+export const EDIT_CATEGORY = "EDIT_CATEGORY";
+export const DELETE_CATEGORY = "DELETE_CATEGORY";
 
-export const addCategory = (cart, userId) => {
+export const deleteCategory = (categoryId) => {
   try {
     return async function (dispatch) {
-      const { data } = await axios.post(`http://localhost:2800/category`, {
-        cart,
-        userId,
+      const { data } = await axios.delete(
+        `http://localhost:2800/category/${categoryId}`,
+      );
+      return dispatch({
+        type: DELETE_CATEGORY,
       });
+    };
+    // eslint-disable-next-line no-unreachable
+  } catch (err) {
+    throw new Error(err.message);
+  }
+};
+export const editCategory = (categoryId,categoryName) => {
+  try {
+    return async function (dispatch) {
+      const { data } = await axios.put(
+        `http://localhost:2800/category/${categoryId}`,
+        {
+          categoryName,
+        }
+      );
+      return dispatch({
+        type: EDIT_CATEGORY,
+        payload: data,
+      });
+    };
+    // eslint-disable-next-line no-unreachable
+  } catch (err) {
+    throw new Error(err.message);
+  }
+};
+export const getCategories = (clientAdminId) => {
+  try {
+    return async function (dispatch) {
+      const { data } = await axios.get(
+        `http://localhost:2800/category/${clientAdminId}`
+      );
+      return dispatch({
+        type: GET_CATEGORIES,
+        payload: data,
+      });
+    };
+    // eslint-disable-next-line no-unreachable
+  } catch (err) {
+    throw new Error(err.message);
+  }
+};
+export const addCategory = (categoryName, clientAdminId) => {
+  try {
+    return async function (dispatch) {
+      const { data } = await axios.post(
+        `http://localhost:2800/category/${clientAdminId}`,
+        {
+          categoryName,
+        }
+      );
       return dispatch({
         type: ADD_CATEGORY,
         payload: data,
@@ -129,15 +184,18 @@ export const postNewProduct = (
 ) => {
   try {
     return async function (dispatch) {
-      const { data } = await axios.post(`http://localhost:2800/products/:${clientAdminId}`, {
-        productName,
-        description,
-        categories,
-        stocks,
-        imageUrl,
-        price,
-        rating,
-      });
+      const { data } = await axios.post(
+        `http://localhost:2800/products/:${clientAdminId}`,
+        {
+          productName,
+          description,
+          categories,
+          stocks,
+          imageUrl,
+          price,
+          rating,
+        }
+      );
       return dispatch({
         type: POST_NEW_PRODUCT,
         payload: data,
@@ -167,7 +225,9 @@ export const getProductById = (productId) => {
 export const getAllProducts = (clientAdminId) => {
   try {
     return async function (dispatch) {
-      const { data } = await axios.get(`http://localhost:2800/products/:${clientAdminId}`);
+      const { data } = await axios.get(
+        `http://localhost:2800/products/:${clientAdminId}`
+      );
       return dispatch({
         type: GET_ALL_PRODUCTS,
         payload: data,
@@ -185,7 +245,7 @@ export const loginAdmin = (email, password) => {
         email,
         password,
       });
-      localStorage.setItem('dataAdmin', data);
+      localStorage.setItem("dataAdmin", data);
       return dispatch({
         type: LOGIN_ADMIN,
         payload: data,
@@ -199,11 +259,14 @@ export const loginAdmin = (email, password) => {
 export const loginClientAdmin = (email, password) => {
   try {
     return async function (dispatch) {
-      const { data } = await axios.post("http://localhost:2800/clientAdmin/login", {
-        email,
-        password,
-      });
-      localStorage.setItem('dataClientAdmin', data);
+      const { data } = await axios.post(
+        "http://localhost:2800/clientAdmin/login",
+        {
+          email,
+          password,
+        }
+      );
+      localStorage.setItem("dataClientAdmin", data);
       return dispatch({
         type: LOGIN_CLIENT_ADMIN,
         payload: data,
@@ -221,7 +284,7 @@ export const loginUser = (email, password) => {
         email,
         password,
       });
-      localStorage.setItem('User', data);
+      localStorage.setItem("User", data);
       return dispatch({
         type: LOGIN_USER,
         payload: data,
@@ -285,15 +348,14 @@ export const registerUser = (email, password) => {
   }
 };
 
-
 export const logOutAdmin = () => {
   try {
-    localStorage.removeItem('dataAdmin');
-    window.location.href = '/';
+    localStorage.removeItem("dataAdmin");
+    window.location.href = "/";
 
     return dispatch({
       type: LOGOUT_ADMIN,
-});
+    });
   } catch (err) {
     throw new Error(err.message);
   }
@@ -301,12 +363,12 @@ export const logOutAdmin = () => {
 
 export const logOutClientAdmin = () => {
   try {
-    localStorage.removeItem('dataClientAdmin');
-    window.location.href = '/';
+    localStorage.removeItem("dataClientAdmin");
+    window.location.href = "/";
 
     return dispatch({
       type: LOGOUT_CLIENT_ADMIN,
-});
+    });
   } catch (err) {
     throw new Error(err.message);
   }
@@ -314,14 +376,13 @@ export const logOutClientAdmin = () => {
 
 export const logOutUser = () => {
   try {
-    localStorage.removeItem('dataUser');
-    window.location.href = '/';
+    localStorage.removeItem("dataUser");
+    window.location.href = "/";
 
     return dispatch({
       type: LOGOUT_USER,
-});
+    });
   } catch (err) {
     throw new Error(err.message);
   }
 };
-
