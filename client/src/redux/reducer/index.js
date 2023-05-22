@@ -85,6 +85,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
     case POST_NEW_PRODUCT:
       return {
         ...state,
+        products : [ ...state.products ,payload]
       };
     case GET_PRODUCT_BY_ID:
       return {

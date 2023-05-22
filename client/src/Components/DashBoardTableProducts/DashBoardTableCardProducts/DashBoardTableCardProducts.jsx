@@ -44,7 +44,6 @@ const DashBoardTableCardProducts = ({product}) => {
                 <td>{product?.price}</td>
                 <td>{product?.rating}</td>
                 <td>
-                  <button>view </button>
                   <button>Edit </button>
                   <button onClick={()=> setIdReference(product._id) }>delete </button>
                 </td>

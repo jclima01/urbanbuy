@@ -4,9 +4,13 @@ import DashBoardCardsUser from "../../Components/DashBoardCardsUser/DashBoardCar
 import logo from "../../assets/Logo.jpeg";
 import ilustration from "../../assets/ilustrationhome.png";
 import { Products, User, categoryProducts } from "../../data";
-import {IoMdAddCircleOutline} from "react-icons/io";
+import { IoMdAddCircleOutline } from "react-icons/io";
 
 const DashBoard = () => {
+  let arrUser = [];
+  for (let i = 0; i < 3; i++) {
+    arrUser.push(User[i]);
+  }
 
   return (
     <div className="vh-100 w-100 d-flex justify-content-center overflow-hidden ">
@@ -137,7 +141,7 @@ const DashBoard = () => {
               {categoryProducts.map((item, i) => (
                 <DashBoardCardCategory key={i} category={item} />
               ))}
-              {categoryProducts.length === 7 ? null : ((
+              {categoryProducts.length === 7 ? null : (
                 <div
                   style={{
                     width: 140,
@@ -148,11 +152,15 @@ const DashBoard = () => {
                     alignItems: "center",
                     justifyContent: "center",
                   }}
-                  
                 >
-                  <IoMdAddCircleOutline size={60} color="white" className="hoverCategory"  cursor={'pointer'} />
+                  <IoMdAddCircleOutline
+                    size={60}
+                    color="white"
+                    className="hoverCategory"
+                    cursor={"pointer"}
+                  />
                 </div>
-              ))}
+              )}
             </div>
             <div
               style={{
@@ -240,7 +248,7 @@ const DashBoard = () => {
                   gap: 10,
                 }}
               >
-                {User?.map((item) => (
+                {arrUser?.map((item) => (
                   <DashBoardCardsUser key={item.id} Users={item} />
                 ))}
               </div>

@@ -30,7 +30,7 @@ export const getUserById = (userId) => {
       );
       return dispatch({
         type: GET_USER_BY_ID,
-        payload: data
+        payload: data,
       });
     };
     // eslint-disable-next-line no-unreachable
@@ -46,7 +46,7 @@ export const getClientAdminUsers = (clientAdminId) => {
       );
       return dispatch({
         type: GET_CLIENT_ADMIN_USERS,
-        payload: data
+        payload: data,
       });
     };
     // eslint-disable-next-line no-unreachable
@@ -160,7 +160,9 @@ export const postOrder = (
 export const getOrdersByUser = (userId) => {
   try {
     return async function (dispatch) {
-      const { data } = await axios.get(`http://localhost:2800/orders/${userId}`);
+      const { data } = await axios.get(
+        `http://localhost:2800/orders/${userId}`
+      );
       return dispatch({
         type: GET_ORDERS_BY_USER,
         payload: data,
@@ -174,9 +176,7 @@ export const getOrdersByUser = (userId) => {
 export const deleteProduct = (productId) => {
   try {
     return async function (dispatch) {
-       await axios.delete(
-        `http://localhost:2800/products/delete/${productId}`
-        );
+      await axios.delete(`http://localhost:2800/products/delete/${productId}`);
       return dispatch({
         type: DELETE_PRODUCT,
         payload: productId,
@@ -275,7 +275,9 @@ export const getProductById = (productId) => {
 export const getAllProducts = (clientAdminId) => {
   try {
     return async function (dispatch) {
-      const { data } = await axios.get(`http://localhost:2800/products/${clientAdminId}`);
+      const { data } = await axios.get(
+        `http://localhost:2800/products/${clientAdminId}`
+      );
       return dispatch({
         type: GET_ALL_PRODUCTS,
         payload: data,

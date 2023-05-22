@@ -1,42 +1,40 @@
-import { useEffect } from "react"  
+import { useRef, useEffect } from 'react';
 
-function UploadWidget(){
-/*   const cloudinaryRef = useRef()
-  const widgetRef = useRef() */
-  
+function UploadWidget({dataProducts , setdataProducts}) {
+  const cloudinaryRef = useRef();
+  const widgetRef = useRef();
 
-  let myWidget = window.cloudinary.createUploadWidget(
-    {
-      cloudName: 'dboblsqkr',
-      uploadPreset: 'zzrhgmlq'
-      
-    },
-    (error, result) => {
-      if (!error && result && result.event === "success") {
-        console.log("Done! Here is the image info: ", result.info);
+  useEffect(() => {
+    cloudinaryRef.current = window.cloudinary;
+    widgetRef.current = cloudinaryRef.current.createUploadWidget(
+      {
+        cloudName: 'dhan4gjbn',
+        uploadPreset: 'zzrhgmlq',
+      },
+      function (error, result) {
+        setdataProducts({
+          ...dataProducts,
+          imageUrl : result.data.info.files[0].uploadInfo.secure_url
+        })
       }
-    }
     );
-    
-    console.log('myWidget', myWidget)
+  }, []);
 
+  const openWidget = () => {
+    widgetRef.current.open();
+  };
 
-  useEffect(()=>{
-   /*  cloudinaryRef.current = window.cloudinary  
-    widgetRef.current = cloudinaryRef.current.createUploadWidget({
-      cloudName: 'dboblsqkr',
-      uploadPreset: 'zzrhgmlq'
-    }, function(error, result){
-      console.log('result', result)
-      console.log(error)
-    }) */
-  },[])
-
-  return(
-    <button onClick={() => myWidget.open()}>
+  return (
+    <button style={{
+      backgroundColor:'#ff7f2a',
+      border:'none',
+      borderRadius:8,
+      color:'white',
+      padding: 5
+    }} onClick={openWidget}>
       Upload
     </button>
-  )
+  );
 }
 
-export default UploadWidget
+export default UploadWidget;
