@@ -5,7 +5,7 @@ const {
   postOrderHandlers,
 } = require("../handlers/OrderHandlers.js");
 
-OrderRouter.get("/", getOrderHandlers);
-OrderRouter.post("/", postOrderHandlers);
+OrderRouter.get("/:userId", getOrderHandlers);
+OrderRouter.post("/:userId", postOrderHandlers);
 
 module.exports = OrderRouter;

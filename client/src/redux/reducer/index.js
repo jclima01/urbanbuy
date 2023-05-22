@@ -13,13 +13,14 @@ import {
   POST_NEW_PRODUCT,
   EDIT_PRODUCT,
   DELETE_PRODUCT,
-  GET_ORDERS,
+  GET_ORDERS_BY_USER,
   POST_ORDER,
   GET_CATEGORIES,
   ADD_CATEGORY,
   EDIT_CATEGORY,
   DELETE_CATEGORY,
-  GET_SESSION,
+  GET_CLIENT_ADMIN_USERS,
+  GET_USER_BY_ID
 } from "../actions/index.js";
 
 const initialState = {
@@ -30,10 +31,22 @@ const initialState = {
   products: [],
   product: {},
   categories: [],
+  ordersByUser: [],
+  clientAdminUsers:[],
 };
 
 const rootReducer = (state = initialState, { type, payload }) => {
   switch (type) {
+    case GET_USER_BY_ID:
+      return {
+        ...state,
+        user:{...payload}
+      };
+    case GET_CLIENT_ADMIN_USERS:
+      return {
+        ...state,
+        clientAdminUsers:[...payload]
+      };
     case DELETE_CATEGORY:
       return {
         ...state,
@@ -55,9 +68,10 @@ const rootReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
       };
-    case GET_ORDERS:
+    case GET_ORDERS_BY_USER:
       return {
         ...state,
+        ordersByUser: [...payload],
       };
     case DELETE_PRODUCT:
       return {
@@ -125,15 +139,10 @@ const rootReducer = (state = initialState, { type, payload }) => {
       };
 
     case LOGOUT_USER:
-
       return {
         ...state,
         user: {},
         UserSession: false,
-      };
-    case GET_SESSION:
-      return {
-        ...state,
       };
 
     default:
