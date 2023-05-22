@@ -150,7 +150,8 @@ export const getProductById = (productId) => {
 export const getAllProducts = (clientAdminId) => {
   try {
     return async function (dispatch) {
-      const { data } = await axios.get(`http://localhost:2800/products/:${clientAdminId}`);
+      const  {data}  = await axios.get(`http://localhost:2800/products/${clientAdminId}`);
+      console.log('data', data)
       return dispatch({
         type: GET_ALL_PRODUCTS,
         payload: data,
