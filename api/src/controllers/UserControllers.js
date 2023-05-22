@@ -74,6 +74,8 @@ const getClientAdminUsers = async (clientAdminId) => {
       .exec();
 
     return clientAdmin.users;
+    // const clientAdminUsers = await User.find({ clientAdmin: clientAdminId });
+    // return clientAdminUsers;
   } catch (error) {
     throw new Error(error.message);
   }
@@ -97,5 +99,5 @@ module.exports = {
   UserUpdate,
   UserDelete,
   getClientAdminUsers,
-  getUserById
+  getUserById,
 };
