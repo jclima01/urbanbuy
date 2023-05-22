@@ -23,10 +23,6 @@ const DashBoardListUsers = ({setActiveTab,activeTab,users,setActualPage}) => {
 
   return (
     <div className="contentAllUser">
-      {/* trabajas ema con los titulos de columnas
-                  -------------------------------
-                  lista de usuarios avatar ,
-                  boton para entrar al detalle */}
       <div>
         <ul className="listUl">
           <li>Avatar </li>

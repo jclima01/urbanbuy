@@ -40,19 +40,7 @@ const DashBoardNavUsers = () => {
     width: "800px",
     color: "#474646",
   };
-  {
-    /* 
-                    pestañas all users - user detail
-                    ------------------------------
-                    componente ordenamiento
-                    --------------------------
-                    componente search users
-                    ----------------------------
-                    componente paginado
-                    ----------------------
-                    componente filters
-                    */
-  }
+
   return (
     <>
       <div style={contentOrderSearchAndFilters}>
@@ -79,11 +67,11 @@ const DashBoardNavUsers = () => {
 
         </div>
 
-        <div className="filters">
+        {/* <div className="filters">
           <select style={filters}>
             <option value="Filters">Filters</option>
           </select>
-        </div>
+        </div> */}
         
       </div>
     </>

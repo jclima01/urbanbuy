@@ -2,7 +2,7 @@
 
 const DashBoardShipping = () => {
   return (
-    <div>Upcoming...</div>
+    <h1>Upcoming...</h1>
   )
 }
 
