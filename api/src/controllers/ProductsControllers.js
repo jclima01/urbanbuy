@@ -33,7 +33,7 @@ const getProductName = async (name, clientAdminId) => {
       clientAdmin: clientAdminId,
     })
       .populate("categories") // Popula las categorías
-      .populate("clientAdmin") // Popula el modelo ClientAdmin
+      // .populate("clientAdmin") // Popula el modelo ClientAdmin
       .exec();
     return dataBaseProducts;
   } catch (error) {
@@ -46,7 +46,7 @@ const getProductById = async (productId) => {
   try {
     const dataBaseProducts = await Product.findById(productId)
       .populate("categories") // Popula las categorías
-      .populate("clientAdmin") // Popula el modelo ClientAdmin
+      // .populate("clientAdmin") // Popula el modelo ClientAdmin
       .exec();
     return dataBaseProducts;
   } catch (error) {
