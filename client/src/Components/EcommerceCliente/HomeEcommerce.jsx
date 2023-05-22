@@ -33,7 +33,7 @@ function HomeEcommerce() {
       <br/> */}
       
       <h2 className={style.h2}>PRODUCTOS </h2>
-      <Filter/>
+      <Filter />
       <div className={style.containerCard}>
       <Card products={products}/>
       </div>
