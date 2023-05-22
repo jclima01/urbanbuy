@@ -276,7 +276,7 @@ export const getAllProducts = (clientAdminId) => {
   try {
     return async function (dispatch) {
       const { data } = await axios.get(
-        `http://localhost:2800/products/:${clientAdminId}`
+        `http://localhost:2800/products/${clientAdminId}`
       );
       return dispatch({
         type: GET_ALL_PRODUCTS,
