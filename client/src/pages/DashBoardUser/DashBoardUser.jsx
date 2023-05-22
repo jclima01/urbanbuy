@@ -1,9 +1,8 @@
 import { useState } from "react";
 import "../DashBoardUser/DashBoardUser.css";
-import DashBoardListUsers from "../DashBoardUser/ListUsers";
-import DashBoardNavUsers from "./NavUsers";
 import PaginadoUser from "./PaginadoUser";
 import DashBoardUserDetail from "./DashBoardUserDetail";
+import DashBoardUsersConteiner from "./DashBoardUsersConteiner";
 
 const DashBoardUser = () => {
   const navTab = {
@@ -38,10 +37,7 @@ const DashBoardUser = () => {
     marginRight: "8px",
   };
 
-  const ocultarDetalles = () => {
-    /* document.getElementById('overlay').style.display = 'none';
-  document.getElementById('detalles').style.display = 'none';*/
-  };
+
   const [activeTab, setActiveTab] = useState(true);
   const handleView = () => {
     setActiveTab(!activeTab);
@@ -67,8 +63,8 @@ const DashBoardUser = () => {
         <div className="contentDashboardUsers">
           {activeTab ? (
             <>
-              <DashBoardNavUsers />
-              <DashBoardListUsers />
+              <DashBoardUsersConteiner/>
+              
             </>
           ) : (
             <DashBoardUserDetail />

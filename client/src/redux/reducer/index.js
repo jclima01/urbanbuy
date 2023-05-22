@@ -20,7 +20,10 @@ import {
   EDIT_CATEGORY,
   DELETE_CATEGORY,
   GET_CLIENT_ADMIN_USERS,
-  GET_USER_BY_ID
+  GET_USER_BY_ID,
+  FILTER_CLIENT_USERS, 
+  ORDER_CLIENT_USERS,
+  SEARCH_USERS
 } from "../actions/index.js";
 
 const initialState = {
@@ -47,6 +50,35 @@ const rootReducer = (state = initialState, { type, payload }) => {
         ...state,
         clientAdminUsers:[...payload]
       };
+    case ORDER_CLIENT_USERS:
+      //eslint-disable-next-line
+        let orderUsers;
+        if(payload==='fullName_az'){
+          orderUsers=state.clientAdminUsers.sort((a,b)=>a.fullName>b.fullName?1:-1);
+        }else if(payload==='fullName_za'){
+          orderUsers=state.clientAdminUsers.sort((a,b)=>a.fullName<b.fullName?1:-1);
+        }else if(payload==='email_az'){
+          orderUsers=state.clientAdminUsers.sort((a,b)=>a.email>b.email?1:-1);
+        }else if(payload==='email_za'){
+          orderUsers=state.clientAdminUsers.sort((a,b)=>a.email<b.email?1:-1);
+        }
+      return{
+       ...state,
+        clientAdminUsers:[...orderUsers ]
+       };
+       case SEARCH_USERS:
+         return { 
+          ...state, 
+          //clientAdminUsers=clientAdminUsers.filter((user) => user.fullName.toLowerCase().includes(payload.toLowerCase()))
+        };
+    //  case FILTER_CLIENT_USERS:
+    //   //eslint-disable-next-line
+    //   let filteredUsers;
+    //   return{
+    //     ...state,
+    //     //clientAdminUsers:state.clientAdminUsers.filter(e=>e.===payload)
+    //   }  
+
     case DELETE_CATEGORY:
       return {
         ...state,
