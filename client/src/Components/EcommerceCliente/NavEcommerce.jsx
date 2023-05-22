@@ -26,7 +26,7 @@ function NavEcommerce() {
           
         <SearchBar />
         </div>
-        <img src={logoClient} style={{width:'3%'}}/>
+    
       </Container>
     </Navbar>
   );
