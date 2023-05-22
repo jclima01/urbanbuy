@@ -40,7 +40,14 @@ const tabActive={
     marginRight:"8px",
     
 }
+
+const ocultarDetalles=()=> {
+ /* document.getElementById('overlay').style.display = 'none';
+  document.getElementById('detalles').style.display = 'none';*/
+}
+
   return (
+    <>
     <div className="contieneTodoDashboardUsers">
     <div className="navegateUser">
         <div style={navTab}>
@@ -59,6 +66,12 @@ const tabActive={
 
     </div>
     </div>
+    <div id="overlay" style={{display:"none"}}></div>
+    <div id="detalles" style={{display:"none"}}>
+        {/* <!-- Contenido de los detalles del cliente --> */}
+        <button onClick={ocultarDetalles()}></button>
+    </div>
+    </>
   )
 }
 
