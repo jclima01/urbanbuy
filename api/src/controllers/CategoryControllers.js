@@ -6,11 +6,13 @@ const ClientAdmin = require("../models/Users/ClientAdmin");
 //GET funcionando correctamente
 const getAllCategory = async (clientAdminId) => {
     try {
-      const clientAdmin = await ClientAdmin.findById(clientAdminId)
-      .populate("categories") // Popula las categorías
-      .exec();
+      // const clientAdmin = await ClientAdmin.findById(clientAdminId)
+      const categories = await Category.find({clientAdmin: clientAdminId})
+      // .populate("categories") // Popula las categorías
+      // .exec();
   
-      return clientAdmin.categories;
+      // return clientAdmin.categories;
+      return categories;
       } catch (error) {
         console.error('Error al obtener las categorías:', error);
         throw error;

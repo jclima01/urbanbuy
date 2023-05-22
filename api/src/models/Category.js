@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const CategorySchema = new Schema(
   {
-    categoryName: { type: String,unique: true },
+    categoryName: { type: String },
     clientAdmin: { type: Schema.Types.ObjectId, ref: "ClientAdmin" },
   },
   { timestamps: true }
