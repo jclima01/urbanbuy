@@ -127,6 +127,7 @@ const updateProduct = async (
 
 //DELETE
 const deleteProduct = async (productId) => {
+  console.log( productId)
   try {
     const deletedProduct = await Product.findByIdAndDelete(productId);
     return deletedProduct;

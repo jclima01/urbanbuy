@@ -1,7 +1,10 @@
 import Table from "react-bootstrap/esm/Table";
 import DashBoardTableCardProducts from "./DashBoardTableCardProducts/DashBoardTableCardProducts";
 
-const DashBoardTableProducts = ({ products }) => {
+const DashBoardTableProducts = ({Products}) => {
+
+
+
   return (
     <Table
       striped="columns"

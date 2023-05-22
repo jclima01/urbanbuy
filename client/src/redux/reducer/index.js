@@ -108,6 +108,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
     case DELETE_PRODUCT:
       return {
         ...state,
+        products: state.products.filter(item => item._id !== payload)
       };
     case EDIT_PRODUCT:
       return {
@@ -116,6 +117,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
     case POST_NEW_PRODUCT:
       return {
         ...state,
+        products : [ ...state.products ,payload]
       };
     case GET_PRODUCT_BY_ID:
       return {
