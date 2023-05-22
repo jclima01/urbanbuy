@@ -175,7 +175,7 @@ export const deleteProduct = (productId) => {
   try {
     return async function (dispatch) {
       const { data } = await axios.delete(
-        `http://localhost:2800/products/:${productId}`
+        `http://localhost:2800/products/${productId}`
       );
       return dispatch({
         type: DELETE_PRODUCT,
@@ -201,7 +201,7 @@ export const editProduct = (
   try {
     return async function (dispatch) {
       const { data } = await axios.put(
-        `http://localhost:2800/products/:${productId}`,
+        `http://localhost:2800/products/${productId}`,
         {
           productName,
           description,
@@ -235,7 +235,7 @@ export const postNewProduct = (
   try {
     return async function (dispatch) {
       const { data } = await axios.post(
-        `http://localhost:2800/products/:${clientAdminId}`,
+        `http://localhost:2800/products/${clientAdminId}`,
         {
           productName,
           description,
@@ -260,7 +260,7 @@ export const getProductById = (productId) => {
   try {
     return async function (dispatch) {
       const { data } = await axios.get(
-        `http://localhost:2800/products/product/:${productId}`
+        `http://localhost:2800/products/product/${productId}`
       );
       return dispatch({
         type: GET_PRODUCT_BY_ID,
@@ -276,7 +276,7 @@ export const getAllProducts = (clientAdminId) => {
   try {
     return async function (dispatch) {
       const { data } = await axios.get(
-        `http://localhost:2800/products/:${clientAdminId}`
+        `http://localhost:2800/products/${clientAdminId}`
       );
       return dispatch({
         type: GET_ALL_PRODUCTS,
