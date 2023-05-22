@@ -1,22 +1,19 @@
 import '../DashBoardUser/ListUsers.css'
 import { User } from '../../data.js';
 import { useEffect, useState } from 'react';
-
+import DetailUsers from '../DashBoardUser/detailUsers';
 
 
 const DashBoardListUsers = () => {
   const [selectedUser, setSelectedUser] = useState(null);
+  
 
   const handleClick = (user) => {
     setSelectedUser(user);
-    mostrarDetalles(user);
-  };
-  function mostrarDetalles() {
-    document.getElementById('overlay').style.display = 'block';
-    document.getElementById('detalles').style.display = 'block';
-  }
-  
  
+  };
+  
+  
   useEffect(() => {
    
   },[selectedUser]);
@@ -50,16 +47,14 @@ console.log(selectedUser);
                   <h6>{user.fullName}</h6>
                   <h6>{user.email}</h6>
                   <h6>{user.permissions}</h6>
-                  <button className='buttonView' onClick={() => handleClick(user)}>View User</button>
+                  <button className='buttonView' onClick={() => handleClick(user)}>{selectedUser && <DetailUsers user={selectedUser} />}</button>
                   <h6 className='puntosUser'>···</h6>
                   </li>)}
                   
                   </ul>
-
+                  
              </div>
-            <span>
-              
-            </span>
+             
     </div>
   );
 };
