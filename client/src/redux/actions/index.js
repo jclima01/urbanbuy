@@ -13,14 +13,50 @@ export const GET_PRODUCT_BY_ID = "GET_PRODUCT_BY_ID";
 export const POST_NEW_PRODUCT = "POST_NEW_PRODUCT";
 export const EDIT_PRODUCT = "EDIT_PRODUCT";
 export const DELETE_PRODUCT = "DELETE_PRODUCT";
-export const GET_ORDERS = "GET_ORDERS";
+export const GET_ORDERS_BY_USER = "GET_ORDERS_BY_USER";
 export const POST_ORDER = "POST_ORDER";
 export const GET_CATEGORIES = "GET_CATEGORIES";
 export const ADD_CATEGORY = "ADD_CATEGORY";
 export const EDIT_CATEGORY = "EDIT_CATEGORY";
 export const DELETE_CATEGORY = "DELETE_CATEGORY";
-export const GET_SESSION = "GET_SESSION";
+export const GET_CLIENT_ADMIN_USERS = "GET_CLIENT_ADMIN_USERS";
+export const GET_USER_BY_ID = "GET_USER_BY_ID";
+export const ORDER_CLIENT_USERS = "ORDER_CLIENT_USERS";
+export const SEARCH_USERS = "SEARCH_USERS";
+export const FILTER_CLIENT_USERS = "FILTER_CLIENT_USERS";
 
+export const getUserById = (userId) => {
+  try {
+    return async function (dispatch) {
+      const { data } = await axios.get(
+        `http://localhost:2800/users/user/${userId}`
+      );
+      return dispatch({
+        type: GET_USER_BY_ID,
+        payload: data,
+      });
+    };
+    // eslint-disable-next-line no-unreachable
+  } catch (err) {
+    throw new Error(err.message);
+  }
+};
+export const getClientAdminUsers = (clientAdminId) => {
+  try {
+    return async function (dispatch) {
+      const { data } = await axios.get(
+        `http://localhost:2800/users/${clientAdminId}`
+      );
+      return dispatch({
+        type: GET_CLIENT_ADMIN_USERS,
+        payload: data,
+      });
+    };
+    // eslint-disable-next-line no-unreachable
+  } catch (err) {
+    throw new Error(err.message);
+  }
+};
 export const deleteCategory = (categoryId) => {
   try {
     return async function (dispatch) {
@@ -90,15 +126,32 @@ export const addCategory = (categoryName, clientAdminId) => {
     throw new Error(err.message);
   }
 };
-export const postOrder = (cart, userId) => {
+export const postOrder = (
+  fullName,
+  status,
+  payment,
+  email,
+  cart,
+  total,
+  adress,
+  userId
+) => {
   try {
     return async function (dispatch) {
-      const { data } = await axios.post(`http://localhost:2800/orders`, {
-        cart,
-        userId,
-      });
+      const { data } = await axios.post(
+        `http://localhost:2800/orders/${userId}`,
+        {
+          fullName,
+          status,
+          payment,
+          email,
+          cart,
+          total,
+          adress,
+        }
+      );
       return dispatch({
-        type: GET_ORDERS,
+        type: POST_ORDER,
         payload: data,
       });
     };
@@ -107,14 +160,14 @@ export const postOrder = (cart, userId) => {
     throw new Error(err.message);
   }
 };
-export const getOrders = (userId) => {
+export const getOrdersByUser = (userId) => {
   try {
     return async function (dispatch) {
-      const { data } = await axios.get(`http://localhost:2800/orders`, {
-        userId,
-      });
+      const { data } = await axios.get(
+        `http://localhost:2800/orders/${userId}`
+      );
       return dispatch({
-        type: GET_ORDERS,
+        type: GET_ORDERS_BY_USER,
         payload: data,
       });
     };
@@ -127,7 +180,7 @@ export const deleteProduct = (productId) => {
   try {
     return async function (dispatch) {
       const { data } = await axios.delete(
-        `http://localhost:2800/products/:${productId}`
+        `http://localhost:2800/products/${productId}`
       );
       return dispatch({
         type: DELETE_PRODUCT,
@@ -153,7 +206,7 @@ export const editProduct = (
   try {
     return async function (dispatch) {
       const { data } = await axios.put(
-        `http://localhost:2800/products/:${productId}`,
+        `http://localhost:2800/products/${productId}`,
         {
           productName,
           description,
@@ -187,7 +240,7 @@ export const postNewProduct = (
   try {
     return async function (dispatch) {
       const { data } = await axios.post(
-        `http://localhost:2800/products/:${clientAdminId}`,
+        `http://localhost:2800/products/${clientAdminId}`,
         {
           productName,
           description,
@@ -212,7 +265,7 @@ export const getProductById = (productId) => {
   try {
     return async function (dispatch) {
       const { data } = await axios.get(
-        `http://localhost:2800/products/:${productId}`
+        `http://localhost:2800/products/product/${productId}`
       );
       return dispatch({
         type: GET_PRODUCT_BY_ID,
@@ -228,7 +281,7 @@ export const getAllProducts = (clientAdminId) => {
   try {
     return async function (dispatch) {
       const { data } = await axios.get(
-        `http://localhost:2800/products/:${clientAdminId}`
+        `http://localhost:2800/products/${clientAdminId}`
       );
       return dispatch({
         type: GET_ALL_PRODUCTS,
@@ -378,7 +431,7 @@ export const logOutClientAdmin = () => {
       });
 
       // setTimeout(() => {
-        window.location.href = "/";
+      window.location.href = "/";
       // }, 100);
     };
     // eslint-disable-next-line no-unreachable
@@ -404,3 +457,15 @@ export const logOutUser = () => {
     throw new Error(err.message);
   }
 };
+
+export const orderClientUsers = (orden) => {
+  return {
+    type: ORDER_CLIENT_USERS,
+    payload: orden,
+  };
+};
+
+export const searchUsers = (searchTerm) => ({
+  type: SEARCH_USERS,
+  payload: searchTerm,
+});

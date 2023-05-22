@@ -13,13 +13,17 @@ import {
   POST_NEW_PRODUCT,
   EDIT_PRODUCT,
   DELETE_PRODUCT,
-  GET_ORDERS,
+  GET_ORDERS_BY_USER,
   POST_ORDER,
   GET_CATEGORIES,
   ADD_CATEGORY,
   EDIT_CATEGORY,
   DELETE_CATEGORY,
-  GET_SESSION,
+  GET_CLIENT_ADMIN_USERS,
+  GET_USER_BY_ID,
+  FILTER_CLIENT_USERS,
+  ORDER_CLIENT_USERS,
+  SEARCH_USERS,
 } from "../actions/index.js";
 
 const initialState = {
@@ -30,10 +34,59 @@ const initialState = {
   products: [],
   product: {},
   categories: [],
+  ordersByUser: [],
+  clientAdminUsers: [],
 };
 
 const rootReducer = (state = initialState, { type, payload }) => {
   switch (type) {
+    case GET_USER_BY_ID:
+      return {
+        ...state,
+        user: { ...payload },
+      };
+    case GET_CLIENT_ADMIN_USERS:
+      return {
+        ...state,
+        clientAdminUsers: [...payload],
+      };
+    case ORDER_CLIENT_USERS:
+      //eslint-disable-next-line
+      let orderUsers;
+      if (payload === "fullName_az") {
+        orderUsers = state.clientAdminUsers.sort((a, b) =>
+          a.fullName > b.fullName ? 1 : -1
+        );
+      } else if (payload === "fullName_za") {
+        orderUsers = state.clientAdminUsers.sort((a, b) =>
+          a.fullName < b.fullName ? 1 : -1
+        );
+      } else if (payload === "email_az") {
+        orderUsers = state.clientAdminUsers.sort((a, b) =>
+          a.email > b.email ? 1 : -1
+        );
+      } else if (payload === "email_za") {
+        orderUsers = state.clientAdminUsers.sort((a, b) =>
+          a.email < b.email ? 1 : -1
+        );
+      }
+      return {
+        ...state,
+        clientAdminUsers: [...orderUsers],
+      };
+    case SEARCH_USERS:
+      return {
+        ...state,
+        //clientAdminUsers=clientAdminUsers.filter((user) => user.fullName.toLowerCase().includes(payload.toLowerCase()))
+      };
+    //  case FILTER_CLIENT_USERS:
+    //   //eslint-disable-next-line
+    //   let filteredUsers;
+    //   return{
+    //     ...state,
+    //     //clientAdminUsers:state.clientAdminUsers.filter(e=>e.===payload)
+    //   }
+
     case DELETE_CATEGORY:
       return {
         ...state,
@@ -55,9 +108,10 @@ const rootReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
       };
-    case GET_ORDERS:
+    case GET_ORDERS_BY_USER:
       return {
         ...state,
+        ordersByUser: [...payload],
       };
     case DELETE_PRODUCT:
       return {
@@ -125,15 +179,10 @@ const rootReducer = (state = initialState, { type, payload }) => {
       };
 
     case LOGOUT_USER:
-
       return {
         ...state,
         user: {},
         UserSession: false,
-      };
-    case GET_SESSION:
-      return {
-        ...state,
       };
 
     default:

@@ -14,17 +14,17 @@ cloudinary.config({
 //All products
 const getAllProducts = async (clientAdminId) => {
   try {
-    const clientAdmin = await ClientAdmin.findById(clientAdminId)
-      .populate("catalogue") // Popula las categorías
-      // .populate("clientAdmin") // Popula el modelo ClientAdmin
+    const products = await Product.find({ clientAdmin: clientAdminId })
+      .populate("categories") // Popula las categorías
       .exec();
-
-    return clientAdmin.catalogue;
+    // const clientAdmin = await ClientAdmin.findById(clientAdminId)
+    //   // .populate("clientAdmin") // Popula el modelo ClientAdmin
+    // return clientAdmin.catalogue;
+    return products;
   } catch (error) {
     throw new Error(error.message);
   }
 };
-
 //By Name
 const getProductName = async (name, clientAdminId) => {
   try {

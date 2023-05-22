@@ -5,6 +5,7 @@ import logo from "../../assets/Logo.jpeg";
 import ilustration from "../../assets/ilustrationhome.png";
 import { Products, User, categoryProducts } from "../../data";
 import {IoMdAddCircleOutline} from "react-icons/io";
+import { Link } from "react-router-dom";
 
 const DashBoard = () => {
 
@@ -41,6 +42,7 @@ const DashBoard = () => {
               <p style={{ fontSize: 20 }}>
                 Improve your products in our section.
               </p>
+              <Link to={"/homecliente"}>
               <button
                 style={{
                   cursor: "pointer",
@@ -57,6 +59,7 @@ const DashBoard = () => {
               >
                 Go Site View.
               </button>
+                </Link>
             </div>
 
             <div style={{ width: "30%", height: "100%" }}>
