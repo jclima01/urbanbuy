@@ -24,9 +24,6 @@ const getAllCategory = async (clientAdminId) => {
 
 const createNewCategory =  async (clientAdminId, categoryName) => {
 
-  const category = await Category.findOne({categoryName})
-  if(category) throw new Error('category already exists');
-  
   const newCategory = new Category({categoryName, clientAdmin: clientAdminId});
   const savedCategory = await newCategory.save();
 
