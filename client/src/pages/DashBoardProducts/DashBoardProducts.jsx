@@ -14,6 +14,7 @@ const DashBoardProducts = () => {
 const clientAdminId = clientAdmin._id
   useEffect(() => {
     dispatch(getAllProducts(clientAdminId))
+    
   }, []);
 
   return (

@@ -1,6 +1,12 @@
+import { deleteProduct } from "../../../redux/actions"
+import { useDispatch} from 'react-redux'
 
 
 const DashBoardTableCardProducts = ({product}) => {
+
+
+  const dispatch = useDispatch()
+
   return (
     <tbody>
               <tr>
@@ -35,7 +41,7 @@ const DashBoardTableCardProducts = ({product}) => {
                 <td>
                   <button>view </button>
                   <button>Edit </button>
-                  <button>delete </button>
+                  <button onClick={()=> dispatch(deleteProduct(product._id)) }>delete </button>
                 </td>
               </tr>
             </tbody>
