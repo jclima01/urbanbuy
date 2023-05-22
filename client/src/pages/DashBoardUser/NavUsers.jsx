@@ -16,14 +16,7 @@ const DashBoardNavUsers = () => {
 
 
 
-    borderRadius: "15px 15px 0px 0px",
-    display: "flex",
-    flexDirection: "row",
-    flexWrap: "nowrap",
-    alignContent: "center",
-    justifyContent: "space-evenly",
-    alignItems: "center",
-  };
+ 
   const ordenamiento = {
     backgroundColor: "#EFE7E7",
     width: "150px",
@@ -92,7 +85,7 @@ const DashBoardNavUsers = () => {
             <option value="Filters">Filter 2</option>
             <option value="Filters">Filter 3</option>
           </select>
-        </div> */}
+        </div> 
         
       </div>
     </>

@@ -15,8 +15,8 @@ const DashBoardUsersConteiner = () => {
      
 return(
         <>
-         <DashBoardNavUsers  />
-         <DashBoardListUsers />
+         {/* <DashBoardNavUsers  /> */}
+         {/* <DashBoardListUsers /> */}
         </>
       
       ) 

@@ -1,10 +1,12 @@
-
 import "../DashBoardUser/ListUsers.css";
 import { useEffect, useState } from "react";
 // import DetailUsers from "../DashBoardUser/detailUsers";
 import { getClientAdminUsers, getUserById } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import avatar from "../../assets/avatar.jpg";
+
+
+
 const DashBoardListUsers = ({setActiveTab,activeTab,users,setActualPage}) => {
   const [selectedUser, setSelectedUser] = useState(null);
   const dispatch = useDispatch();
@@ -34,7 +36,7 @@ const DashBoardListUsers = ({setActiveTab,activeTab,users,setActualPage}) => {
                 </ul>
             
                <ul className='datosUser'>
-                 {users.map(user => <li className='liUsers' key={user._id}>
+                 {users && users.map(user => <li className='liUsers' key={user._id}>
                   <h6><img src={avatar} alt={user.fullName} width="50px" className='imgAvatar' /></h6>
                   <h6>{user.fullName}</h6>
                   <h6>{user.email}</h6>
@@ -46,12 +48,11 @@ const DashBoardListUsers = ({setActiveTab,activeTab,users,setActualPage}) => {
                   </ul>
                   
              </div>
-          ))}
-        </ul>
+          
       </div>
-
-    </div>
-  );
+  
+  )
+  
 };
 
 export default DashBoardListUsers;
