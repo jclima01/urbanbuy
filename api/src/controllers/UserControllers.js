@@ -78,11 +78,24 @@ const getClientAdminUsers = async (clientAdminId) => {
     throw new Error(error.message);
   }
 };
+const getUserById = async (userId) => {
+  try {
+    const user = await User.findById(userId)
+      .populate("orders") // Popula las categorías
+      // .populate("clientAdmin") // Popula el modelo ClientAdmin
+      .exec();
+
+    return user;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
 
 module.exports = {
   UserRegister,
   UserLogin,
   UserUpdate,
   UserDelete,
-  getClientAdminUsers
+  getClientAdminUsers,
+  getUserById
 };

@@ -5,6 +5,8 @@ const {
   UserUpdate,
   UserDelete,
   getClientAdminUsers,
+  getUserById
+  
 } = require("../controllers/UserControllers.js");
 
 const loginUserHandler = async (req, res) => {
@@ -62,6 +64,15 @@ const getClientAdminUsersHandler = async (req, res) => {
     res.status(400).json({ error: error.message });
   }
 };
+const   getUserHandler = async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const users = await getUserById(userId);
+    res.status(200).json(users);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
 
 module.exports = {
   loginUserHandler,
@@ -69,4 +80,6 @@ module.exports = {
   updateUserHandler,
   deleteUserHandler,
   getClientAdminUsersHandler,
+  getUserHandler
+
 };
