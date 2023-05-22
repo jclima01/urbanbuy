@@ -1,16 +1,20 @@
 import '../DashBoardUser/ListUsers.css'
 import { User } from '../../data.js';
+import { useEffect, useState } from 'react';
+
 
 
 const DashBoardListUsers = () => {
+  const [selectedUser, setSelectedUser] = useState(null);
 
-//   const listaUser = {};
-//   datos.forEach(User => {
-//     if (!listaUser[User.id]) {
-//       const li = document.createElement('li');
-//       li.textContent = `${User.avatar} - ${User.email}`;
-//       ul.appendChild(li);
-// }})
+  const hadleClick = (user) => {
+    setSelectedUser(user);
+  };
+
+  useEffect(() => {
+   
+  },[selectedUser]);
+console.log(selectedUser);
   return (
   
     <div className="contentAllUser">
@@ -29,17 +33,20 @@ const DashBoardListUsers = () => {
                   <li>Permision </li>
                   
                   <li>Options</li>
+
+                  <li></li>
                 </ul>
             </div> 
               <div >
                <ul className='datosUser'>
-                 {User.map(user => <li>
-                  <img src={user.avatar} alt={user.fullName} width="50px" />
+                 {User.map(user => <li className='liUsers'>
+                  <img src={user.avatar} alt={user.fullName} width="50px" className='imgAvatar' />
                   <h6>{user.fullName}</h6>
                   <h6>{user.email}</h6>
                   <h6>{user.permissions}</h6>
-                  <button>View User</button>
-                 </li>)}
+                  <button className='buttonView' onClick={() => hadleClick(user)}>View User</button>
+                  <h6 className='puntosUser'>···</h6>
+                  </li>)}
                   
                   </ul>
 
