@@ -1,20 +1,21 @@
 import { CiSearch } from "react-icons/ci";
 import DashBoardTableProducts from "../../Components/DashBoardTableProducts/DashBoardTableProducts";
-import { useEffect } from "react";
-import { useDispatch , useSelector} from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { getAllProducts } from "../../redux/actions";
+import DashBoardModalAddProducts from "../../Components/DashBoardModalAddProducts/DashBoardModalAddProducts";
 
 const DashBoardProducts = () => {
+  const dispatch = useDispatch();
+  const Products = useSelector((state) => state.products);
+  const clientAdmin = useSelector((state) => state.clientAdmin);
+  const clientAdminId = clientAdmin._id;
 
+  const [show, setShow] = useState(false);
+  const handleShow = () => setShow(true);
 
-  const dispatch = useDispatch()
-  const Products = useSelector(state => state.products)
-  console.log('Products', Products)
-  const clientAdmin = useSelector(state => state.clientAdmin)
-const clientAdminId = clientAdmin._id
   useEffect(() => {
-    dispatch(getAllProducts(clientAdminId))
-    
+    dispatch(getAllProducts(clientAdminId));
   }, []);
 
   return (
@@ -25,7 +26,7 @@ const clientAdminId = clientAdmin._id
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        overflow:'hidden'
+        overflow: "hidden",
       }}
     >
       <div
@@ -95,7 +96,7 @@ const clientAdminId = clientAdmin._id
               borderRadius: 20,
             }}
           >
-            <button>Add Product</button>
+            <button onClick={handleShow}>Add Product</button>
             <button>Add Categories</button>
           </div>
         </div>
@@ -184,12 +185,14 @@ const clientAdminId = clientAdmin._id
             width: "95%",
             padding: 15,
             overflow: "hidden",
-            overflowY: 'auto',
+            overflowY: "auto",
           }}
         >
-          <DashBoardTableProducts Products={Products}/>
+          <DashBoardTableProducts Products={Products} />
+          
         </div>
       </div>
+      <DashBoardModalAddProducts setShow={setShow} show={show} />
     </div>
   );
 };

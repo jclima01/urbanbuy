@@ -1,12 +1,17 @@
+import { useEffect, useState } from "react";
 import { deleteProduct } from "../../../redux/actions"
-import { useDispatch} from 'react-redux'
+import { useDispatch, useSelector} from 'react-redux'
 
 
 const DashBoardTableCardProducts = ({product}) => {
 
-
+  const [idReference, setIdReference] = useState('');
   const dispatch = useDispatch()
+  const Products = useSelector(state => state.products)
 
+  useEffect(() => {
+    dispatch(deleteProduct(idReference))
+  }, [idReference]);
   return (
     <tbody>
               <tr>
@@ -41,7 +46,7 @@ const DashBoardTableCardProducts = ({product}) => {
                 <td>
                   <button>view </button>
                   <button>Edit </button>
-                  <button onClick={()=> dispatch(deleteProduct(product._id)) }>delete </button>
+                  <button onClick={()=> setIdReference(product._id) }>delete </button>
                 </td>
               </tr>
             </tbody>

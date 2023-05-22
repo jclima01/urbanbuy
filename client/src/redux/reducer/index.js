@@ -76,6 +76,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
     case DELETE_PRODUCT:
       return {
         ...state,
+        products: state.products.filter(item => item._id !== payload)
       };
     case EDIT_PRODUCT:
       return {

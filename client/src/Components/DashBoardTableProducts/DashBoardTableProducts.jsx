@@ -3,6 +3,7 @@ import Table from 'react-bootstrap/esm/Table'
 import DashBoardTableCardProducts from './DashBoardTableCardProducts/DashBoardTableCardProducts'
 
 
+
 const DashBoardTableProducts = ({Products}) => {
 
 
