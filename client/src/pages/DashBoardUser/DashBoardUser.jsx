@@ -1,10 +1,14 @@
 import { useState } from "react";
 import "../DashBoardUser/DashBoardUser.css";
+
+import DashBoardUsersConteiner from "./DashBoardUsersConteiner";
+
 import DashBoardListUsers from "../DashBoardUser/ListUsers";
 import DashBoardNavUsers from "./NavUsers";
 import Pagination from "./Pagination/Pagination";
 import DashBoardUserDetail from "./DashBoardUserDetail";
 import { useSelector } from "react-redux";
+
 
 const DashBoardUser = () => {
   const navTab = {
@@ -39,10 +43,7 @@ const DashBoardUser = () => {
     marginRight: "8px",
   };
 
-  const ocultarDetalles = () => {
-    /* document.getElementById('overlay').style.display = 'none';
-  document.getElementById('detalles').style.display = 'none';*/
-  };
+
   const [activeTab, setActiveTab] = useState(true);
   const [actualPage, setActualPage] = useState(1);
   const [usersPerPage, setUsersPerPage] = useState(3);
@@ -78,8 +79,13 @@ const DashBoardUser = () => {
         <div className="contentDashboardUsers">
           {activeTab ? (
             <>
+
+              <DashBoardUsersConteiner/>
+              
+
               <DashBoardNavUsers />
               <DashBoardListUsers setActiveTab={setActiveTab} activeTab={activeTab} users={usersSlice} setActualPage={setActualPage}/>
+
             </>
           ) : (
             <DashBoardUserDetail />

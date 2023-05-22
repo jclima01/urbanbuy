@@ -1,3 +1,4 @@
+
 import "../DashBoardUser/ListUsers.css";
 import { useEffect, useState } from "react";
 // import DetailUsers from "../DashBoardUser/detailUsers";
@@ -21,38 +22,34 @@ const DashBoardListUsers = ({setActiveTab,activeTab,users,setActualPage}) => {
     dispatch(getClientAdminUsers(clientAdmin._id));
   }, []);
 
+
+  
+ 
   return (
     <div className="contentAllUser">
-      <div>
-        <ul className="listUl">
-          <li>Avatar </li>
-          <li>FullName </li>
-          <li>Email </li>
-          <li>Permision </li>
-          <li>Options</li>
-        </ul>
-      </div>
-      <div>
-        <ul className="datosUser">
-          {users.map((user) => (
-            <li className="liUsers" key={user._id}>
-              <img
-                src={avatar}
-                alt={user.fullName}
-                width="50px"
-                className="imgAvatar"
-              />
-              <h6>{user.fullName}</h6>
-              <h6>{user.email}</h6>
-              <h6>{user.permissions}</h6>
-              <div className="buttonView" onClick={() => handleClick(user)}>
-                User Detail
-              </div>
 
-            </li>
+            <div>            
+                <ul className='listUl'>
+                  <li>Avatar </li><li>FullName </li><li>Email </li><li>Permision </li><li>Options</li>
+                </ul>
+            
+               <ul className='datosUser'>
+                 {users.map(user => <li className='liUsers' key={user._id}>
+                  <h6><img src={avatar} alt={user.fullName} width="50px" className='imgAvatar' /></h6>
+                  <h6>{user.fullName}</h6>
+                  <h6>{user.email}</h6>
+                  <h6>{user.permissions}</h6>
+                  <button className='buttonView' onClick={() => handleClick(user)}>View User</button>
+                  
+                  </li>)}
+                  
+                  </ul>
+                  
+             </div>
           ))}
         </ul>
       </div>
+
     </div>
   );
 };

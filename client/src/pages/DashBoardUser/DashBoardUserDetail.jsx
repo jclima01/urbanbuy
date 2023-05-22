@@ -33,4 +33,5 @@ const DashBoardUserDetail = () => {
   );
 };
 
+
 export default DashBoardUserDetail;
