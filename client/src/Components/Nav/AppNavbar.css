@@ -26,3 +26,21 @@
    color: rgb(23, 32, 42);
    transform: scale(1.1);
 }
+
+.cart-button {
+   display: inline-block;
+   border-radius: 50%;
+   background-color: rgb(23, 32, 42);
+   color: white;
+   transition: background-color 0.3s;
+   padding: 5px;
+ }
+ 
+ .cart-button:hover {
+   background-color: white;
+   color: rgb(23, 32, 42);
+ }
+ 
+ .cart-button svg {
+   margin: 2px;
+ }

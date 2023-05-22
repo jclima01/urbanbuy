@@ -2,8 +2,10 @@ import React, { useState, useEffect } from "react";
 import { Navbar, Container } from "react-bootstrap";
 import logo from '../../Img/logo.png';
 import logo2 from '../../Img/logo2.png';
-import './AppNavbar.css'
-import {Link} from 'react-router-dom'
+import './AppNavbar.css';
+import {Link} from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 
 function AppNavbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -39,13 +41,16 @@ function AppNavbar() {
           <button className="button-nav">Comienza tu prueba hoy</button>
           </Link>
         </Navbar.Brand>
-        <div >
+        <div className="">
         <Link to='Signin'>
        <button className="SignIn">Sign in</button>
         </Link>
      <Link to='login'>
        <button className="SignIn">Login</button>
        </Link>
+        <Link to="/shoppingcart">
+            <FontAwesomeIcon icon={faShoppingCart} className="cart-button" />
+          </Link>
        </div>
       </Container>
     </Navbar>
