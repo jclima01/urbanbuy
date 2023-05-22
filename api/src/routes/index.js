@@ -16,7 +16,6 @@ mainRouter.use("/products", ProductRouter);
 mainRouter.use("/users", UsersRouter); // ver este Handler, se repite en la ruta /user  !!
 mainRouter.use("/admin", AdminRouter);
 mainRouter.use("/clientAdmin", ClientAdminRouter);
-mainRouter.use("/user", UsersRouter);
 mainRouter.use("/category", CategoryRoutes);
 mainRouter.use("/reviews", ReviewRouter);
 mainRouter.use("/orders", OrderRouter);

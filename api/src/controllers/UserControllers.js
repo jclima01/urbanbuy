@@ -1,4 +1,5 @@
 const User = require("../models/Users/User.js");
+const ClientAdmin = require("../models/Users/ClientAdmin.js");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 require("dotenv").config();
@@ -63,10 +64,23 @@ const UserDelete = async (userId) => {
     throw new Error(error.message);
   }
 };
+const getClientAdminUsers = async (clientAdminId) => {
+  try {
+    const clientAdmin = await ClientAdmin.findById(clientAdminId)
+      .populate("users") // Popula las categorías
+      // .populate("clientAdmin") // Popula el modelo ClientAdmin
+      .exec();
+
+    return clientAdmin.users;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
 
 module.exports = {
   UserRegister,
   UserLogin,
   UserUpdate,
   UserDelete,
+  getClientAdminUsers
 };

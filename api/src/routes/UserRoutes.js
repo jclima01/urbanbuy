@@ -5,10 +5,12 @@ const {
   registerUserHandler,
   updateUserHandler,
   deleteUserHandler,
+  getClientAdminUsersHandler
 } = require("../handlers/UserHandlers.js");
 
 usersRouter.post("/login", loginUserHandler);
 usersRouter.post("/register", registerUserHandler);
+usersRouter.get("/:clientAdminId", getClientAdminUsersHandler);
 
 //PUT
 
