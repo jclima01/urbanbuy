@@ -1,8 +1,14 @@
 import { useState } from "react";
 import "../DashBoardUser/DashBoardUser.css";
-import PaginadoUser from "./PaginadoUser";
-import DashBoardUserDetail from "./DashBoardUserDetail";
+
 import DashBoardUsersConteiner from "./DashBoardUsersConteiner";
+
+import DashBoardListUsers from "../DashBoardUser/ListUsers";
+import DashBoardNavUsers from "./NavUsers";
+import Pagination from "./Pagination/Pagination";
+import DashBoardUserDetail from "./DashBoardUserDetail";
+import { useSelector } from "react-redux";
+
 
 const DashBoardUser = () => {
   const navTab = {
@@ -39,32 +45,47 @@ const DashBoardUser = () => {
 
 
   const [activeTab, setActiveTab] = useState(true);
+  const [actualPage, setActualPage] = useState(1);
+  const [usersPerPage, setUsersPerPage] = useState(3);
   const handleView = () => {
     setActiveTab(!activeTab);
   };
+  const users = useSelector((state) => state.clientAdminUsers);
+
+  const lastUserIndex = actualPage * usersPerPage;
+
+  const firstUserIndex = lastUserIndex - usersPerPage;
+
+  const usersSlice = users.slice(firstUserIndex, lastUserIndex);
+
 
   return (
     <>
       <div className="contieneTodoDashboardUsers">
         <div className="navegateUser">
           <div style={navTab}>
-            <div style={tabActive} onClick={handleView}>
+            <div style={activeTab? tabActive: tab} onClick={handleView}>
               All Users
             </div>
-            <div style={tab} onClick={handleView}>
+            <div style={activeTab? tab: tabActive} onClick={handleView}>
               User Detail
             </div>
           </div>
           <div className="paginationUsers">
-            <PaginadoUser />
+        {  activeTab ? <Pagination usersPerPage={usersPerPage} numberOfUsers={users.length} setActualPage={setActualPage}/>:null}
           </div>
         </div>
 
         <div className="contentDashboardUsers">
           {activeTab ? (
             <>
+
               <DashBoardUsersConteiner/>
               
+
+              <DashBoardNavUsers />
+              <DashBoardListUsers setActiveTab={setActiveTab} activeTab={activeTab} users={usersSlice} setActualPage={setActualPage}/>
+
             </>
           ) : (
             <DashBoardUserDetail />

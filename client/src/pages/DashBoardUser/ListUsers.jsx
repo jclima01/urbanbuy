@@ -1,26 +1,33 @@
-import '../DashBoardUser/ListUsers.css'
-import {useState } from 'react';
-import DetailUsers from '../DashBoardUser/detailUsers';
-import avatar from '../../assets/avatar.jpg'
-import { useSelector } from 'react-redux';
-const DashBoardListUsers = () => {
+
+import "../DashBoardUser/ListUsers.css";
+import { useEffect, useState } from "react";
+// import DetailUsers from "../DashBoardUser/detailUsers";
+import { getClientAdminUsers, getUserById } from "../../redux/actions";
+import { useDispatch, useSelector } from "react-redux";
+import avatar from "../../assets/avatar.jpg";
+const DashBoardListUsers = ({setActiveTab,activeTab,users,setActualPage}) => {
   const [selectedUser, setSelectedUser] = useState(null);
-  const users=useSelector(state=>state.clientAdminUsers)
- 
+  const dispatch = useDispatch();
+  const clientAdmin = useSelector((state) => state.clientAdmin);
+  // const users = useSelector((state) => state.clientAdminUsers);
+
   const handleClick = (user) => {
     setSelectedUser(user);
-    console.log(user);
-   };
+    dispatch(getUserById(user._id));
+    setActiveTab(!activeTab);
+    setActualPage(1)
+  };
+
+  useEffect(() => {
+    dispatch(getClientAdminUsers(clientAdmin._id));
+  }, []);
+
 
   
  
   return (
-  
     <div className="contentAllUser">
-      {/* trabajas ema con los titulos de columnas
-                  -------------------------------
-                  lista de usuarios avatar ,
-                  boton para entrar al detalle */}
+
             <div>            
                 <ul className='listUl'>
                   <li>Avatar </li><li>FullName </li><li>Email </li><li>Permision </li><li>Options</li>
@@ -39,14 +46,12 @@ const DashBoardListUsers = () => {
                   </ul>
                   
              </div>
-             
+          ))}
+        </ul>
+      </div>
+
     </div>
   );
 };
-
-
-
-
-
 
 export default DashBoardListUsers;
