@@ -317,7 +317,7 @@ export const User = [
         avatar: avatar
       },
       {
-        id: `User-${8}`,
+        id: `User-${20}`,
         fullName: "Soledad Pastoruti",
         email: "SPtest@ibm.com",
         password: "123456",
@@ -326,7 +326,7 @@ export const User = [
         avatar: avatar
       },
       {
-        id: `User-${20}`,
+        id: `User-${21}`,
         fullName: "Claudia Tapia",
         email: "ClauTatest@ibm.com",
         password: "123456",

@@ -30,12 +30,20 @@ const DashBoardUser = () => {
     backgroundColor: "white",
     width: "max-content",
     padding: "11px 20px 11px 20px",
-    borderRadius: "10px",
-    color: "black",
-    border: "2px solid #ff7f2a",
-    marginRight: "8px",
-  };
+    borderRadius:"10px",
+    color:"black",
+    border:"2px solid #ff7f2a",
+    marginRight:"8px",
+    
+}
+
+const ocultarDetalles=()=> {
+ /* document.getElementById('overlay').style.display = 'none';
+  document.getElementById('detalles').style.display = 'none';*/
+}
+
   return (
+    <>
     <div className="contieneTodoDashboardUsers">
       <div className="navegateUser">
         <div style={navTab}>
@@ -52,7 +60,13 @@ const DashBoardUser = () => {
         {/* Ema */}
       </div>
     </div>
-  );
-};
+    <div id="overlay" style={{display:"none"}}></div>
+    <div id="detalles" style={{display:"none"}}>
+        {/* <!-- Contenido de los detalles del cliente --> */}
+        <button onClick={ocultarDetalles()}></button>
+    </div>
+    </>
+  )
+}
 
 export default DashBoardUser;
