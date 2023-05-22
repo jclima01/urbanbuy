@@ -7,7 +7,7 @@ import DashBoardAddProducts from "../../Components/DashBoardAddProducts/DashBoar
 
 const DashBoardProducts = () => {
   const dispatch = useDispatch();
-  const Products = useSelector((state) => state.products);
+  const products = useSelector((state) => state.products);
   const clientAdmin = useSelector((state) => state.clientAdmin);
   const clientAdminId = clientAdmin._id;
   const refTransitionAddProduct = useRef();
@@ -21,7 +21,7 @@ const DashBoardProducts = () => {
   useEffect(() => {
     dispatch(getAllProducts(clientAdminId));
   }, []);
-
+console.log(products);
   return (
     <div
       style={{
@@ -215,7 +215,7 @@ const DashBoardProducts = () => {
           }}
         >
 
-          <DashBoardTableProducts Products={Products} />
+          <DashBoardTableProducts products={products} />
 
         </div>
       </div>

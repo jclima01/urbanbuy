@@ -14,7 +14,7 @@ function UploadWidget({dataProducts , setdataProducts}) {
       function (error, result) {
         setdataProducts({
           ...dataProducts,
-          imageUrl : result.data.info.files[0].uploadInfo.secure_url
+          imageUrl : result?.data.info.files[0].uploadInfo.secure_url
         })
       }
     );

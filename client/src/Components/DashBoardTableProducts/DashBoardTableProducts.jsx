@@ -1,8 +1,7 @@
 import Table from "react-bootstrap/esm/Table";
 import DashBoardTableCardProducts from "./DashBoardTableCardProducts/DashBoardTableCardProducts";
 
-const DashBoardTableProducts = ({Products}) => {
-
+const DashBoardTableProducts = ({ products }) => {
   return (
     <Table
       striped="columns"
@@ -22,10 +21,11 @@ const DashBoardTableProducts = ({Products}) => {
           <th>Options</th>
         </tr>
       </thead>
-      {Products?.map((product) => (
-        <DashBoardTableCardProducts key={product._id} product={product} />
-      ))}
-
+      <tbody>
+        {products?.map((product) => (
+          <DashBoardTableCardProducts key={product._id} product={product} />
+        ))}
+      </tbody>
     </Table>
   );
 };
