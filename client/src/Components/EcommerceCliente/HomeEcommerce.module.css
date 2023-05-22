@@ -5,3 +5,15 @@
     background-color: rgb(220, 221, 223);
     padding: 20px;
 }
+.containerCard{
+    width: 70%;
+   margin-left: 330px;
+   margin-top: -280px;
+}
+.img{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+
+}
