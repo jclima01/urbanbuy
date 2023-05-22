@@ -56,13 +56,17 @@ const DashBoardNavUsers = () => {
   return (
     <>
       <div style={contentOrderSearchAndFilters}>
+
         <div className="contentOrdenamiento">
+
           <select style={ordenamiento}>
             <option value="az">A-Z</option>
             <option value="za">Z-A</option>
           </select>
         </div>
+
         <div className="contentSearchUsers">
+
           <div className=" input-container-navbar" style={inputSearchUser}>
             <input
               type="text"
@@ -72,12 +76,15 @@ const DashBoardNavUsers = () => {
             <hr />
             <CiSearch size={25} cursor={"pointer"} />
           </div>
+
         </div>
+
         <div className="filters">
           <select style={filters}>
             <option value="Filters">Filters</option>
           </select>
         </div>
+        
       </div>
     </>
   );
