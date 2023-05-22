@@ -6,13 +6,17 @@ import logo from "../../assets/Logo.jpeg";
 import ilustration from "../../assets/ilustrationhome.png";
 import { Products, User, categoryProducts } from "../../data";
 import { IoMdAddCircleOutline } from "react-icons/io";
+import { useSelector } from "react-redux";
 
 
 const DashBoard = () => {
+
+  const clientAdmin = useSelector(state => state.clientAdmin)
   let arrUser = [];
   for (let i = 0; i < 3; i++) {
     arrUser.push(User[i]);
   }
+
   return (
     <div className="vh-100 w-100 d-flex justify-content-center overflow-hidden ">
       <div className="contianer-home">
@@ -80,7 +84,7 @@ const DashBoard = () => {
               />
             </div>
           </div>
-          {/* <div className="freaturedSettion2">
+          <div className="freaturedSettion2">
             <div className=" d-flex w-100 h-75 gap-4  align-items-center">
               <div className="container-image-logo">
                 <img src={logo} alt="" />
@@ -94,9 +98,9 @@ const DashBoard = () => {
               <h4>Today</h4>
               <h4>$ 350.000 CLP</h4>
             </div>
-          </div> */}
+          </div>
         </div>
-        {/* <div
+        <div
           style={{
             display: "flex",
             alignItems: "center",
@@ -257,7 +261,7 @@ const DashBoard = () => {
               </div>
             </div>
           </div>
-        </div> */}
+        </div>
       </div>
     </div>
   );

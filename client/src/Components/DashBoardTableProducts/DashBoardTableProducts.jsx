@@ -24,7 +24,7 @@ const DashBoardTableProducts = ({Products}) => {
           <th>Options</th>
         </tr>
       </thead>
-      {products?.map((product) => (
+      {Products?.map((product) => (
         <DashBoardTableCardProducts key={product._id} product={product} />
       ))}
 
