@@ -156,8 +156,8 @@ export const User = [
       },
       {
         id: `User-${2}`,
-        fullName: "Ezequiel Irace2",
-        email: "test@ibm.com",
+        fullName: "Maria Becerra",
+        email: "MaBetest@ibm.com",
         password: "123456",
         permissions: "user",
         order: [],
@@ -165,13 +165,175 @@ export const User = [
       },
       {
         id: `User-${3}`,
-        fullName: "Ezequiel Irace3",
+        fullName: "Soledad Acuña",
+        email: "SoAtest@ibm.com",
+        password: "123456",
+        permissions: "user",
+        order: [],
+        avatar: avatar
+      },
+      {
+        id: `User-${4}`,
+        fullName: "Fernando Aguilar",
         email: "test@ibm.com",
         password: "123456",
         permissions: "user",
         order: [],
         avatar: avatar
-      }
+      },
+      {
+        id: `User-${5}`,
+        fullName: "Silvio Soldan",
+        email: "SilSoltest@ibm.com",
+        password: "123456",
+        permissions: "user",
+        order: [],
+        avatar: avatar
+      },
+      {
+        id: `User-${6}`,
+        fullName: "Armando Paredes",
+        email: "APtest@ibm.com",
+        password: "123456",
+        permissions: "user",
+        order: [],
+        avatar: avatar
+      },
+      {
+        id: `User-${7}`,
+        fullName: "Camilo Sexto",
+        email: "CStest@ibm.com",
+        password: "123456",
+        permissions: "user",
+        order: [],
+        avatar: avatar
+      },
+      {
+        id: `User-${8}`,
+        fullName: "Soledad Pastoruti",
+        email: "SPtest@ibm.com",
+        password: "123456",
+        permissions: "user",
+        order: [],
+        avatar: avatar
+      },
+      {
+        id: `User-${9}`,
+        fullName: "Claudia Tapia",
+        email: "ClauTatest@ibm.com",
+        password: "123456",
+        permissions: "user",
+        order: [],
+        avatar: avatar
+      },
+      {
+        id: `User-${10}`,
+        fullName: "Mariano Martinez",
+        email: "MMtest@ibm.com",
+        password: "123456",
+        permissions: "user",
+        order: [],
+        avatar: avatar
+      },
+      {
+        id: `User-${11}`,
+        fullName: "Cristiano Ronaldo",
+        email: "CR7test@ibm.com",
+        password: "123456",
+        permissions: "user",
+        order: [],
+        avatar: avatar
+      },
+      {
+        id: `User-${12}`,
+        fullName: "Juan Roman Riquelme",
+        email: "JRRtest@ibm.com",
+        password: "123456",
+        permissions: "user",
+        order: [],
+        avatar: avatar
+      },
+      {
+        id: `User-${13}`,
+        fullName: "Ezequiel Irace",
+        email: "test@ibm.com",
+        password: "123456",
+        permissions: "user",
+        order: [],
+        avatar: avatar
+      },
+      {
+        id: `User-${14}`,
+        fullName: "Maria Becerra",
+        email: "MaBetest@ibm.com",
+        password: "123456",
+        permissions: "user",
+        order: [],
+        avatar: avatar
+      },
+      {
+        id: `User-${15}`,
+        fullName: "Soledad Acuña",
+        email: "SoAtest@ibm.com",
+        password: "123456",
+        permissions: "user",
+        order: [],
+        avatar: avatar
+      },
+      {
+        id: `User-${16}`,
+        fullName: "Fernando Aguilar",
+        email: "test@ibm.com",
+        password: "123456",
+        permissions: "user",
+        order: [],
+        avatar: avatar
+      },
+      {
+        id: `User-${17}`,
+        fullName: "Silvio Soldan",
+        email: "SilSoltest@ibm.com",
+        password: "123456",
+        permissions: "user",
+        order: [],
+        avatar: avatar
+      },
+      {
+        id: `User-${18}`,
+        fullName: "Armando Paredes",
+        email: "APtest@ibm.com",
+        password: "123456",
+        permissions: "user",
+        order: [],
+        avatar: avatar
+      },
+      {
+        id: `User-${19}`,
+        fullName: "Camilo Sexto",
+        email: "CStest@ibm.com",
+        password: "123456",
+        permissions: "user",
+        order: [],
+        avatar: avatar
+      },
+      {
+        id: `User-${8}`,
+        fullName: "Soledad Pastoruti",
+        email: "SPtest@ibm.com",
+        password: "123456",
+        permissions: "user",
+        order: [],
+        avatar: avatar
+      },
+      {
+        id: `User-${20}`,
+        fullName: "Claudia Tapia",
+        email: "ClauTatest@ibm.com",
+        password: "123456",
+        permissions: "user",
+        order: [],
+        avatar: avatar
+      },
 ]
 
 
@@ -187,6 +349,40 @@ export const order = [
     adrress: "sanatiago,chile test dirrecion",
     total: 500,
   },
+  {
+    id: `Order-${2}`,
+    fullName: "Ezequiel Irace",
+    status: "process",
+    payment: false,
+    permissions: "user",
+    email: "test@ibm.com",
+    cart: [],
+    adrress: "sanatiago,chile test dirrecion",
+    total: 600
+  },
+  {
+      id: `Order-${1}`,
+      fullName: "Ezequiel Irace",
+      status: "process",
+      payment: false,
+      permissions: "user",
+      email: "test@ibm.com",
+      cart: [],
+      adrress: "sanatiago,chile test dirrecion",
+      total: 1600,
+    },
+    {
+      id: `Order-${1}`,
+      fullName: "Ezequiel Irace",
+      status: "process",
+      payment: false,
+      permissions: "user",
+      email: "test@ibm.com",
+      cart: [],
+      adrress: "sanatiago,chile test dirrecion",
+      total: 560,
+    }
+  
 ];
 
 /*  clients or User  */
