@@ -1,19 +1,17 @@
 import { CiSearch } from "react-icons/ci";
 import DashBoardTableProducts from "../../Components/DashBoardTableProducts/DashBoardTableProducts";
 import { useEffect } from "react";
-import { useDispatch , useSelector} from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getAllProducts } from "../../redux/actions";
 
 const DashBoardProducts = () => {
-
-
-  const dispatch = useDispatch()
-  const Products = useSelector(state => state.products)
-  const clientAdmin = useSelector(state => state.clientAdmin)
-const clientAdminId = clientAdmin._id
- console.log(clientAdmin)
+  const dispatch = useDispatch();
+  const products = useSelector((state) => state.products);
+  const clientAdmin = useSelector((state) => state.clientAdmin);
+  const clientAdminId = clientAdmin._id;
+  console.log(clientAdmin);
   useEffect(() => {
-    dispatch(getAllProducts(clientAdminId))
+    dispatch(getAllProducts(clientAdminId));
   }, []);
 
   return (
@@ -24,7 +22,7 @@ const clientAdminId = clientAdmin._id
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        overflow:'hidden'
+        overflow: "hidden",
       }}
     >
       <div
@@ -183,10 +181,10 @@ const clientAdminId = clientAdmin._id
             width: "95%",
             padding: 15,
             overflow: "hidden",
-            overflowY: 'auto',
+            overflowY: "auto",
           }}
         >
-          <DashBoardTableProducts Products={Products}/>
+          <DashBoardTableProducts products={products} />
         </div>
       </div>
     </div>

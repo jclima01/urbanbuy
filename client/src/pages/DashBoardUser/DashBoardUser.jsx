@@ -80,11 +80,8 @@ const DashBoardUser = () => {
           {activeTab ? (
             <>
 
-              <DashBoardUsersConteiner/>
+              <DashBoardUsersConteiner setActiveTab={setActiveTab} activeTab={activeTab} users={usersSlice} setActualPage={setActualPage}/>
               
-
-              <DashBoardNavUsers />
-              <DashBoardListUsers setActiveTab={setActiveTab} activeTab={activeTab} users={usersSlice} setActualPage={setActualPage}/>
 
             </>
           ) : (

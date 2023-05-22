@@ -5,11 +5,11 @@ import { useEffect, useState } from "react";
 import { getClientAdminUsers, getUserById } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import avatar from "../../assets/avatar.jpg";
-const DashBoardListUsers = ({setActiveTab,activeTab,users,setActualPage}) => {
+const DashBoardListUsers = ({setActiveTab,activeTab,setActualPage}) => {
   const [selectedUser, setSelectedUser] = useState(null);
   const dispatch = useDispatch();
   const clientAdmin = useSelector((state) => state.clientAdmin);
-  // const users = useSelector((state) => state.clientAdminUsers);
+  const users = useSelector((state) => state.clientAdminUsers);
 
   const handleClick = (user) => {
     setSelectedUser(user);
@@ -46,10 +46,9 @@ const DashBoardListUsers = ({setActiveTab,activeTab,users,setActualPage}) => {
                   </ul>
                   
              </div>
-          ))}
-        </ul>
-      </div>
-
+          
+        
+     
     </div>
   );
 };
