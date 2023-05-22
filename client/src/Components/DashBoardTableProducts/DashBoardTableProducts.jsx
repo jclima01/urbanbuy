@@ -3,8 +3,6 @@ import DashBoardTableCardProducts from "./DashBoardTableCardProducts/DashBoardTa
 
 const DashBoardTableProducts = ({Products}) => {
 
-
-
   return (
     <Table
       striped="columns"

@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
 import { deleteProduct } from "../../../redux/actions"
-import { useDispatch, useSelector} from 'react-redux'
+import { useDispatch} from 'react-redux'
 
 
 const DashBoardTableCardProducts = ({product}) => {
 
   const [idReference, setIdReference] = useState('');
   const dispatch = useDispatch()
-  const Products = useSelector(state => state.products)
 
   useEffect(() => {
     dispatch(deleteProduct(idReference))
