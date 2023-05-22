@@ -11,20 +11,22 @@ import DashBoardShipping from "./pages/DashBoardShipping/DashBoardShipping";
 import DashBoardSettings from "./pages/DashBoardSettings/DashBoardSettings";
 import Home from "./Components/Home/Home";
 import FormLogin from "./Components/FormLogin/FormLogin";
-import SignIn from "./Components/SignIn/SignIn"
+import SignIn from "./Components/SignIn/SignIn";
 import Card from "./Components/Card/Card";
 import HomeEcommerce from "./Components/EcommerceCliente/HomeEcommerce";
+import ProductDetail from "./Components/ProductDetail/ProductDetail";
+import ProductDetailContainer from "./Components/EcommerceCliente/ProductDetailContainer";
 
 function App() {
   // const dispatch = useDispatch()
   const session = useSelector((state) => state.UserSession);
-// useEffect(() => {
-//   dispatch(getSession())
-// }, [session])
+  // useEffect(() => {
+  //   dispatch(getSession())
+  // }, [session])
 
   return (
     <>
-      {session? (
+      {session ? (
         <div className="d-flex vh-100 vw-100 ">
           <SideBarDashBoard />
           <div className="d-flex flex-column">
@@ -45,7 +47,8 @@ function App() {
                 path="/dashBoard/Settings"
                 element={<DashBoardSettings />}
               />
-              
+              <Route path="/homecliente" element={<HomeEcommerce />} />
+              <Route path="/product/:productId" element={<ProductDetail />} />
             </Routes>
           </div>
         </div>
@@ -54,13 +57,11 @@ function App() {
           <Route path="/" element={<Home />} /> {/* LadingPage */}
           <Route path="/login" element={<FormLogin />} />
           <Route path="/SignIn" element={<SignIn />} />
-
-          <Route path="/homecliente" element={<HomeEcommerce />} />
+          {/* <Route path="/homecliente" element={<HomeEcommerce />} /> */}
         </Routes>
       )}
     </>
   );
-
 }
 
 export default App;

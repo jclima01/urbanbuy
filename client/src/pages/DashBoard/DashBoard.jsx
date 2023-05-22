@@ -1,13 +1,15 @@
+import { Link } from "react-router-dom";
 import DashBoardCardCategory from "../../Components/DashBoardCardCategory/DashBoardCardCategory";
 import DashBoardCardProducts from "../../Components/DashBoardCardProducts/DashBoardCardProducts";
 import DashBoardCardsUser from "../../Components/DashBoardCardsUser/DashBoardCardsUser";
 import logo from "../../assets/Logo.jpeg";
 import ilustration from "../../assets/ilustrationhome.png";
 import { Products, User, categoryProducts } from "../../data";
-import {IoMdAddCircleOutline} from "react-icons/io";
+import { IoMdAddCircleOutline } from "react-icons/io";
+import { useSelector } from "react-redux";
 
 const DashBoard = () => {
-
+  const clientAdmin = useSelector((state) => state.clientAdmin);
   return (
     <div className="vh-100 w-100 d-flex justify-content-center overflow-hidden ">
       <div className="contianer-home">
@@ -36,27 +38,29 @@ const DashBoard = () => {
                   fontWeight: 400,
                 }}
               >
-                Hello <strong>Henry Carrilo, </strong>
+                Hello <strong>{clientAdmin.fullName} </strong>
               </h1>
               <p style={{ fontSize: 20 }}>
                 Improve your products in our section.
               </p>
-              <button
-                style={{
-                  cursor: "pointer",
-                  fontSize: 20,
-                  width: 200,
-                  marginTop: 15,
-                  padding: 15,
-                  borderRadius: 15,
-                  background: "#ff7f2a",
-                  border: "none",
-                  color: "white",
-                  fontWeight: 400,
-                }}
-              >
-                Go Site View.
-              </button>
+              <Link to="/homeCliente">
+                <button
+                  style={{
+                    cursor: "pointer",
+                    fontSize: 20,
+                    width: 200,
+                    marginTop: 15,
+                    padding: 15,
+                    borderRadius: 15,
+                    background: "#ff7f2a",
+                    border: "none",
+                    color: "white",
+                    fontWeight: 400,
+                  }}
+                >
+                  Go Site View.
+                </button>
+              </Link>
             </div>
 
             <div style={{ width: "30%", height: "100%" }}>
@@ -73,7 +77,7 @@ const DashBoard = () => {
               />
             </div>
           </div>
-          <div className="freaturedSettion2">
+          {/* <div className="freaturedSettion2">
             <div className=" d-flex w-100 h-75 gap-4  align-items-center">
               <div className="container-image-logo">
                 <img src={logo} alt="" />
@@ -87,9 +91,9 @@ const DashBoard = () => {
               <h4>Today</h4>
               <h4>$ 350.000 CLP</h4>
             </div>
-          </div>
+          </div> */}
         </div>
-        <div
+        {/* <div
           style={{
             display: "flex",
             alignItems: "center",
@@ -246,7 +250,7 @@ const DashBoard = () => {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

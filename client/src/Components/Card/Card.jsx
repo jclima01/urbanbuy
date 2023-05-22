@@ -1,17 +1,16 @@
 import React from "react";
-import { Products } from "../../data";
 import { Link } from "react-router-dom";
 import styles from "./Card.module.css";
 import { FaStar } from "react-icons/fa";
 
-const Card = () => {
+const Card = ({products}) => {
   return (
     <div className={styles.cardContainer}>
       {" "}
-      {Products.map((product) => (
+      {products.map((product) => (
         <Link
-          to={`/product/${product.id}`}
-          key={product.id}
+          to={`/product/${product._id}`}
+          key={product._id}
           className={styles.productLink}
         >
           {" "}
