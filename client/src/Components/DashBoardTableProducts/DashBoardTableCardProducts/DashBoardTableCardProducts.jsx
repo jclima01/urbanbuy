@@ -18,9 +18,13 @@ const DashBoardTableCardProducts = ({product}) => {
                       width: 30,
                       height: 30,
                       borderRadius: "50%",
+                      overflow:'hidden'
+                      , display:'flex',
+                      alignItems:'center',
+                      justifyContent:'center'
                     }}
                   >
-                    <img src={product?.imageUrl} alt="" />
+                    <img src={product?.imageUrl} alt=""  style={{width:100, height:100, objectFit:'contain'}}/>
                   </div>
                 </td>
                 <td>{product?.productName}</td>
