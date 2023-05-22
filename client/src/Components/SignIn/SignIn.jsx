@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import logo2 from "../../Img/logo2.png";
 import style from "./SignIn.module.css";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch} from 'react-redux';
-import {registerClientAdmin} from '../../redux/actions';
+import { useDispatch } from "react-redux";
+import { registerClientAdmin } from "../../redux/actions";
 
 const SignIn = () => {
   //   const [username, setUsername] = useState("");
@@ -14,6 +14,8 @@ const SignIn = () => {
   const [emailError, setEmailError] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [confirmPasswordError, setConfirmPasswordError] = useState("");
+  const [fullName, setFullName] = useState("");
+  const [fullNameError, setFullNameError] = useState("");
 
   //   const handleUsernameChange = (e) => {
   //     const value = e.target.value;
@@ -21,8 +23,8 @@ const SignIn = () => {
   //     setUsername(value);
   //   };
 
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleEmailChange = (e) => {
     const value = e.target.value;
@@ -34,6 +36,10 @@ const SignIn = () => {
     const value = e.target.value;
     setPassword(value);
     validatePassword(value);
+  };
+  const handleFullNameChange = (e) => {
+    const value = e.target.value;
+    setFullName(value);
   };
 
   const validatePassword = (value) => {
@@ -56,11 +62,9 @@ const SignIn = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const fullname = "User"
-    console.log(fullname, email, password)
-    dispatch(registerClientAdmin( fullname, email , password)).finally(()=> {
-      navigate('/login')
-    } )
+    dispatch(registerClientAdmin(fullName, email, password)).finally(() => {
+      navigate("/login");
+    });
   };
 
   const validateConfirmPassword = (value) => {
@@ -71,17 +75,17 @@ const SignIn = () => {
     }
   };
 
-  //   const validateUsername = (value) => {
-  //     const hasUppercase = /[A-Z]/.test(value);
-  //     const hasNumber = /\d/.test(value);
-  //     if (!hasUppercase || !hasNumber) {
-  //       setUserError(
-  //         "El nombre de usuario debe contener al menos una mayúscula y un número."
-  //       );
-  //     } else {
-  //       setUserError("");
-  //     }
-  //   };
+  const validateFullName = (value) => {
+    const hasUppercase = /[A-Z]/.test(value);
+    const hasNumber = /\d/.test(value);
+    if (!hasUppercase || !hasNumber) {
+      setUserError(
+        "El nombre de usuario debe contener al menos una mayúscula y un número."
+      );
+    } else {
+      setUserError("");
+    }
+  };
 
   const validateEmail = (value) => {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -101,17 +105,17 @@ const SignIn = () => {
         <div className={style.form}>
           <h2 className={style.h2}>Registrarse</h2>
           <form onSubmit={handleSubmit} className={style.form}>
-            {/* <label htmlFor="username">Usuario:</label>
+            <label htmlFor="fullName">Usuario:</label>
             <input
               type="text"
-              id="username"
-              name="username"
+              id="fullName"
+              name="fullName"
               placeholder="Ingrese su nombre de usuario"
-              value={username}
-              onChange={handleUsernameChange}
+              value={fullName}
+              onChange={handleFullNameChange}
               required
               className={style.input}
-            /> */}
+            />
             <label htmlFor="correo electronico">Correo electrónico:</label>
             <input
               type="email"

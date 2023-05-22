@@ -82,7 +82,7 @@ const Filter = () => {
   }
 
   return (
-    <div style={{width:'20vw', marginLeft:'30px'}}>
+    <div style={{width: "300px"}}>
    
       <div className="form-group">
         <label htmlFor="categoria">Categoría:</label>

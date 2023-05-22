@@ -2,7 +2,7 @@
 
 const DashBoardSettings = () => {
   return (
-    <h1>DashBoardSettings</h1>
+    <h1>Upcoming...</h1>
   )
 }
 

@@ -214,7 +214,9 @@ const DashBoardProducts = () => {
             overflowY: "auto",
           }}
         >
+
           <DashBoardTableProducts Products={Products} />
+
         </div>
       </div>
     </div>

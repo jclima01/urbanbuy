@@ -12,7 +12,7 @@ const NavBarDashBoard = () => {
               Today <strong>DashBoard</strong>
             </h1>
 
-            <div className=" input-container-navbar">
+            {/* <div className=" input-container-navbar">
               <input
                 type="text"
                 placeholder="Search..."
@@ -20,9 +20,9 @@ const NavBarDashBoard = () => {
               />
               <hr />
               <CiSearch size={25} cursor={"pointer"} />
-            </div>
+            </div> */}
 
-            <div className="d-flex  w-25  justify-content-evenly align-items-center ">
+            {/* <div className="d-flex  w-25  justify-content-evenly align-items-center ">
               <div className="notifications">
                 <IoIosNotificationsOutline
                   size={30}
@@ -44,7 +44,7 @@ const NavBarDashBoard = () => {
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
     </div>

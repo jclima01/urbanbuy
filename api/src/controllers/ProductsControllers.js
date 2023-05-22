@@ -14,11 +14,11 @@ cloudinary.config({
 //All products
 const getAllProducts = async (clientAdminId) => {
   try {
-    const products = await Product.find({ clientAdmin: clientAdminId });
+    const products = await Product.find({ clientAdmin: clientAdminId })
+    .populate("categories") // Popula las categorías
+    .exec();
     // const clientAdmin = await ClientAdmin.findById(clientAdminId)
-    //   .populate("catalogue") // Popula las categorías
     //   // .populate("clientAdmin") // Popula el modelo ClientAdmin
-    //   .exec();
     // return clientAdmin.catalogue;
     return products;
   } catch (error) {

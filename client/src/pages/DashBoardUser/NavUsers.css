@@ -1,0 +1,41 @@
+.contentSearchUsers{
+    width: 60%;
+}
+.contentOrderSearchAndFilters{
+    height: 100px;
+    border-radius: 15px 15px 0px 0px;
+    display: flex;
+    flex-flow: row nowrap;
+    place-content: center space-evenly;
+    align-items: center;
+}
+.ordenamientoUsers{
+    background-color: rgb(239, 231, 231);
+    min-width: 160px;
+    border-radius: 10px;
+    padding: 15px;
+    border: none;
+    text-align: center;
+    color: rgb(71, 70, 70);
+}
+.inputSearchUser{
+    display: flex;
+    background-color: rgb(239, 231, 231);
+    align-items: center;
+    justify-content: center;
+    border-radius: 15px;
+    padding: 7px;
+    width: 100%;
+    color: rgb(71, 70, 70);
+}
+.filters{
+    background-color: rgb(255, 127, 42);
+    width: 150px;
+    border-radius: 10px;
+    padding: 15px;
+    border: none;
+    color: white;
+    text-align: center;
+    align-items: center;
+
+}
