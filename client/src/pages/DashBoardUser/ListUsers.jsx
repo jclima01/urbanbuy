@@ -1,12 +1,14 @@
 import '../DashBoardUser/ListUsers.css'
-import { User } from '../../data.js';
 import { useEffect, useState } from 'react';
 import DetailUsers from '../DashBoardUser/detailUsers';
-
-
+import { getClientAdminUsers } from '../../redux/actions';
+import {useDispatch, useSelector} from "react-redux"
+import avatar from '../../assets/avatar.jpg'
 const DashBoardListUsers = () => {
   const [selectedUser, setSelectedUser] = useState(null);
-  
+  const dispatch = useDispatch()
+const clientAdmin = useSelector(state => state.clientAdmin)
+const users = useSelector(state => state.clientAdminUsers)
 
   const handleClick = (user) => {
     setSelectedUser(user);
@@ -15,9 +17,9 @@ const DashBoardListUsers = () => {
   
   
   useEffect(() => {
-   
-  },[selectedUser]);
-console.log(selectedUser);
+   dispatch(getClientAdminUsers(clientAdmin._id))
+  },[]);
+
   return (
   
     <div className="contentAllUser">
@@ -42,8 +44,8 @@ console.log(selectedUser);
             </div> 
               <div >
                <ul className='datosUser'>
-                 {User.map(user => <li className='liUsers'>
-                  <img src={user.avatar} alt={user.fullName} width="50px" className='imgAvatar' />
+                 {users.map(user => <li className='liUsers'>
+                  <img src={avatar} alt={user.fullName} width="50px" className='imgAvatar' />
                   <h6>{user.fullName}</h6>
                   <h6>{user.email}</h6>
                   <h6>{user.permissions}</h6>
