@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import DashBoardCardCategory from "../../Components/DashBoardCardCategory/DashBoardCardCategory";
 import DashBoardCardProducts from "../../Components/DashBoardCardProducts/DashBoardCardProducts";
 import DashBoardCardsUser from "../../Components/DashBoardCardsUser/DashBoardCardsUser";
@@ -41,6 +42,7 @@ const DashBoard = () => {
               <p style={{ fontSize: 20 }}>
                 Improve your products in our section.
               </p>
+              <Link to ="/homeCliente">
               <button
                 style={{
                   cursor: "pointer",
@@ -57,6 +59,8 @@ const DashBoard = () => {
               >
                 Go Site View.
               </button>
+              
+              </Link>
             </div>
 
             <div style={{ width: "30%", height: "100%" }}>
