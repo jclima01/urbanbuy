@@ -8,7 +8,6 @@ import DashBoardAddProducts from "../../Components/DashBoardAddProducts/DashBoar
 const DashBoardProducts = () => {
   const dispatch = useDispatch();
   const Products = useSelector((state) => state.products);
-  console.log('Products', Products)
   const clientAdmin = useSelector((state) => state.clientAdmin);
   const clientAdminId = clientAdmin._id;
   const refTransitionAddProduct = useRef();
