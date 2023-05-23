@@ -2,11 +2,12 @@ import { useState } from "react";
 import UploadWidget from "../UploadWidget/UploadWidget";
 import Form from "react-bootstrap/Form";
 import { MdOutlineKeyboardDoubleArrowRight } from "react-icons/md";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { postNewProduct } from "../../redux/actions";
 
 const DashBoardAddProducts = ({ setIsActive, clientAdminId }) => {
   const dispatch = useDispatch();
+  const categorie = useSelector((state) => state.categories);
 
   const [dataProducts, setdataProducts] = useState({
     productName: "",
@@ -18,6 +19,7 @@ const DashBoardAddProducts = ({ setIsActive, clientAdminId }) => {
     rating: 0,
   });
 
+  console.log(dataProducts);
   const {
     productName,
     description,
@@ -116,8 +118,32 @@ const DashBoardAddProducts = ({ setIsActive, clientAdminId }) => {
         </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Categories</Form.Label>
-          <Form.Select>
-            <option> Categories</option>
+          <Form.Select
+            onChange={(e) => {
+              e.preventDefault();
+
+
+              if (dataProducts.categories.includes(e.target.value) ){
+                setdataProducts({
+                  ...dataProducts,
+                  categories: [...categories],
+                });
+              } else {
+                setdataProducts({
+                  ...dataProducts,
+                  categories: [...categories, e.target.value],
+                });
+              }
+            }}
+          >
+            <option > Seleccionar</option>
+            {categorie?.map((category) => (
+              <>
+                <option key={category._id} value={category._id}>
+                  {category.categoryName}
+                </option>
+              </>
+            ))}
           </Form.Select>
         </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicEmail">

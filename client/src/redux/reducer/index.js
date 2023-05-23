@@ -84,6 +84,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
     case DELETE_CATEGORY:
       return {
         ...state,
+        categories: state.categories.filter(item=> item._id !== payload)
       };
     case EDIT_CATEGORY:
       return {
@@ -97,6 +98,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
     case ADD_CATEGORY:
       return {
         ...state,
+        categories: [...state.categories , payload]
       };
     case POST_ORDER:
       return {

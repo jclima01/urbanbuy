@@ -4,10 +4,10 @@ import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllProducts } from "../../redux/actions";
 import DashBoardAddProducts from "../../Components/DashBoardAddProducts/DashBoardAddProducts";
+import DashBoardModalAddCategories from "../../Components/DashBoardModalAddCategories/DashBoardModalAddCategories";
 
 const DashBoardProducts = () => {
   const dispatch = useDispatch();
-  const Products = useSelector((state) => state.products);
   const clientAdmin = useSelector((state) => state.clientAdmin);
   const clientAdminId = clientAdmin._id;
   const refTransitionAddProduct = useRef();
@@ -17,6 +17,9 @@ const DashBoardProducts = () => {
   const handleActiveAddProduct = (isActive) => {
     isActive ? setIsActive(0) : setIsActive(900);
   };
+
+  const [show, setShow] = useState(false);
+  const handleShow = () => setShow(true);
 
   useEffect(() => {
     dispatch(getAllProducts(clientAdminId));
@@ -63,7 +66,13 @@ const DashBoardProducts = () => {
           }}
           ref={refTransitionAddProduct}
         >
-          <DashBoardAddProducts setIsActive={setIsActive} clientAdminId={clientAdminId} />
+          <DashBoardAddProducts
+            setIsActive={setIsActive}
+            clientAdminId={clientAdminId}
+          />
+
+          <DashBoardModalAddCategories show={show} setShow={setShow} />
+
         </div>
         <div
           style={{
@@ -84,7 +93,9 @@ const DashBoardProducts = () => {
               borderRadius: 20,
             }}
           >
-            <h1>test</h1>
+            <span>
+              <strong>Total </strong> Products
+            </span>
           </div>
           <div
             style={{
@@ -123,7 +134,7 @@ const DashBoardProducts = () => {
             <button onClick={() => handleActiveAddProduct(isActive)}>
               Add Product
             </button>
-            <button>Add Categories</button>
+            <button onClick={handleShow}>Set Categories</button>
           </div>
         </div>
         <div
@@ -214,9 +225,7 @@ const DashBoardProducts = () => {
             overflowY: "auto",
           }}
         >
-
-          <DashBoardTableProducts Products={Products} />
-
+          <DashBoardTableProducts />
         </div>
       </div>
     </div>

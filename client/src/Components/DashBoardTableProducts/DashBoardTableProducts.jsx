@@ -1,7 +1,11 @@
 import Table from "react-bootstrap/esm/Table";
 import DashBoardTableCardProducts from "./DashBoardTableCardProducts/DashBoardTableCardProducts";
+import { useSelector } from "react-redux";
 
-const DashBoardTableProducts = ({Products}) => {
+const DashBoardTableProducts = () => {
+
+
+ const Products = useSelector(state=> state.products)
 
   return (
     <Table
@@ -23,7 +27,16 @@ const DashBoardTableProducts = ({Products}) => {
         </tr>
       </thead>
       {Products?.map((product) => (
-        <DashBoardTableCardProducts key={product._id} product={product} />
+        <DashBoardTableCardProducts 
+        key={product._id}
+        productName={product.productName}
+        categories={product.categories}
+        imageUrl={product.imageUrl}
+        stocks={product.stocks}
+        price={product.price}
+        rating={product.rating}
+        id={product._id}
+          />
       ))}
 
     </Table>
