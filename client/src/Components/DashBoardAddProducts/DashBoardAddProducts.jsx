@@ -8,6 +8,7 @@ import { postNewProduct } from "../../redux/actions";
 const DashBoardAddProducts = ({ setIsActive, clientAdminId }) => {
   const dispatch = useDispatch();
   const categorie = useSelector((state) => state.categories);
+  const [Category, setsetCategory] = useState('');
 
   const [dataProducts, setdataProducts] = useState({
     productName: "",
@@ -196,7 +197,7 @@ const DashBoardAddProducts = ({ setIsActive, clientAdminId }) => {
           <Form.Select
             onChange={(e) => {
               e.preventDefault();
-
+              setsetCategory(e.target.value);
 
               if (dataProducts.categories.includes(e.target.value) ){
                 setdataProducts({
@@ -211,7 +212,7 @@ const DashBoardAddProducts = ({ setIsActive, clientAdminId }) => {
               }
             }}
           >
-            <option > Seleccionar</option>
+            <option value={Category}>Selecionar</option>
             {categorie?.map((category) => (
               <>
                 <option key={category._id} value={category._id}>
