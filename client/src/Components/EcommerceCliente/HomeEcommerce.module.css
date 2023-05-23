@@ -1,3 +1,8 @@
+.fondo{
+  background-image: url(../../Img/fondoecommerce.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
 .h2 {
   display: inline-block;
   justify-content: center;

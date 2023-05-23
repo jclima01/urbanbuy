@@ -6,19 +6,25 @@ import ilustration from "../../assets/ilustrationhome.png";
 import { Products, User, categoryProducts } from "../../data";
 import { Link } from "react-router-dom";
 import { IoMdAddCircleOutline } from "react-icons/io";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getAllProducts } from "../../redux/actions";
 
 const DashBoard = () => {
 
   const clientAdmin = useSelector(state => state.clientAdmin)
-
+const products = useSelector(state => state.products)
+const productsSlice = products.slice(0,4)
   const clientAdminStorage = JSON.parse(localStorage.getItem('clientAdmin')) ?? false
   const adminStorage = clientAdminStorage ? clientAdminStorage : false
   let arrUser = [];
   for (let i = 0; i < 3; i++) {
     arrUser.push(User[i]);
   }
-
+const dispatch = useDispatch()
+  useEffect(() => {
+dispatch(getAllProducts(clientAdmin._id))
+  })
   return (
     <div className="vh-100 w-100 d-flex justify-content-center overflow-hidden ">
       <div className="contianer-home">
@@ -31,7 +37,7 @@ const DashBoard = () => {
                 marginLeft: 30,
               }}
             >
-              <p
+              {/* <p
                 style={{
                   padding: 5,
                   background: "#eee6e6cc",
@@ -41,7 +47,8 @@ const DashBoard = () => {
                 }}
               >
                 Apr 11 2023 3:00 pm{" "}
-              </p>
+              </p> */}
+              <p></p>
               <h1
                 style={{
                   fontWeight: 400,
@@ -87,7 +94,7 @@ const DashBoard = () => {
               />
             </div>
           </div>
-          <div className="freaturedSettion2">
+          {/* <div className="freaturedSettion2">
             <div className=" d-flex w-100 h-75 gap-4  align-items-center">
               <div className="container-image-logo">
                 <img src={logo} alt="" />
@@ -101,7 +108,7 @@ const DashBoard = () => {
               <h4>Today</h4>
               <h4>$ 350.000 CLP</h4>
             </div>
-          </div>
+          </div> */}
         </div>
         <div
           style={{
@@ -121,7 +128,7 @@ const DashBoard = () => {
               alignItems: "center",
             }}
           >
-            <div
+            {/* <div
               style={{
                 width: "100%",
                 height: "25px",
@@ -137,9 +144,9 @@ const DashBoard = () => {
               <p style={{ cursor: "pointer", padding: 10, margin: 10 }}>
                 View all
               </p>
-            </div>
+            </div> */}
 
-            <div
+            {/* <div
               style={{
                 height: 130,
                 width: "98%",
@@ -171,7 +178,7 @@ const DashBoard = () => {
                   />
                 </div>
               )}
-            </div>
+            </div> */}
             <div
               style={{
                 width: "100%",
@@ -188,7 +195,7 @@ const DashBoard = () => {
                 </h4>
               </div>
 
-              <div style={{ cursor: "pointer" }}>View all</div>
+              {/* <div style={{ cursor: "pointer" }}>View all</div> */}
             </div>
 
             <div
@@ -198,14 +205,15 @@ const DashBoard = () => {
                 height: "100%",
                 alignItems: "end",
                 justifyContent: "space-around",
+               
               }}
             >
-              {Products?.map((item) => (
-                <DashBoardCardProducts key={item.id} Products={item} />
+              {productsSlice?.map((item) => (
+                <DashBoardCardProducts key={item.id} products={item} />
               ))}
             </div>
           </div>
-          <div
+          {/* <div
             style={{
               height: "100%",
               width: "35%",
@@ -263,7 +271,7 @@ const DashBoard = () => {
                 ))}
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

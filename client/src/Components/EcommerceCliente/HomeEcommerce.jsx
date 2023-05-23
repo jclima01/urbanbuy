@@ -104,11 +104,11 @@ function HomeEcommerce() {
   console.log("filterProduct: ", filteredProduct);
 
   return (
-    <div>
+    <div className={style.fondo}>
       {/* <NavEcommerce/> */}
       <SliderEcommerceClient products={products} />
 
-      <h2 className={style.h2}>PRODUCTOS </h2>
+      {/* <h2 className={style.h2}>PRODUCTOS</h2> */}
 
       {/* Filter */}
       <div className={style.filterSearchContainer}>
