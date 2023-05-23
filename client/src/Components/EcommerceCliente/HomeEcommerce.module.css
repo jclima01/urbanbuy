@@ -10,17 +10,18 @@
     animation: highlight 10s infinite alternate; /* Agrega la animación */
     margin-left: 650px;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);
+    margin-bottom: 50px;
   }
   
   @keyframes highlight {
     0% {
-      background-color: rgb(243, 156, 18);
+      background-color: rgb(245, 175, 62);
     }
     50% {
       background-color: rgb(255, 115, 0); /* Define el color de fondo destacado */
     }
     100% {
-      background-color: rgb(243, 156, 18);
+      background-color: rgb(248, 186, 86);
     }
   }
   
@@ -35,4 +36,27 @@
     align-items: center;
     width: 100%;
 
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+ 
+}
+
+.filterSearchContainer {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 10px;
+ 
+}
+
+.filterContainer {
+  margin-right: 10px;
+}
+
+.searchContainer {
+  margin-left: auto;
 }
