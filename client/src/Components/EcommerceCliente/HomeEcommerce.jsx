@@ -31,10 +31,13 @@ function HomeEcommerce() {
   )
 
   const filterProduct = (e) => {
+    if(e.target.value === ''){
+      setFilteredProducts(products)
+    } else {
     const filterRating = e.target.value
     const filterResult = products.filter(p => p.rating == filterRating)  
     setFilteredProducts(filterResult)
-  }
+  }}
 
   const handleSearch = (searchTerm) => {
      setSearchTerm(searchTerm)
@@ -47,6 +50,17 @@ function HomeEcommerce() {
     }
   }
 
+  /*Paginado*/
+  const [productsPerPage] = useState(2); // Number of products to display per page
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const indexOfLastProduct = currentPage * productsPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+  const currentProducts = filteredProduct.slice(indexOfFirstProduct, indexOfLastProduct);
+  const paginate = (pageNumber) => {
+      setCurrentPage(pageNumber);
+  };
+
   console.log('filterProduct: ', filteredProduct)
   
   return (
@@ -55,6 +69,7 @@ function HomeEcommerce() {
       <SliderEcommerceClient products={products} />
 
       <h2 className={style.h2}>PRODUCTOS </h2>
+<<<<<<< HEAD
 
       <div className={style.filterSearchContainer}>
         <div className={style.filterContainer}>
@@ -74,6 +89,36 @@ function HomeEcommerce() {
       </div>
 
       <Card products={filteredProduct} />
+=======
+      {/*<Filter filter={products} onFilterChange={filterProduct}/>*/}
+       <p>Filtrar por rating: </p>
+      <select onChange={filterProduct}>
+        <option value='' default selected>Elegir rating</option>
+        {rating.map(r => {
+          return <option key={r} value={r}>{r}</option>
+        })}
+      </select>
+
+      <Card products={currentProducts} />
+  
+      {/* Pagination */}
+      <div>
+        {filteredProduct.length > productsPerPage && (
+          <ul className="pagination">
+            {Array(Math.ceil(filteredProduct.length / productsPerPage))
+              .fill()
+              .map((_, index) => (
+                <li key={index} className={`page-item ${currentPage === index + 1 ? 'active' : ''}`}>
+                  <button onClick={() => paginate(index + 1)} className="page-link">
+                    {index + 1}
+                  </button>
+                </li>
+              ))}
+          </ul>
+        )}
+      </div>
+
+>>>>>>> 8c0223f4bc2fc5c3d207bc782d5367ed7aa03246
     </div>
   )
 }
