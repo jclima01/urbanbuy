@@ -6,12 +6,13 @@ import { getAllProducts } from "../../redux/actions";
 import DashBoardAddProducts from "../../Components/DashBoardAddProducts/DashBoardAddProducts";
 import DashBoardModalAddCategories from "../../Components/DashBoardModalAddCategories/DashBoardModalAddCategories";
 
+import styles from "./DashBoardProducts.module.css"
 const DashBoardProducts = () => {
   const dispatch = useDispatch();
   const clientAdmin = useSelector((state) => state.clientAdmin);
   const clientAdminId = clientAdmin._id;
   const refTransitionAddProduct = useRef();
-
+  const products = useSelector((state) => state.products);
   const [isActive, setIsActive] = useState(900);
 
   const handleActiveAddProduct = (isActive) => {
@@ -72,8 +73,8 @@ const DashBoardProducts = () => {
           />
 
           <DashBoardModalAddCategories show={show} setShow={setShow} />
-
         </div>
+
         <div
           style={{
             height: "25%",
@@ -85,19 +86,24 @@ const DashBoardProducts = () => {
             padding: 30,
           }}
         >
+
           <div
             style={{
               width: 400,
               height: 130,
               boxShadow: "4px 3px 10px 4px #4644442b",
               borderRadius: 20,
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              textAlign: "center",
             }}
           >
-            <span>
-              <strong>Total </strong> Products
+            <span style={{fontSize: "26px"}}>
+              <strong>Total </strong> Products {products.length}
             </span>
           </div>
-          <div
+          {/* <div
             style={{
               width: 400,
               height: 130,
@@ -117,7 +123,7 @@ const DashBoardProducts = () => {
             }}
           >
             <h1>test</h1>
-          </div>
+          </div> */}
 
           <div
             style={{
@@ -125,16 +131,17 @@ const DashBoardProducts = () => {
               flexDirection: "column",
               alignItems: "end",
               justifyContent: "center",
+              gap:30,
               padding: 10,
               width: 200,
               height: 160,
               borderRadius: 20,
             }}
           >
-            <button onClick={() => handleActiveAddProduct(isActive)}>
+            <button className={styles.button1} onClick={() => handleActiveAddProduct(isActive)}>
               Add Product
             </button>
-            <button onClick={handleShow}>Set Categories</button>
+            <button className={styles.button1} onClick={handleShow}>Set Categories</button>
           </div>
         </div>
         <div
@@ -157,7 +164,7 @@ const DashBoardProducts = () => {
               padding: 5,
             }}
           >
-            <div
+            {/* <div
               style={{
                 display: "flex",
                 justifyContent: "center",
@@ -174,8 +181,8 @@ const DashBoardProducts = () => {
               >
                 Order
               </span>
-            </div>
-            <div
+            </div> */}
+            {/* <div
               style={{
                 display: "flex",
                 justifyContent: "center",
@@ -192,8 +199,8 @@ const DashBoardProducts = () => {
               >
                 filter
               </span>
-            </div>
-            <div
+            </div> */}
+            {/* <div
               style={{
                 width: "80%",
                 height: "100%",
@@ -210,10 +217,10 @@ const DashBoardProducts = () => {
                 className="inputDashboard-Products"
               />
               <CiSearch size={23} />
-            </div>
-            <div style={{ width: "20%" }}>
+            </div> */}
+            {/* <div style={{ width: "20%" }}>
               <span>- 1 2 3 4 5 -</span>
-            </div>
+            </div> */}
           </div>
         </div>
         <div
