@@ -31,10 +31,13 @@ function HomeEcommerce() {
   )
 
   const filterProduct = (e) => {
+    if(e.target.value === ''){
+      setFilteredProducts(products)
+    } else {
     const filterRating = e.target.value
     const filterResult = products.filter(p => p.rating == filterRating)  
     setFilteredProducts(filterResult)
-  }
+  }}
 
   const handleSearch = (searchTerm) => {
      setSearchTerm(searchTerm)
@@ -46,6 +49,17 @@ function HomeEcommerce() {
       setFilteredProducts(products)
     }
   }
+
+  /*Paginado*/
+  const [productsPerPage] = useState(2); // Number of products to display per page
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const indexOfLastProduct = currentPage * productsPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+  const currentProducts = filteredProduct.slice(indexOfFirstProduct, indexOfLastProduct);
+  const paginate = (pageNumber) => {
+      setCurrentPage(pageNumber);
+  };
 
   console.log('filterProduct: ', filteredProduct)
   
@@ -59,14 +73,31 @@ function HomeEcommerce() {
       {/*<Filter filter={products} onFilterChange={filterProduct}/>*/}
        <p>Filtrar por rating: </p>
       <select onChange={filterProduct}>
-        <option value='' disabled default selected>Elegir rating</option>
+        <option value='' default selected>Elegir rating</option>
         {rating.map(r => {
           return <option key={r} value={r}>{r}</option>
         })}
       </select>
-   
-      <Card products={filteredProduct} />
-     
+
+      <Card products={currentProducts} />
+  
+      {/* Pagination */}
+      <div>
+        {filteredProduct.length > productsPerPage && (
+          <ul className="pagination">
+            {Array(Math.ceil(filteredProduct.length / productsPerPage))
+              .fill()
+              .map((_, index) => (
+                <li key={index} className={`page-item ${currentPage === index + 1 ? 'active' : ''}`}>
+                  <button onClick={() => paginate(index + 1)} className="page-link">
+                    {index + 1}
+                  </button>
+                </li>
+              ))}
+          </ul>
+        )}
+      </div>
+
     </div>
   )
 }
