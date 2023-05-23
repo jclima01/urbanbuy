@@ -33,7 +33,7 @@ export const getUserById = (userId) => {
       );
       return dispatch({
         type: GET_USER_BY_ID,
-        payload: data,
+        payload: data
       });
     };
     // eslint-disable-next-line no-unreachable
@@ -49,7 +49,7 @@ export const getClientAdminUsers = (clientAdminId) => {
       );
       return dispatch({
         type: GET_CLIENT_ADMIN_USERS,
-        payload: data,
+        payload: data
       });
     };
     // eslint-disable-next-line no-unreachable
@@ -163,9 +163,7 @@ export const postOrder = (
 export const getOrdersByUser = (userId) => {
   try {
     return async function (dispatch) {
-      const { data } = await axios.get(
-        `http://localhost:2800/orders/${userId}`
-      );
+      const { data } = await axios.get(`http://localhost:2800/orders/${userId}`);
       return dispatch({
         type: GET_ORDERS_BY_USER,
         payload: data,
@@ -179,10 +177,12 @@ export const getOrdersByUser = (userId) => {
 export const deleteProduct = (productId) => {
   try {
     return async function (dispatch) {
-      await axios.delete(`http://localhost:2800/products/delete/${productId}`);
+      const { data } = await axios.delete(
+        `http://localhost:2800/products/${productId}`
+      );
       return dispatch({
         type: DELETE_PRODUCT,
-        payload: productId,
+        payload: data,
       });
     };
     // eslint-disable-next-line no-unreachable
@@ -384,10 +384,10 @@ export const registerClientAdmin = (fullName, email, password) => {
     throw new Error(err.message);
   }
 };
-export const registerUser = (email, password, clientAdminId) => {
+export const registerUser = (email, password) => {
   try {
     return async function (dispatch) {
-      await axios.post(`http://localhost:6800/users/register/${clientAdminId}`, {
+      await axios.post("http://localhost:6800/admin/register", {
         email,
         password,
       });
@@ -459,7 +459,7 @@ export const logOutUser = () => {
 export const orderClientUsers=(orden)=>{
   return{
       type:ORDER_CLIENT_USERS,
-      payload:orden
+      payload: orden
     }
 }
 
