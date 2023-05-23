@@ -15,6 +15,7 @@ function HomeEcommerce() {
   const clientAdminId = clientAdmin._id
   const [filteredProduct, setFilteredProducts] = useState([])
   const [searchTerm, setSearchTerm] = useState([])
+  const [orderedProduct, setOrderedProduct] = useState([])
 
   useEffect(() =>{
     dispatch(getAllProducts(clientAdminId))
@@ -30,6 +31,7 @@ function HomeEcommerce() {
     new Set(products.map(p => p.rating))
   )
 
+  {/* Filter */}
   const filterProduct = (e) => {
     if(e.target.value === ''){
       setFilteredProducts(products)
@@ -37,23 +39,37 @@ function HomeEcommerce() {
     const filterRating = e.target.value
     const filterResult = products.filter(p => p.rating == filterRating)  
     setFilteredProducts(filterResult)
+    paginate(1)
   }}
 
+  {/* Search */}
   const handleSearch = (searchTerm) => {
      setSearchTerm(searchTerm)
     if(searchTerm.length > 0){
      const searchResult = filteredProduct.filter(p => p.productName.toLowerCase().includes(searchTerm))
-    setFilteredProducts(searchResult)
-    }
-    else {
+     setFilteredProducts(searchResult)
+    } else {
       setFilteredProducts(products)
     }
   }
 
-  /*Paginado*/
-  const [productsPerPage] = useState(2); // Number of products to display per page
-  const [currentPage, setCurrentPage] = useState(1);
+  {/* Order */}
+  const handleOrder = (order) =>{
+    let orderResult = [] 
+    if(order === 'price'){
+      orderResult = [...filteredProduct].sort((a, b) => a.price > b.price ? 1 : -1)
+      console.log('price', orderResult)
+    } else if (order === 'name'){
+      orderResult = [...filteredProduct].sort((a, b) => a.productName.localeCompare(b.productName))
+      console.log('name', orderResult)
+    }
+     setFilteredProducts(orderResult)
+     paginate(1)
+  }
 
+  /*Paginado*/
+  const [productsPerPage] = useState(4); // Number of products to display per page
+  const [currentPage, setCurrentPage] = useState(1);
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
   const currentProducts = filteredProduct.slice(indexOfFirstProduct, indexOfLastProduct);
@@ -69,7 +85,6 @@ function HomeEcommerce() {
       <SliderEcommerceClient products={products} />
 
       <h2 className={style.h2}>PRODUCTOS </h2>
-<<<<<<< HEAD
 
       <div className={style.filterSearchContainer}>
         <div className={style.filterContainer}>
@@ -89,15 +104,24 @@ function HomeEcommerce() {
       </div>
 
       <Card products={filteredProduct} />
-=======
+
       {/*<Filter filter={products} onFilterChange={filterProduct}/>*/}
-       <p>Filtrar por rating: </p>
+      {/* Filter */}
+      <p>Filtrar por rating: </p>
       <select onChange={filterProduct}>
         <option value='' default selected>Elegir rating</option>
         {rating.map(r => {
           return <option key={r} value={r}>{r}</option>
         })}
       </select>
+
+      {/* Order */}
+      <div>
+        <p>Ordenar por:</p>
+        <button onClick={() => handleOrder('price')}>Precio</button>
+        <button onClick={() => handleOrder('name')}>Nombre</button>
+      </div>
+
 
       <Card products={currentProducts} />
   
@@ -118,7 +142,7 @@ function HomeEcommerce() {
         )}
       </div>
 
->>>>>>> 8c0223f4bc2fc5c3d207bc782d5367ed7aa03246
+
     </div>
   )
 }
