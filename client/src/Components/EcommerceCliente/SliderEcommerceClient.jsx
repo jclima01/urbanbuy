@@ -1,25 +1,17 @@
-import React from 'react';
 import Carousel from 'react-bootstrap/Carousel';
+import style from './SliderEcommerceClient.module.css';
 
-
-import imagenCl3 from '../../Img/imagenCl3.jpg'
-import portadaC2 from '../../Img/portadaC2.jpg'
-import portadaC3 from '../../Img/portadaC3.jpg'
-
-const SliderComponent = () => {
+const SliderComponent = ({ products }) => {
   return (
-    <div style={{marginTop:'-20px'}}>
-    <Carousel>
-      <Carousel.Item>
-        <img className="d-block w-100" src={imagenCl3} alt="Image 1" />
-      </Carousel.Item>
-      <Carousel.Item>
-        <img className="d-block w-100" src={portadaC2} alt="Image 2" />
-      </Carousel.Item>
-      <Carousel.Item>
-        <img className="d-block w-100" src={portadaC3} alt="Image 3" />
-      </Carousel.Item>
-    </Carousel>
+    <div className={style.slider}>
+      <h3 className={style.sliderTitle}>Productos destacados</h3>
+      <Carousel>
+        {products.map((product, index) => (
+          <Carousel.Item key={product._id}>
+            <img className={style.img} src={product.imageUrl} alt={product.productName} />
+          </Carousel.Item>
+        ))}
+      </Carousel>
     </div>
   );
 };

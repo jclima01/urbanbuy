@@ -1,6 +1,6 @@
 import { FaSearchPlus } from "react-icons/fa";
 
-const DashBoardCardProducts = ({ Products }) => {
+const DashBoardCardProducts = ({ products }) => {
   return (
     <div
       style={{
@@ -27,7 +27,7 @@ const DashBoardCardProducts = ({ Products }) => {
         }}
       >
         <img
-          src={Products?.imageUrl}
+          src={products?.imageUrl}
           style={{
             width: "100%",
             height: "100%",
@@ -40,35 +40,43 @@ const DashBoardCardProducts = ({ Products }) => {
           color: "black",
           fontSize: "20px",
           textAlign: "center",
-          
         }}
       >
-        {Products?.productName}
+        {products?.productName}
       </h1>
       <div
         style={{
           display: "flex",
-          width:'100%',
+          width: "100%",
           justifyContent: "space-evenly",
-          alignItems:'center',
-          gap: 10
+          alignItems: "center",
+          gap: 10,
         }}
       >
-        <h4>$ 300</h4>
-        <div style={{
-            display:'flex',
-            justifyContent:'center',
-            alignItems:'center',
-            width: '30px',
-            height: '30px',
-            backgroundColor:'orange',
+        <h1
+          style={{
+            color: "black",
+            fontSize: "20px",
+            textAlign: "center",
+          }}
+        >
+          ${products?.price}
+        </h1>
+        {/* <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            width: "30px",
+            height: "30px",
+            backgroundColor: "orange",
             marginBottom: 20,
-            borderRadius: '50%',
-            cursor:'pointer'
-        }}>
-        <FaSearchPlus  />
-        </div>
-        
+            borderRadius: "50%",
+            cursor: "pointer",
+          }}
+        >
+          <FaSearchPlus />
+        </div> */}
       </div>
     </div>
   );

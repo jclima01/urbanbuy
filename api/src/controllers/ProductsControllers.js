@@ -15,8 +15,9 @@ cloudinary.config({
 const getAllProducts = async (clientAdminId) => {
   try {
     const products = await Product.find({ clientAdmin: clientAdminId })
-    .populate("categories") // Popula las categorías
-    .exec();
+      .populate("categories") // Popula las categorías
+      .exec();
+
     // const clientAdmin = await ClientAdmin.findById(clientAdminId)
     //   // .populate("clientAdmin") // Popula el modelo ClientAdmin
     // return clientAdmin.catalogue;
@@ -25,7 +26,6 @@ const getAllProducts = async (clientAdminId) => {
     throw new Error(error.message);
   }
 };
-
 //By Name
 const getProductName = async (name, clientAdminId) => {
   try {

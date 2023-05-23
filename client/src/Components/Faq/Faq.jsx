@@ -1,9 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import style from "./Faq.module.css";
 
 function Faq() {
+  useEffect(() => {
+    const accordions = document.querySelectorAll(".accordion-button");
+    accordions.forEach((accordion) => {
+      accordion.addEventListener("click", () => {
+        accordion.classList.toggle("active");
+      });
+    });
+  }, []);
+
   return (
     <div className={style.container}>
       <div>
@@ -20,7 +29,7 @@ function Faq() {
                 aria-controls="flush-collapseOne"
                 style={{ fontSize: "18px", color: "rgb(214, 137, 16)" }}
               >
-                Puedo empezar en Henry sin conocimientos previos?
+                Es seguro que mis clientes compren desde mi e-commerce?
               </button>
             </h5>
             <div
@@ -29,14 +38,7 @@ function Faq() {
               data-bs-parent="#accordionFlushExample"
             >
               <div className="accordion-body">
-                Para iniciar en la carrera NO hace falta tener conocimientos
-                previos, será super importante que te apoyes en cada paso del
-                proceso en tu comunidad. Ten en cuenta que tendrás una vez por
-                semana una clase especial, donde un/os TAs 'Teaching Assistant'
-                estarán para asesorarte en toda tu instancia dentro de Henry.
-                <br />
-                Tendrás a tu disposición los videos de cada clase para que
-                puedas verlos en el momento que sea necesario.
+                UrbanBuy nos preocupamos por tu seguridad al comprar en línea. Nuestra plataforma está diseñada para garantizar que tus datos estén protegidos, tus transacciones sean seguras y puedas disfrutar de una experiencia de compra confiable. Estamos comprometidos en brindarte un entorno seguro y confiable para que puedas comprar con tranquilidad y confianza.
               </div>
             </div>
           </div>
@@ -51,7 +53,7 @@ function Faq() {
                 aria-controls="flush-collapseTwo"
                 style={{ fontSize: "18px", color: "rgb(214, 137, 16)" }}
               >
-                ¿Es un requisito la edad para comenzar?
+                Cuento con asesores?
               </button>
             </h5>
             <div
@@ -60,11 +62,7 @@ function Faq() {
               data-bs-parent="#accordionFlushExample"
             >
               <div className="accordion-body">
-                Para comenzar a cursar en Henry tan solo tienes que ser mayor de
-                18 años, ese es el único requisito.
-                <br />
-                <br /> Si eres mayor de 18 años, ¡ya puedes dar el primer paso
-                sin miedo!
+                Puedes comunicarte por correo electrónico, también puedes contactarnos a través de nuestra dirección de correo electrónico de soporte. Simplemente envíanos tu consulta o problema, y nuestro equipo de soporte responderá lo más pronto posible para brindarte la ayuda necesaria.
               </div>
             </div>
           </div>
@@ -79,8 +77,7 @@ function Faq() {
                 aria-controls="flush-collapseThree"
                 style={{ fontSize: "18px", color: "rgb(214, 137, 16)" }}
               >
-                ¿Qué pasa si tengo alguna dificultad que no me permita continuar
-                la cursada?
+                Puedo incrementar mis ventas?
               </button>
             </h5>
             <div
@@ -89,13 +86,7 @@ function Faq() {
               data-bs-parent="#accordionFlushExample"
             >
               <div className="accordion-body">
-                En caso de que tengas algún tipo de inconveniente durante la
-                cursada que te impida seguir con la misma, no te preocupes, puedes
-                comunicar cualquier tipo de situación a @AlumnosHenry desde
-                tu slack o bien enviando un correo electrónico. Ellos te darán las pautas de
-                los pasos a seguir.
-                <br />
-                <br /> ¡Ten en cuenta que la comunicación es una parte importante!
+                UrbanBuy es una plataforma de ventas en línea establecida y confiable. Al unirse a nuestra plataforma, los clientes obtienen acceso a una base de usuarios existente y a una audiencia más amplia. Esto significa que sus productos y negocios tendrán una mayor visibilidad frente a potenciales compradores, lo que puede resultar en un aumento en las ventas y, por ende, en las ganancias.
               </div>
             </div>
           </div>

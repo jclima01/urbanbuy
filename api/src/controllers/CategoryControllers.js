@@ -1,10 +1,9 @@
-const Category = require('../models/Category');
+const Category = require("../models/Category");
 const ClientAdmin = require("../models/Users/ClientAdmin");
-
-
 
 //GET funcionando correctamente
 const getAllCategory = async (clientAdminId) => {
+
     try {
       // const clientAdmin = await ClientAdmin.findById(clientAdminId)
       const categories = await Category.find({clientAdmin: clientAdminId})
@@ -20,25 +19,25 @@ const getAllCategory = async (clientAdminId) => {
     };
 
 
-//POST terminado 
 
-const createNewCategory =  async (clientAdminId, categoryName) => {
 
-  const newCategory = new Category({categoryName, clientAdmin: clientAdminId});
+const createNewCategory = async (clientAdminId, categoryName) => {
+  const newCategory = new Category({
+    categoryName,
+    clientAdmin: clientAdminId,
+  });
+
   const savedCategory = await newCategory.save();
 
   const clientAdmin = await ClientAdmin.findById(clientAdminId);
   clientAdmin.categories.push(savedCategory._id);
   await clientAdmin.save();
   return savedCategory;
-
 };
-
 
 //PUT
 
 const setCategory = async (categoryName, categoryId) => {
-
   const category = await Category.findByIdAndUpdate(
     categoryId,
     { categoryName },
@@ -46,25 +45,22 @@ const setCategory = async (categoryName, categoryId) => {
   );
 
   if (!category) {
-    throw new Error('Categoría no encontrada');
+    throw new Error("Categoría no encontrada");
   }
 
   return category;
 };
 
-
 //DELETE funcionando
 
 const deleteCategory = async (categoryId) => {
-
-  const categoryDelete = await Category.findOneAndDelete({_id: categoryId})
+  const categoryDelete = await Category.findOneAndDelete({ _id: categoryId });
   return "category deleted";
 };
 
-
 module.exports = {
-    getAllCategory,
-    createNewCategory,
-    deleteCategory,
-    setCategory
-}
+  getAllCategory,
+  createNewCategory,
+  deleteCategory,
+  setCategory,
+};

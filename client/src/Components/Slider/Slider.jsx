@@ -35,8 +35,8 @@ function Slider() {
           </Carousel>
         </Col>
         <Col xs={12} md={6}>
-          <h1 style={{fontSize:'60px', color:'black'}} >Conoce nuestras Opciones</h1>
-          <button className='button-slider'>DESCUBRE TUS OPORTUNIDADES</button>
+          <h1 style={{fontSize:'60px', color:'black'}} >Descubre una nueva forma de verder tus productos</h1>
+          {/* <button className='button-slider'>DESCUBRE TUS OPORTUNIDADES</button> */}
         </Col>
       </Row>
       

@@ -2,8 +2,9 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 5px rgba(250, 123, 5, 1);
     margin-top: 50px;
+    border-radius: 5px;
     
   }
   
@@ -43,8 +44,9 @@
     position: absolute; /* Agregamos posicionamiento absoluto */
     top: 0; /* Posicionamos en la parte superior */
     left: 0; /* Posicionamos en la parte izquierda */
-    background-color: rgba(0, 0, 0, 0.3); /* Fondo gris transparente */
+    background-color: rgba(241, 120, 7, 0.7); /* Fondo gris transparente */
     padding: 5px; /* Agregamos un pequeño padding */
+    border-radius: 5px;
   }
   
   .productRating {

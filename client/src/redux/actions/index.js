@@ -25,6 +25,7 @@ export const ORDER_CLIENT_USERS= "ORDER_CLIENT_USERS";
 export const SEARCH_USERS = "SEARCH_USERS";
 export const FILTER_CLIENT_USERS="FILTER_CLIENT_USERS";
 
+
 export const getUserById = (userId) => {
   try {
     return async function (dispatch) {
@@ -65,6 +66,7 @@ export const deleteCategory = (categoryId) => {
       );
       return dispatch({
         type: DELETE_CATEGORY,
+        payload: categoryId
       });
     };
     // eslint-disable-next-line no-unreachable
@@ -319,7 +321,7 @@ export const loginClientAdmin = (email, password) => {
           password,
         }
       );
-      localStorage.setItem("dataClientAdmin", data);
+      localStorage.setItem("clientAdmin", JSON.stringify(data));
       return dispatch({
         type: LOGIN_CLIENT_ADMIN,
         payload: data,
@@ -421,7 +423,7 @@ export const logOutAdmin = () => {
 };
 export const logOutClientAdmin = () => {
   try {
-    localStorage.removeItem("dataClientAdmin");
+    localStorage.removeItem("clientAdmin");
 
     return async function (dispatch) {
       dispatch({
@@ -456,14 +458,17 @@ export const logOutUser = () => {
   }
 };
 
-export const orderClientUsers=(orden)=>{
-  return{
-      type:ORDER_CLIENT_USERS,
-      payload: orden
-    }
-}
+
+export const orderClientUsers = (orden) => {
+  return {
+    type: ORDER_CLIENT_USERS,
+    payload: orden,
+  };
+};
+
 
 export const searchUsers = (searchTerm) => ({
   type: SEARCH_USERS,
   payload: searchTerm,
 });
+

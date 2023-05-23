@@ -11,7 +11,8 @@ function CompraSegura() {
         <img src={compra1} className="card-img-top" alt="..."  />
         <div className="card-body">
           <p className="card-text">
-            Some quick example text to build on the card title and make up the bulk of the card's content.
+            
+En UrbanBuy, entendemos que la seguridad es fundamental al comprar en línea. Por eso, hemos implementado una serie de medidas para garantizar que tu experiencia de compra sea segura y protegida en todo momento.
           </p>
         </div>
       </div>
@@ -19,7 +20,7 @@ function CompraSegura() {
         <img src={compra2} className="card-img-top" alt="..." />
         <div className="card-body">
           <p className="card-text">
-            Some quick example text to build on the card title and make up the bulk of the card's content.
+          En UrbanBuy, comprendemos la importancia de brindar un soporte eficiente y oportuno a nuestros usuarios. Por eso, hemos implementado un sistema de soporte en línea que te permite obtener ayuda y solucionar tus consultas de manera rápida y conveniente.
           </p>
         </div>
       </div>
@@ -27,7 +28,7 @@ function CompraSegura() {
         <img src={compra3} className="card-img-top" alt="..." />
         <div className="card-body">
           <p className="card-text">
-            Some quick example text to build on the card title and make up the bulk of the card's content.
+          UrbanBuy es una plataforma de ventas en línea establecida y confiable. Al unirse a nuestra plataforma, los clientes obtienen acceso a una base de usuarios existente y a una audiencia más amplia. 
           </p>
         </div>
       </div>
