@@ -21,9 +21,10 @@ export const EDIT_CATEGORY = "EDIT_CATEGORY";
 export const DELETE_CATEGORY = "DELETE_CATEGORY";
 export const GET_CLIENT_ADMIN_USERS = "GET_CLIENT_ADMIN_USERS";
 export const GET_USER_BY_ID = "GET_USER_BY_ID";
-export const ORDER_CLIENT_USERS = "ORDER_CLIENT_USERS";
+export const ORDER_CLIENT_USERS= "ORDER_CLIENT_USERS";
 export const SEARCH_USERS = "SEARCH_USERS";
-export const FILTER_CLIENT_USERS = "FILTER_CLIENT_USERS";
+export const FILTER_CLIENT_USERS="FILTER_CLIENT_USERS";
+
 
 export const getUserById = (userId) => {
   try {
@@ -179,12 +180,10 @@ export const getOrdersByUser = (userId) => {
 export const deleteProduct = (productId) => {
   try {
     return async function (dispatch) {
-      const { data } = await axios.delete(
-        `http://localhost:2800/products/${productId}`
-      );
+      await axios.delete(`http://localhost:2800/products/delete/${productId}`);
       return dispatch({
         type: DELETE_PRODUCT,
-        payload: data,
+        payload: productId,
       });
     };
     // eslint-disable-next-line no-unreachable
@@ -386,10 +385,10 @@ export const registerClientAdmin = (fullName, email, password) => {
     throw new Error(err.message);
   }
 };
-export const registerUser = (email, password) => {
+export const registerUser = (email, password, clientAdminId) => {
   try {
     return async function (dispatch) {
-      await axios.post("http://localhost:6800/admin/register", {
+      await axios.post(`http://localhost:6800/users/register/${clientAdminId}`, {
         email,
         password,
       });
@@ -458,6 +457,7 @@ export const logOutUser = () => {
   }
 };
 
+
 export const orderClientUsers = (orden) => {
   return {
     type: ORDER_CLIENT_USERS,
@@ -465,7 +465,9 @@ export const orderClientUsers = (orden) => {
   };
 };
 
+
 export const searchUsers = (searchTerm) => ({
   type: SEARCH_USERS,
   payload: searchTerm,
 });
+

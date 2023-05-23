@@ -14,8 +14,8 @@ function Footer() {
       </ul>
       <p className="copy">
     © 2023 UrbanBuy. Todos los derechos reservados.
-    <a href="https://github.com/tu-usuario" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
-    <a href="https://linkedin.com/in/tu-usuario" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin"></i></a>
+    <a href="https://github.com/tu-usuario" target="_blank" rel="noopener noreferrer"><i className="fab fa-github"></i></a>
+    <a href="https://linkedin.com/in/tu-usuario" target="_blank" rel="noopener noreferrer"><i className="fab fa-linkedin"></i></a>
   </p>
     </div>
   );

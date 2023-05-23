@@ -1,29 +1,33 @@
-import React from 'react';
-import {Products} from '../../data.js'; 
-import style from './ProductDetail.module.css'
+import React, { useEffect } from "react";
+import style from "./ProductDetail.module.css";
+import { useDispatch, useSelector } from "react-redux";
+import { getProductById } from "../../redux/actions/index.js";
+import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-
-const ProductDetail = ({ productId }) => {
-  const productDetail = Products.find(item => item.id === productId);
-  console.log(productDetail)
-
-//   if (!product) {
-//     return <p>Producto no encontrado</p>;
-//   }
-
-  const { ProductName, description, category, stocks, imageUrl, price, rating } = productDetail;
+const ProductDetail = () => {
+  const product = useSelector((state) =>state.product);
+  const {productId} = useParams()
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getProductById(productId));
+  }, []);
+console.log(product)
 
   return (
     <div className={style.container}>
-      <h2 className={style.h2}>{ProductName}</h2>
-      <img src={imageUrl} alt={ProductName}  className={style.img}/>
-      <p className={style.description}>{description}</p>
-      <p >Category: {category.join(', ')}</p>
+      <h2 className={style.h2}>{product.productName}</h2>
+      <img src={product.imageUrl} alt={product.productName} className={style.img} />
+      <p className={style.description}>{product.description}</p>
+      {/* <p>Category: {product.categories.join(", ")}</p> */}
       <div className={style.hovers}>
-      <p>Stocks: {stocks}</p>
-      <p>Price: ${price}</p>
-      <p>Rating: {rating}</p>
+        <p>Stock: {product.stocks}</p>
+        <p>Price: ${product.price}</p>
+        <p>Rating: {product.rating}</p>
       </div>
+      <Link to='/homecliente'>
+      <button className={style.button}>go back</button>
+      </Link>
     </div>
   );
 };

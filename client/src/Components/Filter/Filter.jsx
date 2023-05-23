@@ -10,12 +10,13 @@ function Filter({filter, onFilterChange }){
     onFilterChange(selectedFilter)
   }
 
+
   return(
       <div>
         <p>Filtrar : </p>
 			<select onChange={handleFilter}>
 				<option disabled default selected>Elegir una opción</option>
-{/*eslint-disable-next-line*/}
+          {/*eslint-disable-next-line*/}
 				{filter.map((a, i) => (
 					<option key={i} value={a.rating}>{a.rating}</option>
 				))}
