@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import NavEcommerce from "./NavEcommerce";
 import SliderEcommerceClient from "../EcommerceCliente/SliderEcommerceClient";
 import style from "./HomeEcommerce.module.css";
 import Card from "../Card/Card";
@@ -14,6 +15,8 @@ function HomeEcommerce() {
   const clientAdminId = clientAdmin._id;
   const [filteredProduct, setFilteredProducts] = useState([]);
   const [searchTerm, setSearchTerm] = useState([]);
+  const [orderedProduct, setOrderedProduct] = useState([]);
+
 
   useEffect(() => {
     dispatch(getAllProducts(clientAdminId));
@@ -66,10 +69,12 @@ function HomeEcommerce() {
         a.price > b.price ? 1 : -1
       );
       console.log("price", orderResult);
+
     } else if (order === "priceDs") {
       orderResult = [...filteredProduct].sort((a, b) =>
         a.price > b.price ? -1 : 1)
     } else if  (order === "nameAs") {
+
       orderResult = [...filteredProduct].sort((a, b) =>
         a.productName.localeCompare(b.productName)
       );
@@ -77,6 +82,7 @@ function HomeEcommerce() {
     } else if (order === "nameDs") {
       orderResult = [...filteredProduct].sort((a, b) =>
         b.productName.localeCompare(a.productName))
+
     }
     setFilteredProducts(orderResult);
     paginate(1);
@@ -130,11 +136,13 @@ function HomeEcommerce() {
       {/* Order */}
       <div className={style.buttonDiv}>
         <p>Ordenar por:</p>
+
         <button onClick={() => handleOrder("priceAs")}>Precio Ascendente</button>
         <button onClick={() => handleOrder("priceDs")}>Precio Descendente</button>
         <button onClick={() => handleOrder("nameAs")}>Nombre A - Z</button>
         <button onClick={() => handleOrder("nameDs")}>Nombre Z - A</button>
       </div>
+
       </div>
 
       <Card products={currentProducts} />
