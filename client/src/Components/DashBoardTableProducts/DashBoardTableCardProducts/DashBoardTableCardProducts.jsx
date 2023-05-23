@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { deleteProduct } from "../../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
-
+import styles from "./DashBoardTableCardProducts.module.css"
 const DashBoardTableCardProducts = ({
   productName,
   categories,
@@ -66,8 +66,8 @@ const DashBoardTableCardProducts = ({
         <td>{price}</td>
         <td>{rating}</td>
         <td>
-          <button>Edit </button>
-          <button onClick={() => setIdReference(id)}>delete </button>
+          {/* <button>Edit </button> */}
+          <button className={styles.button} onClick={() => setIdReference(id)}>delete</button>
         </td>
       </tr>
     </tbody>

@@ -1,0 +1,18 @@
+/* Estilos para los botones */
+.button1{
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #ff7f2a;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    transition: background-color 0.3s, color 0.3s, transform 0.3s;
+  }
+  
+  /* Estilos para cuando el cursor está encima */
+  .button1:hover {
+    background-color:whitesmoke ;
+    color: #ff7f2a;
+    transform: scale(1.1);
+    border-color: 1px solid #ff7f2a ;
+  }
