@@ -17,6 +17,7 @@ function HomeEcommerce() {
   const [searchTerm, setSearchTerm] = useState([]);
   const [orderedProduct, setOrderedProduct] = useState([]);
 
+
   useEffect(() => {
     dispatch(getAllProducts(clientAdminId));
     dispatch(getCategories(clientAdminId));
@@ -63,16 +64,25 @@ function HomeEcommerce() {
   }
   const handleOrder = (order) => {
     let orderResult = [];
-    if (order === "price") {
+    if (order === "priceAs") {
       orderResult = [...filteredProduct].sort((a, b) =>
         a.price > b.price ? 1 : -1
       );
       console.log("price", orderResult);
-    } else if (order === "name") {
+
+    } else if (order === "priceDs") {
+      orderResult = [...filteredProduct].sort((a, b) =>
+        a.price > b.price ? -1 : 1)
+    } else if  (order === "nameAs") {
+
       orderResult = [...filteredProduct].sort((a, b) =>
         a.productName.localeCompare(b.productName)
       );
       console.log("name", orderResult);
+    } else if (order === "nameDs") {
+      orderResult = [...filteredProduct].sort((a, b) =>
+        b.productName.localeCompare(a.productName))
+
     }
     setFilteredProducts(orderResult);
     paginate(1);
@@ -102,6 +112,9 @@ function HomeEcommerce() {
 
       {/* Filter */}
       <div className={style.filterSearchContainer}>
+        <div className={style.searchContainer}>
+          <SearchBar onSearch={handleSearch} />
+        </div>
         <div className={style.filterContainer}>
           <p>Filtrar por rating:</p>
           <select onChange={filterProduct}>
@@ -117,18 +130,19 @@ function HomeEcommerce() {
             })}
           </select>
         </div>
-        <div className={style.searchContainer}>
-          <SearchBar onSearch={handleSearch} />
-        </div>
-      </div>
 
 
 
       {/* Order */}
-      <div>
+      <div className={style.buttonDiv}>
         <p>Ordenar por:</p>
-        <button onClick={() => handleOrder("price")}>Precio</button>
-        <button onClick={() => handleOrder("name")}>Nombre</button>
+
+        <button onClick={() => handleOrder("priceAs")}>Precio Ascendente</button>
+        <button onClick={() => handleOrder("priceDs")}>Precio Descendente</button>
+        <button onClick={() => handleOrder("nameAs")}>Nombre A - Z</button>
+        <button onClick={() => handleOrder("nameDs")}>Nombre Z - A</button>
+      </div>
+
       </div>
 
       <Card products={currentProducts} />
