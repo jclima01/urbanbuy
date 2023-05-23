@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
 import { deleteProduct } from "../../../redux/actions"
-import { useDispatch} from 'react-redux'
+import { useDispatch, useSelector} from 'react-redux'
 
 
-const DashBoardTableCardProducts = ({product}) => {
+const DashBoardTableCardProducts = ({productName, categories, imageUrl,stocks, price , rating ,id}) => {
 
   const [idReference, setIdReference] = useState('');
   const dispatch = useDispatch()
+  const categorie = useSelector((state) => state.categories);
+  console.log('categorie', categorie)
+
 
   useEffect(() => {
     dispatch(deleteProduct(idReference))
@@ -34,17 +37,22 @@ const DashBoardTableCardProducts = ({product}) => {
                       justifyContent:'center'
                     }}
                   >
-                    <img src={product?.imageUrl} alt=""  style={{width:100, height:100, objectFit:'contain'}}/>
+                    <img src={imageUrl} alt=""  style={{width:100, height:100, objectFit:'contain'}}/>
                   </div>
                 </td>
-                <td>{product?.productName}</td>
-                <td>{product?.categories}</td>
-                <td>{product?.stocks}</td>
-                <td>{product?.price}</td>
-                <td>{product?.rating}</td>
+                <td>{productName}</td>
+                <td>
+                {
+                  categorie?.map(item=> (item.categoryName)).join('-')
+                }
+                </td>
+              
+                <td>{stocks}</td>
+                <td>{price}</td>
+                <td>{rating}</td>
                 <td>
                   <button>Edit </button>
-                  <button onClick={()=> setIdReference(product._id) }>delete </button>
+                  <button onClick={()=> setIdReference(id) }>delete </button>
                 </td>
               </tr>
             </tbody>

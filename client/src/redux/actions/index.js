@@ -66,6 +66,7 @@ export const deleteCategory = (categoryId) => {
       );
       return dispatch({
         type: DELETE_CATEGORY,
+        payload: categoryId
       });
     };
     // eslint-disable-next-line no-unreachable
