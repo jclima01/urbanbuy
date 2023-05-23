@@ -1,18 +1,37 @@
-import { useRef } from "react";
+import { useEffect, useRef,useState } from "react";
 import { CiSearch } from "react-icons/ci"
-import { useDispatch } from "react-redux";
-import { orderClientUsers,searchUsers } from "../../redux/actions";
+import { useDispatch,useSelector } from "react-redux";
+import { getClientAdminUsers, orderClientUsers,searchUsers } from "../../redux/actions";
 import "./NavUsers.css"
 const DashBoardNavUsers = () => {
  
+  const clientAdmin = useSelector(state => state.clientAdmin)
   const order=useRef(null);
-  
   const dispatch=useDispatch();
+  
+  const [searchTerm, setSearchTerm] = useState('');
 
-
-  const handleChange = (e)=>{
-    dispatch(searchUsers(e.target.value));
+ 
+  const handleInputChange = (e) =>{
+    setSearchTerm(e.target.value);
+  
+    if(e.target.value!==''){
+      dispatch(searchUsers(e.target.value));
+      //users.filter(user=>user.fullName.tolowerCase().includes(searchTerm))
+    }else{
+      dispatch(getClientAdminUsers(clientAdmin._id))
+    }
+  
  }
+ 
+
+ useEffect(() =>{ 
+
+  dispatch(getClientAdminUsers(clientAdmin._id))
+
+},[dispatch, clientAdmin._id])
+ 
+
 
 
   return (
@@ -38,7 +57,7 @@ const DashBoardNavUsers = () => {
               type="text"
               placeholder="Search Users..."
               className="inputsearch-navbar"
-              onChange={handleChange}
+              onChange={handleInputChange}
             />
             <hr />
             <CiSearch size={25} cursor={"pointer"} />
@@ -47,7 +66,7 @@ const DashBoardNavUsers = () => {
         </div>
 
 
-        <div className="filter">
+        {/* <div className="filter">
           <select className="filters">
 
             <option value="Filters">Filters</option>
@@ -56,7 +75,7 @@ const DashBoardNavUsers = () => {
             <option value="Filters">Filter 3</option>
           </select>
         </div> 
-        
+         */}
       </div>
     </>
   );
