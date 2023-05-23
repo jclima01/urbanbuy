@@ -5,7 +5,10 @@ import { useEffect, useState } from "react";
 import { getClientAdminUsers, getUserById } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import avatar from "../../assets/avatar.jpg";
+//props que estan desestructuradas
+//eslint-disable-next-line
 const DashBoardListUsers = ({setActiveTab,activeTab,setActualPage}) => {
+  //eslint-disable-next-line 
   const [selectedUser, setSelectedUser] = useState(null);
   const dispatch = useDispatch();
   const clientAdmin = useSelector((state) => state.clientAdmin);
@@ -20,6 +23,7 @@ const DashBoardListUsers = ({setActiveTab,activeTab,setActualPage}) => {
 
   useEffect(() => {
     dispatch(getClientAdminUsers(clientAdmin._id));
+    //eslint-disable-next-line 
   }, []);
 
 
