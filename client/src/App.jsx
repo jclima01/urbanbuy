@@ -47,8 +47,10 @@ function App() {
                 path="/dashBoard/Settings"
                 element={<DashBoardSettings />}
               />
+
               <Route path="/homecliente" element={<HomeEcommerce />} />
               <Route path="/product/:productId" element={<ProductDetail />} />
+
             </Routes>
           </div>
         </div>
@@ -57,7 +59,7 @@ function App() {
           <Route path="/" element={<Home />} /> {/* LadingPage */}
           <Route path="/login" element={<FormLogin />} />
           <Route path="/SignIn" element={<SignIn />} />
-          {/* <Route path="/homecliente" element={<HomeEcommerce />} /> */}
+
         </Routes>
       )}
     </>

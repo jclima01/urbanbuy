@@ -25,6 +25,7 @@ export const ORDER_CLIENT_USERS= "ORDER_CLIENT_USERS";
 export const SEARCH_USERS = "SEARCH_USERS";
 export const FILTER_CLIENT_USERS="FILTER_CLIENT_USERS";
 
+
 export const getUserById = (userId) => {
   try {
     return async function (dispatch) {
@@ -456,14 +457,17 @@ export const logOutUser = () => {
   }
 };
 
-export const orderClientUsers=(orden)=>{
-  return{
-      type:ORDER_CLIENT_USERS,
-      payload:orden
-    }
-}
+
+export const orderClientUsers = (orden) => {
+  return {
+    type: ORDER_CLIENT_USERS,
+    payload: orden,
+  };
+};
+
 
 export const searchUsers = (searchTerm) => ({
   type: SEARCH_USERS,
   payload: searchTerm,
 });
+

@@ -5,9 +5,10 @@ import DashBoardCardsUser from "../../Components/DashBoardCardsUser/DashBoardCar
 import logo from "../../assets/Logo.jpeg";
 import ilustration from "../../assets/ilustrationhome.png";
 import { Products, User, categoryProducts } from "../../data";
+import {IoMdAddCircleOutline} from "react-icons/io";
+import { Link } from "react-router-dom";
 import { IoMdAddCircleOutline } from "react-icons/io";
 import { useSelector } from "react-redux";
-
 
 const DashBoard = () => {
 
@@ -50,24 +51,25 @@ const DashBoard = () => {
               <p style={{ fontSize: 20 }}>
                 Improve your products in our section.
               </p>
-              <Link to="/homeCliente">
-                <button
-                  style={{
-                    cursor: "pointer",
-                    fontSize: 20,
-                    width: 200,
-                    marginTop: 15,
-                    padding: 15,
-                    borderRadius: 15,
-                    background: "#ff7f2a",
-                    border: "none",
-                    color: "white",
-                    fontWeight: 400,
-                  }}
-                >
-                  Go Site View.
-                </button>
-              </Link>
+              <Link to={"/homecliente"}>
+              <button
+                style={{
+                  cursor: "pointer",
+                  fontSize: 20,
+                  width: 200,
+                  marginTop: 15,
+                  padding: 15,
+                  borderRadius: 15,
+                  background: "#ff7f2a",
+                  border: "none",
+                  color: "white",
+                  fontWeight: 400,
+                }}
+              >
+                Go Site View.
+              </button>
+                </Link>
+
             </div>
 
             <div style={{ width: "30%", height: "100%" }}>

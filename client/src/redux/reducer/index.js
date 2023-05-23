@@ -21,6 +21,7 @@ import {
   DELETE_CATEGORY,
   GET_CLIENT_ADMIN_USERS,
   GET_USER_BY_ID,
+
   FILTER_CLIENT_USERS, 
   ORDER_CLIENT_USERS,
   SEARCH_USERS
@@ -35,6 +36,7 @@ const initialState = {
   product: {},
   categories: [],
   ordersByUser: [],
+
   clientAdminUsers:[],
 };
 
@@ -43,7 +45,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
     case GET_USER_BY_ID:
       return {
         ...state,
-        user:{...payload}
+        user: { ...payload },
       };
     case GET_CLIENT_ADMIN_USERS:
       return {
@@ -71,14 +73,14 @@ const rootReducer = (state = initialState, { type, payload }) => {
           ...state, 
           //clientAdminUsers=clientAdminUsers.filter((user) => user.fullName.toLowerCase().includes(payload.toLowerCase()))
         };
+
     //  case FILTER_CLIENT_USERS:
     //   //eslint-disable-next-line
     //   let filteredUsers;
     //   return{
     //     ...state,
     //     //clientAdminUsers:state.clientAdminUsers.filter(e=>e.===payload)
-    //   }  
-
+    // }
     case DELETE_CATEGORY:
       return {
         ...state,
