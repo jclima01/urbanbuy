@@ -1,5 +1,5 @@
 import "./App.css";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import DashBoard from "./pages/DashBoard/DashBoard";
 import SideBarDashBoard from "./Components/SideBarDashBoard/SideBarDashBoard";
@@ -20,13 +20,14 @@ import ProductDetailContainer from "./Components/EcommerceCliente/ProductDetailC
 function App() {
   // const dispatch = useDispatch()
   const session = useSelector((state) => state.UserSession);
+  const adminStorage = JSON.parse(localStorage.getItem('clientAdmin'));
   // useEffect(() => {
   //   dispatch(getSession())
   // }, [session])
 
   return (
     <>
-      {session ? (
+      {adminStorage ? (
         <div className="d-flex vh-100 vw-100 ">
           <SideBarDashBoard />
           <div className="d-flex flex-column">
@@ -50,6 +51,7 @@ function App() {
 
               <Route path="/homecliente" element={<HomeEcommerce />} />
               <Route path="/product/:productId" element={<ProductDetail />} />
+              <Route path="*" element={<Navigate to="/dashBoard" />} />
 
             </Routes>
           </div>
@@ -59,7 +61,7 @@ function App() {
           <Route path="/" element={<Home />} /> {/* LadingPage */}
           <Route path="/login" element={<FormLogin />} />
           <Route path="/SignIn" element={<SignIn />} />
-
+          <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       )}
     </>
