@@ -20,10 +20,8 @@ import ProductDetailContainer from "./Components/EcommerceCliente/ProductDetailC
 function App() {
   // const dispatch = useDispatch()
   const session = useSelector((state) => state.UserSession);
-  const adminStorage = JSON.parse(localStorage.getItem('clientAdmin'));
-  // useEffect(() => {
-  //   dispatch(getSession())
-  // }, [session])
+  const adminStorage = JSON.parse(localStorage.getItem('clientAdmin')) ?? false
+
 
   return (
     <>

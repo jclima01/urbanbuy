@@ -11,6 +11,9 @@ import { useSelector } from "react-redux";
 const DashBoard = () => {
 
   const clientAdmin = useSelector(state => state.clientAdmin)
+
+  const clientAdminStorage = JSON.parse(localStorage.getItem('clientAdmin')) ?? false
+  const adminStorage = clientAdminStorage ? clientAdminStorage : false
   let arrUser = [];
   for (let i = 0; i < 3; i++) {
     arrUser.push(User[i]);
