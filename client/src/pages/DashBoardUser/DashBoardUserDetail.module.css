@@ -35,6 +35,7 @@
     padding-left: 15px;
     border-radius: 10px;
     margin-top: 15px;
+    
 }
 .liUsers h5{ width: 14%; text-align: center;}
 .orderStatusT{
@@ -78,6 +79,7 @@
   align-content: stretch;
   align-items: center;
   color: #474646;
+  font-weight: bold;
 }
 .listUl li{
   padding-bottom: 5px;

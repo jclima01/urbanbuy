@@ -32,7 +32,7 @@ const DashBoardUserDetail = () => {
                     <h5>{order.createdAt.slice(0,10)}</h5>
                     <h5>{order.adress}</h5>
                     <h5>{order.cart.length}</h5>
-                    <h5 className={styles.orderPrice}>Price: {order.total}</h5>
+                    <h5 className={styles.orderPrice}> {order.total}</h5>
                     <h5 className={order.payment==true?styles.orderStatusT:styles.orderStatusF}>{order.payment==true?'YES':'NO'}</h5>
                   </li>
                 );
