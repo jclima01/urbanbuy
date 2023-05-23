@@ -64,11 +64,10 @@ function HomeEcommerce() {
   console.log('filterProduct: ', filteredProduct)
   
   return (
-    <div>
-      <NavEcommerce/>
+    <div >
+      {/* <NavEcommerce/> */}
       <SliderEcommerceClient products={products}/>
-      <h2 className={style.h2}>PRODUCTOS DESTACADOS</h2>
-      <br/>
+  
       <SearchBar onSearch={handleSearch} />
       <h2 className={style.h2}>PRODUCTOS </h2>
       {/*<Filter filter={products} onFilterChange={filterProduct}/>*/}
@@ -79,6 +78,7 @@ function HomeEcommerce() {
           return <option key={r} value={r}>{r}</option>
         })}
       </select>
+
       <Card products={currentProducts} />
   
       {/* Pagination */}

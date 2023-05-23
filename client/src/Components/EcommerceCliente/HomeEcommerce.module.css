@@ -1,10 +1,30 @@
-.h2{
-    display: flex;
+.h2 {
+    display: inline-block;
     justify-content: center;
     margin-top: 70px;
-    background-color: rgb(220, 221, 223);
+    background-color: rgb(243, 156, 18);
     padding: 20px;
-}
+    color: white;
+    border-radius: 10px;
+    width: fit-content;
+    animation: highlight 10s infinite alternate; /* Agrega la animación */
+    margin-left: 650px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);
+  }
+  
+  @keyframes highlight {
+    0% {
+      background-color: rgb(243, 156, 18);
+    }
+    50% {
+      background-color: rgb(255, 115, 0); /* Define el color de fondo destacado */
+    }
+    100% {
+      background-color: rgb(243, 156, 18);
+    }
+  }
+  
+  
 .containerCard{
    margin-left: 330px;
    margin-top: -280px;
