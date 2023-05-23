@@ -22,14 +22,18 @@ const Team = () => {
         
       <div className={style.cardContainerB}>
         <div className={style.cardB}>
-          <img src={avatar1} alt="mujer" style={{ width: "100%",borderRadius:'20px' }} />
+        <a href="https://www.linkedin.com/in/alejandro-villamayor-7089ba1a5/"  className={style.cardLink}>
+          <img src={avatar1} alt="mujer" className={style.cardImage} />
+          </a>
           <div className="card-body">
             <h5 className="card-title">Ale </h5>
             <p className="card-text">Partner</p>
           </div>
         </div>
         <div className={style.cardB}>
-          <img src={avatar2} alt="mujer" style={{ width: "100%",borderRadius:'20px' }} />
+        <a href="https://www.linkedin.com/in/henry-carrillo-b89838212/"  className={style.cardLink}>
+          <img src={avatar2} alt="mujer" className={style.cardImage} />
+          </a>
           <div className="card-body">
             <h5 className="card-title">Henry</h5>
             <p className="card-text">Partner</p>
@@ -71,7 +75,9 @@ const Team = () => {
           </div>
         </div>
         <div className={style.cardB}>
-          <img src={avatar7} alt="mujer" style={{ width: "100%",borderRadius:'20px' }} />
+        <a href="https://www.linkedin.com/in/alberto-ezequiel-irace/" className={style.cardLink}>
+          <img src={avatar7} alt="mujer" className={style.cardImage} />
+          </a>
           <div className="card-body">
             <h5 className="card-title">Eze</h5>
             <p className="card-text">Partner</p>
