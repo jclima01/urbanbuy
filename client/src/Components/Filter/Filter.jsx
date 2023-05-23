@@ -1,26 +1,27 @@
-function Filter({ categories, onCategoryChange }){
+import {useState} from "react";
 
-  function handleCategory(e){
-    const selectedCategory = e.target.value
-    onCategoryChange(selectedCategory)
+{/*eslint-disable-next-line*/}
+function Filter({filter, onFilterChange }){
+  const [selectedFilter,setSelectedFilter] = useState('')
+
+  function handleFilter(e){
+{/*eslint-disable-next-line*/}
+    setSelectedFilter(e.target.value)
+    onFilterChange(selectedFilter)
   }
 
-console.log(categories)
-
   return(
-    <>
       <div>
-        <label htmlFor="category">Categoria: </label>
-        <select
-        id="categoria"
-        onChange={handleCategory}>
-          <option value=''>Todos</option>
-            {categories.map((cat)=>(
-                <option key={cat._id} value={cat.categoryName}>{cat.categoryName}</option>
-            ))}
-        </select>
+        <p>Filtrar : </p>
+			<select onChange={handleFilter}>
+				<option disabled default selected>Elegir una opción</option>
+{/*eslint-disable-next-line*/}
+				{filter.map((a, i) => (
+					<option key={i} value={a.rating}>{a.rating}</option>
+				))}
+			</select>
+        {/*	<input className={style.inputBtn} type='button' onClick={handleRemoveFilter} value='Limpiar Filtros' /> */}
       </div>
-    </>
 )}
 
 export default Filter;
