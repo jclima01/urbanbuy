@@ -3,6 +3,7 @@ import style from "./ProductDetail.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { getProductById } from "../../redux/actions/index.js";
 import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const ProductDetail = () => {
   const product = useSelector((state) =>state.product);
@@ -24,7 +25,9 @@ console.log(product)
         <p>Price: ${product.price}</p>
         <p>Rating: {product.rating}</p>
       </div>
-      <button>go back</button>
+      <Link to='/homecliente'>
+      <button className={style.button}>go back</button>
+      </Link>
     </div>
   );
 };
