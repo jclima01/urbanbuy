@@ -37,6 +37,7 @@ function HomeEcommerce() {
     const filterRating = e.target.value
     const filterResult = products.filter(p => p.rating == filterRating)  
     setFilteredProducts(filterResult)
+    paginate(1)
   }}
 
   const handleSearch = (searchTerm) => {
