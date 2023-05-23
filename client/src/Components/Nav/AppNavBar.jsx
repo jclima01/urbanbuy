@@ -35,9 +35,9 @@ function AppNavbar() {
       <Container>
         <Navbar.Brand>
           <img src={ scrolled ? logo : logo2} className="logo-nav"/>
-          <Link to='/homecliente'>
+          {/* <Link to='/homecliente'>
           <button className="button-nav">Comienza tu prueba hoy</button>
-          </Link>
+          </Link> */}
         </Navbar.Brand>
         <div >
         <Link to='Signin'>
