@@ -1,19 +1,25 @@
 import { CiSearch } from "react-icons/ci";
 import DashBoardTableProducts from "../../Components/DashBoardTableProducts/DashBoardTableProducts";
-import { useEffect } from "react";
-import { useDispatch , useSelector} from "react-redux";
+import { useEffect, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { getAllProducts } from "../../redux/actions";
+import DashBoardAddProducts from "../../Components/DashBoardAddProducts/DashBoardAddProducts";
 
 const DashBoardProducts = () => {
+  const dispatch = useDispatch();
+  const Products = useSelector((state) => state.products);
+  const clientAdmin = useSelector((state) => state.clientAdmin);
+  const clientAdminId = clientAdmin._id;
+  const refTransitionAddProduct = useRef();
 
+  const [isActive, setIsActive] = useState(900);
 
-  const dispatch = useDispatch()
-  const Products = useSelector(state => state.products)
-  const clientAdmin = useSelector(state => state.clientAdmin)
-const clientAdminId = clientAdmin._id
- console.log(clientAdmin)
+  const handleActiveAddProduct = (isActive) => {
+    isActive ? setIsActive(0) : setIsActive(900);
+  };
+
   useEffect(() => {
-    dispatch(getAllProducts(clientAdminId))
+    dispatch(getAllProducts(clientAdminId));
   }, []);
 
   return (
@@ -24,7 +30,7 @@ const clientAdminId = clientAdmin._id
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        overflow:'hidden'
+        overflow: "hidden",
       }}
     >
       <div
@@ -37,8 +43,28 @@ const clientAdminId = clientAdmin._id
           flexDirection: "column",
           boxShadow: "4px 3px 10px 4px #4644442b",
           borderRadius: 25,
+          position: "relative",
         }}
       >
+        <div
+          style={{
+            width: "50%",
+            height: "100%",
+            position: "absolute",
+            backgroundColor: "white",
+            boxShadow: "4px 3px 10px 4px #4644442b",
+            right: `-${isActive}px`,
+            borderRadius: 25,
+            transition: "0.5s all ease",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            flexDirection: "column",
+          }}
+          ref={refTransitionAddProduct}
+        >
+          <DashBoardAddProducts setIsActive={setIsActive} clientAdminId={clientAdminId} />
+        </div>
         <div
           style={{
             height: "25%",
@@ -94,7 +120,9 @@ const clientAdminId = clientAdmin._id
               borderRadius: 20,
             }}
           >
-            <button>Add Product</button>
+            <button onClick={() => handleActiveAddProduct(isActive)}>
+              Add Product
+            </button>
             <button>Add Categories</button>
           </div>
         </div>
@@ -183,10 +211,12 @@ const clientAdminId = clientAdmin._id
             width: "95%",
             padding: 15,
             overflow: "hidden",
-            overflowY: 'auto',
+            overflowY: "auto",
           }}
         >
-          <DashBoardTableProducts Products={Products}/>
+
+          <DashBoardTableProducts Products={Products} />
+
         </div>
       </div>
     </div>

@@ -21,9 +21,10 @@ import {
   DELETE_CATEGORY,
   GET_CLIENT_ADMIN_USERS,
   GET_USER_BY_ID,
-  FILTER_CLIENT_USERS,
+
+  FILTER_CLIENT_USERS, 
   ORDER_CLIENT_USERS,
-  SEARCH_USERS,
+  SEARCH_USERS
 } from "../actions/index.js";
 
 const initialState = {
@@ -35,7 +36,8 @@ const initialState = {
   product: {},
   categories: [],
   ordersByUser: [],
-  clientAdminUsers: [],
+
+  clientAdminUsers:[],
 };
 
 const rootReducer = (state = initialState, { type, payload }) => {
@@ -48,45 +50,37 @@ const rootReducer = (state = initialState, { type, payload }) => {
     case GET_CLIENT_ADMIN_USERS:
       return {
         ...state,
-        clientAdminUsers: [...payload],
+        clientAdminUsers:[...payload]
       };
     case ORDER_CLIENT_USERS:
       //eslint-disable-next-line
-      let orderUsers;
-      if (payload === "fullName_az") {
-        orderUsers = state.clientAdminUsers.sort((a, b) =>
-          a.fullName > b.fullName ? 1 : -1
-        );
-      } else if (payload === "fullName_za") {
-        orderUsers = state.clientAdminUsers.sort((a, b) =>
-          a.fullName < b.fullName ? 1 : -1
-        );
-      } else if (payload === "email_az") {
-        orderUsers = state.clientAdminUsers.sort((a, b) =>
-          a.email > b.email ? 1 : -1
-        );
-      } else if (payload === "email_za") {
-        orderUsers = state.clientAdminUsers.sort((a, b) =>
-          a.email < b.email ? 1 : -1
-        );
-      }
-      return {
-        ...state,
-        clientAdminUsers: [...orderUsers],
-      };
-    case SEARCH_USERS:
-      return {
-        ...state,
-        //clientAdminUsers=clientAdminUsers.filter((user) => user.fullName.toLowerCase().includes(payload.toLowerCase()))
-      };
+        let orderUsers;
+        if(payload==='fullName_az'){
+          orderUsers=state.clientAdminUsers.sort((a,b)=>a.fullName>b.fullName?1:-1);
+        }else if(payload==='fullName_za'){
+          orderUsers=state.clientAdminUsers.sort((a,b)=>a.fullName<b.fullName?1:-1);
+        }else if(payload==='email_az'){
+          orderUsers=state.clientAdminUsers.sort((a,b)=>a.email>b.email?1:-1);
+        }else if(payload==='email_za'){
+          orderUsers=state.clientAdminUsers.sort((a,b)=>a.email<b.email?1:-1);
+        }
+      return{
+       ...state,
+        clientAdminUsers:[...orderUsers ]
+       };
+       case SEARCH_USERS:
+         return { 
+          ...state, 
+          //clientAdminUsers=clientAdminUsers.filter((user) => user.fullName.toLowerCase().includes(payload.toLowerCase()))
+        };
+
     //  case FILTER_CLIENT_USERS:
     //   //eslint-disable-next-line
     //   let filteredUsers;
     //   return{
     //     ...state,
     //     //clientAdminUsers:state.clientAdminUsers.filter(e=>e.===payload)
-    //   }
-
+    // }
     case DELETE_CATEGORY:
       return {
         ...state,
@@ -116,6 +110,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
     case DELETE_PRODUCT:
       return {
         ...state,
+        products: state.products.filter(item => item._id !== payload)
       };
     case EDIT_PRODUCT:
       return {
@@ -124,6 +119,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
     case POST_NEW_PRODUCT:
       return {
         ...state,
+        products : [ ...state.products ,payload]
       };
     case GET_PRODUCT_BY_ID:
       return {

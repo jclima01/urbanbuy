@@ -1,5 +1,5 @@
 .container{
-    background-color: whitesmoke;
+    background-image: url('../../Img/fondodetail.png');
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -7,6 +7,8 @@
     align-items: center;
     border-radius: 30px;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.6);
+    margin-left: 300px;
+    
     
 }
 
@@ -26,11 +28,15 @@
 
 .hovers{
     background-color: black;
-    padding: 2vw;
+    padding: 0.5vw;
     margin-top: 5px;
     margin-bottom: 5px;
     border-radius: 10px;
     color: white;
+    width: 200px;
+    display: flex;
+  flex-direction: column;
+  justify-content: center;
 
 }
 
@@ -47,3 +53,11 @@
     width: 70%;
     border-radius: 10px;
 }
+
+.button{
+    background-color: rgb(243, 156, 18);
+    padding: 10px;
+    border: none;
+    border-radius: 7px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.6);
+};

@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
 import NavEcommerce from './NavEcommerce'
-{/*import Filter from '../Filter/Filter'*/}
 import SliderEcommerceClient from '../EcommerceCliente/SliderEcommerceClient'
 import style from './HomeEcommerce.module.css'
 import Card from '../Card/Card'
+
 import { useDispatch, useSelector } from 'react-redux'
 import {getAllProducts, getCategories} from '../../redux/actions'
 import SearchBar from '../../SearchBar/SearchBar'

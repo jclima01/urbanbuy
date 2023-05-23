@@ -3,14 +3,15 @@ import { Link } from "react-router-dom";
 import styles from "./Card.module.css";
 import { FaStar } from "react-icons/fa";
 
+
 /* eslint-disable react/prop-types */
+
 const Card = ({products}) => {
   return (
     <div className={styles.cardContainer}>
       {" "}
       {/* eslint-disable react/prop-types */}
       {products && products.map((product) => (
-
         <Link
           to={`/product/${product._id}`}
           key={product._id}

@@ -12,7 +12,7 @@ const {
 
 productRouter.get("/:clientAdminId", getProductsHandler);
 
-productRouter.get("/:productId", getProductsHandlerById);
+productRouter.get("/product/:productId", getProductsHandlerById);
 
 //POST
 

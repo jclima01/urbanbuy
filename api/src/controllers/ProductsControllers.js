@@ -17,6 +17,7 @@ const getAllProducts = async (clientAdminId) => {
     const products = await Product.find({ clientAdmin: clientAdminId })
       .populate("categories") // Popula las categorías
       .exec();
+
     // const clientAdmin = await ClientAdmin.findById(clientAdminId)
     //   // .populate("clientAdmin") // Popula el modelo ClientAdmin
     // return clientAdmin.catalogue;
@@ -33,7 +34,7 @@ const getProductName = async (name, clientAdminId) => {
       clientAdmin: clientAdminId,
     })
       .populate("categories") // Popula las categorías
-      .populate("clientAdmin") // Popula el modelo ClientAdmin
+      // .populate("clientAdmin") // Popula el modelo ClientAdmin
       .exec();
     return dataBaseProducts;
   } catch (error) {
@@ -46,7 +47,7 @@ const getProductById = async (productId) => {
   try {
     const dataBaseProducts = await Product.findById(productId)
       .populate("categories") // Popula las categorías
-      .populate("clientAdmin") // Popula el modelo ClientAdmin
+      // .populate("clientAdmin") // Popula el modelo ClientAdmin
       .exec();
     return dataBaseProducts;
   } catch (error) {
@@ -126,6 +127,7 @@ const updateProduct = async (
 
 //DELETE
 const deleteProduct = async (productId) => {
+  console.log( productId)
   try {
     const deletedProduct = await Product.findByIdAndDelete(productId);
     return deletedProduct;

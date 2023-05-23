@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import DashBoardCardCategory from "../../Components/DashBoardCardCategory/DashBoardCardCategory";
 import DashBoardCardProducts from "../../Components/DashBoardCardProducts/DashBoardCardProducts";
 import DashBoardCardsUser from "../../Components/DashBoardCardsUser/DashBoardCardsUser";
@@ -6,8 +7,16 @@ import ilustration from "../../assets/ilustrationhome.png";
 import { Products, User, categoryProducts } from "../../data";
 import {IoMdAddCircleOutline} from "react-icons/io";
 import { Link } from "react-router-dom";
+import { IoMdAddCircleOutline } from "react-icons/io";
+import { useSelector } from "react-redux";
 
 const DashBoard = () => {
+
+  const clientAdmin = useSelector(state => state.clientAdmin)
+  let arrUser = [];
+  for (let i = 0; i < 3; i++) {
+    arrUser.push(User[i]);
+  }
 
   return (
     <div className="vh-100 w-100 d-flex justify-content-center overflow-hidden ">
@@ -37,7 +46,7 @@ const DashBoard = () => {
                   fontWeight: 400,
                 }}
               >
-                Hello <strong>Henry Carrilo, </strong>
+                Hello <strong>{clientAdmin.fullName} </strong>
               </h1>
               <p style={{ fontSize: 20 }}>
                 Improve your products in our section.
@@ -60,6 +69,7 @@ const DashBoard = () => {
                 Go Site View.
               </button>
                 </Link>
+
             </div>
 
             <div style={{ width: "30%", height: "100%" }}>
@@ -140,7 +150,7 @@ const DashBoard = () => {
               {categoryProducts.map((item, i) => (
                 <DashBoardCardCategory key={i} category={item} />
               ))}
-              {categoryProducts.length === 7 ? null : ((
+              {categoryProducts.length === 7 ? null : (
                 <div
                   style={{
                     width: 140,
@@ -151,11 +161,15 @@ const DashBoard = () => {
                     alignItems: "center",
                     justifyContent: "center",
                   }}
-                  
                 >
-                  <IoMdAddCircleOutline size={60} color="white" className="hoverCategory"  cursor={'pointer'} />
+                  <IoMdAddCircleOutline
+                    size={60}
+                    color="white"
+                    className="hoverCategory"
+                    cursor={"pointer"}
+                  />
                 </div>
-              ))}
+              )}
             </div>
             <div
               style={{
@@ -243,7 +257,7 @@ const DashBoard = () => {
                   gap: 10,
                 }}
               >
-                {User?.map((item) => (
+                {arrUser?.map((item) => (
                   <DashBoardCardsUser key={item.id} Users={item} />
                 ))}
               </div>

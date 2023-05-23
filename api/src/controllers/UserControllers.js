@@ -1,9 +1,10 @@
 const User = require("../models/Users/User.js");
+const ClientAdmin = require("../models/Users/ClientAdmin.js");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 require("dotenv").config();
 
-const UserRegister = async (fullName, email, password) => {
+const UserRegister = async (fullName, email, password, clientAdminId) => {
   try {
     if (!email) throw new Error("Email is required");
     if (!password) throw new Error("Password is required");
@@ -14,8 +15,10 @@ const UserRegister = async (fullName, email, password) => {
     var hash = bcrypt.hashSync(password, salt);
 
     const newUser = new User({ fullName, email, password: hash });
-
     const savedUser = await newUser.save();
+    const clientAdmin = await ClientAdmin.findById(clientAdminId);
+    clientAdmin.users.push(savedUser._id);
+    await clientAdmin.save();
     return savedUser;
   } catch (error) {
     throw new Error(error.message);
@@ -63,10 +66,38 @@ const UserDelete = async (userId) => {
     throw new Error(error.message);
   }
 };
+const getClientAdminUsers = async (clientAdminId) => {
+  try {
+    const clientAdmin = await ClientAdmin.findById(clientAdminId)
+      .populate("users") // Popula las categorías
+      // .populate("clientAdmin") // Popula el modelo ClientAdmin
+      .exec();
+
+    return clientAdmin.users;
+    // const clientAdminUsers = await User.find({ clientAdmin: clientAdminId });
+    // return clientAdminUsers;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+const getUserById = async (userId) => {
+  try {
+    const user = await User.findById(userId)
+      .populate("orders") // Popula las categorías
+      // .populate("clientAdmin") // Popula el modelo ClientAdmin
+      .exec();
+
+    return user;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
 
 module.exports = {
   UserRegister,
   UserLogin,
   UserUpdate,
   UserDelete,
+  getClientAdminUsers,
+  getUserById,
 };
