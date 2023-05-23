@@ -1,0 +1,37 @@
+.slider{
+    border: 1px solid rgb(255, 153, 0);
+    border-radius: 10px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);
+}
+.img {
+    width: 100%; /* Ancho del contenedor */
+    height: 300px; /* Altura deseada */
+    object-fit: contain; /* Ajustar imagen sin distorsión */
+    object-position: center; /* Centrar imagen horizontalmente */
+  }
+
+  .sliderTitle {
+    position: absolute;
+    bottom: 450px;
+    left: 160px;
+    background-color: rgba(243, 148, 7, 0.9);
+    color: white;
+    padding: 10px;
+    margin: 0;
+    border-radius: 0 10px 10px 0;
+  }
+  .carousel-indicators {
+    bottom: 10px;
+  }
+  
+  .carousel-indicators li {
+    background-color: #f7a902; /* Color de fondo para las indicaciones */
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+  }
+  
+  .carousel-indicators .active {
+    background-color: #333; /* Color de fondo para la indicación activa */
+  }
+  

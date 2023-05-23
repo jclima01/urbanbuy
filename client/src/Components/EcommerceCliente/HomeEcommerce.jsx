@@ -81,12 +81,30 @@ function HomeEcommerce() {
   
   return (
     <div>
-      <NavEcommerce/>
-      <SliderEcommerceClient products={products}/>
-      <h2 className={style.h2}>PRODUCTOS DESTACADOS</h2>
-      <br/>
-      <SearchBar onSearch={handleSearch} />
+      {/* <NavEcommerce/> */}
+      <SliderEcommerceClient products={products} />
+
       <h2 className={style.h2}>PRODUCTOS </h2>
+
+      <div className={style.filterSearchContainer}>
+        <div className={style.filterContainer}>
+          <p>Filtrar por rating:</p>
+          <select onChange={filterProduct}>
+            <option value='' disabled defaultValue>
+              Elegir rating
+            </option>
+            {rating.map((r) => {
+              return <option key={r} value={r}>{r}</option>
+            })}
+          </select>
+        </div>
+        <div className={style.searchContainer}>
+          <SearchBar onSearch={handleSearch} />
+        </div>
+      </div>
+
+      <Card products={filteredProduct} />
+
       {/*<Filter filter={products} onFilterChange={filterProduct}/>*/}
       {/* Filter */}
       <p>Filtrar por rating: </p>
@@ -96,12 +114,14 @@ function HomeEcommerce() {
           return <option key={r} value={r}>{r}</option>
         })}
       </select>
+
       {/* Order */}
       <div>
         <p>Ordenar por:</p>
         <button onClick={() => handleOrder('price')}>Precio</button>
         <button onClick={() => handleOrder('name')}>Nombre</button>
       </div>
+
 
       <Card products={currentProducts} />
   
@@ -121,6 +141,7 @@ function HomeEcommerce() {
           </ul>
         )}
       </div>
+
 
     </div>
   )

@@ -1,16 +1,19 @@
-import { Link } from "react-router-dom";
 import DashBoardCardCategory from "../../Components/DashBoardCardCategory/DashBoardCardCategory";
 import DashBoardCardProducts from "../../Components/DashBoardCardProducts/DashBoardCardProducts";
 import DashBoardCardsUser from "../../Components/DashBoardCardsUser/DashBoardCardsUser";
 import logo from "../../assets/Logo.jpeg";
 import ilustration from "../../assets/ilustrationhome.png";
 import { Products, User, categoryProducts } from "../../data";
+import { Link } from "react-router-dom";
 import { IoMdAddCircleOutline } from "react-icons/io";
 import { useSelector } from "react-redux";
 
 const DashBoard = () => {
 
   const clientAdmin = useSelector(state => state.clientAdmin)
+
+  const clientAdminStorage = JSON.parse(localStorage.getItem('clientAdmin')) ?? false
+  const adminStorage = clientAdminStorage ? clientAdminStorage : false
   let arrUser = [];
   for (let i = 0; i < 3; i++) {
     arrUser.push(User[i]);

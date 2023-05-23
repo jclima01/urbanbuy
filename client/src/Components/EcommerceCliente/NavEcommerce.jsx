@@ -24,7 +24,7 @@ function NavEcommerce() {
        
         <div>
           
-        <SearchBar />
+       
         </div>
     
       </Container>

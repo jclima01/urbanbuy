@@ -320,7 +320,7 @@ export const loginClientAdmin = (email, password) => {
           password,
         }
       );
-      localStorage.setItem("dataClientAdmin", data);
+      localStorage.setItem("clientAdmin", JSON.stringify(data));
       return dispatch({
         type: LOGIN_CLIENT_ADMIN,
         payload: data,
@@ -422,7 +422,7 @@ export const logOutAdmin = () => {
 };
 export const logOutClientAdmin = () => {
   try {
-    localStorage.removeItem("dataClientAdmin");
+    localStorage.removeItem("clientAdmin");
 
     return async function (dispatch) {
       dispatch({
