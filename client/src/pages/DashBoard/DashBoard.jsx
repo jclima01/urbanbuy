@@ -4,7 +4,6 @@ import DashBoardCardsUser from "../../Components/DashBoardCardsUser/DashBoardCar
 import logo from "../../assets/Logo.jpeg";
 import ilustration from "../../assets/ilustrationhome.png";
 import { Products, User, categoryProducts } from "../../data";
-import {IoMdAddCircleOutline} from "react-icons/io";
 import { Link } from "react-router-dom";
 import { IoMdAddCircleOutline } from "react-icons/io";
 import { useSelector } from "react-redux";
