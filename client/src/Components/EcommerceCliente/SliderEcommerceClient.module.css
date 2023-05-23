@@ -20,4 +20,18 @@
     margin: 0;
     border-radius: 0 10px 10px 0;
   }
+  .carousel-indicators {
+    bottom: 10px;
+  }
+  
+  .carousel-indicators li {
+    background-color: #f7a902; /* Color de fondo para las indicaciones */
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+  }
+  
+  .carousel-indicators .active {
+    background-color: #333; /* Color de fondo para la indicación activa */
+  }
   

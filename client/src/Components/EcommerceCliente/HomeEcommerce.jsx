@@ -50,23 +50,30 @@ function HomeEcommerce() {
   console.log('filterProduct: ', filteredProduct)
   
   return (
-    <div >
+    <div>
       {/* <NavEcommerce/> */}
-      <SliderEcommerceClient products={products}/>
-  
-      <SearchBar onSearch={handleSearch} />
+      <SliderEcommerceClient products={products} />
+
       <h2 className={style.h2}>PRODUCTOS </h2>
-      {/*<Filter filter={products} onFilterChange={filterProduct}/>*/}
-       <p>Filtrar por rating: </p>
-      <select onChange={filterProduct}>
-        <option value='' disabled default selected>Elegir rating</option>
-        {rating.map(r => {
-          return <option key={r} value={r}>{r}</option>
-        })}
-      </select>
-   
+
+      <div className={style.filterSearchContainer}>
+        <div className={style.filterContainer}>
+          <p>Filtrar por rating:</p>
+          <select onChange={filterProduct}>
+            <option value='' disabled defaultValue>
+              Elegir rating
+            </option>
+            {rating.map((r) => {
+              return <option key={r} value={r}>{r}</option>
+            })}
+          </select>
+        </div>
+        <div className={style.searchContainer}>
+          <SearchBar onSearch={handleSearch} />
+        </div>
+      </div>
+
       <Card products={filteredProduct} />
-     
     </div>
   )
 }

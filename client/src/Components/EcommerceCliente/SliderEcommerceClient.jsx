@@ -6,13 +6,12 @@ const SliderComponent = ({ products }) => {
     <div className={style.slider}>
       <h3 className={style.sliderTitle}>Productos destacados</h3>
       <Carousel>
-        {products.map((product) => (
+        {products.map((product, index) => (
           <Carousel.Item key={product._id}>
             <img className={style.img} src={product.imageUrl} alt={product.productName} />
           </Carousel.Item>
         ))}
       </Carousel>
-      
     </div>
   );
 };
