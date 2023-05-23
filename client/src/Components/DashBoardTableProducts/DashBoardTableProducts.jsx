@@ -6,6 +6,7 @@ const DashBoardTableProducts = () => {
 
 
  const Products = useSelector(state=> state.products)
+ console.log('Products', Products)
 
   return (
     <Table
