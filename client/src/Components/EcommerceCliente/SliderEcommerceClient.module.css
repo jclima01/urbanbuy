@@ -12,8 +12,7 @@
 
   .sliderTitle {
     position: absolute;
-    bottom: 450px;
-    left: 160px;
+z-index: 1;
     background-color: rgba(243, 148, 7, 0.9);
     color: white;
     padding: 10px;
