@@ -71,9 +71,9 @@ const DashBoardUser = () => {
               User Detail
             </div>
           </div>
-          <div className="paginationUsers">
+          {/* <div className="paginationUsers">
         {  activeTab ? <Pagination usersPerPage={usersPerPage} numberOfUsers={users.length} setActualPage={setActualPage}/>:null}
-          </div>
+          </div> */}
         </div>
 
         <div className="contentDashboardUsers">
