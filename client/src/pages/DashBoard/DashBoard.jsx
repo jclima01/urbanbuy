@@ -205,8 +205,8 @@ const DashBoard = () => {
                 justifyContent: "space-around",
               }}
             >
-              {productsSlice?.map((item) => (
-                <DashBoardCardProducts key={item._id} products={item} />
+              {products?.map((item, i) => (
+                <DashBoardCardProducts key={`cardproducts-${i}`} products={item} />
               ))}
             </div>
           </div>

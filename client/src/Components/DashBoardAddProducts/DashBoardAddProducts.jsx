@@ -20,7 +20,6 @@ const DashBoardAddProducts = ({ setIsActive, clientAdminId }) => {
     rating: 0,
   });
 
-  console.log(dataProducts);
   const {
     productName,
     description,

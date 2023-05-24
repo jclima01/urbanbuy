@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { deleteProduct, getAllProducts } from "../../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./DashBoardTableCardProducts.module.css"
+import Swal from "sweetalert2";
 const DashBoardTableCardProducts = ({
   productName,
   categories,
@@ -20,10 +21,31 @@ const DashBoardTableCardProducts = ({
   .filter(category => categories?.includes(category._id))
   .map(category => category.categoryName);
   
-  console.log('categoriatest', categoriatest)
+ 
 
   
+const handleDelete = () =>{
 
+  Swal.fire({
+    title: 'Are you sure?',
+    text: "You won't be able to revert this!",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes, delete it!'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      setIdReference(id)
+      Swal.fire(
+        'Deleted!',
+        'Your file has been deleted.',
+        'success'
+      )
+    }
+  })
+   
+}
   
 
   useEffect(() => {
@@ -69,7 +91,7 @@ const DashBoardTableCardProducts = ({
         <td>{rating}</td>
         <td>
           {/* <button>Edit </button> */}
-          <button className={styles.button} onClick={() => setIdReference(id)}>delete</button>
+          <button className={styles.button} onClick={handleDelete}>delete</button>
         </td>
       </tr>
     </tbody>

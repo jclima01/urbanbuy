@@ -4,7 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getAllProducts } from "../../redux/actions";
 
-const DashBoardTableProducts = () => {
+const DashBoardTableProducts = ({ searchInput }) => {
+
 
   const clientAdminStorage = JSON.parse(localStorage.getItem('clientAdmin')) ?? false;
   const clientAdminId = clientAdminStorage._id;
@@ -33,19 +34,20 @@ const dispatch = useDispatch()
           <th>Options</th>
         </tr>
       </thead>
-      {products?.map((product) => (
-        <DashBoardTableCardProducts 
-        key={product._id}
-        productName={product.productName}
-        categories={product.categories}
-        imageUrl={product.imageUrl}
-        stocks={product.stocks}
-        price={product.price}
-        rating={product.rating}
-        id={product._id}
+      {products?.filter((item) => item.productName.toLowerCase().includes(searchInput)).map(
+        (product) => (
+          <DashBoardTableCardProducts
+            key={product._id}
+            productName={product.productName}
+            categories={product.categories}
+            imageUrl={product.imageUrl}
+            stocks={product.stocks}
+            price={product.price}
+            rating={product.rating}
+            id={product._id}
           />
-      ))}
-
+        )
+      )}
     </Table>
   );
 };
