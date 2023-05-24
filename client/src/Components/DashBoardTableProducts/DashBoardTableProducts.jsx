@@ -1,9 +1,9 @@
 import Table from "react-bootstrap/esm/Table";
 import DashBoardTableCardProducts from "./DashBoardTableCardProducts/DashBoardTableCardProducts";
 import { useSelector } from "react-redux";
-import { useEffect } from "react";
 
-const DashBoardTableProducts = ({ searchInput }) => {
+
+const DashBoardTableProducts = ({ searchInput , setIsActive  }) => {
   const Products = useSelector((state) => state.products);
 
 
@@ -38,6 +38,7 @@ const DashBoardTableProducts = ({ searchInput }) => {
             price={product.price}
             rating={product.rating}
             id={product._id}
+            setIsActive={setIsActive}
           />
         )
       )}

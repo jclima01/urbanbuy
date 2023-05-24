@@ -24,7 +24,8 @@ import {
 
   FILTER_CLIENT_USERS, 
   ORDER_CLIENT_USERS,
-  SEARCH_USERS
+  SEARCH_USERS,
+  DATA_EDIT_PRODUCT
 } from "../actions/index.js";
 
 const initialState = {
@@ -36,7 +37,7 @@ const initialState = {
   product: {},
   categories: [],
   ordersByUser: [],
-
+  dataEditProduct: {},
   clientAdminUsers:[],
 };
 
@@ -123,7 +124,8 @@ const rootReducer = (state = initialState, { type, payload }) => {
     case POST_NEW_PRODUCT:
       return {
         ...state,
-        products: [...state.products , payload]
+        products: [...state.products , payload],
+        dataEditProduct: {}
       };
     case GET_PRODUCT_BY_ID:
       return {
@@ -185,6 +187,12 @@ const rootReducer = (state = initialState, { type, payload }) => {
         UserSession: false,
       };
 
+      case DATA_EDIT_PRODUCT:
+        console.log(payload)
+        return{
+          ...state,
+          dataEditProduct: payload
+        }
     default:
       return {
         ...state,
