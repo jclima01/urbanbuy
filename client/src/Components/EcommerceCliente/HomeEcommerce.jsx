@@ -9,7 +9,7 @@ import { getAllProducts, getCategories } from "../../redux/actions";
 import SearchBar from "../../SearchBar/SearchBar";
 
 function HomeEcommerce() {
-  const clientAdmin = useSelector((state) => state.clientAdmin);
+  const clientAdmin = JSON.parse(localStorage.getItem('clientAdmin')) ?? false
   const products = useSelector((state) => state.products);
   const dispatch = useDispatch();
   const clientAdminId = clientAdmin._id;

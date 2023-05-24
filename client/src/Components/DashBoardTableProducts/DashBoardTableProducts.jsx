@@ -1,13 +1,19 @@
 import Table from "react-bootstrap/esm/Table";
 import DashBoardTableCardProducts from "./DashBoardTableCardProducts/DashBoardTableCardProducts";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getAllProducts } from "../../redux/actions";
 
 const DashBoardTableProducts = () => {
 
-
- const Products = useSelector(state=> state.products)
- console.log('Products', Products)
-
+  const clientAdminStorage = JSON.parse(localStorage.getItem('clientAdmin')) ?? false;
+  const clientAdminId = clientAdminStorage._id;
+ const products = useSelector(state=> state.products)
+const dispatch = useDispatch()
+ useEffect(() => {
+  dispatch(getAllProducts(clientAdminId));
+}, [dispatch]);
+ 
   return (
     <Table
       striped="columns"
@@ -27,7 +33,7 @@ const DashBoardTableProducts = () => {
           <th>Options</th>
         </tr>
       </thead>
-      {Products?.map((product) => (
+      {products?.map((product) => (
         <DashBoardTableCardProducts 
         key={product._id}
         productName={product.productName}

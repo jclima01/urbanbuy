@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "../DashBoardUser/DashBoardUser.css";
 
 import DashBoardUsersConteiner from "./DashBoardUsersConteiner";
@@ -7,8 +7,8 @@ import DashBoardListUsers from "../DashBoardUser/ListUsers";
 import DashBoardNavUsers from "./NavUsers";
 import Pagination from "./Pagination/Pagination";
 import DashBoardUserDetail from "./DashBoardUserDetail";
-import { useSelector } from "react-redux";
-
+import { useDispatch, useSelector } from "react-redux";
+import { getClientAdminUsers } from "../../redux/actions";
 
 const DashBoardUser = () => {
   const navTab = {
@@ -43,7 +43,6 @@ const DashBoardUser = () => {
     marginRight: "8px",
   };
 
-
   const [activeTab, setActiveTab] = useState(true);
   const [actualPage, setActualPage] = useState(1);
   const [usersPerPage, setUsersPerPage] = useState(3);
@@ -51,38 +50,51 @@ const DashBoardUser = () => {
     setActiveTab(!activeTab);
   };
   const users = useSelector((state) => state.clientAdminUsers);
-
+  const dispatch = useDispatch();
   const lastUserIndex = actualPage * usersPerPage;
 
   const firstUserIndex = lastUserIndex - usersPerPage;
 
   const usersSlice = users.slice(firstUserIndex, lastUserIndex);
 
+  const clientAdmin = JSON.parse(localStorage.getItem("clientAdmin")) ?? false;
+
+  useEffect(() => {
+   dispatch(getClientAdminUsers(clientAdmin._id))
+  }, []);
 
   return (
     <>
       <div className="contieneTodoDashboardUsers">
         <div className="navegateUser">
           <div style={navTab}>
-            <div style={activeTab? tabActive: tab} onClick={handleView}>
+            <div style={activeTab ? tabActive : tab} onClick={handleView}>
               All Users
             </div>
-            <div style={activeTab? tab: tabActive} onClick={handleView}>
+            <div style={activeTab ? tab : tabActive} onClick={handleView}>
               User Detail
             </div>
           </div>
           <div className="paginationUsers">
-        {  activeTab ? <Pagination usersPerPage={usersPerPage} numberOfUsers={users.length} setActualPage={setActualPage}/>:null}
+            {activeTab ? (
+              <Pagination
+                usersPerPage={usersPerPage}
+                numberOfUsers={users.length}
+                setActualPage={setActualPage}
+              />
+            ) : null}
           </div>
         </div>
 
         <div className="contentDashboardUsers">
           {activeTab ? (
             <>
-
-              <DashBoardUsersConteiner setActiveTab={setActiveTab} activeTab={activeTab} users={usersSlice} setActualPage={setActualPage}/>
-              
-
+              <DashBoardUsersConteiner
+                setActiveTab={setActiveTab}
+                activeTab={activeTab}
+                users={usersSlice}
+                setActualPage={setActualPage}
+              />
             </>
           ) : (
             <DashBoardUserDetail />
