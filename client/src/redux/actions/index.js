@@ -389,7 +389,7 @@ export const registerClientAdmin = (fullName, email, password) => {
 export const registerUser = (email, password) => {
   try {
     return async function (dispatch) {
-      await axios.post("http://localhost:6800/admin/register", {
+      await axios.post("/admin/register", {
         email,
         password,
       });
