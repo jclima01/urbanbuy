@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint src --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview --host https://urbaybuy-front.up.railway.app/"
+    "preview": "npm run preview -- --host urbaybuy-front.up.railway.app"
   },
   "dependencies": {
     "axios": "^1.4.0",
