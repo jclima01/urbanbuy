@@ -143,9 +143,11 @@ const rootReducer = (state = initialState, { type, payload }) => {
         ...state,
       };
     case LOGIN_CLIENT_ADMIN:
+
+      const clientAdmin = JSON.parse(localStorage.getItem("clientAdmin"));
       return {
         ...state,
-        clientAdmin: { ...payload },
+        clientAdmin: { ...clientAdmin },
         UserSession: true,
       };
     case REGISTER_CLIENT_ADMIN:

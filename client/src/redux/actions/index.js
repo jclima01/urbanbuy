@@ -472,3 +472,11 @@ export const searchUsers = (searchTerm) => ({
   payload: searchTerm,
 });
 
+
+export const getSession = () => {
+  
+  return {
+    type: ORDER_CLIENT_USERS,
+    payload: orden,
+  };
+};

@@ -8,23 +8,22 @@ import { Link } from "react-router-dom";
 import { IoMdAddCircleOutline } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { getAllProducts } from "../../redux/actions";
+import { getAllProducts, getClientAdminUsers } from "../../redux/actions";
 
 const DashBoard = () => {
+  const products = useSelector((state) => state.products);
+  const users = useSelector((state) => state.users);
 
-  const clientAdmin = useSelector(state => state.clientAdmin)
-const products = useSelector(state => state.products)
-const productsSlice = products.slice(0,4)
-  const clientAdminStorage = JSON.parse(localStorage.getItem('clientAdmin')) ?? false
-  const adminStorage = clientAdminStorage ? clientAdminStorage : false
-  let arrUser = [];
-  for (let i = 0; i < 3; i++) {
-    arrUser.push(User[i]);
-  }
-const dispatch = useDispatch()
+  const productsSlice = products.slice(0, 4);
+  const clientAdminStorage =
+    JSON.parse(localStorage.getItem("clientAdmin")) ?? false;
+  console.log(clientAdminStorage);
+  const adminStorage = clientAdminStorage ? clientAdminStorage : false;
+  const dispatch = useDispatch();
   useEffect(() => {
-dispatch(getAllProducts(clientAdmin._id))
-  })
+    dispatch(getAllProducts(clientAdminStorage._id));
+    dispatch(getClientAdminUsers(clientAdminStorage._id));
+  }, []);
   return (
     <div className="vh-100 w-100 d-flex justify-content-center overflow-hidden ">
       <div className="contianer-home">
@@ -54,30 +53,29 @@ dispatch(getAllProducts(clientAdmin._id))
                   fontWeight: 400,
                 }}
               >
-                Hello <strong>{clientAdmin.fullName} </strong>
+                Hello <strong>{clientAdminStorage.fullName} </strong>
               </h1>
               <p style={{ fontSize: 20 }}>
                 Improve your products in our section.
               </p>
               <Link to={"/homecliente"}>
-              <button
-                style={{
-                  cursor: "pointer",
-                  fontSize: 20,
-                  width: 200,
-                  marginTop: 15,
-                  padding: 15,
-                  borderRadius: 15,
-                  background: "#ff7f2a",
-                  border: "none",
-                  color: "white",
-                  fontWeight: 400,
-                }}
-              >
-                Go Site View.
-              </button>
-                </Link>
-
+                <button
+                  style={{
+                    cursor: "pointer",
+                    fontSize: 20,
+                    width: 200,
+                    marginTop: 15,
+                    padding: 15,
+                    borderRadius: 15,
+                    background: "#ff7f2a",
+                    border: "none",
+                    color: "white",
+                    fontWeight: 400,
+                  }}
+                >
+                  Go Site View.
+                </button>
+              </Link>
             </div>
 
             <div style={{ width: "30%", height: "100%" }}>
@@ -205,11 +203,10 @@ dispatch(getAllProducts(clientAdmin._id))
                 height: "100%",
                 alignItems: "end",
                 justifyContent: "space-around",
-               
               }}
             >
               {productsSlice?.map((item) => (
-                <DashBoardCardProducts key={item.id} products={item} />
+                <DashBoardCardProducts key={item._id} products={item} />
               ))}
             </div>
           </div>
