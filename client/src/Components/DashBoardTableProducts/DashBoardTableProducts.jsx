@@ -45,6 +45,7 @@ const dispatch = useDispatch()
             price={product.price}
             rating={product.rating}
             id={product._id}
+            setIsActive={setIsActive}
           />
         )
       )}

@@ -6,13 +6,14 @@ import { getAllProducts } from "../../redux/actions";
 import DashBoardAddProducts from "../../Components/DashBoardAddProducts/DashBoardAddProducts";
 import DashBoardModalAddCategories from "../../Components/DashBoardModalAddCategories/DashBoardModalAddCategories";
 
-import styles from "./DashBoardProducts.module.css"
+import styles from "./DashBoardProducts.module.css";
 const DashBoardProducts = () => {
   const dispatch = useDispatch();
   const clientAdminStorage = JSON.parse(localStorage.getItem('clientAdmin')) ?? false;
   const clientAdminId = clientAdminStorage._id;
   const refTransitionAddProduct = useRef();
   const products = useSelector((state) => state.products);
+  const dataEditProduct = useSelector((state) => state.dataEditProduct);
   const [isActive, setIsActive] = useState(900);
 
   const handleActiveAddProduct = (isActive) => {
@@ -21,7 +22,7 @@ const DashBoardProducts = () => {
 
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(true);
-  const [searchInput, setSearchInput] = useState('');
+  const [searchInput, setSearchInput] = useState("");
 
   useEffect(() => {
     dispatch(getAllProducts(clientAdminId));
@@ -68,6 +69,8 @@ const DashBoardProducts = () => {
           }}
           ref={refTransitionAddProduct}
         >
+          
+
           <DashBoardAddProducts
             setIsActive={setIsActive}
             clientAdminId={clientAdminId}
@@ -87,7 +90,6 @@ const DashBoardProducts = () => {
             padding: 30,
           }}
         >
-
           <div
             style={{
               width: 400,
@@ -100,7 +102,7 @@ const DashBoardProducts = () => {
               textAlign: "center",
             }}
           >
-            <span style={{fontSize: "26px"}}>
+            <span style={{ fontSize: "26px" }}>
               <strong>Total </strong> Products {products.length}
             </span>
           </div>
@@ -132,17 +134,22 @@ const DashBoardProducts = () => {
               flexDirection: "column",
               alignItems: "end",
               justifyContent: "center",
-              gap:30,
+              gap: 30,
               padding: 10,
               width: 200,
               height: 160,
               borderRadius: 20,
             }}
           >
-            <button className={styles.button1} onClick={() => handleActiveAddProduct(isActive)}>
+            <button
+              className={styles.button1}
+              onClick={() => handleActiveAddProduct(isActive)}
+            >
               Add Product
             </button>
-            <button className={styles.button1} onClick={handleShow}>Set Categories</button>
+            <button className={styles.button1} onClick={handleShow}>
+              Set Categories
+            </button>
           </div>
         </div>
         <div
@@ -201,7 +208,7 @@ const DashBoardProducts = () => {
                 filter
               </span>
             </div> */}
-             <div
+            <div
               style={{
                 width: "80%",
                 height: "100%",
@@ -219,7 +226,7 @@ const DashBoardProducts = () => {
                 onChange={(e) => setSearchInput(e.target.value)}
               />
               <CiSearch size={23} />
-            </div> 
+            </div>
             {/* <div style={{ width: "20%" }}>
               <span>- 1 2 3 4 5 -</span>
             </div> */}
@@ -234,7 +241,10 @@ const DashBoardProducts = () => {
             overflowY: "auto",
           }}
         >
-          <DashBoardTableProducts searchInput={searchInput} />
+          <DashBoardTableProducts
+            searchInput={searchInput}
+            setIsActive={setIsActive}
+          />
         </div>
       </div>
     </div>
