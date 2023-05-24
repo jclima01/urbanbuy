@@ -8,7 +8,8 @@ import { postNewProduct } from "../../redux/actions";
 const DashBoardAddProducts = ({ setIsActive, clientAdminId }) => {
   const dispatch = useDispatch();
   const categorie = useSelector((state) => state.categories);
-  const [Category, setsetCategory] = useState('');
+ 
+  const [Category, setsetCategory] = useState("");
 
   const [dataProducts, setdataProducts] = useState({
     productName: "",
@@ -45,7 +46,7 @@ const DashBoardAddProducts = ({ setIsActive, clientAdminId }) => {
       ...dataProducts,
       [e.target.name]: e.target.value,
     });
-  
+
     // Verificar si hay errores en el campo actual y habilitar el botón si no hay errores
     if (e.target.name === "productName" && errors.productNameError) {
       setErrors({
@@ -146,7 +147,18 @@ const DashBoardAddProducts = ({ setIsActive, clientAdminId }) => {
       }}
     >
       <div
-        onClick={() => setIsActive(900)}
+        onClick={() => {
+          setdataProducts({
+            productName: "",
+            description: "",
+            categories: [],
+            stocks: 0,
+            imageUrl: "",
+            price: 0,
+            rating: 0,
+          });
+          setIsActive(900);
+        }}
         style={{
           position: "absolute",
           left: "-90px",
@@ -198,7 +210,7 @@ const DashBoardAddProducts = ({ setIsActive, clientAdminId }) => {
               e.preventDefault();
               setsetCategory(e.target.value);
 
-              if (dataProducts.categories.includes(e.target.value) ){
+              if (dataProducts.categories.includes(e.target.value)) {
                 setdataProducts({
                   ...dataProducts,
                   categories: [...categories],
