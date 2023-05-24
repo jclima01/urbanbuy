@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { deleteProduct } from "../../../redux/actions";
+import { deleteProduct, getAllProducts } from "../../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./DashBoardTableCardProducts.module.css"
 const DashBoardTableCardProducts = ({
@@ -28,7 +28,9 @@ const DashBoardTableCardProducts = ({
 
   useEffect(() => {
     dispatch(deleteProduct(idReference));
-  }, [idReference]);
+    dispatch(getAllProducts());
+
+  }, [dispatch,idReference]);
   return (
     <tbody>
       <tr>

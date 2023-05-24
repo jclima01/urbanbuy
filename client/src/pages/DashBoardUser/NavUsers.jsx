@@ -66,7 +66,7 @@ const DashBoardNavUsers = () => {
         </div>
 
 
-        {/* <div className="filter">
+         {/* <div className="filter">
           <select className="filters">
 
             <option value="Filters">Filters</option>
@@ -74,7 +74,7 @@ const DashBoardNavUsers = () => {
             <option value="Filters">Filter 2</option>
             <option value="Filters">Filter 3</option>
           </select>
-        </div> 
+        </div>  */}
 
         
 
