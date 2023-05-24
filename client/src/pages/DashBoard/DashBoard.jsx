@@ -14,7 +14,7 @@ const DashBoard = () => {
 
   const clientAdmin = useSelector(state => state.clientAdmin)
 const products = useSelector(state => state.products)
-const productsSlice = products.slice(0,4)
+/* const productsSlice = products.slice(0,4) */
   const clientAdminStorage = JSON.parse(localStorage.getItem('clientAdmin')) ?? false
   const adminStorage = clientAdminStorage ? clientAdminStorage : false
   let arrUser = [];
@@ -208,8 +208,8 @@ dispatch(getAllProducts(clientAdmin._id))
                
               }}
             >
-              {productsSlice?.map((item) => (
-                <DashBoardCardProducts key={item.id} products={item} />
+              {products?.map((item, i) => (
+                <DashBoardCardProducts key={`cardproducts-${i}`} products={item} />
               ))}
             </div>
           </div>

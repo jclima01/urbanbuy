@@ -21,6 +21,7 @@ const DashBoardProducts = () => {
 
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(true);
+  const [searchInput, setSearchInput] = useState('');
 
   useEffect(() => {
     dispatch(getAllProducts(clientAdminId));
@@ -200,7 +201,7 @@ const DashBoardProducts = () => {
                 filter
               </span>
             </div> */}
-            {/* <div
+             <div
               style={{
                 width: "80%",
                 height: "100%",
@@ -215,9 +216,10 @@ const DashBoardProducts = () => {
                 type="text"
                 placeholder="Search Products"
                 className="inputDashboard-Products"
+                onChange={(e) => setSearchInput(e.target.value)}
               />
               <CiSearch size={23} />
-            </div> */}
+            </div> 
             {/* <div style={{ width: "20%" }}>
               <span>- 1 2 3 4 5 -</span>
             </div> */}
@@ -232,7 +234,7 @@ const DashBoardProducts = () => {
             overflowY: "auto",
           }}
         >
-          <DashBoardTableProducts />
+          <DashBoardTableProducts searchInput={searchInput} />
         </div>
       </div>
     </div>

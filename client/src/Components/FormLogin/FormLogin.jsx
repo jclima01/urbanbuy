@@ -15,7 +15,6 @@ const FormLogin = () => {
   const [password, setPassword] = useState('');
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
-  console.log('passwordError', passwordError)
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
