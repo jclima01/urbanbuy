@@ -30,7 +30,7 @@ export const getUserById = (userId) => {
   try {
     return async function (dispatch) {
       const { data } = await axios.get(
-        `http://localhost:2800/users/user/${userId}`
+        `/users/user/${userId}`
       );
       return dispatch({
         type: GET_USER_BY_ID,
@@ -46,7 +46,7 @@ export const getClientAdminUsers = (clientAdminId) => {
   try {
     return async function (dispatch) {
       const { data } = await axios.get(
-        `http://localhost:2800/users/${clientAdminId}`
+        `/users/${clientAdminId}`
       );
       return dispatch({
         type: GET_CLIENT_ADMIN_USERS,
@@ -62,7 +62,7 @@ export const deleteCategory = (categoryId) => {
   try {
     return async function (dispatch) {
       const { data } = await axios.delete(
-        `http://localhost:2800/category/${categoryId}`
+        `/category/${categoryId}`
       );
       return dispatch({
         type: DELETE_CATEGORY,
@@ -78,7 +78,7 @@ export const editCategory = (categoryId, categoryName) => {
   try {
     return async function (dispatch) {
       const { data } = await axios.put(
-        `http://localhost:2800/category/${categoryId}`,
+        `/category/${categoryId}`,
         {
           categoryName,
         }
@@ -97,7 +97,7 @@ export const getCategories = (clientAdminId) => {
   try {
     return async function (dispatch) {
       const { data } = await axios.get(
-        `http://localhost:2800/category/${clientAdminId}`
+        `/category/${clientAdminId}`
       );
       return dispatch({
         type: GET_CATEGORIES,
@@ -113,7 +113,7 @@ export const addCategory = (categoryName, clientAdminId) => {
   try {
     return async function (dispatch) {
       const { data } = await axios.post(
-        `http://localhost:2800/category/${clientAdminId}`,
+        `/category/${clientAdminId}`,
         {
           categoryName,
         }
@@ -141,7 +141,7 @@ export const postOrder = (
   try {
     return async function (dispatch) {
       const { data } = await axios.post(
-        `http://localhost:2800/orders/${userId}`,
+        `/orders/${userId}`,
         {
           fullName,
           status,
@@ -165,7 +165,7 @@ export const postOrder = (
 export const getOrdersByUser = (userId) => {
   try {
     return async function (dispatch) {
-      const { data } = await axios.get(`http://localhost:2800/orders/${userId}`);
+      const { data } = await axios.get(`/orders/${userId}`);
       return dispatch({
         type: GET_ORDERS_BY_USER,
         payload: data,
@@ -180,7 +180,7 @@ export const deleteProduct = (productId) => {
   try {
     return async function (dispatch) {
       const { data } = await axios.delete(
-        `http://localhost:2800/products/delete/${productId}`
+        `/products/delete/${productId}`
       );
       return dispatch({
         type: DELETE_PRODUCT,
@@ -206,7 +206,7 @@ export const editProduct = (
   try {
     return async function (dispatch) {
       const { data } = await axios.put(
-        `http://localhost:2800/products/${productId}`,
+        `/products/${productId}`,
         {
           productName,
           description,
@@ -240,7 +240,7 @@ export const postNewProduct = (
   try {
     return async function (dispatch) {
       const { data } = await axios.post(
-        `http://localhost:2800/products/${clientAdminId}`,
+        `/products/${clientAdminId}`,
         {
           productName,
           description,
@@ -265,7 +265,7 @@ export const getProductById = (productId) => {
   try {
     return async function (dispatch) {
       const { data } = await axios.get(
-        `http://localhost:2800/products/product/${productId}`
+        `/products/product/${productId}`
       );
       return dispatch({
         type: GET_PRODUCT_BY_ID,
@@ -281,7 +281,7 @@ export const getAllProducts = (clientAdminId) => {
   try {
     return async function (dispatch) {
       const { data } = await axios.get(
-        `http://localhost:2800/products/${clientAdminId}`
+        `/products/${clientAdminId}`
       );
       return dispatch({
         type: GET_ALL_PRODUCTS,
@@ -296,7 +296,7 @@ export const getAllProducts = (clientAdminId) => {
 export const loginAdmin = (email, password) => {
   try {
     return async function (dispatch) {
-      const { data } = await axios.post("http://localhost:2800/admin/login", {
+      const { data } = await axios.post("/admin/login", {
         email,
         password,
       });
@@ -315,7 +315,7 @@ export const loginClientAdmin = (email, password) => {
   try {
     return async function (dispatch) {
       const { data } = await axios.post(
-        "http://localhost:2800/clientAdmin/login",
+        "/clientAdmin/login",
         {
           email,
           password,
@@ -335,7 +335,7 @@ export const loginClientAdmin = (email, password) => {
 export const loginUser = (email, password) => {
   try {
     return async function (dispatch) {
-      const { data } = await axios.post("http://localhost:2800/user/login", {
+      const { data } = await axios.post("/user/login", {
         email,
         password,
       });
@@ -354,7 +354,7 @@ export const loginUser = (email, password) => {
 export const registerAdmin = (email, password) => {
   try {
     return async function (dispatch) {
-      await axios.post("http://localhost:2800/admin/register", {
+      await axios.post("/admin/register", {
         email,
         password,
       });
@@ -371,7 +371,7 @@ export const registerAdmin = (email, password) => {
 export const registerClientAdmin = (fullName, email, password) => {
   try {
     return async function (dispatch) {
-      await axios.post("http://localhost:2800/clientAdmin/register", {
+      await axios.post("/clientAdmin/register", {
         fullName,
         email,
         password,
