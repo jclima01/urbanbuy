@@ -59,7 +59,7 @@ const [input, setInput] = useState('');
                     backgroundColor:'#fff',
                     color:'black',
                     margin: 5,
-                    backgroundColor:'lightgray',
+                    //backgroundColor:'lightgray',
                     borderRadius: 10
     
                 }} key={item._id}> {item.categoryName} 
