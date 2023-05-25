@@ -36,7 +36,7 @@ const initialState = {
   categories: [],
   ordersByUser: [],
 
-  clientAdminUsers:[],
+  clientAdminUsers: [],
 };
 
 const rootReducer = (state = initialState, { type, payload }) => {
@@ -130,7 +130,6 @@ const rootReducer = (state = initialState, { type, payload }) => {
         ...state,
       };
     case POST_NEW_PRODUCT:
-
       const updatedCategories = payload.categories.map((category) => {
         const foundCategory = state.categories.find((c) => c._id === category);
         if (foundCategory) {

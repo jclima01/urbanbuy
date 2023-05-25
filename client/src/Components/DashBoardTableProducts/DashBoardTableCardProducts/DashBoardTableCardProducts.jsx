@@ -4,6 +4,8 @@ import {
   getAllProducts,
 } from "../../../redux/actions";
 import { useDispatch } from "react-redux";
+import { dataEditProduct, deleteProduct } from "../../../redux/actions";
+import { useDispatch, useSelector } from "react-redux";
 import styles from "./DashBoardTableCardProducts.module.css";
 import Swal from "sweetalert2";
 const DashBoardTableCardProducts = ({
@@ -18,39 +20,23 @@ const DashBoardTableCardProducts = ({
 }) => {
   const [idReference, setIdReference] = useState("");
   const dispatch = useDispatch();
-  const categorie = useSelector((state) => state.categories);
+  const handleDelete = () => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        setIdReference(id);
+        Swal.fire("Deleted!", "Your file has been deleted.", "success");
+      }
+    });
+  };
 
-  
-  const categoriatest = categorie
-  .filter(category => categories?.includes(category._id))
-  .map(category => category.categoryName);
-  
- 
-
-  
-const handleDelete = () =>{
-
-  Swal.fire({
-    title: 'Are you sure?',
-    text: "You won't be able to revert this!",
-    icon: 'warning',
-    showCancelButton: true,
-    confirmButtonColor: '#3085d6',
-    cancelButtonColor: '#d33',
-    confirmButtonText: 'Yes, delete it!'
-  }).then((result) => {
-    if (result.isConfirmed) {
-      setIdReference(id)
-      Swal.fire(
-        'Deleted!',
-        'Your file has been deleted.',
-        'success'
-      )
-    }
-  })
-   
-}
-  
 
   useEffect(() => {
     dispatch(deleteProduct(idReference));
@@ -87,8 +73,9 @@ const handleDelete = () =>{
           </div>
         </td>
         <td>{productName}</td>
-        <td>{categoriatest.map(p=> p).join('-')}</td>
-
+        <td className={styles.flexwrap}>
+          {categories.map((element) => element.categoryName).join("-")}
+        </td>
         <td>{stocks}</td>
         <td>{price}</td>
         <td>{rating}</td>
@@ -96,7 +83,7 @@ const handleDelete = () =>{
           <button className={styles.button} onClick={handleDelete}>
             delete
           </button>
-          <button className={styles.button}>
+          <button className={styles.button} onClick={handleEdit}>
             Edit
           </button>
         </td>

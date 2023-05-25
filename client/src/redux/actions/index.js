@@ -181,7 +181,7 @@ export const getOrdersByUser = (userId) => {
 export const deleteProduct = (productId) => {
   try {
     return async function (dispatch) {
-      await axios.delete(`http://localhost:2800/products/delete/${productId}`);
+      await axios.delete(`http://localhost:2800/products/delete/delete/${productId}`);
       return dispatch({
         type: DELETE_PRODUCT,
         payload: productId,
