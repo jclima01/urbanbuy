@@ -4,17 +4,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getAllProducts } from "../../redux/actions";
 
-const DashBoardTableProducts = ({ searchInput }) => {
 
-
-  const clientAdminStorage = JSON.parse(localStorage.getItem('clientAdmin')) ?? false;
+const DashBoardTableProducts = ({ setIsActive, searchInput }) => {
+  const clientAdminStorage =
+    JSON.parse(localStorage.getItem("clientAdmin")) ?? false;
   const clientAdminId = clientAdminStorage._id;
- const products = useSelector(state=> state.products)
-const dispatch = useDispatch()
- useEffect(() => {
-  dispatch(getAllProducts(clientAdminId));
-}, [dispatch]);
- 
+  const products = useSelector((state) => state.products);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getAllProducts(clientAdminId));
+  }, [dispatch]);
+
   return (
     <Table
       striped="columns"
@@ -34,8 +34,9 @@ const dispatch = useDispatch()
           <th>Options</th>
         </tr>
       </thead>
-      {products?.filter((item) => item.productName.toLowerCase().includes(searchInput)).map(
-        (product) => (
+      {products
+        ?.filter((item) => item.productName.toLowerCase().includes(searchInput))
+        .map((product) => (
           <DashBoardTableCardProducts
             key={product._id}
             productName={product.productName}
@@ -47,8 +48,7 @@ const dispatch = useDispatch()
             id={product._id}
             setIsActive={setIsActive}
           />
-        )
-      )}
+        ))}
     </Table>
   );
 };

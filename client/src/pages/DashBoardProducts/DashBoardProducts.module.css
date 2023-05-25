@@ -16,3 +16,14 @@
     transform: scale(1.1);
     border-color: 1px solid #ff7f2a ;
   }
+
+
+  ::-webkit-scrollbar{
+    width: 5px;
+    background-color: rgba(0, 0, 0, 0.127);
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb{
+    background-color:#ff7f2a;
+  }

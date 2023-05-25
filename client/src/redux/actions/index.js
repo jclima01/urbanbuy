@@ -98,7 +98,7 @@ export const getCategories = (clientAdminId) => {
     return async function (dispatch) {
       const { data } = await axios.get(
         `http://localhost:2800/category/${clientAdminId}`
-      );
+        );
       return dispatch({
         type: GET_CATEGORIES,
         payload: data,
