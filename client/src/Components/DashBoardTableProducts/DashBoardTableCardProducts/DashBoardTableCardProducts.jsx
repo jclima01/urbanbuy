@@ -1,9 +1,5 @@
 import { useEffect, useState } from "react";
-import {
-  dataEditProduct,
-  deleteProduct,
-  getAllProducts,
-} from "../../../redux/actions";
+import { deleteProduct, getAllProducts } from "../../../redux/actions";
 import { useDispatch } from "react-redux";
 import styles from "./DashBoardTableCardProducts.module.css";
 import Swal from "sweetalert2";
@@ -34,22 +30,6 @@ const DashBoardTableCardProducts = ({
         Swal.fire("Deleted!", "Your file has been deleted.", "success");
       }
     });
-  };
-
-  const obj = {
-    productName,
-    categories,
-    imageUrl,
-    stocks,
-    price,
-    rating,
-    id,
-  };
-
-  const handleEdit = (e) => {
-    e.preventDefault();
-    setIsActive(0);
-    dispatch(dataEditProduct(obj)).then(() => setIsActive(0));
   };
 
   useEffect(() => {
@@ -98,9 +78,7 @@ const DashBoardTableCardProducts = ({
           <button className={styles.button} onClick={handleDelete}>
             delete
           </button>
-          <button className={styles.button} onClick={handleEdit}>
-            Edit
-          </button>
+          <button className={styles.button}>Edit</button>
         </td>
       </tr>
     </tbody>

@@ -24,7 +24,7 @@ import {
   FILTER_CLIENT_USERS,
   ORDER_CLIENT_USERS,
   SEARCH_USERS,
-  DATA_EDIT_PRODUCT
+  DATA_EDIT_PRODUCT,
 } from "../actions/index.js";
 
 const initialState = {
@@ -37,7 +37,7 @@ const initialState = {
   categories: [],
   ordersByUser: [],
 
-  clientAdminUsers:[],
+  clientAdminUsers: [],
 };
 
 const rootReducer = (state = initialState, { type, payload }) => {
@@ -124,14 +124,13 @@ const rootReducer = (state = initialState, { type, payload }) => {
     case DELETE_PRODUCT:
       return {
         ...state,
-        products: state.products.filter(item=> item._id !== payload)
+        products: state.products.filter((item) => item._id !== payload),
       };
     case EDIT_PRODUCT:
       return {
         ...state,
       };
     case POST_NEW_PRODUCT:
-
       const updatedCategories = payload.categories.map((category) => {
         const foundCategory = state.categories.find((c) => c._id === category);
         if (foundCategory) {
