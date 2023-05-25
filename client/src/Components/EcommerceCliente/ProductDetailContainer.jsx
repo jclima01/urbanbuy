@@ -1,6 +1,6 @@
 import React from 'react'
-import ProductDetail from '../ProductDetail/ProductDetail'
 import { useParams } from 'react-router-dom'
+import ProductDetail from '../ProductDetail/ProductDetail'
 
 const ProductDetailContainer = () => {
     const {poductId} = useParams()

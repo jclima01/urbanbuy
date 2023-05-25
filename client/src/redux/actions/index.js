@@ -24,8 +24,39 @@ export const GET_USER_BY_ID = "GET_USER_BY_ID";
 export const ORDER_CLIENT_USERS= "ORDER_CLIENT_USERS";
 export const SEARCH_USERS = "SEARCH_USERS";
 export const FILTER_CLIENT_USERS="FILTER_CLIENT_USERS";
+export const ADD_PRODUCT_TO_CART="ADD_PRODUCT_TO_CART";
+export const REMOVE_PRODUCT_FROM_CART="REMOVE_PRODUCT_FROM_CART";
 
 
+
+export const RemoveProductFromCart = (product) => {
+  try {
+    return async function (dispatch) {
+
+      return dispatch({
+        type: REMOVE_PRODUCT_FROM_CART,
+        payload: {...product}
+      });
+    };
+    // eslint-disable-next-line no-unreachable
+  } catch (err) {
+    throw new Error(err.message);
+  }
+}
+export const addProductToCart = (product) => {
+  try {
+    return async function (dispatch) {
+
+      return dispatch({
+        type: ADD_PRODUCT_TO_CART,
+        payload: {...product}
+      });
+    };
+    // eslint-disable-next-line no-unreachable
+  } catch (err) {
+    throw new Error(err.message);
+  }
+};
 export const getUserById = (userId) => {
   try {
     return async function (dispatch) {
