@@ -10,7 +10,7 @@ import s from "./DashBoardAddProducts.module.css";
 const DashBoardAddProducts = ({ setIsActive, clientAdminId }) => {
   const dispatch = useDispatch();
   const categorie = useSelector((state) => state.categories);
-
+ 
   const [Category, setsetCategory] = useState("");
 
   const [dataProducts, setdataProducts] = useState({
