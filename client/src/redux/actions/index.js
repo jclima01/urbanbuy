@@ -165,7 +165,9 @@ export const postOrder = (
 export const getOrdersByUser = (userId) => {
   try {
     return async function (dispatch) {
-      const { data } = await axios.get(`http://localhost:2800/orders/${userId}`);
+      const { data } = await axios.get(
+        `http://localhost:2800/orders/${userId}`
+      );
       return dispatch({
         type: GET_ORDERS_BY_USER,
         payload: data,
@@ -177,12 +179,9 @@ export const getOrdersByUser = (userId) => {
   }
 };
 export const deleteProduct = (productId) => {
-
   try {
     return async function (dispatch) {
-      await axios.delete(
-        `http://localhost:2800/products/delete/${productId}`
-      );
+      await axios.delete(`http://localhost:2800/products/delete/${productId}`);
       return dispatch({
         type: DELETE_PRODUCT,
         payload: productId,
@@ -476,10 +475,4 @@ export const dataEditProduct = (obj) => ({
   payload: obj,
 });
 
-export const getSession = () => {
-  
-  return {
-    type: ORDER_CLIENT_USERS,
-    payload: orden,
-  };
-};
+

@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import {
-  dataEditProduct,
   deleteProduct,
   getAllProducts,
 } from "../../../redux/actions";
@@ -19,38 +18,39 @@ const DashBoardTableCardProducts = ({
 }) => {
   const [idReference, setIdReference] = useState("");
   const dispatch = useDispatch();
-  const handleDelete = () => {
-    Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        setIdReference(id);
-        Swal.fire("Deleted!", "Your file has been deleted.", "success");
-      }
-    });
-  };
+  const categorie = useSelector((state) => state.categories);
 
-  const obj = {
-    productName,
-    categories,
-    imageUrl,
-    stocks,
-    price,
-    rating,
-    id,
-  };
+  
+  const categoriatest = categorie
+  .filter(category => categories?.includes(category._id))
+  .map(category => category.categoryName);
+  
+ 
 
-  const handleEdit = (e) => {
-    e.preventDefault();
-    setIsActive(0);
-    dispatch(dataEditProduct(obj)).then(() => setIsActive(0));
-  };
+  
+const handleDelete = () =>{
+
+  Swal.fire({
+    title: 'Are you sure?',
+    text: "You won't be able to revert this!",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes, delete it!'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      setIdReference(id)
+      Swal.fire(
+        'Deleted!',
+        'Your file has been deleted.',
+        'success'
+      )
+    }
+  })
+   
+}
+  
 
   useEffect(() => {
     dispatch(deleteProduct(idReference));
@@ -87,9 +87,7 @@ const DashBoardTableCardProducts = ({
           </div>
         </td>
         <td>{productName}</td>
-        <td className={styles.flexwrap}>
-          {categories.map((element) => element.categoryName).join("-")}
-        </td>
+        <td>{categoriatest.map(p=> p).join('-')}</td>
 
         <td>{stocks}</td>
         <td>{price}</td>
@@ -98,7 +96,7 @@ const DashBoardTableCardProducts = ({
           <button className={styles.button} onClick={handleDelete}>
             delete
           </button>
-          <button className={styles.button} onClick={handleEdit}>
+          <button className={styles.button}>
             Edit
           </button>
         </td>
