@@ -148,7 +148,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
 
       return {
         ...state,
-        products: [...state.products , payload]
+        products: [...state.products , newProduct]
       };
     case GET_PRODUCT_BY_ID:
       return {

@@ -4,8 +4,6 @@ import {
   getAllProducts,
 } from "../../../redux/actions";
 import { useDispatch } from "react-redux";
-import { dataEditProduct, deleteProduct } from "../../../redux/actions";
-import { useDispatch, useSelector } from "react-redux";
 import styles from "./DashBoardTableCardProducts.module.css";
 import Swal from "sweetalert2";
 const DashBoardTableCardProducts = ({
@@ -83,7 +81,7 @@ const DashBoardTableCardProducts = ({
           <button className={styles.button} onClick={handleDelete}>
             delete
           </button>
-          <button className={styles.button} onClick={handleEdit}>
+          <button className={styles.button}>
             Edit
           </button>
         </td>

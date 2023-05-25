@@ -16,8 +16,6 @@ const DashBoardModalAddCategories = ({ show, setShow }) => {
 
   const [input, setInput] = useState("");
 
- 
-
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!input) return;
@@ -65,20 +63,7 @@ const DashBoardModalAddCategories = ({ show, setShow }) => {
             }}
           >
             {categories?.map((item) => (
-              
-                <span style={{
-                    display:'flex',
-                    alignItems:'center',
-                    justifyContent:'center',
-                    gap:9,
-                    padding: 10,
-                    backgroundColor:'#fff',
-                    color:'black',
-                    margin: 5,
-                    borderRadius: 10
-    
-                }} key={item._id}> {item.categoryName} 
-                <button  
+              <span
                 style={{
                   display: "flex",
                   alignItems: "center",
