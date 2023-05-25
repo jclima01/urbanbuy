@@ -1,0 +1,19 @@
+.containerImageViewAddProduct{
+    display: flex;
+    align-items: center;
+    justify-self: center;
+    position: absolute;
+    overflow: hidden;
+    width: 200px;
+    height: 200px;
+    background-color: white;
+    box-Shadow: 4px 3px 10px 5px #44403b2b;
+    left: -220px;
+    border-radius: 50%;
+}
+
+.imagenView{
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}

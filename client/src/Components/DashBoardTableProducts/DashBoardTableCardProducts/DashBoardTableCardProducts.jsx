@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
-import { dataEditProduct, deleteProduct, getAllProducts } from "../../../redux/actions";
-import { useDispatch, useSelector } from "react-redux";
+import {
+  dataEditProduct,
+  deleteProduct,
+  getAllProducts,
+} from "../../../redux/actions";
+import { useDispatch } from "react-redux";
 import styles from "./DashBoardTableCardProducts.module.css";
 import Swal from "sweetalert2";
 const DashBoardTableCardProducts = ({
@@ -15,13 +19,6 @@ const DashBoardTableCardProducts = ({
 }) => {
   const [idReference, setIdReference] = useState("");
   const dispatch = useDispatch();
-  const categorie = useSelector((state) => state.categories);
-
-
-  const categoriatest = categorie
-    .filter((category) => categories?.includes(category._id))
-    .map((category) => category.categoryName);
-
   const handleDelete = () => {
     Swal.fire({
       title: "Are you sure?",
@@ -58,8 +55,7 @@ const DashBoardTableCardProducts = ({
   useEffect(() => {
     dispatch(deleteProduct(idReference));
     dispatch(getAllProducts());
-
-  }, [dispatch,idReference]);
+  }, [dispatch, idReference]);
   return (
     <tbody>
       <tr>
@@ -91,7 +87,9 @@ const DashBoardTableCardProducts = ({
           </div>
         </td>
         <td>{productName}</td>
-        <td>{categoriatest.map((p) => p).join("-")}</td>
+        <td className={styles.flexwrap}>
+          {categories.map((element) => element.categoryName).join("-")}
+        </td>
 
         <td>{stocks}</td>
         <td>{price}</td>

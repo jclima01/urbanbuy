@@ -12,18 +12,18 @@ import { getAllProducts, getClientAdminUsers } from "../../redux/actions";
 
 const DashBoard = () => {
   const products = useSelector((state) => state.products);
-  const users = useSelector((state) => state.users);
-
   const productsSlice = products.slice(0, 4);
   const clientAdminStorage =
     JSON.parse(localStorage.getItem("clientAdmin")) ?? false;
   console.log(clientAdminStorage);
-  const adminStorage = clientAdminStorage ? clientAdminStorage : false;
   const dispatch = useDispatch();
+
+
   useEffect(() => {
     dispatch(getAllProducts(clientAdminStorage._id));
     dispatch(getClientAdminUsers(clientAdminStorage._id));
   }, []);
+  
   return (
     <div className="vh-100 w-100 d-flex justify-content-center overflow-hidden ">
       <div className="contianer-home">
@@ -205,8 +205,11 @@ const DashBoard = () => {
                 justifyContent: "space-around",
               }}
             >
-              {products?.map((item, i) => (
-                <DashBoardCardProducts key={`cardproducts-${i}`} products={item} />
+              {productsSlice?.map((item, i) => (
+                <DashBoardCardProducts
+                  key={`cardproducts-${i}`}
+                  products={item}
+                />
               ))}
             </div>
           </div>

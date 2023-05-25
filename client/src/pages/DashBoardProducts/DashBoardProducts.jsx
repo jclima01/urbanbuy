@@ -13,11 +13,10 @@ const DashBoardProducts = () => {
   const clientAdminId = clientAdminStorage._id;
   const refTransitionAddProduct = useRef();
   const products = useSelector((state) => state.products);
-  const dataEditProduct = useSelector((state) => state.dataEditProduct);
-  const [isActive, setIsActive] = useState(900);
+  const [isActive, setIsActive] = useState(1200);
 
   const handleActiveAddProduct = (isActive) => {
-    isActive ? setIsActive(0) : setIsActive(900);
+    isActive ? setIsActive(0) : setIsActive(1200);
   };
 
   const [show, setShow] = useState(false);
@@ -233,12 +232,14 @@ const DashBoardProducts = () => {
           </div>
         </div>
         <div
+        className={styles.scrrolbar}
           style={{
             height: "60%",
             width: "95%",
             padding: 15,
             overflow: "hidden",
             overflowY: "auto",
+            overflowX: "hidden",
           }}
         >
           <DashBoardTableProducts

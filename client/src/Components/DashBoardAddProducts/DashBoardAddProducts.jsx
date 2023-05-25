@@ -4,11 +4,13 @@ import Form from "react-bootstrap/Form";
 import { MdOutlineKeyboardDoubleArrowRight } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { postNewProduct } from "../../redux/actions";
+import toast, { Toaster } from "react-hot-toast";
+import s from "./DashBoardAddProducts.module.css";
 
 const DashBoardAddProducts = ({ setIsActive, clientAdminId }) => {
   const dispatch = useDispatch();
   const categorie = useSelector((state) => state.categories);
- 
+
   const [Category, setsetCategory] = useState("");
 
   const [dataProducts, setdataProducts] = useState({
@@ -108,7 +110,8 @@ const DashBoardAddProducts = ({ setIsActive, clientAdminId }) => {
           clientAdminId
         )
       ).finally(() => {
-        setIsActive(900);
+        toast.success("Successfully toasted!");
+        setIsActive(1200);
       });
 
       setdataProducts({
@@ -157,7 +160,7 @@ const DashBoardAddProducts = ({ setIsActive, clientAdminId }) => {
             price: 0,
             rating: 0,
           });
-          setIsActive(900);
+          setIsActive(1200);
         }}
         style={{
           position: "absolute",
@@ -167,13 +170,25 @@ const DashBoardAddProducts = ({ setIsActive, clientAdminId }) => {
       >
         <MdOutlineKeyboardDoubleArrowRight size={30} cursor={"pointer"} />
       </div>
+      <div className={s.containerImageViewAddProduct}>
+        <img className={s.imagenView  } src={dataProducts.imageUrl || "https://us.123rf.com/450wm/rastudio/rastudio1601/rastudio160103779/51365230-icono-de-l%C3%ADnea-de-la-c%C3%A1mara-para-web-m%C3%B3vil-e-infograf%C3%ADa-vector-icono-de-l%C3%ADnea-delgada-gris-en-el.jpg?ver=6"} alt="" />
+      </div>
       <label>Image Product</label>
       <UploadWidget
         dataProducts={dataProducts}
         setdataProducts={setdataProducts}
       />
-
       <Form>
+        <Toaster
+          toastOptions={{
+            style: {
+              padding: "36px",
+              color: "#2f2b29",
+            },
+          }}
+          position="top-center"
+          reverseOrder={false}
+        />
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Product Name</Form.Label>
           <Form.Control
