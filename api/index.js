@@ -6,6 +6,9 @@ const app = express()
 const PORT = process.env.PORT || 5001 // Port Server
 const mainRouter = require("./src/routes/index.js");
 const morgan = require("morgan")
+// const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+
+
 // Middleware 
 app.use(express.json());
 app.use(cors())
@@ -22,6 +25,7 @@ app.use((req, res, next) => {
 
 app.use(mainRouter)
 
+  
 //Server Listen
 app.listen(PORT , () => {
     console.log(`Server is running on port ${PORT}`)

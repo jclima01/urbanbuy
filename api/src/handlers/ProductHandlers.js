@@ -6,6 +6,7 @@ const {
   createNewProduct,
   updateProduct,
   deleteProduct,
+ 
 } = require("../controllers/ProductsControllers");
 
 const getProductsHandler = async (req, res) => {
@@ -103,10 +104,14 @@ const deletedProductHandler = async (req, res) => {
   }
 };
 
+
+
+
 module.exports = {
   getProductsHandler,
   postProductHandler,
   updateProductHandler,
   deletedProductHandler,
   getProductsHandlerById,
+  
 };
