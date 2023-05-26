@@ -3,10 +3,10 @@ import NavEcommerce from "./NavEcommerce";
 import SliderEcommerceClient from "../EcommerceCliente/SliderEcommerceClient";
 import style from "./HomeEcommerce.module.css";
 import Card from "../Card/Card";
-
 import { useDispatch, useSelector } from "react-redux";
 import { getAllProducts, getCategories } from "../../redux/actions";
 import SearchBar from "../../SearchBar/SearchBar";
+import FooterEcommerce from "./FooterEcommerce";
 
 function HomeEcommerce() {
   const clientAdmin = JSON.parse(localStorage.getItem('clientAdmin')) ?? false
@@ -16,6 +16,7 @@ function HomeEcommerce() {
   const [filteredProduct, setFilteredProducts] = useState([]);
   const [searchTerm, setSearchTerm] = useState([]);
   const [orderedProduct, setOrderedProduct] = useState([]);
+  const [colorPalette, setColorPalette] = useState('paleta1');
 
 
   useEffect(() => {
@@ -105,8 +106,7 @@ function HomeEcommerce() {
 
   return (
     <div className={style.fondo}>
-      {/* <NavEcommerce/> */}
-      <SliderEcommerceClient products={products} />
+      <NavEcommerce/>
 
       {/* <h2 className={style.h2}>PRODUCTOS</h2> */}
 
@@ -114,6 +114,7 @@ function HomeEcommerce() {
       <div className={style.filterSearchContainer}>
         <div className={style.searchContainer}>
           <SearchBar onSearch={handleSearch} />
+      <SliderEcommerceClient products={products} />
         </div>
         <div className={style.filterContainer}>
           <p>Filtrar por rating:</p>
@@ -171,6 +172,7 @@ function HomeEcommerce() {
           </ul>
         )}
       </div>
+      <FooterEcommerce/>
     </div>
   );
 }

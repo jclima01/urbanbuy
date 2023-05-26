@@ -52,14 +52,14 @@ const logout = () => {
                   <CiUser size={30} />
                 </li>
               </Link>
-              {/* <Link to={"dashboard/Edit"} className="custom-link">
+              <Link to={"dashboard/Edit"} className="custom-link">
                 <li
                   onClick={() => handleIsActiveHover("Edit")}
                   className={isActive === "Edit" ? "isActive" : " btn"}
                 >
                   <CiEdit size={30} />
                 </li>
-              </Link> */}
+              </Link>
               <Link to={"dashboard/products"} className="custom-link">
                 <li
                   onClick={() => handleIsActiveHover("Products")}
