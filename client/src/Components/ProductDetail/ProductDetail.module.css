@@ -4,10 +4,9 @@
   justify-content: center;
   align-items: center;
   width: 80%;
-  height: 750px; /* Altura fija del contenedor principal */
+  height: 700px; /* Altura fija del contenedor principal */
   gap: 20px;
   align-self: center;
-  border-radius: 30px;
 }
 
 .navButtons {
@@ -34,18 +33,20 @@
 }
 
 .img {
-  width: 400px;
-  height: auto;
-  border-radius: 12px;
+  width: 300px; /* Ancho fijo de la imagen */
+  height: 300px; /* Alto fijo de la imagen */
+  object-fit: contain; /* Ajustar la imagen sin distorsionarla */
+  margin-top: 20px;
 }
 .h2 {
   color: rgb(41, 41, 41);
   border-radius: 8px;
+  font-size: 20px;
 }
 .descriptionContainer {
   width: 100%;
   height: 500px;
-  overflow:scroll;
+  overflow: scroll;
   border: black solid 1px;
   border-radius: 10px;
   font-size: 20px;
@@ -65,34 +66,9 @@
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.6);
 }
 
-
-
-
-
-/* 
-.descriptionContainer {
-  flex: 1;
-  display: flex;
-  overflow: hidden;
-  height: 400px;
-  margin-left: 70px
-} */
-
-
-
-
-/* .button {
-  background-color: rgb(243, 156, 18);
-  padding: 10px;
-  border: none;
-  border-radius: 7px;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.6);
-} */
-
 .descriptionContainer {
   overflow-y: auto; /* Habilitar el scroll vertical */
   overflow-x: auto; /* Habilitar el scroll vertical */
-
   scrollbar-width: thin; /* Ancho del scroll (solo para navegadores que admiten esta propiedad) */
   scrollbar-color: #888888 #f1f1f1; /* Color del scroll (solo para navegadores que admiten esta propiedad) */
 }
@@ -109,14 +85,3 @@
 .descriptionContainer::-webkit-scrollbar-track {
   background-color: #f1f1f1; /* Color del track (fondo del scroll) */
 }
-
-
-
-/* .hovers{
-  background-color: white;
-  padding: 10px;
-  width: 20%;
-  margin-bottom: 10px;
-  border-radius: 10px;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.6);
-} */

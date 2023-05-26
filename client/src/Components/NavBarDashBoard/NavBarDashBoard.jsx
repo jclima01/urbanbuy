@@ -7,7 +7,7 @@ const NavBarDashBoard = () => {
   return (
     <div>
         <div className="contianer-navBar">
-          <div className="navbar ">
+          <div className="navbar">
             <h1>
               Today <strong>DashBoard</strong>
             </h1>

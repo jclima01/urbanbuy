@@ -10,58 +10,50 @@ const ProductDetail = () => {
   const product = useSelector((state) => state.product);
   const { productId } = useParams();
   const dispatch = useDispatch();
-  const descriptionRef = useRef(null);
 
   useEffect(() => {
     dispatch(getProductById(productId));
   }, []);
-  // useEffect(() => {
-  //   if (
-  //     descriptionRef.current.scrollHeight > descriptionRef.current.clientHeight
-  //   ) {
-  //     descriptionRef.current.classList.add(style.scrollable);
-  //   } else {
-  //     descriptionRef.current.classList.remove(style.scrollable);
-  //   }
-  // }, [product.description]);
 
   console.log(product.description);
   return (
-    <div className={style.detailContainer}>
+    <>
+      <div className={style.detailContainer}>
       <div className={style.navButtons}>
-        <Link to="/homecliente">
-          <button className={style.button}>go back</button>
-        </Link>
+          <Link to="/homecliente">
+            <button className={style.button}>go back</button>
+          </Link>
 
-        <Link to="/cart">
-          <button className={style.button}>go cart</button>
-        </Link>
-      </div>
-
-      <div className={style.cardContainer}>
-        <div>
-          <h2 className={style.h2}>{product.productName}</h2>
-          <img
-            src={product.imageUrl}
-            alt={product.productName}
-            className={style.img}
-          />
-          <p>Rating: {product.rating}</p>
-          <p>Stock: {product.stocks}</p>
-          <p>Price: ${product.price}</p>
+          <Link to="/cart">
+            <button className={style.button}>go cart</button>
+          </Link>
         </div>
-        <div className={style.descriptionContainer}>
-          <p className={style.description}>
-            {product?.description}
-          </p>
-        </div>
-        {product.categories?.map((categorie) => {
-          return <div>{categorie.categoryName}</div>;
-        })}
+        <div className={style.cardContainer}>
+          <div>
+            <h2 className={style.h2}>{product.productName}</h2>
+            <img
+              src={product.imageUrl}
+              alt={product.productName}
+              className={style.img}
+            />
+            <p>Rating: {product.rating}</p>
+            <p>Stock: {product.stocks}</p>
+            <p>Price: ${product.price}</p>
+          </div>
+          <div className={style.descriptionContainer}>
+            <p className={style.description}>{product?.description}</p>
+            <div>
+              {product.categories?.map((categorie) => {
+                return <div>{categorie.categoryName}</div>;
+              })}
+            </div>
+          </div>
 
-        <AddToCart product={product} stock={product.stocks} />
+          <AddToCart product={product} stock={product.stocks} />
+        </div>
+        
       </div>
-    </div>
+    </>
   );
 };
 
