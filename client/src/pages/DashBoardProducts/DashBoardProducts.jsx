@@ -9,8 +9,8 @@ import DashBoardModalAddCategories from "../../Components/DashBoardModalAddCateg
 import styles from "./DashBoardProducts.module.css"
 const DashBoardProducts = () => {
   const dispatch = useDispatch();
-  const clientAdmin = useSelector((state) => state.clientAdmin);
-  const clientAdminId = clientAdmin._id;
+  const clientAdminStorage = JSON.parse(localStorage.getItem('clientAdmin')) ?? false;
+  const clientAdminId = clientAdminStorage._id;
   const refTransitionAddProduct = useRef();
   const products = useSelector((state) => state.products);
   const [isActive, setIsActive] = useState(900);
@@ -24,7 +24,7 @@ const DashBoardProducts = () => {
 
   useEffect(() => {
     dispatch(getAllProducts(clientAdminId));
-  }, []);
+  }, [dispatch]);
 
   return (
     <div
