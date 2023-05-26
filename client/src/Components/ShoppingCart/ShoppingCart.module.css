@@ -1,0 +1,61 @@
+/* Estilos generales del carrito de compras */
+.shoppingCart {
+    border: 1px solid #ddd;
+    padding: 20px;
+    width: 300px;
+  }
+  
+  h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    
+  }
+  
+  ul {
+    list-style-type: none;
+    padding: 0;
+    margin-bottom: 20px;
+  }
+  
+  li {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  li:last-child {
+    border-bottom: none;
+  }
+  
+  p {
+    font-weight: bold;
+    font-size: 16px;
+  }
+  
+  /* Estilos específicos para el carrito de compras de Mercado Libre */
+  .shopping-cart.mercado-libre {
+    background-color: white;
+    border-radius: 4px;
+  }
+  
+  .shopping-cart.mercado-libre h2 {
+    font-size: 20px;
+    color: #333;
+  }
+  
+  .shopping-cart.mercado-libre li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .shopping-cart.mercado-libre li img {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+  }
+  
+  .shopping-cart.mercado-libre p {
+    color: #ff9900;
+    margin-top: 10px;
+  }
+  
