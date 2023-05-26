@@ -49,7 +49,9 @@
   justify-content: flex-end;
 }
 .icon {
-  fill: #ffffffd1;
+  fill: #ff7f2a;
+  background-color: black;
+  border-radius: 14px;
   width: 40px;
   height: auto;
 }

@@ -3,6 +3,7 @@ import styles from "./ShoppingCart.module.css";
 import { useSelector } from "react-redux";
 import { BsArrowLeftSquareFill } from "react-icons/bs";
 import RemoveFromCartButton from "../RemoveFromCartButton/RemoveFromCartButton";
+import CartWidget from "../AddToCart/CartWidget/CartWidget";
 
 export default function ShoppingCart() {
   const cartItems = useSelector((state) => state.cart);

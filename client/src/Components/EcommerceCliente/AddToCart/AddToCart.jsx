@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addProductToCart } from "../../../redux/actions";
-
-const AddToCart = ({ product, stock}) => {
+import styles from "./AddToCart.module.css";
+import { GrAddCircle, GrSubtractCircle } from "react-icons/gr";
+import Swal from "sweetalert2";
+const AddToCart = ({ product, stock }) => {
   const [quantity, setQuantity] = useState(1);
   const dispatch = useDispatch();
   const handleQuantityChange = (operation) => {
@@ -13,19 +15,40 @@ const AddToCart = ({ product, stock}) => {
     }
   };
 
-  const handleAddToCart = (productId, quantity) => {
-    
+  const handleDispatch = (productId, quantity) => {
+    dispatch(addProductToCart(productId, quantity));
+    Swal.fire({
+      title: 'Product added to Cart',
+      // text: 'Do you want to continue',
+      icon: 'success',
+      confirmButtonText: 'Ok'
+    })
   };
+
   return (
-    <div>
-      <p>Counter: {quantity}</p>
-      <div>
-        <button onClick={() => handleQuantityChange("increment")}>+</button>
-        <button onClick={() => handleQuantityChange("decrement")}>-</button>
+    <div className={styles.addToCartContainer}>
+      <p className={styles.quantity}>Quantity: {quantity}</p>
+
+      <div className={styles.counterButtons}>
+        <GrAddCircle
+          onClick={() => handleQuantityChange("increment")}
+          className={styles.btn}
+        >
+          {" "}
+        </GrAddCircle>
+        <GrSubtractCircle
+          onClick={() => handleQuantityChange("decrement")}
+          className={styles.btn}
+        >
+          {" "}
+        </GrSubtractCircle>
       </div>
 
       <div>
-        <button onClick={() => dispatch(addProductToCart(product._id, quantity))}>
+        <button
+          onClick={() => handleDispatch(product._id, quantity)}
+          className={styles.addToCartBtn}
+        >
           Add to Cart
         </button>
       </div>
