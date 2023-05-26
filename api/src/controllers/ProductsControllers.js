@@ -3,6 +3,7 @@ const Product = require("../models/Product");
 const ClientAdmin = require("../models/Users/ClientAdmin");
 const mongoose = require("mongoose");
 
+
 cloudinary.config({
   cloud_name: "dhan4gjbn",
   api_key: "982674615614551",
@@ -136,6 +137,8 @@ const deleteProduct = async (productId) => {
   }
 };
 
+
+
 module.exports = {
   getAllProducts,
   getProductName,
@@ -145,4 +148,5 @@ module.exports = {
   createNewProduct,
   updateProduct,
   deleteProduct,
+  
 };
