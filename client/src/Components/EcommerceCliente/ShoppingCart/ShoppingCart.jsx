@@ -1,15 +1,21 @@
 import { Link } from "react-router-dom";
 import styles from "./ShoppingCart.module.css";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { BsArrowLeftSquareFill } from "react-icons/bs";
 import RemoveFromCartButton from "../RemoveFromCartButton/RemoveFromCartButton";
-import CartWidget from "../AddToCart/CartWidget/CartWidget";
+import { getCartFromLS } from "../../../redux/actions";
+import { useEffect } from "react";
 
 export default function ShoppingCart() {
-  const cartItems = useSelector((state) => state.cart);
+  const cart = useSelector((state) => state.cart);
+  // const cart = JSON.parse(localStorage.getItem("cart"));
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getCartFromLS());
+  }, [cart]);
 
   const calculateTotal = () => {
-    let total = cartItems.reduce(
+    let total = cart.reduce(
       (count, product) => (count += product.quantity * product.price),
       0
     );
@@ -17,13 +23,12 @@ export default function ShoppingCart() {
   };
 
   const calculateTotalQuantity = () => {
-    const totalQuantity = cartItems.reduce(
+    const totalQuantity = cart.reduce(
       (count, product) => (count += product.quantity),
       0
     );
     return totalQuantity;
   };
-  console.log(cartItems);
 
   return (
     <div className={styles.shoppingCart}>
@@ -40,7 +45,7 @@ export default function ShoppingCart() {
       </div>
 
       <div className={styles.listContainer}>
-        {cartItems?.map((product) => (
+        {cart?.map((product) => (
           <div key={product._id} className={styles.cardProduct}>
             <img
               src={product.imageUrl}

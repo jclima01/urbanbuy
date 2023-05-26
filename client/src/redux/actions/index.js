@@ -26,7 +26,20 @@ export const SEARCH_USERS = "SEARCH_USERS";
 export const FILTER_CLIENT_USERS = "FILTER_CLIENT_USERS";
 export const ADD_PRODUCT_TO_CART = "ADD_PRODUCT_TO_CART";
 export const REMOVE_PRODUCT_FROM_CART = "REMOVE_PRODUCT_FROM_CART";
+export const GET_CART_FROM_LS = "GET_CART_FROM_LS";
 
+export const getCartFromLS = () => {
+  try {
+    return async function (dispatch) {
+      return await dispatch({
+        type: GET_CART_FROM_LS,
+      });
+    };
+    // eslint-disable-next-line no-unreachable
+  } catch (err) {
+    throw new Error(err.message);
+  }
+};
 export const RemoveProductFromCart = (product) => {
   try {
     return async function (dispatch) {
