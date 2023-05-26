@@ -1,4 +1,4 @@
-.container{
+.container {
     background-image: url('../../Img/fondodetail.png');
     display: flex;
     flex-direction: column;
@@ -8,56 +8,76 @@
     border-radius: 30px;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.6);
     margin-left: 300px;
-    
-    
-}
-
-.img{
-    width: 40%;
-    height: auto;
-    margin-top: 20px;
-   
-}
-.h2{
-    margin-top: 2vw;
-    background-color: black;
-    color: whitesmoke;
-    padding: 0.7vw;
-    border-radius: 8px;
-}
-
-.hovers{
-    background-color: black;
-    padding: 0.5vw;
-    margin-top: 5px;
-    margin-bottom: 5px;
-    border-radius: 10px;
-    color: white;
-    width: 200px;
+    height: 750px; /* Altura fija del contenedor principal */
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  
+  .descriptionContainer {
+    flex: 1;
     display: flex;
-  flex-direction: column;
-  justify-content: center;
-
-}
-
-.hovers:hover{
-    color:rgb(243, 156, 18)
-}
-
-.description{
-    border:black solid 1px;
-    display: flex;
-    justify-content: center;
+    overflow: hidden;
+    height: 400px;
+    margin-left: 70px
+  }
+  
+  .description {
+    border: rgb(252, 123, 3) solid 1px;
     padding: 10px;
     text-align: center;
-    width: 70%;
+    width: 90%;
     border-radius: 10px;
-}
-
-.button{
+    overflow-y: auto; /* Habilitar el scroll vertical */
+    background-color: white;
+    font-size: 18px;
+    line-height: 2;
+  }
+  .img {
+    width: 300px; /* Ancho fijo de la imagen */
+    height: 300px; /* Alto fijo de la imagen */
+    object-fit: contain; /* Ajustar la imagen sin distorsionarla */
+    margin-top: 20px;
+  }
+  
+  .button {
     background-color: rgb(243, 156, 18);
     padding: 10px;
     border: none;
     border-radius: 7px;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.6);
-};
+  }
+  
+  .scrollable {
+    max-height: 200px; /* Altura máxima de la descripción */
+    overflow-y: auto; /* Habilitar el scroll vertical */
+    scrollbar-width: thin; /* Ancho del scroll (solo para navegadores que admiten esta propiedad) */
+    scrollbar-color: #888888 #f1f1f1; /* Color del scroll (solo para navegadores que admiten esta propiedad) */
+  }
+  
+  /* Estilos para el scroll en navegadores webkit (Chrome, Safari) */
+  .scrollable::-webkit-scrollbar {
+    width: 8px; /* Ancho del scroll */
+  }
+  
+  .scrollable::-webkit-scrollbar-thumb {
+    background-color: #f57a07; /* Color del scroll thumb (barra de desplazamiento) */
+  }
+  
+  .scrollable::-webkit-scrollbar-track {
+    background-color: #f1f1f1; /* Color del track (fondo del scroll) */
+  }
+  
+  
+  
+  .hovers{
+    background-color: white;
+    padding: 10px;
+    width: 20%;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.6);
+  }
+  .h2{
+    color:white;
+    margin-top: 30px;
+  }
