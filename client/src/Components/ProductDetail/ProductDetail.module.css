@@ -3,8 +3,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 60%;
-  height: auto;
+  width: 80%;
+  height: 700px; /* Altura fija del contenedor principal */
   gap: 20px;
   align-self: center;
 }
@@ -33,24 +33,29 @@
 }
 
 .img {
-  width: 400px;
-  height: auto;
-  border-radius: 12px;
+  width: 300px; /* Ancho fijo de la imagen */
+  height: 300px; /* Alto fijo de la imagen */
+  object-fit: contain; /* Ajustar la imagen sin distorsionarla */
+  margin-top: 20px;
 }
 .h2 {
   color: rgb(41, 41, 41);
   border-radius: 8px;
+  font-size: 20px;
 }
-
-.description {
+.descriptionContainer {
+  width: 100%;
+  height: 500px;
+  overflow: scroll;
   border: black solid 1px;
-  padding: 10px;
-  text-align: flex-start;
-  width: 70%;
-  height: 90%;
   border-radius: 10px;
   font-size: 20px;
   color: rgb(53, 53, 53);
+  line-height: 1.7;
+}
+.description {
+  padding: 10px;
+  text-align: flex-start;
 }
 
 .button {
@@ -59,4 +64,24 @@
   border: none;
   border-radius: 7px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+.descriptionContainer {
+  overflow-y: auto; /* Habilitar el scroll vertical */
+  overflow-x: auto; /* Habilitar el scroll vertical */
+  scrollbar-width: thin; /* Ancho del scroll (solo para navegadores que admiten esta propiedad) */
+  scrollbar-color: #888888 #f1f1f1; /* Color del scroll (solo para navegadores que admiten esta propiedad) */
+}
+
+/* Estilos para el scroll en navegadores webkit (Chrome, Safari) */
+.descriptionContainer::-webkit-scrollbar {
+  width: 8px; /* Ancho del scroll */
+}
+
+.descriptionContainer::-webkit-scrollbar-thumb {
+  background-color: #f57a07; /* Color del scroll thumb (barra de desplazamiento) */
+}
+
+.descriptionContainer::-webkit-scrollbar-track {
+  background-color: #f1f1f1; /* Color del track (fondo del scroll) */
 }
