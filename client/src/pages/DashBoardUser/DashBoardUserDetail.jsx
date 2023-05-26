@@ -1,8 +1,11 @@
 import { useSelector } from "react-redux";
 import avatar from "../../assets/avatar.jpg";
 import styles from "./DashBoardUserDetail.module.css";
-const DashBoardUserDetail = () => {
+
+const DashBoardUserDetail = ({setActiveTab,activeTab,setActualPage,onOrderSelect}) => {
   const user = useSelector((state) => state.user);
+  
+  
   return (
     <div className={styles.userDetailContainer}>
       <div className={styles.header }>
@@ -22,7 +25,7 @@ const DashBoardUserDetail = () => {
             <div className={styles.contentAllOrders}>
               <h2 className={styles.titleOrder}>User orders:</h2>
               <ul className={styles.listUl}>
-              <li>status:</li><li>date:</li><li>created:</li><li>prod:</li><li>price:</li><li>payment</li>
+              <li>status:</li><li>date:</li><li>created:</li><li>prod:</li><li>price:</li><li>payment</li><li>option</li>
               </ul>
               <ul>
               {user?.orders?.map((order) => {console.log(order);
@@ -34,11 +37,14 @@ const DashBoardUserDetail = () => {
                     <h5>{order.cart.length}</h5>
                     <h5 className={styles.orderPrice}> {order.total}</h5>
                     <h5 className={order.payment==true?styles.orderStatusT:styles.orderStatusF}>{order.payment==true?'YES':'NO'}</h5>
+                    <h5><button className='buttonView' onClick={() => onOrderSelect(order)}>View Order</button></h5>
+                
                   </li>
                 );
               })}
             </ul>
             </div>
+            
     </div>
     
   );

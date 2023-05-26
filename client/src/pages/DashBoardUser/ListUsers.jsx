@@ -13,11 +13,11 @@ const DashBoardListUsers = ({setActiveTab,activeTab,setActualPage}) => {
   const dispatch = useDispatch();
   const clientAdmin = useSelector((state) => state.clientAdmin);
   const users = useSelector((state) => state.clientAdminUsers);
-
+  
   const handleClick = (user) => {
     setSelectedUser(user);
     dispatch(getUserById(user._id));
-    setActiveTab(!activeTab);
+    setActiveTab("userDetail");
     setActualPage(1)
   };
 
