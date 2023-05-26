@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
-import {
-  deleteProduct,
-  getAllProducts,
-} from "../../../redux/actions";
+import { deleteProduct, getAllProducts } from "../../../redux/actions";
 import { useDispatch } from "react-redux";
 import styles from "./DashBoardTableCardProducts.module.css";
 import Swal from "sweetalert2";
+import DashBoardModalEditProduct from "../../DashBoardEditProduct/DashBoardEditProduct";
 const DashBoardTableCardProducts = ({
   productName,
+  description,
   categories,
   imageUrl,
   stocks,
@@ -16,6 +15,9 @@ const DashBoardTableCardProducts = ({
   id,
   setIsActive,
 }) => {
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
   const [idReference, setIdReference] = useState("");
   const dispatch = useDispatch();
   const handleDelete = () => {
@@ -81,11 +83,24 @@ const DashBoardTableCardProducts = ({
           <button className={styles.button} onClick={handleDelete}>
             delete
           </button>
-          <button className={styles.button}>
+          <button className={styles.button} onClick={handleShow}>
             Edit
           </button>
         </td>
       </tr>
+
+      <DashBoardModalEditProduct 
+      show={show} 
+      handleClose={handleClose} 
+      productName={productName}
+      description={description}
+      categories={categories}
+      imageUrl={imageUrl}
+      stocks={stocks}
+      price={price}
+      rating={rating}
+      id={id}
+      />
     </tbody>
   );
 };

@@ -29,9 +29,7 @@ export const DATA_EDIT_PRODUCT = "DATA_EDIT_PRODUCT";
 export const getUserById = (userId) => {
   try {
     return async function (dispatch) {
-      const { data } = await axios.get(
-        `/users/user/${userId}`
-      );
+      const { data } = await axios.get(`/users/user/${userId}`);
       return dispatch({
         type: GET_USER_BY_ID,
         payload: data,
@@ -45,9 +43,7 @@ export const getUserById = (userId) => {
 export const getClientAdminUsers = (clientAdminId) => {
   try {
     return async function (dispatch) {
-      const { data } = await axios.get(
-        `/users/${clientAdminId}`
-      );
+      const { data } = await axios.get(`/users/${clientAdminId}`);
       return dispatch({
         type: GET_CLIENT_ADMIN_USERS,
         payload: data,
@@ -61,9 +57,7 @@ export const getClientAdminUsers = (clientAdminId) => {
 export const deleteCategory = (categoryId) => {
   try {
     return async function (dispatch) {
-      const { data } = await axios.delete(
-        `/category/${categoryId}`
-      );
+      const { data } = await axios.delete(`/category/${categoryId}`);
       return dispatch({
         type: DELETE_CATEGORY,
         payload: categoryId,
@@ -77,12 +71,9 @@ export const deleteCategory = (categoryId) => {
 export const editCategory = (categoryId, categoryName) => {
   try {
     return async function (dispatch) {
-      const { data } = await axios.put(
-        `/category/${categoryId}`,
-        {
-          categoryName,
-        }
-      );
+      const { data } = await axios.put(`/category/${categoryId}`, {
+        categoryName,
+      });
       return dispatch({
         type: EDIT_CATEGORY,
         payload: data,
@@ -96,9 +87,7 @@ export const editCategory = (categoryId, categoryName) => {
 export const getCategories = (clientAdminId) => {
   try {
     return async function (dispatch) {
-      const { data } = await axios.get(
-        `/category/${clientAdminId}`
-      );
+      const { data } = await axios.get(`/category/${clientAdminId}`);
       return dispatch({
         type: GET_CATEGORIES,
         payload: data,
@@ -112,12 +101,9 @@ export const getCategories = (clientAdminId) => {
 export const addCategory = (categoryName, clientAdminId) => {
   try {
     return async function (dispatch) {
-      const { data } = await axios.post(
-        `/category/${clientAdminId}`,
-        {
-          categoryName,
-        }
-      );
+      const { data } = await axios.post(`/category/${clientAdminId}`, {
+        categoryName,
+      });
       return dispatch({
         type: ADD_CATEGORY,
         payload: data,
@@ -140,18 +126,15 @@ export const postOrder = (
 ) => {
   try {
     return async function (dispatch) {
-      const { data } = await axios.post(
-        `/orders/${userId}`,
-        {
-          fullName,
-          status,
-          payment,
-          email,
-          cart,
-          total,
-          adress,
-        }
-      );
+      const { data } = await axios.post(`/orders/${userId}`, {
+        fullName,
+        status,
+        payment,
+        email,
+        cart,
+        total,
+        adress,
+      });
       return dispatch({
         type: POST_ORDER,
         payload: data,
@@ -198,15 +181,17 @@ export const editProduct = (
   productName,
   description,
   categoriesIds,
-  stocks,
   imageUrl,
+  stocks,
   price,
   rating
 ) => {
+  console.log("stocks", stocks);
+
   try {
     return async function (dispatch) {
-      const { data } = await axios.put(
-        `/products/${productId}`,
+      const res = await axios.put(
+        `http://localhost:2800/products/${productId}`,
         {
           productName,
           description,
@@ -217,9 +202,10 @@ export const editProduct = (
           rating,
         }
       );
+      console.log(res);
       return dispatch({
         type: EDIT_PRODUCT,
-        payload: data,
+        payload: res.data,
       });
     };
     // eslint-disable-next-line no-unreachable
@@ -239,18 +225,15 @@ export const postNewProduct = (
 ) => {
   try {
     return async function (dispatch) {
-      const { data } = await axios.post(
-        `/products/${clientAdminId}`,
-        {
-          productName,
-          description,
-          categories,
-          stocks,
-          imageUrl,
-          price,
-          rating,
-        }
-      );
+      const { data } = await axios.post(`/products/${clientAdminId}`, {
+        productName,
+        description,
+        categories,
+        stocks,
+        imageUrl,
+        price,
+        rating,
+      });
       return dispatch({
         type: POST_NEW_PRODUCT,
         payload: data,
@@ -264,9 +247,7 @@ export const postNewProduct = (
 export const getProductById = (productId) => {
   try {
     return async function (dispatch) {
-      const { data } = await axios.get(
-        `/products/product/${productId}`
-      );
+      const { data } = await axios.get(`/products/product/${productId}`);
       return dispatch({
         type: GET_PRODUCT_BY_ID,
         payload: data,
@@ -280,9 +261,7 @@ export const getProductById = (productId) => {
 export const getAllProducts = (clientAdminId) => {
   try {
     return async function (dispatch) {
-      const { data } = await axios.get(
-        `/products/${clientAdminId}`
-      );
+      const { data } = await axios.get(`/products/${clientAdminId}`);
       return dispatch({
         type: GET_ALL_PRODUCTS,
         payload: data,
@@ -314,13 +293,10 @@ export const loginAdmin = (email, password) => {
 export const loginClientAdmin = (email, password) => {
   try {
     return async function (dispatch) {
-      const { data } = await axios.post(
-        "/clientAdmin/login",
-        {
-          email,
-          password,
-        }
-      );
+      const { data } = await axios.post("/clientAdmin/login", {
+        email,
+        password,
+      });
       localStorage.setItem("clientAdmin", JSON.stringify(data));
       return dispatch({
         type: LOGIN_CLIENT_ADMIN,
@@ -474,5 +450,3 @@ export const dataEditProduct = (obj) => ({
   type: DATA_EDIT_PRODUCT,
   payload: obj,
 });
-
-

@@ -15,7 +15,6 @@ const DashBoard = () => {
   const productsSlice = products.slice(0, 4);
   const clientAdminStorage =
     JSON.parse(localStorage.getItem("clientAdmin")) ?? false;
-  console.log(clientAdminStorage);
   const dispatch = useDispatch();
 
 

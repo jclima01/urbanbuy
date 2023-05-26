@@ -4,16 +4,35 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getAllProducts } from "../../redux/actions";
 
+const DashBoardTableProducts = ({
+  setIsActive,
+  searchInput,
+  productsPerPage,
+  setActualPage,
+}) => {
 
-const DashBoardTableProducts = ({ setIsActive, searchInput }) => {
+  //USER SESSION
   const clientAdminStorage =
     JSON.parse(localStorage.getItem("clientAdmin")) ?? false;
   const clientAdminId = clientAdminStorage._id;
-  const products = useSelector((state) => state.products);
+
+  //Use Selector Products and Dispatch Actions
   const dispatch = useDispatch();
+  const products = useSelector((state) => state.products);
+
+  //Get all Products
   useEffect(() => {
     dispatch(getAllProducts(clientAdminId));
   }, [dispatch]);
+
+  //InputToLowerCase for Fitler
+  const searchInputLowerCase = searchInput.toLowerCase();
+
+  // Pagination
+  const lastUserIndex = setActualPage * productsPerPage;
+  const firstUserIndex = lastUserIndex - productsPerPage;
+  const productsSlice = products.slice(firstUserIndex, lastUserIndex);
+  // Pagination
 
   return (
     <Table
@@ -34,12 +53,15 @@ const DashBoardTableProducts = ({ setIsActive, searchInput }) => {
           <th>Options</th>
         </tr>
       </thead>
-      {products
-        ?.filter((item) => item.productName.toLowerCase().includes(searchInput))
+      {productsSlice
+        ?.filter((item) =>
+          item.productName.toLowerCase().includes(searchInputLowerCase)
+        )
         .map((product) => (
           <DashBoardTableCardProducts
             key={product._id}
             productName={product.productName}
+            description={product.description}
             categories={product.categories}
             imageUrl={product.imageUrl}
             stocks={product.stocks}

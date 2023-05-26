@@ -7,13 +7,20 @@ import DashBoardAddProducts from "../../Components/DashBoardAddProducts/DashBoar
 import DashBoardModalAddCategories from "../../Components/DashBoardModalAddCategories/DashBoardModalAddCategories";
 
 import styles from "./DashBoardProducts.module.css";
+import DashBoardEditProduct from "../../Components/DashBoardEditProduct/DashBoardEditProduct";
+import Pagination from "../../../src/pages/DashBoardUser/Pagination/Pagination";
 const DashBoardProducts = () => {
   const dispatch = useDispatch();
-  const clientAdminStorage = JSON.parse(localStorage.getItem('clientAdmin')) ?? false;
+  const clientAdminStorage =
+    JSON.parse(localStorage.getItem("clientAdmin")) ?? false;
   const clientAdminId = clientAdminStorage._id;
   const refTransitionAddProduct = useRef();
   const products = useSelector((state) => state.products);
   const [isActive, setIsActive] = useState(1200);
+
+  const [productsPerPage, setProductsPerPage] = useState(6);
+
+  const [setActualPage, setSetActualPage] = useState(1);
 
   const handleActiveAddProduct = (isActive) => {
     isActive ? setIsActive(0) : setIsActive(1200);
@@ -68,7 +75,7 @@ const DashBoardProducts = () => {
           }}
           ref={refTransitionAddProduct}
         >
-          
+          <DashBoardEditProduct />
 
           <DashBoardAddProducts
             setIsActive={setIsActive}
@@ -169,9 +176,10 @@ const DashBoardProducts = () => {
               alignItems: "center",
               justifyContent: "space-between",
               padding: 5,
+              gap: 30,
             }}
           >
-            {/* <div
+            <div
               style={{
                 display: "flex",
                 justifyContent: "center",
@@ -186,27 +194,19 @@ const DashBoardProducts = () => {
                   borderRadius: 20,
                 }}
               >
-                Order
+                <select name="" id="">
+                  <option value="">Seleccione</option>
+                  <option value="">A-Z</option>
+                  <option value="">Z-A</option>
+                  <option value="">Rating Asc</option>
+                  <option value="">Rating Des</option>
+                  <option value="">Stock Asc</option>
+                  <option value="">Stock Desc</option>
+                  <option value="">Price Asc</option>
+                  <option value="">Price Desc</option>
+                </select>
               </span>
-            </div> */}
-            {/* <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                width: "10%",
-              }}
-            >
-              <span
-                style={{
-                  padding: "2px 30px",
-                  backgroundColor: "lightgray",
-                  borderRadius: 20,
-                }}
-              >
-                filter
-              </span>
-            </div> */}
+            </div>
             <div
               style={{
                 width: "80%",
@@ -226,13 +226,24 @@ const DashBoardProducts = () => {
               />
               <CiSearch size={23} />
             </div>
-            {/* <div style={{ width: "20%" }}>
-              <span>- 1 2 3 4 5 -</span>
-            </div> */}
+            <div
+              style={{
+                width: "20%",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <Pagination
+                usersPerPage={productsPerPage}
+                numberOfUsers={products.length}
+                setActualPage={setSetActualPage}
+              />
+            </div>
           </div>
         </div>
         <div
-        className={styles.scrrolbar}
+          className={styles.scrrolbar}
           style={{
             height: "60%",
             width: "95%",
@@ -245,6 +256,8 @@ const DashBoardProducts = () => {
           <DashBoardTableProducts
             searchInput={searchInput}
             setIsActive={setIsActive}
+            productsPerPage={productsPerPage}
+            setActualPage={setActualPage}
           />
         </div>
       </div>
