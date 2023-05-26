@@ -10,18 +10,18 @@ import { useDispatch } from "react-redux";
 
 const SideBarDashBoard = () => {
   const [isActive, setisActive] = useState("Home");
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const handleIsActiveHover = (value) => {
     setisActive(value);
   };
 
-const logout = () => {
-  dispatch(logOutClientAdmin())
-}
+  const logout = () => {
+    dispatch(logOutClientAdmin());
+  };
 
   return (
     <div>
-      <div className="sidebarMenu  ">
+      <div className="sidebarMenu ">
         <img
           src={containerlogo}
           alt="caontainer logo"

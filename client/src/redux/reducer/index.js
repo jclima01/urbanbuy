@@ -55,18 +55,18 @@ const rootReducer = (state = initialState, { type, payload }) => {
       };
     case ADD_PRODUCT_TO_CART:
       const item = state.products.find(
-        (product) => product._id === payload._id
+        (product) => product._id === payload.productId
       );
-      const inCart = state.cart.some((product) => product._id === item._id);
+      const inCart = state.cart.some((product) => product._id === payload.productId);
       return {
         ...state,
         cart: inCart
           ? state.cart.map((product) =>
               product._id === item._id
-                ? { ...item, quantity: product.quantity + 1 }
+                ? { ...item, quantity: product.quantity + payload.quantity }
                 : item
             )
-          : [...state.cart, { ...item, quantity: 1 }],
+          : [...state.cart, { ...item, quantity: payload.quantity }],
       };
     case GET_USER_BY_ID:
       return {

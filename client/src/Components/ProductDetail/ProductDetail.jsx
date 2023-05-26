@@ -4,8 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getProductById } from "../../redux/actions/index.js";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
-import AddToCart from "../EcommerceCliente/AddToCart/AddToCartButton";
-import RemoveFromCartButton from "../EcommerceCliente/RemoveFromCartButton/RemoveFromCartButton";
+import AddToCart from "../EcommerceCliente/AddToCart/AddToCart";
 
 const ProductDetail = () => {
   const product = useSelector((state) => state.product);
@@ -39,8 +38,7 @@ const ProductDetail = () => {
       <Link to="/cart">
         <button className={style.button}>go cart</button>
       </Link>
-      <AddToCart product={product} />
-      <RemoveFromCartButton product={product} />
+      <AddToCart product={product} stock={product.stocks} />
       <ul>{cart?.map((product) => {
         <li>
           <h5>{product.productName}</h5>
