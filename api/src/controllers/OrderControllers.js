@@ -1,7 +1,8 @@
 const Order = require("../models/Order.js");
 const Purchase = require("../models/Purchase.js");
 const User = require("../models/Users/User.js");
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+const stripe = require('stripe')('sk_test_51NBID4EdWFvWYSp3Ltrb2CfF0bSZIwiJy0TeDpxwqZfmBJsJTXujnYPbfFtiIJEJWlZj0du2qymzqeTI0PwPMnSk00Ay2YyxXV');
+
 
 const postOrder = async (
   fullName,
@@ -44,34 +45,36 @@ const getOrdersByUser = async (userId) => {
   }
 };
 
-const processPayment = async (req, res) =>{
-  const { amount, currency, token } = req.body;
-  const user = req.User.orders // Obtén el ID del usuario desde la solicitud (ajústalo según tu lógica)
-
+const processPayment = async (req, res) => {
+  
+  const {product} = req.body;
   try {
+    const foundOrder = await Order.find({ user: user});
+    console.log(foundOrder);
+    
+    if (foundOrder.length === 0) {
+      return res.status(400).json({ success: false, error: 'Orden no encontrada' });
+    }
+    
     const charge = await stripe.charges.create({
-      amount,
-      currency,
-      source: token,
-      description: 'Descripción de la compra'
+      amount: await paymentHandler(product),
+      currency: "usd",
+      payment_method: product[0].pm,
+      confirm: true
     });
 
     // Almacenar la información de la transacción en la base de datos
-    const purchase = new Purchase({
-      amount,
-      currency,
-      status: 'completed',
-      user: user // Asigna el ID del usuario a la transacción
-      // Otros campos que necesites almacenar
-    });
-    await purchase.save();
+    res.send({
+      clientSecret: paymentIntent.client_secret,
+    })
 
     res.json({ success: true, message: 'Pago procesado correctamente' });
   } catch (error) {
     console.log(error);
     res.status(500).json({ success: false, error: error.message });
   }
-}
+};
+
 
 
 module.exports = {
