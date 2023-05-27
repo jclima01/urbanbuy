@@ -27,7 +27,8 @@ export const FILTER_CLIENT_USERS = "FILTER_CLIENT_USERS";
 export const ADD_PRODUCT_TO_CART = "ADD_PRODUCT_TO_CART";
 export const REMOVE_PRODUCT_FROM_CART = "REMOVE_PRODUCT_FROM_CART";
 export const GET_CART_FROM_LS = "GET_CART_FROM_LS";
-
+export const SET_SLIDER_THEME= "SET_SLIDER_THEME"
+export const SET_THEME = "SET_THEME"
 export const getCartFromLS = () => {
   try {
     return async function (dispatch) {
@@ -482,5 +483,21 @@ export const getSession = () => {
   return {
     type: ORDER_CLIENT_USERS,
     payload: orden,
+  };
+};
+
+export const setTheme = (theme) => {
+  
+  return {
+    type: SET_THEME,
+    payload: theme,
+  };
+};
+
+export const setSliderTheme = (sliderTheme) => {
+  
+  return {
+    type: SET_SLIDER_THEME,
+    payload: sliderTheme,
   };
 };

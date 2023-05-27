@@ -27,6 +27,7 @@ import {
   ADD_PRODUCT_TO_CART,
   REMOVE_PRODUCT_FROM_CART,
   GET_CART_FROM_LS,
+  SET_THEME
 } from "../actions/index.js";
 
 const initialState = {
@@ -38,7 +39,8 @@ const initialState = {
   product: {},
   categories: [],
   ordersByUser: [],
-
+  theme:"urbanBuy",
+  sliderTheme: "urbanBuy",
   clientAdminUsers: [],
   cart: [],
 };
@@ -233,6 +235,18 @@ const rootReducer = (state = initialState, { type, payload }) => {
         user: {},
         UserSession: false,
       };
+
+      case SET_THEME:
+        return{
+          ...state,
+          theme: payload,
+        }
+
+        // case SET_SLIDER_THEME:
+        //   return{
+        //     ...state,
+        //     sliderTheme: payload,
+        //   }
 
     default:
       return {
