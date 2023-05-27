@@ -6,12 +6,12 @@ const RegisterButton = () => {
 
   const handleRegister = () => {
     loginWithRedirect({
-      screen_hint: 'signup',
+      connection: 'google-oauth2',
     });
   };
 
   return (
-    <button onClick={handleRegister}>Registrarse</button>
+    <button onClick={handleRegister}>Registrarse con Google</button>
   );
 };
 
