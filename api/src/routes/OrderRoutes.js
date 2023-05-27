@@ -9,5 +9,5 @@ const {processPayment} = require("../controllers/OrderControllers.js")
 
 OrderRouter.get("/:userId", getOrderHandlers);
 OrderRouter.post("/:userId", postOrderHandlers);
-OrderRouter.post("/payment", processPayment);
+OrderRouter.post("/", processPayment);
 module.exports = OrderRouter;
