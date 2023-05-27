@@ -1,8 +1,9 @@
 const {
   postOrder,
   getOrdersByUser,
-  processPayment,
+  
 } = require("../controllers/OrderControllers.js");
+
 const Order = require("../models/Order.js");
 
 const getOrderHandlers = async (req, res) => {
@@ -35,13 +36,12 @@ const postOrderHandlers = async (req, res) => {
   }
 };
 
-const paymentHandler = async (req, res) => {
-  const userId = await Order.findById(req.params.userId);
- return userId
-};
+// const paymentHandler = async (req, res) => {
+//   const userId = await Order.findById(req.params.userId);
+//  return userId
+// };
 
 module.exports = {
   getOrderHandlers,
   postOrderHandlers,
-  paymentHandler
 };
