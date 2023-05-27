@@ -4,6 +4,7 @@ import style from "./SignIn.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { registerClientAdmin } from "../../redux/actions";
+import RegisterButton from "./RegisterButton/RegisterButton";
 
 const SignIn = () => {
   //   const [username, setUsername] = useState("");
@@ -171,8 +172,10 @@ const SignIn = () => {
             >
               Registrarse
             </button>
+            <RegisterButton />
           </form>
         </div>
+
       </div>
     </div>
   );
