@@ -3,6 +3,7 @@ const {
   getOrdersByUser,
   processPayment,
 } = require("../controllers/OrderControllers.js");
+const Order = require("../models/Order.js");
 
 const getOrderHandlers = async (req, res) => {
   try {
@@ -35,19 +36,12 @@ const postOrderHandlers = async (req, res) => {
 };
 
 const paymentHandler = async (req, res) => {
-  try {
-    const { amount, currency, token  } = req.body;
-    const result = await processPayment(amount, currency, token );
-
-    res.status(200).json(result);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ success: false, message: 'Error al procesar el pago.' });
-  }
+  const userId = await Order.findById(req.params.userId);
+ return userId
 };
 
 module.exports = {
   getOrderHandlers,
   postOrderHandlers,
-  paymentHandler,
+  paymentHandler
 };
