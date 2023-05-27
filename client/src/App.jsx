@@ -16,6 +16,8 @@ import HomeEcommerce from "./Components/EcommerceCliente/HomeEcommerce";
 import ProductDetail from "./Components/ProductDetail/ProductDetail";
 import ShoppingCart from "./Components/EcommerceCliente/ShoppingCart/ShoppingCart.jsx";
 import ShoppingCartContainer from "./Components/EcommerceCliente/ShoppingCart/ShoppingCartContainer";
+
+
 function App() {
   // const dispatch = useDispatch()
   const session = useSelector((state) => state.UserSession);
@@ -57,8 +59,25 @@ function App() {
           <Route path="/" element={<Home />} /> {/* LadingPage */}
           <Route path="/login" element={<FormLogin />} />
           <Route path="/SignIn" element={<SignIn />} />
+          <Route element={<NavBarDashBoard />}> 
+              <Route path="/dashBoard" element={<DashBoard />} />
+              <Route path="/dashBoard/User" element={<DashBoardUser />} />
+              <Route path="/dashBoard/Edit" element={<DashBoardEdit />} />
+              <Route
+                path="/dashBoard/Products"
+                element={<DashBoardProducts />}
+              />
+              <Route
+                path="/dashBoard/Shipping"
+                element={<DashBoardShipping />}
+              />
+              <Route
+                path="/dashBoard/Settings"
+                element={<DashBoardSettings />}
+              /></Route> 
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
+        
       )}
     </>
   );

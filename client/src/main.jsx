@@ -1,19 +1,32 @@
 import React from "react";
-import ReactDOM from "react-dom/client";
+import ReactDOM from "react-dom";
+import { Auth0Provider } from "@auth0/auth0-react";
 import App from "./App.jsx";
 import { BrowserRouter } from "react-router-dom";
-import { Provider } from 'react-redux'
+import { Provider } from 'react-redux';
 import store from "./redux/store/index.js";
-import axios from "axios"
-//axios.defaults.baseURL='http://localhost:2800'
-axios.defaults.baseURL='https://urbaybuy-back.up.railway.app'
-ReactDOM.createRoot(document.getElementById("root")).render(
+import axios from "axios";
+
+
+axios.defaults.baseURL = 'https://urbaybuy-back.up.railway.app';
+
+const auth0Domain = import.meta.env.VITE_AUTH0_DOMAIN;
+const auth0ClientId = import.meta.env.VITE_AUTH0_CLIENT_ID;
+console.log(auth0Domain)
+
+ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-    <Provider store={store}>
-      <App />
-    </Provider>
+      <Auth0Provider
+        domain={auth0Domain}
+        clientId={auth0ClientId}
+        redirectUri={window.location.origin}
+      >
+        <Provider store={store}>
+          <App />
+        </Provider>
+      </Auth0Provider>
     </BrowserRouter>
-  </React.StrictMode>
+  </React.StrictMode>,
+  document.getElementById("root")
 );
-

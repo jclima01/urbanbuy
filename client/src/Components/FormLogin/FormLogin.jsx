@@ -5,6 +5,7 @@ import { useDispatch} from 'react-redux';
 import {Link, useNavigate} from 'react-router-dom'
 import ventas from '../../Img/ventas.png';
 import { loginClientAdmin } from '../../redux/actions';
+import LoginAuth from './LoginAuth';
 
 // Falta crear una funcion que asocie email y contraseña para dar acceso
 
@@ -92,7 +93,7 @@ const FormLogin = () => {
       
       </div>
     </div>
-
+<LoginAuth/>
     </div>
   );
 };

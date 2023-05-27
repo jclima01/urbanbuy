@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import AppNavbar from '../Nav/AppNavBar'
 import Introduction from "../Introduction/Introduction"
 import Slider from '../Slider/Slider'
@@ -7,15 +7,26 @@ import CompraSegura from '../CompraSegura/CompraSegura'
 import Footer from '../Footer/Footer'
 import Team from '../Team/Team'
 import './Home.css'
-// import ProductDetail from '../ProductDetail/ProductDetail'
+import { useAuth0 } from '@auth0/auth0-react'
+import {useNavigate} from 'react-router-dom'
 
 
 
 
 
-export default function Home() {
 
-  // const productId =1
+ function Home(props) {
+
+  const {isAuthenticated} = useAuth0()
+  console.log('usuario authenticated', isAuthenticated)
+
+const navigate = useNavigate()
+
+  useEffect(() => {
+if (!!isAuthenticated) 
+navigate('/dashBoard')
+
+  },[isAuthenticated])
 
   return (
       <div className='home-landing'>
@@ -32,3 +43,5 @@ export default function Home() {
     </div>
   )
 }
+
+export default Home;
