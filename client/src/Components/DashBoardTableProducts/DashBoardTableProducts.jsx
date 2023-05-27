@@ -9,8 +9,8 @@ const DashBoardTableProducts = ({
   searchInput,
   productsPerPage,
   setActualPage,
+  sort,
 }) => {
-
   //USER SESSION
   const clientAdminStorage =
     JSON.parse(localStorage.getItem("clientAdmin")) ?? false;
@@ -57,6 +57,27 @@ const DashBoardTableProducts = ({
         ?.filter((item) =>
           item.productName.toLowerCase().includes(searchInputLowerCase)
         )
+        .sort((a, b) => {
+          if (sort) {
+            if (sort === "az") {
+              return a.productName.localeCompare(b.productName);
+            } else if (sort === "za") {
+              return b.productName.localeCompare(a.productName);
+            } else if (sort === "rasc") {
+              return b.rating - a.rating;
+            } else if (sort === "rdes") {
+              return a.rating - b.rating;
+            } else if (sort === "sasc") {
+              return b.stocks - a.stocks;
+            } else if (sort === "sdes") {
+              return a.stocks - b.stocks;
+            } else if (sort === "pasc") {
+              return b.price - a.price;
+            } else if (sort === "pdes") {
+              return a.price - b.price;
+            }
+          }
+        })
         .map((product) => (
           <DashBoardTableCardProducts
             key={product._id}
