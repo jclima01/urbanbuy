@@ -105,7 +105,7 @@ function HomeEcommerce() {
 
   return (
     <div className={style.fondo}>
-      {/* <NavEcommerce/> */}
+      <NavEcommerce/>
       <SliderEcommerceClient products={products} />
 
       {/* <h2 className={style.h2}>PRODUCTOS</h2> */}

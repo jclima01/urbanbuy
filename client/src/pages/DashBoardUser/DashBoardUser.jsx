@@ -43,6 +43,7 @@ const DashBoardUser = () => {
     border: "2px solid #ff7f2a",
     marginRight: "8px",
   };
+
  
   const [activeTab, setActiveTab] = useState('allUsers');
 
@@ -50,10 +51,16 @@ const DashBoardUser = () => {
     setActiveTab(tab);
   };
 
+  const users = useSelector((state) => state.clientAdminUsers);
+
+
   const [actualPage, setActualPage] = useState(1);
   const [usersPerPage, setUsersPerPage] = useState(3);
 
-  const users = useSelector((state) => state.clientAdminUsers);
+  const handleView = () => {
+    setActiveTab(!activeTab);
+  };
+
   const dispatch = useDispatch();
   const lastUserIndex = actualPage * usersPerPage;
 
@@ -100,7 +107,7 @@ const DashBoardUser = () => {
         </button>
       </div>
 
-         {/*  <div className="paginationUsers">
+          <div className="paginationUsers">
             {activeTab ? (
               <Pagination
                 usersPerPage={usersPerPage}
@@ -108,7 +115,7 @@ const DashBoardUser = () => {
                 setActualPage={setActualPage}
               />
             ) : null}
-          </div>*/}
+          </div>
 
         </div>
 

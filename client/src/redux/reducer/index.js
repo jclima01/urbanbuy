@@ -21,10 +21,12 @@ import {
   DELETE_CATEGORY,
   GET_CLIENT_ADMIN_USERS,
   GET_USER_BY_ID,
-
-  FILTER_CLIENT_USERS, 
+  FILTER_CLIENT_USERS,
   ORDER_CLIENT_USERS,
-  SEARCH_USERS
+  SEARCH_USERS,
+  ADD_PRODUCT_TO_CART,
+  REMOVE_PRODUCT_FROM_CART,
+  GET_CART_FROM_LS,
 } from "../actions/index.js";
 
 const initialState = {
@@ -37,11 +39,49 @@ const initialState = {
   categories: [],
   ordersByUser: [],
 
-  clientAdminUsers:[],
+  clientAdminUsers: [],
+  cart: [],
 };
 
 const rootReducer = (state = initialState, { type, payload }) => {
   switch (type) {
+    case GET_CART_FROM_LS:
+      JSON.parse(localStorage.getItem("cart"));
+      return{
+        ...state,
+      }
+    case REMOVE_PRODUCT_FROM_CART:
+      let prod = state.products.find((product) => product._id === payload._id);
+      const cartWhitOutProduct = state.cart.filter(
+        (product) => product._id !== prod._id
+      );
+      localStorage.setItem("cart", JSON.stringify(cartWhitOutProduct));
+      return {
+        ...state,
+        cart: cartWhitOutProduct,
+      };
+    case ADD_PRODUCT_TO_CART:
+      const item = state.products.find(
+        (product) => product._id === payload.productId
+      );
+      const inCart = state.cart.some(
+        (product) => product._id === payload.productId
+      );
+
+      const newCart = inCart
+        ? state.cart.map((product) =>
+            product._id === item._id
+              ? { ...item, quantity: product.quantity + payload.quantity }
+              : item
+          )
+        : [...state.cart, { ...item, quantity: payload.quantity }];
+
+      localStorage.setItem("cart", JSON.stringify(newCart));
+
+      return {
+        ...state,
+        cart: newCart,
+      };
     case GET_USER_BY_ID:
       return {
         ...state,
@@ -50,31 +90,41 @@ const rootReducer = (state = initialState, { type, payload }) => {
     case GET_CLIENT_ADMIN_USERS:
       return {
         ...state,
-        clientAdminUsers:[...payload]
+        clientAdminUsers: [...payload],
       };
     case ORDER_CLIENT_USERS:
       //eslint-disable-next-line
-        let orderUsers;
-        if(payload==='fullName_az'){
-          orderUsers=state.clientAdminUsers.sort((a,b)=>a.fullName>b.fullName?1:-1);
-        }else if(payload==='fullName_za'){
-          orderUsers=state.clientAdminUsers.sort((a,b)=>a.fullName<b.fullName?1:-1);
-        }else if(payload==='email_az'){
-          orderUsers=state.clientAdminUsers.sort((a,b)=>a.email>b.email?1:-1);
-        }else if(payload==='email_za'){
-          orderUsers=state.clientAdminUsers.sort((a,b)=>a.email<b.email?1:-1);
-        }
-      return{
-       ...state,
-        clientAdminUsers:[...orderUsers ]
-       };
-       case SEARCH_USERS:
-       let searchUsers;  
-       searchUsers=state.clientAdminUsers.filter((user) => user.fullName.toLowerCase().includes(payload.toLowerCase()))
-         return { 
-          ...state, 
-          clientAdminUsers:[...searchUsers]
-        };
+      let orderUsers;
+      if (payload === "fullName_az") {
+        orderUsers = state.clientAdminUsers.sort((a, b) =>
+          a.fullName > b.fullName ? 1 : -1
+        );
+      } else if (payload === "fullName_za") {
+        orderUsers = state.clientAdminUsers.sort((a, b) =>
+          a.fullName < b.fullName ? 1 : -1
+        );
+      } else if (payload === "email_az") {
+        orderUsers = state.clientAdminUsers.sort((a, b) =>
+          a.email > b.email ? 1 : -1
+        );
+      } else if (payload === "email_za") {
+        orderUsers = state.clientAdminUsers.sort((a, b) =>
+          a.email < b.email ? 1 : -1
+        );
+      }
+      return {
+        ...state,
+        clientAdminUsers: [...orderUsers],
+      };
+    case SEARCH_USERS:
+      let searchUsers;
+      searchUsers = state.clientAdminUsers.filter((user) =>
+        user.fullName.toLowerCase().includes(payload.toLowerCase())
+      );
+      return {
+        ...state,
+        clientAdminUsers: [...searchUsers],
+      };
 
     //  case FILTER_CLIENT_USERS:
     //   //eslint-disable-next-line
@@ -86,7 +136,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
     case DELETE_CATEGORY:
       return {
         ...state,
-        categories: state.categories.filter(item=> item._id !== payload)
+        categories: state.categories.filter((item) => item._id !== payload),
       };
     case EDIT_CATEGORY:
       return {
@@ -100,7 +150,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
     case ADD_CATEGORY:
       return {
         ...state,
-        categories: [...state.categories , payload]
+        categories: [...state.categories, payload],
       };
     case POST_ORDER:
       return {
@@ -143,7 +193,6 @@ const rootReducer = (state = initialState, { type, payload }) => {
         ...state,
       };
     case LOGIN_CLIENT_ADMIN:
-
       const clientAdmin = JSON.parse(localStorage.getItem("clientAdmin"));
       return {
         ...state,
