@@ -9,15 +9,15 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 const SignIn = () => {
 
-  const { user } = useAuth0();
+  // const { user } = useAuth0();
 
-  useEffect(() => {
-    if (user)
-      dispatch(registerClientAdmin(user?.email, "12345"))
-      // .finally(() => {
-      //   navigate("/login");
-      // });
-  }, [user]);
+  // useEffect(() => {
+  //   if (user)
+  //     dispatch(registerClientAdmin(user?.email, "12345"))
+  //     // .finally(() => {
+  //     //   navigate("/login");
+  //     // });
+  // }, [user]);
 
 
 

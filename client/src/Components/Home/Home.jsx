@@ -7,14 +7,14 @@ import CompraSegura from "../CompraSegura/CompraSegura";
 import Footer from "../Footer/Footer";
 import Team from "../Team/Team";
 import "./Home.css";
-// import { useAuth0 } from "@auth0/auth0-react";
+import { useAuth0 } from "@auth0/auth0-react";
 import { useNavigate } from "react-router-dom";
 
 function Home(props) {
   // const { isAuthenticated } = useAuth0();
   // console.log("usuario authenticated", isAuthenticated);
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   // useEffect(() => {
   //   if (!!isAuthenticated) navigate("/login");

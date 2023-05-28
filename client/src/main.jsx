@@ -11,7 +11,6 @@ axios.defaults.baseURL = "https://urbaybuy-back.up.railway.app";
 
 const auth0Domain = import.meta.env.VITE_AUTH0_DOMAIN;
 const auth0ClientId = import.meta.env.VITE_AUTH0_CLIENT_ID;
-console.log(auth0Domain);
 
 ReactDOM.render(
   <React.StrictMode>
@@ -19,7 +18,9 @@ ReactDOM.render(
       <Auth0Provider
         domain={auth0Domain}
         clientId={auth0ClientId}
-        redirect_uri={window.location.origin }
+        authorizationParams={{
+          redirect_uri: "http://localhost:5173/test"
+        }}
       >
         <Provider store={store}>
           <App />

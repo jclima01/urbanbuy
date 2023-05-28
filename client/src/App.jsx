@@ -14,31 +14,29 @@ import FormLogin from "./Components/FormLogin/FormLogin";
 import SignIn from "./Components/SignIn/SignIn";
 import HomeEcommerce from "./Components/EcommerceCliente/HomeEcommerce";
 import ProductDetail from "./Components/ProductDetail/ProductDetail";
-import ShoppingCart from "./Components/EcommerceCliente/ShoppingCart/ShoppingCart.jsx";
 import ShoppingCartContainer from "./Components/EcommerceCliente/ShoppingCart/ShoppingCartContainer";
-import { useAuth0 } from "@auth0/auth0-react";
+import Test from "./Components/Test/Test";
 
 function App() {
   const location = useLocation();
-  const { user } = useAuth0();
-  const session = useSelector((state) => state.UserSession);
-  const adminStorage = JSON.parse(localStorage.getItem("clientAdmin")) ?? false;
-  console.log(user);
   return (
     <>
       <div className="d-flex w-100">
         {location.pathname !== "/" &&
+        location.pathname !== "/test" &&
         location.pathname !== "/login" &&
         location.pathname !== "/singin" ? (
           <SideBarDashBoard />
         ) : null}
         <div className="d-flex flex-column">
           {location.pathname !== "/" &&
+          location.pathname !== "/test" &&
           location.pathname !== "/login" &&
           location.pathname !== "/singin" ? (
             <NavBarDashBoard />
           ) : null}
           <Routes>
+            <Route path="/test" element={<Test />} /> {/* LadingPage */}
             <Route path="/" element={<Home />} /> {/* LadingPage */}
             <Route path="/login" element={<FormLogin />} />
             <Route path="/singin" element={<SignIn />} />
