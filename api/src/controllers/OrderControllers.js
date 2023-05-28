@@ -47,19 +47,23 @@ const getOrdersByUser = async (userId) => {
 };
 
 const processPayment = async (req, res) => {
-  const { title, content, price } = req.body;
-
+  const { title, content, price, order} = req.body;
+  console.log(stripe);
   try {
     // Crear el objeto del pago
+  
+    
     const payment = new Purchase({
       title,
       content,
       price,
+      order,
+      status: stripe.status
     });
-
+    
     // Guardar el pago en MongoDB
     await payment.save();
-
+    
     // Crear un producto en Stripe
     const product = await stripe.products.create({
       name: title,
@@ -69,7 +73,7 @@ const processPayment = async (req, res) => {
     // Crear un precio para el producto en Stripe
     await stripe.prices.create({
       unit_amount: price * 100, // El precio se especifica en centavos
-      currency: 'usd',
+      currency: 'ars',
       product: product.id,
     });
 
