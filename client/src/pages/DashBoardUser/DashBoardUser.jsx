@@ -9,6 +9,7 @@ import Pagination from "./Pagination/Pagination";
 import DashBoardUserDetail from "./DashBoardUserDetail";
 import { useDispatch, useSelector } from "react-redux";
 import { getClientAdminUsers } from "../../redux/actions";
+import OrderDetail from "../../Components/OrderDetail/OrderDetail";
 
 const DashBoardUser = () => {
   const navTab = {
@@ -42,14 +43,24 @@ const DashBoardUser = () => {
     border: "2px solid #ff7f2a",
     marginRight: "8px",
   };
+
+ 
+  const [activeTab, setActiveTab] = useState('allUsers');
+
+  const handleView = (tab) => {
+    setActiveTab(tab);
+  };
+
   const users = useSelector((state) => state.clientAdminUsers);
 
-  const [activeTab, setActiveTab] = useState(true);
+
   const [actualPage, setActualPage] = useState(1);
   const [usersPerPage, setUsersPerPage] = useState(3);
+
   const handleView = () => {
     setActiveTab(!activeTab);
   };
+
   const dispatch = useDispatch();
   const lastUserIndex = actualPage * usersPerPage;
 
@@ -58,7 +69,13 @@ const DashBoardUser = () => {
   const usersSlice = users.slice(firstUserIndex, lastUserIndex);
 
   const clientAdmin = JSON.parse(localStorage.getItem("clientAdmin")) ?? false;
+  const [selectedOrder, setSelectedOrder] = useState(null);
 
+  const handleOrderSelect = (order) => {
+    setSelectedOrder(order);
+    setActiveTab('orderDetail');
+  };
+  
   useEffect(() => {
    dispatch(getClientAdminUsers(clientAdmin._id))
   }, []);
@@ -67,14 +84,28 @@ const DashBoardUser = () => {
     <>
       <div className="contieneTodoDashboardUsers">
         <div className="navegateUser">
-          <div style={navTab}>
-            <div style={activeTab ? tabActive : tab} onClick={handleView}>
-              All Users
-            </div>
-            <div style={activeTab ? tab : tabActive} onClick={handleView}>
-              User Detail
-            </div>
-          </div>
+        <div style={navTab}>
+        <button
+          style={activeTab === 'allUsers' ? tabActive : tab}
+          onClick={() => handleView('allUsers')}
+        >
+          All Users
+        </button>
+        <button
+          disabled={!selectedOrder}
+          style={activeTab === 'userDetail' ? tabActive : tab}
+          onClick={() => handleView('userDetail')}
+        >
+          User Detail
+        </button>
+        <button
+          disabled={!selectedOrder} 
+          style={activeTab === 'orderDetail' ? tabActive : tab}
+          onClick={() => handleView('orderDetail')}
+        >
+          Order Detail
+        </button>
+      </div>
 
           <div className="paginationUsers">
             {activeTab ? (
@@ -89,18 +120,21 @@ const DashBoardUser = () => {
         </div>
 
         <div className="contentDashboardUsers">
-          {activeTab ? (
-            <>
-              <DashBoardUsersConteiner
+              {activeTab === 'allUsers' && <><DashBoardUsersConteiner
                 setActiveTab={setActiveTab}
                 activeTab={activeTab}
                 users={usersSlice}
                 setActualPage={setActualPage}
-              />
-            </>
-          ) : (
-            <DashBoardUserDetail />
-          )}
+                /></>}
+      
+              {activeTab === 'userDetail' && <><DashBoardUserDetail   onOrderSelect={handleOrderSelect}   setActiveTab={setActiveTab}
+                activeTab={activeTab} /></>}
+      
+              {activeTab === 'orderDetail' && <><OrderDetail  orderDetail={selectedOrder}  setActiveTab={setActiveTab}
+                activeTab={activeTab}/></>}
+         
+            
+         
         </div>
       </div>
     </>
