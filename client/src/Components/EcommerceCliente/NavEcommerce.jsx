@@ -1,34 +1,17 @@
 import React from "react";
-import { Navbar, Container } from "react-bootstrap";
-import {Link} from 'react-router-dom'
-import logoClient from '../../Img/logoClient.png'
-import SearchBar from "../../SearchBar/SearchBar";
-import style from './NavEcommerce.module.css'
-
-
-
-
-
-
+import styles from "./NavEcommerce.module.css";
+import logo from "../../assets/urbenbuy.png";
+import formaLogo from "../../assets/formalogo.png";
+import { Link } from "react-router-dom";
 function NavEcommerce() {
-  
-
   return (
-    <Navbar className={style.navEcommerce}>
-     
-      <Container >
-        <Navbar.Brand>
-       
-        <img src={logoClient} className={style.logoClient}/>
-        </Navbar.Brand>
-       
-        <div>
-          
-       
-        </div>
-    
-      </Container>
-    </Navbar>
+    <div className={styles.navEcommerce}>
+      <div className={styles.containerLogo}>
+        <Link to="/homeCliente">
+          <img src={logo} alt="" className={styles.img}/>
+        </Link>
+      </div>
+    </div>
   );
 }
 

@@ -12,16 +12,14 @@ import DashBoardSettings from "./pages/DashBoardSettings/DashBoardSettings";
 import Home from "./Components/Home/Home";
 import FormLogin from "./Components/FormLogin/FormLogin";
 import SignIn from "./Components/SignIn/SignIn";
-import Card from "./Components/Card/Card";
 import HomeEcommerce from "./Components/EcommerceCliente/HomeEcommerce";
 import ProductDetail from "./Components/ProductDetail/ProductDetail";
-import ProductDetailContainer from "./Components/EcommerceCliente/ProductDetailContainer";
-
+import ShoppingCart from "./Components/EcommerceCliente/ShoppingCart/ShoppingCart.jsx";
+import ShoppingCartContainer from "./Components/EcommerceCliente/ShoppingCart/ShoppingCartContainer";
 function App() {
   // const dispatch = useDispatch()
   const session = useSelector((state) => state.UserSession);
-  const adminStorage = JSON.parse(localStorage.getItem('clientAdmin')) ?? false
-
+  const adminStorage = JSON.parse(localStorage.getItem("clientAdmin")) ?? false;
 
   return (
     <>
@@ -29,7 +27,7 @@ function App() {
         <div className="d-flex vh-100 vw-100 ">
           <SideBarDashBoard />
           <div className="d-flex flex-column">
-            <NavBarDashBoard />
+          <NavBarDashBoard />
             <Routes>
               <Route path="/dashBoard" element={<DashBoard />} />
               <Route path="/dashBoard/User" element={<DashBoardUser />} />
@@ -49,8 +47,8 @@ function App() {
 
               <Route path="/homecliente" element={<HomeEcommerce />} />
               <Route path="/product/:productId" element={<ProductDetail />} />
+              <Route path="/cart" element={<ShoppingCartContainer />} />
               <Route path="*" element={<Navigate to="/dashBoard" />} />
-
             </Routes>
           </div>
         </div>
