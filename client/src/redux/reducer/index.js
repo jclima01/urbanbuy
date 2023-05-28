@@ -27,7 +27,8 @@ import {
   ADD_PRODUCT_TO_CART,
   REMOVE_PRODUCT_FROM_CART,
   GET_CART_FROM_LS,
-  SET_THEME
+  SET_THEME,
+  SET_SLIDER_THEME
 } from "../actions/index.js";
 
 const initialState = {
@@ -242,11 +243,11 @@ const rootReducer = (state = initialState, { type, payload }) => {
           theme: payload,
         }
 
-        // case SET_SLIDER_THEME:
-        //   return{
-        //     ...state,
-        //     sliderTheme: payload,
-        //   }
+        case SET_SLIDER_THEME:
+          return{
+            ...state,
+            sliderTheme: payload,
+          }
 
     default:
       return {

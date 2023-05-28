@@ -7,6 +7,8 @@
 
 .title {
   margin-right: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .navy-blue-button {
@@ -78,3 +80,25 @@
     font-weight: bold;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);;
   }
+
+  .SearchButton {
+    padding: 10px 20px;
+    margin: 0 10px;
+    background-color: #ffc09f; /* Naranja pastel */
+    color: white;
+    font-weight: normal;
+    transition: all 0.3s ease;
+    border: none; /* Elimina el borde */
+    border-radius: 5px; /* Redondea los bordes */
+  }
+  
+  .SearchButton:hover {
+    transform: scale(1.1);
+    font-weight: bold;
+  }
+  
+  .SearchButton.active {
+    font-weight: bold;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);;
+  }
+  
