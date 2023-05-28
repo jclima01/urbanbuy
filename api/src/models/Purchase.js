@@ -10,6 +10,12 @@ const PurchaseSchema = new Schema({
  },
  price: {
      type: Number,
+ },
+ order: {
+  type: String
+ },
+ status:{
+  type: String
  }
 }, { timestamps: true });
 
