@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styles from "./ShoppingCart.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { BsArrowLeftSquareFill } from "react-icons/bs";
@@ -10,6 +10,7 @@ export default function ShoppingCart() {
   const cart = useSelector((state) => state.cart);
   // const cart = JSON.parse(localStorage.getItem("cart"));
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   useEffect(() => {
     dispatch(getCartFromLS());
   }, [cart]);
@@ -29,6 +30,10 @@ export default function ShoppingCart() {
     );
     return totalQuantity;
   };
+
+  const Checkout = () => {
+navigate("/payment")
+  }
 
   return (
     <div className={styles.shoppingCart}>
@@ -61,6 +66,7 @@ export default function ShoppingCart() {
           </div>
         ))}
         <div className={styles.total}>Total: ${calculateTotal()}</div>
+        <button onClick= {Checkout}>COMPRAR</button>
       </div>
     </div>
   );

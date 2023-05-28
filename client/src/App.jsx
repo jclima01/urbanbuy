@@ -16,6 +16,10 @@ import HomeEcommerce from "./Components/EcommerceCliente/HomeEcommerce";
 import ProductDetail from "./Components/ProductDetail/ProductDetail";
 import ShoppingCart from "./Components/EcommerceCliente/ShoppingCart/ShoppingCart.jsx";
 import ShoppingCartContainer from "./Components/EcommerceCliente/ShoppingCart/ShoppingCartContainer";
+import Payment from "./Components/EcommerceCliente/ShoppingCart/Payment/Payment";
+
+
+
 function App() {
   // const dispatch = useDispatch()
   const session = useSelector((state) => state.UserSession);
@@ -48,6 +52,7 @@ function App() {
               <Route path="/homecliente" element={<HomeEcommerce />} />
               <Route path="/product/:productId" element={<ProductDetail />} />
               <Route path="/cart" element={<ShoppingCartContainer />} />
+              <Route path="/payment" element={<Payment />} />
               <Route path="*" element={<Navigate to="/dashBoard" />} />
             </Routes>
           </div>

@@ -27,6 +27,8 @@ import {
   ADD_PRODUCT_TO_CART,
   REMOVE_PRODUCT_FROM_CART,
   GET_CART_FROM_LS,
+  PAGO_EXITOSO,
+  PAGO_FALLIDO,
 } from "../actions/index.js";
 
 const initialState = {
@@ -41,6 +43,9 @@ const initialState = {
 
   clientAdminUsers: [],
   cart: [],
+  cargando: false,
+  cargo: null,
+  error: null,
 };
 
 const rootReducer = (state = initialState, { type, payload }) => {
@@ -233,6 +238,20 @@ const rootReducer = (state = initialState, { type, payload }) => {
         user: {},
         UserSession: false,
       };
+      case PAGO_EXITOSO:
+        return {
+          ...state,
+          cargando: false,
+          cargo: action.cargo,
+          error: null,
+        };
+      case PAGO_FALLIDO:
+        return {
+          ...state,
+          cargando: false,
+          cargo: null,
+          error: action.error,
+        };
 
     default:
       return {
