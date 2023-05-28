@@ -13,7 +13,6 @@ const DashBoardListUsers = ({setActiveTab,activeTab,setActualPage,users}) => {
   const dispatch = useDispatch();
   const clientAdmin = useSelector((state) => state.clientAdmin);
 
-  const users = useSelector((state) => state.clientAdminUsers);
   
 
   const handleClick = (user) => {
