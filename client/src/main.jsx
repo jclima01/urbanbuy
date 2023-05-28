@@ -19,7 +19,7 @@ ReactDOM.render(
         domain={auth0Domain}
         clientId={auth0ClientId}
         authorizationParams={{
-          redirect_uri: "http://localhost:5173/test"
+          redirect_uri: window.location.origin,
         }}
       >
         <Provider store={store}>
