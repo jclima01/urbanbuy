@@ -10,11 +10,13 @@ const Test = () => {
   const clientAdmin = useSelector((state) => state.clientAdmin);
   const navigate = useNavigate()
   const dispatch = useDispatch();
+// const pw = user.password? user.password : "123asdASD"
+
   useEffect(() => {
-    // if (isAuthenticated)
-    // dispatch(loginClientAdmin(user.email, "123asdASD")).finally(() => {
-    //   navigate("/dashboard");
-    // });
+    if (isAuthenticated)
+    dispatch(loginClientAdmin(user.email, "123asdASD")).finally(() => {
+      navigate("/dashboard");
+    });
     if (isAuthenticated && user)
       dispatch(
         registerClientAdmin(user.given_name, user.email, "123asdASD")
