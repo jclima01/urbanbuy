@@ -7,7 +7,7 @@ const OrderDetail = (props) => {
     <div className={styles.orderDetailContainer}>
       <h2 className={styles.title}>Order Detail</h2>
       <div className={styles.item}>
-        <strong>Address:</strong> {order.address}
+        <strong>Address:</strong> {order.adress}
       </div>
       <div className={styles.item}>
         <strong>Status:</strong> {order.status}
