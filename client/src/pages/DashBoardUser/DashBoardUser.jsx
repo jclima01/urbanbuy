@@ -47,9 +47,7 @@ const DashBoardUser = () => {
  
   const [activeTab, setActiveTab] = useState('allUsers');
 
-  const handleView = (tab) => {
-    setActiveTab(tab);
-  };
+
 
   const users = useSelector((state) => state.clientAdminUsers);
 
