@@ -78,24 +78,26 @@ const DashBoardUser = () => {
       <div className="contieneTodoDashboardUsers">
         <div className="navegateUser">
         <div style={navTab}>
-        <div
+        <button
           style={activeTab === 'allUsers' ? tabActive : tab}
           onClick={() => handleView('allUsers')}
         >
           All Users
-        </div>
-        <div
+        </button>
+        <button
+          disabled={!selectedOrder}
           style={activeTab === 'userDetail' ? tabActive : tab}
           onClick={() => handleView('userDetail')}
         >
           User Detail
-        </div>
-        <div
+        </button>
+        <button
+          disabled={!selectedOrder} 
           style={activeTab === 'orderDetail' ? tabActive : tab}
           onClick={() => handleView('orderDetail')}
         >
           Order Detail
-        </div>
+        </button>
       </div>
 
          {/*  <div className="paginationUsers">
