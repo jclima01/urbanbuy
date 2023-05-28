@@ -2,7 +2,7 @@ const { default: Stripe } = require("stripe");
 const Order = require("../models/Order.js");
 const Purchase = require("../models/Purchase.js");
 const User = require("../models/Users/User.js");
-const stripe = require('stripe')('sk_test_51NBID4EdWFvWYSp3Ltrb2CfF0bSZIwiJy0TeDpxwqZfmBJsJTXujnYPbfFtiIJEJWlZj0du2qymzqeTI0PwPMnSk00Ay2YyxXV');
+const stripe = require('stripe')('sk_test_51NCdNdL2efsICo3fzbVNZmlNnJaJyRuDxAQrBTJBORiye8bCFNq6PqVwqNAcfnqXgmQ9dwySNJ2L6yQHqz17E2js0059R0fJ9h');
 
 
 const postOrder = async (
