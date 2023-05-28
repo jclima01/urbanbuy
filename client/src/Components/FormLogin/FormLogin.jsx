@@ -14,12 +14,12 @@ const FormLogin = () => {
   const { user } = useAuth0();
   const { isAuthenticated } = useAuth0();
 
-  useEffect(() => {
-    if (isAuthenticated)
-      dispatch(loginClientAdmin(user?.email, "12345")).finally(() => {
-        navigate("/dashboard");
-      });
-  }, [user]);
+  // useEffect(() => {
+  //   if (isAuthenticated)
+  //     dispatch(loginClientAdmin(user?.email, "12345")).finally(() => {
+  //       navigate("/dashboard");
+  //     });
+  // }, [user]);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

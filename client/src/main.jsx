@@ -3,16 +3,15 @@ import ReactDOM from "react-dom";
 import { Auth0Provider } from "@auth0/auth0-react";
 import App from "./App.jsx";
 import { BrowserRouter } from "react-router-dom";
-import { Provider } from 'react-redux';
+import { Provider } from "react-redux";
 import store from "./redux/store/index.js";
 import axios from "axios";
 
-
-axios.defaults.baseURL = 'https://urbaybuy-back.up.railway.app';
+axios.defaults.baseURL = "https://urbaybuy-back.up.railway.app";
 
 const auth0Domain = import.meta.env.VITE_AUTH0_DOMAIN;
 const auth0ClientId = import.meta.env.VITE_AUTH0_CLIENT_ID;
-console.log(auth0Domain)
+console.log(auth0Domain);
 
 ReactDOM.render(
   <React.StrictMode>
@@ -20,7 +19,7 @@ ReactDOM.render(
       <Auth0Provider
         domain={auth0Domain}
         clientId={auth0ClientId}
-        redirectUri={window.location.origin}
+        redirect_uri={window.location.origin }
       >
         <Provider store={store}>
           <App />
