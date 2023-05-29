@@ -1,7 +1,6 @@
 import axios from "axios";
 // import {stripe } from 'stripe-api-library';
 
-
 export const LOGIN_ADMIN = "LOGIN_ADMIN";
 export const LOGIN_CLIENT_ADMIN = "LOGIN_CLIENT_ADMIN";
 export const LOGIN_USER = "LOGIN_USER";
@@ -32,7 +31,6 @@ export const REMOVE_PRODUCT_FROM_CART = "REMOVE_PRODUCT_FROM_CART";
 export const GET_CART_FROM_LS = "GET_CART_FROM_LS";
 export const PAGO_EXITOSO = "PAGO_EXITOSO";
 export const PAGO_FALLIDO = "PAGO_FALLIDO";
-
 
 export const getCartFromLS = () => {
   try {
@@ -491,26 +489,23 @@ export const getSession = () => {
   };
 };
 
-
 export const iniciarPago = (body) => {
   return async (dispatch) => {
     try {
       // Realizar la solicitud a la API de Stripe para crear un cargo
-      const cargo = await axios.post('http://localhost:2800/orders/', body);
+      const cargo = await axios.post("http://localhost:2800/orders/", body);
 
       // Manejar la respuesta exitosa del cargo
       dispatch({
         type: PAGO_EXITOSO,
-        payload: cargo.data
+        payload: cargo.data,
       });
     } catch (error) {
       // Manejar errores durante el proceso de pago
       dispatch({
         type: PAGO_FALLIDO,
-        payload: console.log(error)
+        payload: console.log(error),
       });
     }
   };
 };
-
-

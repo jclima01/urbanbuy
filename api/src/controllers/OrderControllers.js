@@ -2,8 +2,9 @@ const { default: Stripe } = require("stripe");
 const Order = require("../models/Order.js");
 const Purchase = require("../models/Purchase.js");
 const User = require("../models/Users/User.js");
-const stripe = require('stripe')('sk_test_51NCdNdL2efsICo3fzbVNZmlNnJaJyRuDxAQrBTJBORiye8bCFNq6PqVwqNAcfnqXgmQ9dwySNJ2L6yQHqz17E2js0059R0fJ9h');
-
+const stripe = require("stripe")(
+  "sk_test_51NCdNdL2efsICo3fzbVNZmlNnJaJyRuDxAQrBTJBORiye8bCFNq6PqVwqNAcfnqXgmQ9dwySNJ2L6yQHqz17E2js0059R0fJ9h"
+);
 
 const postOrder = async (
   fullName,
@@ -47,44 +48,40 @@ const getOrdersByUser = async (userId) => {
 };
 
 const processPayment = async (req, res) => {
-  const { title, content, price, order} = req.body;
+  const { title, content, price, order } = req.body;
   console.log(stripe);
   try {
     // Crear el objeto del pago
-  
-    
     const payment = new Purchase({
       title,
       content,
       price,
       order,
-      status: stripe.status
+      status: stripe.status,
     });
-    
+
     // Guardar el pago en MongoDB
     await payment.save();
-    
+
     // Crear un producto en Stripe
     const product = await stripe.products.create({
       name: title,
-      type: 'service',
+      type: "service",
     });
 
     // Crear un precio para el producto en Stripe
     await stripe.prices.create({
       unit_amount: price * 100, // El precio se especifica en centavos
-      currency: 'ars',
+      currency: "ars",
       product: product.id,
     });
 
-    res.status(201).json({ message: 'Pago creado exitosamente' });
+    res.status(201).json({ message: "Pago creado exitosamente" });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: 'Error al crear el pago' });
+    res.status(500).json({ message: "Error al crear el pago" });
   }
 };
-
-
 
 module.exports = {
   postOrder,
