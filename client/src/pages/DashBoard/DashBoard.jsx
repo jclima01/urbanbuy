@@ -9,21 +9,23 @@ import { IoMdAddCircleOutline } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getAllProducts, getClientAdminUsers } from "../../redux/actions";
-
+import LoginAuth from "../../Components/FormLogin/LoginAuth";
 const DashBoard = () => {
   const products = useSelector((state) => state.products);
   const users = useSelector((state) => state.users);
-
+  const clientAdmin = useSelector((state) => state.clientAdmin);
   const productsSlice = products.slice(0, 4);
   const clientAdminStorage =
     JSON.parse(localStorage.getItem("clientAdmin")) ?? false;
   console.log(clientAdminStorage);
-  const adminStorage = clientAdminStorage ? clientAdminStorage : false;
+  const adminStorage = clientAdminStorage ? clientAdminStorage : clientAdmin;
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(getAllProducts(clientAdminStorage._id));
     dispatch(getClientAdminUsers(clientAdminStorage._id));
   }, []);
+console.log(adminStorage);
   return (
     <div className="vh-100 w-100 d-flex justify-content-center overflow-hidden ">
       <div className="contianer-home">
@@ -270,6 +272,7 @@ const DashBoard = () => {
             </div>
           </div> */}
         </div>
+        {/* <LoginAuth /> */}
       </div>
     </div>
   );
