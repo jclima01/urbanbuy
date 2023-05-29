@@ -1,24 +1,17 @@
 import React, { useEffect } from "react";
-import AppNavbar from "../Nav/AppNavBar";
-import Introduction from "../Introduction/Introduction";
-import Slider from "../Slider/Slider";
-import Faq from "../Faq/Faq";
-import CompraSegura from "../CompraSegura/CompraSegura";
-import Footer from "../Footer/Footer";
-import Team from "../Team/Team";
-import "./Home.css";
-import { useAuth0 } from "@auth0/auth0-react";
-import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
 import { loginClientAdmin, registerClientAdmin } from "../../redux/actions";
+import { useAuth0 } from "@auth0/auth0-react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router";
 
-function Home(props) {
+const Test = () => {
   const { user } = useAuth0();
   const { isAuthenticated } = useAuth0();
   const clientAdmin = useSelector((state) => state.clientAdmin);
   const navigate = useNavigate()
- 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+// const pw = user.password? user.password : "123asdASD"
+
   useEffect(() => {
     if (isAuthenticated)
     dispatch(loginClientAdmin(user.email, "123asdASD")).finally(() => {
@@ -33,21 +26,7 @@ function Home(props) {
         })
       );
   }, [user, isAuthenticated]);
-  
-  return (
-    <div className="home-landing">
-      <AppNavbar />
+  return <div>Test</div>;
+};
 
-      <Introduction />
-      <Slider />
-      <CompraSegura />
-      <Faq />
-      <Team />
-      {/* <ProductDetail productId={productId}/> */}
-
-      <Footer />
-    </div>
-  );
-}
-
-export default Home;
+export default Test;

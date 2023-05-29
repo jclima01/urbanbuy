@@ -24,6 +24,9 @@ import {
   FILTER_CLIENT_USERS,
   ORDER_CLIENT_USERS,
   SEARCH_USERS,
+  ADD_PRODUCT_TO_CART,
+  REMOVE_PRODUCT_FROM_CART,
+  GET_CART_FROM_LS,
 } from "../actions/index.js";
 
 const initialState = {
@@ -35,12 +38,49 @@ const initialState = {
   product: {},
   categories: [],
   ordersByUser: [],
-
   clientAdminUsers: [],
+  cart: [],
 };
 
 const rootReducer = (state = initialState, { type, payload }) => {
   switch (type) {
+    case GET_CART_FROM_LS:
+      JSON.parse(localStorage.getItem("cart"));
+      return{
+        ...state,
+      }
+    case REMOVE_PRODUCT_FROM_CART:
+      let prod = state.products.find((product) => product._id === payload._id);
+      const cartWhitOutProduct = state.cart.filter(
+        (product) => product._id !== prod._id
+      );
+      localStorage.setItem("cart", JSON.stringify(cartWhitOutProduct));
+      return {
+        ...state,
+        cart: cartWhitOutProduct,
+      };
+    case ADD_PRODUCT_TO_CART:
+      const item = state.products.find(
+        (product) => product._id === payload.productId
+      );
+      const inCart = state.cart.some(
+        (product) => product._id === payload.productId
+      );
+
+      const newCart = inCart
+        ? state.cart.map((product) =>
+            product._id === item._id
+              ? { ...item, quantity: product.quantity + payload.quantity }
+              : item
+          )
+        : [...state.cart, { ...item, quantity: payload.quantity }];
+
+      localStorage.setItem("cart", JSON.stringify(newCart));
+
+      return {
+        ...state,
+        cart: newCart,
+      };
     case GET_USER_BY_ID:
       return {
         ...state,

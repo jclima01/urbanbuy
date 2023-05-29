@@ -25,7 +25,49 @@ export const ORDER_CLIENT_USERS = "ORDER_CLIENT_USERS";
 export const SEARCH_USERS = "SEARCH_USERS";
 export const FILTER_CLIENT_USERS = "FILTER_CLIENT_USERS";
 export const DATA_EDIT_PRODUCT = "DATA_EDIT_PRODUCT";
+export const ADD_PRODUCT_TO_CART = "ADD_PRODUCT_TO_CART";
+export const REMOVE_PRODUCT_FROM_CART = "REMOVE_PRODUCT_FROM_CART";
+export const GET_CART_FROM_LS = "GET_CART_FROM_LS";
 
+
+export const getCartFromLS = () => {
+  try {
+    return async function (dispatch) {
+      return await dispatch({
+        type: GET_CART_FROM_LS,
+      });
+    };
+    // eslint-disable-next-line no-unreachable
+  } catch (err) {
+    throw new Error(err.message);
+  }
+};
+export const RemoveProductFromCart = (product) => {
+  try {
+    return async function (dispatch) {
+      return dispatch({
+        type: REMOVE_PRODUCT_FROM_CART,
+        payload: { ...product },
+      });
+    };
+    // eslint-disable-next-line no-unreachable
+  } catch (err) {
+    throw new Error(err.message);
+  }
+};
+export const addProductToCart = (productId, quantity) => {
+  try {
+    return async function (dispatch) {
+      return await dispatch({
+        type: ADD_PRODUCT_TO_CART,
+        payload: { productId, quantity },
+      });
+    };
+    // eslint-disable-next-line no-unreachable
+  } catch (err) {
+    throw new Error(err.message);
+  }
+};
 export const getUserById = (userId) => {
   try {
     return async function (dispatch) {
@@ -164,7 +206,9 @@ export const getOrdersByUser = (userId) => {
 export const deleteProduct = (productId) => {
   try {
     return async function (dispatch) {
+
       await axios.delete(`http://localhost:2800/products/delete/${productId}`);
+
       return dispatch({
         type: DELETE_PRODUCT,
         payload: productId,
@@ -446,7 +490,11 @@ export const searchUsers = (searchTerm) => ({
   payload: searchTerm,
 });
 
+
 export const dataEditProduct = (obj) => ({
   type: DATA_EDIT_PRODUCT,
   payload: obj,
 });
+
+
+
