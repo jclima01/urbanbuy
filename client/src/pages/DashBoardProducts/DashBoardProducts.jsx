@@ -130,7 +130,7 @@ const DashBoardProducts = () => {
             </span>
           </div>
          <div
-            style={{>
+            style={{
               width: 400,
               height: 130,
               boxShadow: "4px 3px 10px 4px #4644442b",
