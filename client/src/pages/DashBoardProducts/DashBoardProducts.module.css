@@ -16,3 +16,35 @@
     transform: scale(1.1);
     border-color: 1px solid #ff7f2a ;
   }
+
+
+  ::-webkit-scrollbar{
+    width: 5px;
+    background-color: rgba(0, 0, 0, 0.127);
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb{
+    background-color:#ff7f2a;
+  }
+
+  .selectsortProduct{
+    width: auto;
+    background-color: transparent;
+    border: none;
+  }
+
+  .selectsortProduct:focus{
+    outline: none;
+    background-color: transparent;
+    border: none;
+  }
+
+  .spanTotalProducst{
+    font-size: 40px;
+    width: 60px;
+    height: 60px;
+    color: white;
+    background-color: #ff7f2a;
+    border-radius: 50%;
+  }

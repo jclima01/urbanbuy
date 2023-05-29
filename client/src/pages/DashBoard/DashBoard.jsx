@@ -12,6 +12,7 @@ import { getAllProducts, getClientAdminUsers } from "../../redux/actions";
 import LoginAuth from "../../Components/FormLogin/LoginAuth";
 const DashBoard = () => {
   const products = useSelector((state) => state.products);
+
   const users = useSelector((state) => state.users);
   const clientAdmin = useSelector((state) => state.clientAdmin);
   const productsSlice = products.slice(0, 4);
@@ -21,11 +22,12 @@ const DashBoard = () => {
   const adminStorage = clientAdminStorage ? clientAdminStorage : clientAdmin;
   const dispatch = useDispatch();
 
+
   useEffect(() => {
     dispatch(getAllProducts(clientAdminStorage._id));
     dispatch(getClientAdminUsers(clientAdminStorage._id));
   }, []);
-console.log(adminStorage);
+
   return (
     <div className="vh-100 w-100 d-flex justify-content-center overflow-hidden ">
       <div className="contianer-home">
@@ -207,8 +209,11 @@ console.log(adminStorage);
                 justifyContent: "space-around",
               }}
             >
-              {productsSlice?.map((item) => (
-                <DashBoardCardProducts key={item._id} products={item} />
+              {productsSlice?.map((item, i) => (
+                <DashBoardCardProducts
+                  key={`cardproducts-${i}`}
+                  products={item}
+                />
               ))}
             </div>
           </div>
