@@ -21,7 +21,7 @@
 
     "nodemailer": "^6.9.3",
     "nodemailer-sendgrid-transport": "^0.2.0",
-    "nodemon": "^2.0.22"
+    "nodemon": "^2.0.22",
     "stripe": "^12.7.0",
     "stripe-checkout": "^1.0.9"
 
