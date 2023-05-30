@@ -51,7 +51,7 @@ export const RemoveProductFromCart = (product) => {
     return async function (dispatch) {
       return dispatch({
         type: REMOVE_PRODUCT_FROM_CART,
-        payload: { ...product },
+        payload: product,
       });
     };
     // eslint-disable-next-line no-unreachable
