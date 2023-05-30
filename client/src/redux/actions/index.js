@@ -24,11 +24,9 @@ export const GET_USER_BY_ID = "GET_USER_BY_ID";
 export const ORDER_CLIENT_USERS = "ORDER_CLIENT_USERS";
 export const SEARCH_USERS = "SEARCH_USERS";
 export const FILTER_CLIENT_USERS = "FILTER_CLIENT_USERS";
-export const DATA_EDIT_PRODUCT = "DATA_EDIT_PRODUCT";
 export const ADD_PRODUCT_TO_CART = "ADD_PRODUCT_TO_CART";
 export const REMOVE_PRODUCT_FROM_CART = "REMOVE_PRODUCT_FROM_CART";
 export const GET_CART_FROM_LS = "GET_CART_FROM_LS";
-
 
 export const getCartFromLS = () => {
   try {
@@ -111,10 +109,11 @@ export const deleteCategory = (categoryId) => {
   }
 };
 export const editCategory = (categoryId, categoryName) => {
+  console.log('categoryName', categoryName)
   try {
     return async function (dispatch) {
       const { data } = await axios.put(`/category/${categoryId}`, {
-        categoryName,
+        categoryName
       });
       return dispatch({
         type: EDIT_CATEGORY,
@@ -206,9 +205,7 @@ export const getOrdersByUser = (userId) => {
 export const deleteProduct = (productId) => {
   try {
     return async function (dispatch) {
-
-      await axios.delete(`http://localhost:2800/products/delete/${productId}`);
-
+      const { data } = await axios.delete(`/products/delete/${productId}`);
       return dispatch({
         type: DELETE_PRODUCT,
         payload: productId,
@@ -234,22 +231,18 @@ export const editProduct = (
 
   try {
     return async function (dispatch) {
-      const res = await axios.put(
-        `http://localhost:2800/products/${productId}`,
-        {
-          productName,
-          description,
-          categoriesIds,
-          stocks,
-          imageUrl,
-          price,
-          rating,
-        }
-      );
-      console.log(res);
+      const { data } = await axios.put(`/products/${productId}`, {
+        productName,
+        description,
+        categoriesIds,
+        stocks,
+        imageUrl,
+        price,
+        rating,
+      });
       return dispatch({
         type: EDIT_PRODUCT,
-        payload: res.data,
+        payload: data,
       });
     };
     // eslint-disable-next-line no-unreachable
@@ -490,11 +483,9 @@ export const searchUsers = (searchTerm) => ({
   payload: searchTerm,
 });
 
-
-export const dataEditProduct = (obj) => ({
-  type: DATA_EDIT_PRODUCT,
-  payload: obj,
-});
-
-
-
+export const getSession = (orden) => {
+  return {
+    type: ORDER_CLIENT_USERS,
+    payload: orden
+  };
+};

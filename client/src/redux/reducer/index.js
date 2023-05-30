@@ -46,9 +46,9 @@ const rootReducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case GET_CART_FROM_LS:
       JSON.parse(localStorage.getItem("cart"));
-      return{
+      return {
         ...state,
-      }
+      };
     case REMOVE_PRODUCT_FROM_CART:
       let prod = state.products.find((product) => product._id === payload._id);
       const cartWhitOutProduct = state.cart.filter(
@@ -140,6 +140,17 @@ const rootReducer = (state = initialState, { type, payload }) => {
     case EDIT_CATEGORY:
       return {
         ...state,
+        categories: state.categories.map((categorie) => {
+          if (categorie._id === payload._id) {
+            return {
+              ...categorie,
+              ...payload
+            }
+          }
+         
+          return categorie
+        }
+        ),
       };
     case GET_CATEGORIES:
       return {
@@ -166,18 +177,17 @@ const rootReducer = (state = initialState, { type, payload }) => {
         products: state.products.filter((item) => item._id !== payload),
       };
     case EDIT_PRODUCT:
-      
       return {
         ...state,
-        products: state.products.map(item => {
+        products: state.products.map((item) => {
           if (item._id === payload._id) {
             return {
               ...item,
-              ...payload
+              ...payload,
             };
           }
           return item;
-        })
+        }),
       };
     case POST_NEW_PRODUCT:
       const updatedCategories = payload.categories.map((category) => {
@@ -198,7 +208,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
 
       return {
         ...state,
-        products: [...state.products , newProduct]
+        products: [...state.products, newProduct],
       };
     case GET_PRODUCT_BY_ID:
       return {
