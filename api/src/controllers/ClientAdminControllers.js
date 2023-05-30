@@ -1,25 +1,27 @@
 const ClientAdmin = require("../models/Users/ClientAdmin.js");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
-const transporter = require("../email/emailService.js");
+
+// const transporter = require("../email/emailService.js");
 require("dotenv").config();
 
-const sendWelcomeEmail = (fullName, email) => {
-  const mailOptions = {
-    from: 'urbanbuy8@gmail.com',
-    to: email,
-    subject: '¡Bienvenido a nuestro sitio!',
-    text: `Hola ${fullName}, gracias por registrarte en nuestro sitio.`,
-  };
+// const sendWelcomeEmail = (fullName, email) => {
+//   const mailOptions = {
+//     from: 'urbanbuy8@gmail.com',
+//     to: email,
+//     subject: '¡Bienvenido a nuestro sitio!',
+//     text: `Hola ${fullName}, gracias por registrarte en nuestro sitio.`,
+//   };
 
-  transporter.sendMail(mailOptions, (error, info) => {
-    if (error) {
-      console.error("Error al enviar el correo electrónico de bienvenida:", error);
-    } else {
-      console.log("Correo electrónico de bienvenida enviado:", info.response);
-    }
-  });
-};
+//   transporter.sendMail(mailOptions, (error, info) => {
+//     if (error) {
+//       console.error("Error al enviar el correo electrónico de bienvenida:", error);
+//     } else {
+//       console.log("Correo electrónico de bienvenida enviado:", info.response);
+//     }
+//   });
+// };
+
 
 const ClientAdminRegister = async (fullName, email, password) => {
   try {
@@ -34,7 +36,9 @@ const ClientAdminRegister = async (fullName, email, password) => {
     const newAdmin = new ClientAdmin({ fullName, email, password: hash });
 
     const savedAdmin = await newAdmin.save();
-    sendWelcomeEmail(fullName, email);
+
+    // sendWelcomeEmail(fullName, email);
+
     return savedAdmin;
   } catch (error) {
     throw new Error(error.message);
@@ -53,7 +57,7 @@ const ClientAdminLogin = async (email, password) => {
     const token = jwt.sign({ id: clientAdmin._id }, process.env.KEY_JWT, {
       expiresIn: "1h",
     });
-    console.log({ token, ...clientAdmin._doc})
+    console.log({ token, ...clientAdmin._doc });
     return await ClientAdmin.findOne({ email });
   } catch (error) {
     throw new Error(error.message);
@@ -63,7 +67,7 @@ const ClientAdminLogin = async (email, password) => {
 const ClientUpdate = async (clientId, fullName, email, password, logo) => {
   try {
     const client = await ClientAdmin.findById(clientId);
-    if(client) {
+    if (client) {
       client.fullName = fullName;
       client.email = email;
       client.password = password;
@@ -72,7 +76,7 @@ const ClientUpdate = async (clientId, fullName, email, password, logo) => {
     const updatedClient = await client.save();
     return updatedClient;
   } catch (error) {
-    throw new Error(error.message)
+    throw new Error(error.message);
   }
 };
 
@@ -85,11 +89,9 @@ const ClientDelete = async (clientId) => {
   }
 };
 
-
-
 module.exports = {
   ClientAdminRegister,
   ClientAdminLogin,
   ClientUpdate,
-  ClientDelete
+  ClientDelete,
 };
