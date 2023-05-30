@@ -220,6 +220,7 @@ const DashBoardAddProducts = ({ setIsActive, clientAdminId }) => {
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Categories</Form.Label>
           <Form.Select
+          key="1"
             onChange={(e) => {
               e.preventDefault();
               setsetCategory(e.target.value);
