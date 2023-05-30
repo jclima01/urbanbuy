@@ -20,7 +20,6 @@ const DashBoardProducts = () => {
   const refTransitionAddProduct = useRef();
   const products = useSelector((state) => state.products);
   const [isActive, setIsActive] = useState(1200);
-  const categories = useSelector((state) => state.categories);
 
   // Pagination
   const [productsPerPage, setProductsPerPage] = useState(6);
@@ -41,7 +40,7 @@ const DashBoardProducts = () => {
   //Get All products
   useEffect(() => {
     dispatch(getAllProducts(clientAdminId));
-  }, [cateriatest]);
+  }, [dispatch]);
 
   return (
     <div
@@ -134,17 +133,19 @@ const DashBoardProducts = () => {
               justifyContent: "center",
             }}
           >
-            <div className={styles.containertablecategories}>
-              <div className={styles.containertable}>
-                <h5>Categories</h5>
-                <div className={styles.ulcategories}>
-                  {categories?.map((item) => (
-                    <DashBoardSetCategory key={item._id} item={item} cateriatest={cateriatest} settest={settest} />
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
+            <h1>test</h1>
+          </div> 
+          <div
+            style={{
+              width: 500,
+              height: 130,
+              backgroundColor: "#ff7f2a",
+              boxShadow: "4px 3px 10px 4px #4644442b",
+              borderRadius: 20,
+            }}
+          >
+            <h1>test</h1>
+          </div> 
 
           <div
             style={{
