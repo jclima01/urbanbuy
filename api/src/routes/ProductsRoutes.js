@@ -6,6 +6,7 @@ const {
   postProductHandler,
   updateProductHandler,
   deletedProductHandler,
+ 
 } = require("../handlers/ProductHandlers");
 
 //GET
@@ -17,6 +18,7 @@ productRouter.get("/product/:productId", getProductsHandlerById);
 //POST
 
 productRouter.post("/:clientAdminId", postProductHandler);
+
 
 //PUT
 

@@ -14,7 +14,16 @@ import SignIn from "./Components/SignIn/SignIn";
 import HomeEcommerce from "./Components/EcommerceCliente/HomeEcommerce";
 import ProductDetail from "./Components/ProductDetail/ProductDetail";
 import ShoppingCartContainer from "./Components/EcommerceCliente/ShoppingCart/ShoppingCartContainer";
-import Test from "./Components/Test/Test";
+
+import Payment from "./Components/EcommerceCliente/ShoppingCart/Payment/Payment";
+
+
+
+function App() {
+  // const dispatch = useDispatch()
+  const session = useSelector((state) => state.UserSession);
+  const adminStorage = JSON.parse(localStorage.getItem("clientAdmin")) ?? false;
+
 
 function App() {
   const location = useLocation();
@@ -35,7 +44,7 @@ function App() {
             <NavBarDashBoard />
           ) : null}
           <Routes>
-            <Route path="/test" element={<Test />} /> {/* LadingPage */}
+
             <Route path="/" element={<Home />} /> {/* LadingPage */}
             <Route path="/login" element={<FormLogin />} />
             <Route path="/singin" element={<SignIn />} />
