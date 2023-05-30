@@ -92,7 +92,6 @@ export default function ShoppingCart() {
             />
             <h5>{product.productName}</h5>
             <h5>${product.price}</h5>
-            <h5>Qty: {product.quantity}</h5>
             <div className={styles.counterButtons}>
               <GrAddCircle
                 onClick={() => increaseProductQuantity(product._id)}
@@ -107,6 +106,7 @@ export default function ShoppingCart() {
                 {" "}
               </GrSubtractCircle>
             </div>
+            <h5>Qty: {product.quantity}</h5>
             <h4>$ {product.price * product.quantity}</h4>
             <div className={styles.trashIcon}>
               <FaRegTrashAlt
