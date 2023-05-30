@@ -159,9 +159,20 @@ const rootReducer = (state = initialState, { type, payload }) => {
         ...state,
         categories: state.categories.filter((item) => item._id !== payload),
       };
+
     case EDIT_CATEGORY:
+  
       return {
         ...state,
+        categories: state.categories.map((category) => {
+          if (category._id === payload._id) {
+            return {
+              ...category,
+              ...payload,
+            };
+          }
+          return category;
+        }),
       };
     case GET_CATEGORIES:
       return {
@@ -188,7 +199,6 @@ const rootReducer = (state = initialState, { type, payload }) => {
         products: state.products.filter((item) => item._id !== payload),
       };
     case EDIT_PRODUCT:
-      console.log(payload)
       return {
         ...state,
         products: state.products.map((item) => {

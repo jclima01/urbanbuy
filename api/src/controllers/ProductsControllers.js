@@ -124,7 +124,7 @@ const updateProduct = async (
     }
     updatedProduct.productName = productName;
     updatedProduct.description = description;
-    updatedProduct.categories = [...updatedProduct+ categoriesIds];
+    updatedProduct.categories = [...updatedProduct.categories + categoriesIds];
     updatedProduct.stocks = stocks;
     updatedProduct.imageUrl = uploadResult.secure_url;
     updatedProduct.price = price;
