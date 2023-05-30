@@ -12,6 +12,7 @@ import Pagination from "../../../src/pages/DashBoardUser/Pagination/Pagination";
 import DashBoardSetCategory from "../../Components/DashBoardSetCategory/DashBoardSetCategory";
 const DashBoardProducts = () => {
   //Variables
+   const categories = useSelector((state) => state.categories);
   const [cateriatest, settest] = useState(null);
   const dispatch = useDispatch();
   const clientAdminStorage =
@@ -40,7 +41,7 @@ const DashBoardProducts = () => {
   //Get All products
   useEffect(() => {
     dispatch(getAllProducts(clientAdminId));
-  }, [dispatch]);
+  }, [cateriatest]);
 
   return (
     <div
@@ -122,10 +123,12 @@ const DashBoardProducts = () => {
             </span>
             <span className={styles.spanTotalProducst}>{products.length}</span>
           </div>
+        
           <div
             style={{
               width: 900,
               height: 130,
+              backgroundColor: "#ff7f2a",
               boxShadow: "4px 3px 10px 4px #4644442b",
               borderRadius: 20,
               display: "flex",
@@ -133,18 +136,19 @@ const DashBoardProducts = () => {
               justifyContent: "center",
             }}
           >
-            <h1>test</h1>
-          </div> 
-          <div
-            style={{
-              width: 500,
-              height: 130,
-              backgroundColor: "#ff7f2a",
-              boxShadow: "4px 3px 10px 4px #4644442b",
-              borderRadius: 20,
-            }}
-          >
-            <h1>test</h1>
+
+<div className={styles.containertablecategories}>
+              <div className={styles.containertable}>
+                <h5>Categories</h5>
+                <div className={styles.ulcategories}>
+                  {categories?.map((item) => (
+                    <DashBoardSetCategory key={item._id} item={item}  cateriatest={cateriatest} settest={settest}/>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            
           </div> 
 
           <div
@@ -160,6 +164,7 @@ const DashBoardProducts = () => {
               borderRadius: 20,
             }}
           >
+           
             <button
               className={styles.button1}
               onClick={() => handleActiveAddProduct(isActive)}

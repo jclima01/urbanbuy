@@ -21,9 +21,6 @@ const DashBoardSetCategory = ({ item, settest, cateriatest }) => {
     } else return;
   };
 
-useEffect(() => {
- 
-}, []);
 
   return (
     <span
