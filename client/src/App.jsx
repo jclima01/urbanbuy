@@ -18,13 +18,6 @@ import ShoppingCartContainer from "./Components/EcommerceCliente/ShoppingCart/Sh
 import Payment from "./Components/EcommerceCliente/ShoppingCart/Payment/Payment";
 
 
-
-function App() {
-  // const dispatch = useDispatch()
-  const session = useSelector((state) => state.UserSession);
-  const adminStorage = JSON.parse(localStorage.getItem("clientAdmin")) ?? false;
-
-
 function App() {
   const location = useLocation();
   return (
