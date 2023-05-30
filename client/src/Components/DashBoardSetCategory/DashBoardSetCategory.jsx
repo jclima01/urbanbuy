@@ -1,26 +1,29 @@
 import { useDispatch } from "react-redux";
 import { deleteCategory, editCategory } from "../../redux/actions";
 import { BiEditAlt, BiCheck } from "react-icons/bi";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-const DashBoardSetCategory = ({ item }) => {
+const DashBoardSetCategory = ({ item, settest, cateriatest }) => {
   const dispatch = useDispatch();
   const [isActiveEdit, setIsActiveEdit] = useState(false);
 
-   const [data, setData] = useState({
-    categoryName: item.categoryName
-   }); 
 
-   const  handleChange = (e) => {
-    setData({
-        [e.target.name] : e.target.value
-    })
+  const [data, setData] = useState({
+    categoryName: item.categoryName,
+  });
 
-    if(data.categoryName) {
-        dispatch(editCategory(item._id, data.categoryName))
-    }else return;
+  const handleChange = (e) => {
+    e.preventDefault();
+    settest(e.target.value );
 
-   }
+    if (data.categoryName) {
+      dispatch(editCategory(item._id, cateriatest));
+    } else return;
+  };
+
+useEffect(() => {
+ 
+}, []);
 
   return (
     <span
@@ -38,7 +41,11 @@ const DashBoardSetCategory = ({ item }) => {
       key={item._id}
     >
       {isActiveEdit ? (
-        <input type="text" name="categoryName" value={data.categoryName}  onChange={handleChange}/>
+        <input
+          type="text"
+          name="categoryName"
+          onChange={handleChange}
+        />
       ) : (
         item.categoryName
       )}
@@ -81,7 +88,7 @@ const DashBoardSetCategory = ({ item }) => {
           setIsActiveEdit(!isActiveEdit);
         }}
       >
-       { isActiveEdit ? <BiCheck /> : <BiEditAlt />}
+        {isActiveEdit ? <BiCheck /> : <BiEditAlt />}
       </button>
     </span>
   );

@@ -12,6 +12,7 @@ import Pagination from "../../../src/pages/DashBoardUser/Pagination/Pagination";
 import DashBoardSetCategory from "../../Components/DashBoardSetCategory/DashBoardSetCategory";
 const DashBoardProducts = () => {
   //Variables
+  const [cateriatest, settest] = useState(null);
   const dispatch = useDispatch();
   const clientAdminStorage =
     JSON.parse(localStorage.getItem("clientAdmin")) ?? false;
@@ -20,7 +21,7 @@ const DashBoardProducts = () => {
   const products = useSelector((state) => state.products);
   const [isActive, setIsActive] = useState(1200);
   const categories = useSelector((state) => state.categories);
-  console.log("categories", categories);
+
   // Pagination
   const [productsPerPage, setProductsPerPage] = useState(6);
   const [setActualPage, setSetActualPage] = useState(1);
@@ -40,7 +41,7 @@ const DashBoardProducts = () => {
   //Get All products
   useEffect(() => {
     dispatch(getAllProducts(clientAdminId));
-  }, []);
+  }, [cateriatest]);
 
   return (
     <div
@@ -138,7 +139,7 @@ const DashBoardProducts = () => {
                 <h5>Categories</h5>
                 <div className={styles.ulcategories}>
                   {categories?.map((item) => (
-                    <DashBoardSetCategory key={item._id} item={item} />
+                    <DashBoardSetCategory key={item._id} item={item} cateriatest={cateriatest} settest={settest} />
                   ))}
                 </div>
               </div>
