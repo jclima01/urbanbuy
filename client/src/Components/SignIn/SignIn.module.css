@@ -80,3 +80,17 @@
     padding: 10px;
     box-sizing: border-box;
   }
+
+  .buttonGoogle{
+    margin-bottom: 20px;
+    padding: 10px;
+    border: none;
+    background-color: black;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);
+    color:white;
+    border-radius: 10px;
+  }
+
+  .buttonGoogle:hover{
+    background-color: rgb(243, 156, 18);
+  }

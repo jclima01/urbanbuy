@@ -1,11 +1,12 @@
 import React from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
+import style from './FormLogin.module.css'
 
 const LoginButton = () => {
   const { loginWithRedirect } = useAuth0();
 
   return (
-    <button onClick={() => loginWithRedirect()}>Iniciar sesión</button>
+    <button  className={style.logAuth}onClick={() => loginWithRedirect()}>Iniciar sesión con Google</button>
   );
 };
 
@@ -21,7 +22,7 @@ export default function MyComponent() {
   const { isAuthenticated } = useAuth0();
 
   return (
-    <div>
+    <div >
       {isAuthenticated ? <LogoutButton /> : <LoginButton />}
     </div>
   );

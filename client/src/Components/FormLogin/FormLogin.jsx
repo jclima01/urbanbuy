@@ -100,9 +100,11 @@ const FormLogin = () => {
               Iniciar sesión
             </button>
           </form>
+          <div >
+      <LoginAuth />
+      </div>
         </div>
       </div>
-      <LoginAuth />
     </div>
   );
 };
