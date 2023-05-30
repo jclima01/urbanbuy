@@ -29,6 +29,8 @@ export const REMOVE_PRODUCT_FROM_CART = "REMOVE_PRODUCT_FROM_CART";
 export const GET_CART_FROM_LS = "GET_CART_FROM_LS";
 export const SET_SLIDER_THEME= "SET_SLIDER_THEME"
 export const SET_THEME = "SET_THEME"
+export const SET_SEARCH_BAR_THEME = "SET_SEARCH_BAR_THEME"
+export const SET_CARD_STYLE = "SET_CARD_STYLE"
 export const getCartFromLS = () => {
   try {
     return async function (dispatch) {
@@ -501,3 +503,18 @@ export const setSliderTheme = (sliderTheme) => {
     payload: sliderTheme,
   };
 };
+
+export const setSearchBarTheme = (searchBarTheme) => {
+  
+  return {
+    type: SET_SEARCH_BAR_THEME,
+    payload: searchBarTheme,
+  };
+};
+
+export const setCardStyle = (cardStyle) => {
+  return {
+    type: SET_CARD_STYLE,
+    payload: cardStyle
+  }
+}

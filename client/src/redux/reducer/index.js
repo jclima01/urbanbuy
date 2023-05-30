@@ -28,7 +28,9 @@ import {
   REMOVE_PRODUCT_FROM_CART,
   GET_CART_FROM_LS,
   SET_THEME,
-  SET_SLIDER_THEME
+  SET_SLIDER_THEME,
+  SET_SEARCH_BAR_THEME,
+  SET_CARD_STYLE
 } from "../actions/index.js";
 
 const initialState = {
@@ -44,6 +46,8 @@ const initialState = {
   sliderTheme: "urbanBuy",
   clientAdminUsers: [],
   cart: [],
+  searchBarTheme: "styleOne",
+  cardStyle: ""
 };
 
 const rootReducer = (state = initialState, { type, payload }) => {
@@ -248,6 +252,18 @@ const rootReducer = (state = initialState, { type, payload }) => {
             ...state,
             sliderTheme: payload,
           }
+
+          case SET_SEARCH_BAR_THEME:
+            return{
+              ...state,
+              searchBarTheme: payload,
+            }
+
+            case SET_CARD_STYLE:
+              return{
+                ...state,
+                cardStyle: payload,
+              }
 
     default:
       return {

@@ -4,7 +4,7 @@ import styles from "./DashBoardEdit.module.css";
 import NavEcommerce from "../../Components/EcommerceCliente/NavEcommerce";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { setTheme, setSliderTheme, setSearchBarTheme } from "../../redux/actions";
+import { setTheme, setSliderTheme, setSearchBarTheme, setCardStyle } from "../../redux/actions";
 import SearchBar from "../../SearchBar/SearchBar"; 
 
 
@@ -12,6 +12,8 @@ const DashBoardEdit = () => {
   const theme = useSelector((state) => state.theme);
   const sliderTheme = useSelector((state) => state.sliderTheme)
   const searchBarTheme = useSelector((state) => state.searchBarTheme)
+  const cardStyle = useSelector((state) => state.cardStyle);
+  
   const dispatch = useDispatch();
   
   const handleThemeChange = (selectedTheme) => {
@@ -26,9 +28,13 @@ const DashBoardEdit = () => {
     dispatch(setSearchBarTheme(selectedSearchBarTheme));
   };
 
+  const handleCardChange = (selectedCardStyle) =>{
+     dispatch(setCardStyle(selectedCardStyle));
+  }
+
  return (
     <div>
-      <h1 className={styles.title}>Barra de navegacion</h1>
+      <h1 className={styles.title}>Tema Principal</h1>
       <div className={styles.containerButtons}>
       <button
           className={`${styles["urbanBuy"]} ${theme === "urbanBuy" ? styles.active : ""}`}
@@ -70,12 +76,17 @@ const DashBoardEdit = () => {
         </button>
         <h1 className={styles.title}>Estilo de barras de busqueda</h1>
         <button className={`${styles["SearchButton"]} ${searchBarTheme === "styleOne" ? styles.active : ""}`}
-          onClick={() => handleSearchBarThemeChange("styleOne")}>Estilo 1</button>
+          onClick={() => handleSearchBarThemeChange("styleOne")}>Minimalista</button>
          <button className={`${styles["SearchButton"]} ${searchBarTheme === "styleTwo" ? styles.active : ""}`}
-          onClick={() => handleSearchBarThemeChange("styleTwo")}>Estilo 2</button>
+          onClick={() => handleSearchBarThemeChange("styleTwo")}>Moderno</button>
          <button className={`${styles["SearchButton"]} ${searchBarTheme === "styleThree" ? styles.active : ""}`}
-          onClick={() => handleSearchBarThemeChange("styleThree")}>Estilo 3</button>
+          onClick={() => handleSearchBarThemeChange("styleThree")}>Retro</button>
           <SearchBar searchBarTheme={searchBarTheme}/>
+          <h1>Visualizacion del producto</h1>
+          <button className={`${styles["cardButtonClassic"]} ${cardStyle === "clasico" ? styles.active : ""}`}
+          onClick={() => handleCardChange("clasico")}>Clasica</button>
+          <button className={`${styles["babyButton"]} ${cardStyle === "baby" ? styles.active : ""}`}
+          onClick={() => handleCardChange("baby")}>Baby</button>
       </div>
       {/* <UploadWidget /> */}
     </div>
