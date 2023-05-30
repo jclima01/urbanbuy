@@ -296,7 +296,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
         return {
           ...state,
           cargando: false,
-          cargo: action.cargo,
+          cargo: payload,
           error: null,
         };
       case PAGO_FALLIDO:
@@ -304,7 +304,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
           ...state,
           cargando: false,
           cargo: null,
-          error: action.error,
+          error: payload,
         };
 
     case SET_THEME:
