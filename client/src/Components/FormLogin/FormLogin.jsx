@@ -53,7 +53,7 @@ const FormLogin = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Aquí puedes agregar la lógica para procesar el inicio de sesión
-    dispatch(loginClientAdmin("jc@123.com", "123asdASD")).finally(() => {
+    dispatch(loginClientAdmin(email,password)).finally(() => {
       navigate("/dashboard");
     });
   };
