@@ -13,7 +13,6 @@ import DashBoardSetCategory from "../../Components/DashBoardSetCategory/DashBoar
 const DashBoardProducts = () => {
   //Variables
    const categories = useSelector((state) => state.categories);
-  const [cateriatest, settest] = useState(null);
   const dispatch = useDispatch();
   const clientAdminStorage =
     JSON.parse(localStorage.getItem("clientAdmin")) ?? false;
@@ -41,7 +40,7 @@ const DashBoardProducts = () => {
   //Get All products
   useEffect(() => {
     dispatch(getAllProducts(clientAdminId));
-  }, [cateriatest]);
+  }, [categories]);
 
   return (
     <div
@@ -142,7 +141,7 @@ const DashBoardProducts = () => {
                 <h5>Categories</h5>
                 <div className={styles.ulcategories}>
                   {categories?.map((item) => (
-                    <DashBoardSetCategory key={item._id} item={item}  cateriatest={cateriatest} settest={settest}/>
+                    <DashBoardSetCategory key={item._id} item={item}  />
                   ))}
                 </div>
               </div>
