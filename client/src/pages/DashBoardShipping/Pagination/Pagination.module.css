@@ -1,0 +1,38 @@
+.paginationContainer {
+    height: 5vh;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+  }
+  
+  .btn {
+    font-weight: 700;
+    box-sizing: border-box;
+    border: 0.5px solid #00000046;
+    box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.253);
+    border-radius: 0.3em;
+    background-color: rgb(255, 255, 255);
+    color: rgb(53, 53, 54);
+    cursor: pointer;
+  }
+  
+  .btn:hover {
+    font-weight: 700;
+    box-sizing: border-box;
+    border: 0.5px solid #00000046;
+    box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.253);
+    background-color: rgb(255, 127, 42);
+    cursor: pointer;
+  }
+  
+  .btnSelected {
+    font-weight: 700;
+    box-sizing: border-box;
+    border: 0.5px solid #00000046;
+    box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.253);
+    background-color: rgb(255, 127, 42);
+    cursor: pointer;
+  }
+  
