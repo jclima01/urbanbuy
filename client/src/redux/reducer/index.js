@@ -42,8 +42,10 @@ const initialState = {
   product: {},
   categories: [],
   ordersByUser: [],
+
   theme:"urbanBuy",
   sliderTheme: "urbanBuy",
+
   clientAdminUsers: [],
   cart: [],
   searchBarTheme: "styleOne",
@@ -171,14 +173,42 @@ const rootReducer = (state = initialState, { type, payload }) => {
     case DELETE_PRODUCT:
       return {
         ...state,
+        products: state.products.filter((item) => item._id !== payload),
       };
     case EDIT_PRODUCT:
+      
       return {
         ...state,
+        products: state.products.map(item => {
+          if (item._id === payload._id) {
+            return {
+              ...item,
+              ...payload
+            };
+          }
+          return item;
+        })
       };
     case POST_NEW_PRODUCT:
+      const updatedCategories = payload.categories.map((category) => {
+        const foundCategory = state.categories.find((c) => c._id === category);
+        if (foundCategory) {
+          return {
+            categoryId: category,
+            categoryName: foundCategory.categoryName,
+          };
+        }
+        return null;
+      });
+
+      const newProduct = {
+        ...payload,
+        categories: updatedCategories.filter((category) => category !== null),
+      };
+
       return {
         ...state,
+        products: [...state.products , newProduct]
       };
     case GET_PRODUCT_BY_ID:
       return {

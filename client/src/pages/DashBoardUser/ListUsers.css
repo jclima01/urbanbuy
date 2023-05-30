@@ -44,13 +44,15 @@
 
 .buttonView{
     background-color: rgb(255, 127, 42);
-    width: 104px;
+    width: max-content;
     border-radius: 10px;
     padding: 6px;
     border: none;
     color: white;
+    padding-left: 10px;
     text-align: center;
     cursor: pointer;
+    padding-right: 10px;
 
 }
 

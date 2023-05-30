@@ -1,11 +1,27 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import logo2 from "../../Img/logo2.png";
 import style from "./SignIn.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { registerClientAdmin } from "../../redux/actions";
+import RegisterButton from "./RegisterButton/RegisterButton";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const SignIn = () => {
+
+  // const { user } = useAuth0();
+
+  // useEffect(() => {
+  //   if (user)
+  //     dispatch(registerClientAdmin(user?.email, "12345"))
+  //     // .finally(() => {
+  //     //   navigate("/login");
+  //     // });
+  // }, [user]);
+
+
+
+
   //   const [username, setUsername] = useState("");
   //   const [userError, setUserError] = useState("");
   const [password, setPassword] = useState("");
@@ -172,7 +188,9 @@ const SignIn = () => {
               Registrarse
             </button>
           </form>
+            <RegisterButton />
         </div>
+
       </div>
     </div>
   );

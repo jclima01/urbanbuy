@@ -16,3 +16,13 @@
     transform: scale(1.1);
     border: none;
   }
+
+  .container_button{
+    display: flex;
+    gap: 10px;
+  }
+
+  .flexwrap{
+    display: flex;
+    flex-wrap: wrap;
+  }
