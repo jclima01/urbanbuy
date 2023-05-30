@@ -1,6 +1,5 @@
 import "./App.css";
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
 import DashBoard from "./pages/DashBoard/DashBoard";
 import SideBarDashBoard from "./Components/SideBarDashBoard/SideBarDashBoard";
 import NavBarDashBoard from "./Components/NavBarDashBoard/NavBarDashBoard";
