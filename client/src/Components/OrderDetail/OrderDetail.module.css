@@ -1,0 +1,36 @@
+:root {
+    --primary-color: #ff7f2a;
+    --secondary-color: #ffffff;
+    --text-color: #000000;
+    --border-color: #dddddd;
+  }
+  
+  .orderDetailContainer {
+    background-color: var(--secondary-color);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: var(--primary-color);
+  }
+  
+  .item {
+    margin-bottom: 10px;
+  }
+  
+  .cartItems {
+    list-style: none;
+    padding-left: 20px;
+  }
+  
+  .cartItems li {
+    margin-bottom: 5px;
+  }
+  
+  /* Personaliza los estilos a tu gusto */
+  

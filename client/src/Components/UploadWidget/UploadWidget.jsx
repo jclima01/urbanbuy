@@ -20,7 +20,8 @@ function UploadWidget({dataProducts , setdataProducts}) {
     );
   }, []);
 
-  const openWidget = () => {
+  const openWidget = (e) => {
+    e.preventDefault();
     widgetRef.current.open();
   };
 

@@ -27,10 +27,15 @@ import {
   ADD_PRODUCT_TO_CART,
   REMOVE_PRODUCT_FROM_CART,
   GET_CART_FROM_LS,
+
+  PAGO_EXITOSO,
+  PAGO_FALLIDO,
+
   SET_THEME,
   SET_SLIDER_THEME,
   SET_SEARCH_BAR_THEME,
-  SET_CARD_STYLE
+  SET_CARD_STYLE,
+
 } from "../actions/index.js";
 
 const initialState = {
@@ -42,27 +47,36 @@ const initialState = {
   product: {},
   categories: [],
   ordersByUser: [],
-  theme:"urbanBuy",
+
+  theme: "urbanBuy",
   sliderTheme: "urbanBuy",
+
   clientAdminUsers: [],
   cart: [],
+
+  cargando: false,
+  cargo: null,
+  error: null,
+
   searchBarTheme: "styleOne",
-  cardStyle: ""
+  cardStyle: "",
+
 };
 
 const rootReducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case GET_CART_FROM_LS:
       JSON.parse(localStorage.getItem("cart"));
-      return{
+      return {
         ...state,
-      }
+      };
     case REMOVE_PRODUCT_FROM_CART:
       let prod = state.products.find((product) => product._id === payload._id);
       const cartWhitOutProduct = state.cart.filter(
         (product) => product._id !== prod._id
       );
       localStorage.setItem("cart", JSON.stringify(cartWhitOutProduct));
+      JSON.parse(localStorage.getItem("cart"));
       return {
         ...state,
         cart: cartWhitOutProduct,
@@ -145,9 +159,20 @@ const rootReducer = (state = initialState, { type, payload }) => {
         ...state,
         categories: state.categories.filter((item) => item._id !== payload),
       };
+
     case EDIT_CATEGORY:
+  
       return {
         ...state,
+        categories: state.categories.map((category) => {
+          if (category._id === payload._id) {
+            return {
+              ...category,
+              ...payload,
+            };
+          }
+          return category;
+        }),
       };
     case GET_CATEGORIES:
       return {
@@ -171,14 +196,41 @@ const rootReducer = (state = initialState, { type, payload }) => {
     case DELETE_PRODUCT:
       return {
         ...state,
+        products: state.products.filter((item) => item._id !== payload),
       };
     case EDIT_PRODUCT:
       return {
         ...state,
+        products: state.products.map((item) => {
+          if (item._id === payload._id) {
+            return {
+              ...item,
+              ...payload,
+            };
+          }
+          return item;
+        }),
       };
     case POST_NEW_PRODUCT:
+      const updatedCategories = payload.categories.map((category) => {
+        const foundCategory = state.categories.find((c) => c._id === category);
+        if (foundCategory) {
+          return {
+            categoryId: category,
+            categoryName: foundCategory.categoryName,
+          };
+        }
+        return null;
+      });
+
+      const newProduct = {
+        ...payload,
+        categories: updatedCategories.filter((category) => category !== null),
+      };
+
       return {
         ...state,
+        products: [...state.products, newProduct],
       };
     case GET_PRODUCT_BY_ID:
       return {
@@ -240,30 +292,44 @@ const rootReducer = (state = initialState, { type, payload }) => {
         user: {},
         UserSession: false,
       };
-
-      case SET_THEME:
-        return{
+      case PAGO_EXITOSO:
+        return {
           ...state,
-          theme: payload,
-        }
+          cargando: false,
+          cargo: payload,
+          error: null,
+        };
+      case PAGO_FALLIDO:
+        return {
+          ...state,
+          cargando: false,
+          cargo: null,
+          error: payload,
+        };
 
-        case SET_SLIDER_THEME:
-          return{
-            ...state,
-            sliderTheme: payload,
-          }
+    case SET_THEME:
+      return {
+        ...state,
+        theme: payload,
+      };
 
-          case SET_SEARCH_BAR_THEME:
-            return{
-              ...state,
-              searchBarTheme: payload,
-            }
+    case SET_SLIDER_THEME:
+      return {
+        ...state,
+        sliderTheme: payload,
+      };
 
-            case SET_CARD_STYLE:
-              return{
-                ...state,
-                cardStyle: payload,
-              }
+    case SET_SEARCH_BAR_THEME:
+      return {
+        ...state,
+        searchBarTheme: payload,
+      };
+
+    case SET_CARD_STYLE:
+      return {
+        ...state,
+        cardStyle: payload,
+      };
 
     default:
       return {

@@ -1,33 +1,81 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styles from "./ShoppingCart.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { BsArrowLeftSquareFill } from "react-icons/bs";
 import RemoveFromCartButton from "../RemoveFromCartButton/RemoveFromCartButton";
 import { getCartFromLS } from "../../../redux/actions";
-import { useEffect } from "react";
-
+import { useEffect, useRef, useState } from "react";
+import { FaRegTrashAlt } from "react-icons/fa";
+import { GrAddCircle, GrSubtractCircle } from "react-icons/gr";
 export default function ShoppingCart() {
-  const cart = useSelector((state) => state.cart);
-  // const cart = JSON.parse(localStorage.getItem("cart"));
+  const cart = JSON.parse(localStorage.getItem("cart")) ?? [];
+  const [cartList, setCartList] = useState(cart);
   const dispatch = useDispatch();
+
+  const navigate = useNavigate();
+
+  const cartRef = useRef(null); // Add useRef
+
+
   useEffect(() => {
-    dispatch(getCartFromLS());
-  }, [cart]);
+    localStorage.setItem("cart", JSON.stringify(cartList));
+  }, [cartList]);
 
   const calculateTotal = () => {
-    let total = cart.reduce(
+    console.log(cartList);
+    let total = cartList.reduce(
       (count, product) => (count += product.quantity * product.price),
       0
-    );
-    return total;
-  };
-
-  const calculateTotalQuantity = () => {
-    const totalQuantity = cart.reduce(
-      (count, product) => (count += product.quantity),
+      );
+      return total;
+    };
+    
+    const calculateTotalQuantity = () => {
+      console.log(cartList);
+      const totalQuantity = cartList.reduce(
+        (count, product) => (count += product.quantity),
       0
     );
     return totalQuantity;
+  };
+
+  const removeProductFromCart = (productId) => {
+    const cartWhitOutProduct = cartList.filter(
+      (product) => product._id !== productId
+    );
+    setCartList(cartWhitOutProduct);
+  };
+
+  const reduceProductQuantity = (productId) => {
+    const productIdx = cartList.findIndex((product) => product._id === productId);
+  
+    if (cartList[productIdx].quantity === 1) {
+      const cartWithoutProduct = cartList.filter((prod) => prod._id !== productId);
+      setCartList(cartWithoutProduct);
+    } else {
+      const updatedCartList = [...cartList]; // Crear una copia del array cartList
+      updatedCartList[productIdx] = {
+        ...updatedCartList[productIdx],
+        quantity: updatedCartList[productIdx].quantity - 1
+      };
+      setCartList(updatedCartList);
+    }
+  };
+
+
+  const Checkout = () => {
+navigate("/payment")
+  }
+
+  const increaseProductQuantity = (productId) => {
+    const productIdx = cartList.findIndex((product) => product._id === productId);
+  
+    const updatedCartList = [...cartList]; // Crear una copia del array cartList
+    updatedCartList[productIdx] = {
+      ...updatedCartList[productIdx],
+      quantity: updatedCartList[productIdx].quantity + 1
+    };
+    setCartList(updatedCartList);
   };
 
   return (
@@ -45,7 +93,7 @@ export default function ShoppingCart() {
       </div>
 
       <div className={styles.listContainer}>
-        {cart?.map((product) => (
+        {cartList?.map((product) => (
           <div key={product._id} className={styles.cardProduct}>
             <img
               src={product.imageUrl}
@@ -54,13 +102,32 @@ export default function ShoppingCart() {
             />
             <h5>{product.productName}</h5>
             <h5>${product.price}</h5>
+            <div className={styles.counterButtons}>
+              <GrAddCircle
+                onClick={() => increaseProductQuantity(product._id)}
+                className={styles.btn}
+              >
+                {" "}
+              </GrAddCircle>
+              <GrSubtractCircle
+                onClick={() => reduceProductQuantity(product._id)}
+                className={styles.btn}
+              >
+                {" "}
+              </GrSubtractCircle>
+            </div>
             <h5>Qty: {product.quantity}</h5>
-
             <h4>$ {product.price * product.quantity}</h4>
-            <RemoveFromCartButton product={product} />
+            <div className={styles.trashIcon}>
+              <FaRegTrashAlt
+                onClick={() => removeProductFromCart(product._id)}
+              />
+            </div>
+            {/* <RemoveFromCartButton product={product} /> */}
           </div>
         ))}
         <div className={styles.total}>Total: ${calculateTotal()}</div>
+        <button onClick= {Checkout}>COMPRAR</button>
       </div>
     </div>
   );

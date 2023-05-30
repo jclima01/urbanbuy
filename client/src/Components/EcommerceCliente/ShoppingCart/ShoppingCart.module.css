@@ -67,3 +67,12 @@
   justify-content: flex-end;
   font-size: 40px;
 }
+
+.trashIcon{
+  font-size: xx-large;
+  cursor:pointer;
+ }
+
+ .btn{
+  cursor:pointer;
+}
