@@ -11,6 +11,7 @@ export default function ShoppingCart() {
   const cart = JSON.parse(localStorage.getItem("cart")) ?? [];
   const [cartList, setCartList] = useState(cart);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cartList));
   }, [cartList]);
@@ -20,14 +21,14 @@ export default function ShoppingCart() {
     let total = cartList.reduce(
       (count, product) => (count += product.quantity * product.price),
       0
-      );
-      return total;
-    };
-    
-    const calculateTotalQuantity = () => {
-      console.log(cartList);
-      const totalQuantity = cartList.reduce(
-        (count, product) => (count += product.quantity),
+    );
+    return total;
+  };
+
+  const calculateTotalQuantity = () => {
+    console.log(cartList);
+    const totalQuantity = cartList.reduce(
+      (count, product) => (count += product.quantity),
       0
     );
     return totalQuantity;
@@ -41,34 +42,40 @@ export default function ShoppingCart() {
   };
 
   const reduceProductQuantity = (productId) => {
-    const productIdx = cartList.findIndex((product) => product._id === productId);
-  
+    const productIdx = cartList.findIndex(
+      (product) => product._id === productId
+    );
+
     if (cartList[productIdx].quantity === 1) {
-      const cartWithoutProduct = cartList.filter((prod) => prod._id !== productId);
+      const cartWithoutProduct = cartList.filter(
+        (prod) => prod._id !== productId
+      );
       setCartList(cartWithoutProduct);
     } else {
       const updatedCartList = [...cartList]; // Crear una copia del array cartList
       updatedCartList[productIdx] = {
         ...updatedCartList[productIdx],
-        quantity: updatedCartList[productIdx].quantity - 1
+        quantity: updatedCartList[productIdx].quantity - 1,
       };
       setCartList(updatedCartList);
     }
   };
 
   const increaseProductQuantity = (productId) => {
-    const productIdx = cartList.findIndex((product) => product._id === productId);
-  
+    const productIdx = cartList.findIndex(
+      (product) => product._id === productId
+    );
+
     const updatedCartList = [...cartList]; // Crear una copia del array cartList
     updatedCartList[productIdx] = {
       ...updatedCartList[productIdx],
-      quantity: updatedCartList[productIdx].quantity + 1
+      quantity: updatedCartList[productIdx].quantity + 1,
     };
     setCartList(updatedCartList);
   };
   const Checkout = () => {
-navigate("/payment")
-  }
+    navigate("/payment");
+  };
 
   return (
     <div className={styles.shoppingCart}>

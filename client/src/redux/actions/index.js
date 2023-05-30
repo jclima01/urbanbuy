@@ -540,12 +540,12 @@ export const dataEditProduct = (obj) => ({
 
 
 
-export const iniciarPago = (body) => {
+export const iniciarPago = (items) => {
   return async (dispatch) => {
     try {
       // Realizar la solicitud a la API de Stripe para crear un cargo
-      const cargo = await axios.post('http://localhost:2800/orders/', body);
-
+      const cargo = await axios.post('http://localhost:2800/orders/order/create-payment-intent', items);
+      console.log(cargo)
       // Manejar la respuesta exitosa del cargo
       dispatch({
         type: PAGO_EXITOSO,
