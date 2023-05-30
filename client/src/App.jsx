@@ -37,7 +37,7 @@ function App() {
             <NavBarDashBoard />
           ) : null}
           <Routes>
-
+            <Route path="/payment" element={<Payment />} /> 
             <Route path="/" element={<Home />} /> {/* LadingPage */}
             <Route path="/login" element={<FormLogin />} />
             <Route path="/singin" element={<SignIn />} />
