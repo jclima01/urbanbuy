@@ -40,7 +40,7 @@ function AppNavbar() {
           </Link> */}
         </Navbar.Brand>
         <div >
-        <Link to='Signin'>
+        <Link to='singin'>
        <button className="SignIn">Sign in</button>
         </Link>
      <Link to='login'>

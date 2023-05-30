@@ -26,11 +26,17 @@ export const GET_USER_BY_ID = "GET_USER_BY_ID";
 export const ORDER_CLIENT_USERS = "ORDER_CLIENT_USERS";
 export const SEARCH_USERS = "SEARCH_USERS";
 export const FILTER_CLIENT_USERS = "FILTER_CLIENT_USERS";
+export const DATA_EDIT_PRODUCT = "DATA_EDIT_PRODUCT";
 export const ADD_PRODUCT_TO_CART = "ADD_PRODUCT_TO_CART";
 export const REMOVE_PRODUCT_FROM_CART = "REMOVE_PRODUCT_FROM_CART";
 export const GET_CART_FROM_LS = "GET_CART_FROM_LS";
 export const PAGO_EXITOSO = "PAGO_EXITOSO";
 export const PAGO_FALLIDO = "PAGO_FALLIDO";
+
+export const SET_SLIDER_THEME= "SET_SLIDER_THEME"
+export const SET_THEME = "SET_THEME"
+export const SET_SEARCH_BAR_THEME = "SET_SEARCH_BAR_THEME"
+export const SET_CARD_STYLE = "SET_CARD_STYLE"
 
 export const getCartFromLS = () => {
   try {
@@ -49,7 +55,7 @@ export const RemoveProductFromCart = (product) => {
     return async function (dispatch) {
       return dispatch({
         type: REMOVE_PRODUCT_FROM_CART,
-        payload: { ...product },
+        payload: product,
       });
     };
     // eslint-disable-next-line no-unreachable
@@ -192,7 +198,9 @@ export const postOrder = (
 export const getOrdersByUser = (userId) => {
   try {
     return async function (dispatch) {
-      const { data } = await axios.get(`/orders/${userId}`);
+      const { data } = await axios.get(
+        `/orders/${userId}`
+      );
       return dispatch({
         type: GET_ORDERS_BY_USER,
         payload: data,
@@ -206,10 +214,12 @@ export const getOrdersByUser = (userId) => {
 export const deleteProduct = (productId) => {
   try {
     return async function (dispatch) {
-      const { data } = await axios.delete(`/products/delete/${productId}`);
+
+      await axios.delete(`/products/delete/${productId}`);
+
       return dispatch({
         type: DELETE_PRODUCT,
-        payload: data,
+        payload: productId,
       });
     };
     // eslint-disable-next-line no-unreachable
@@ -223,25 +233,32 @@ export const editProduct = (
   productName,
   description,
   categoriesIds,
-  stocks,
   imageUrl,
+  stocks,
   price,
-  rating
+  rating,
 ) => {
+  console.log("stocks", stocks);
+
   try {
     return async function (dispatch) {
-      const { data } = await axios.put(`/products/${productId}`, {
-        productName,
-        description,
-        categoriesIds,
-        stocks,
-        imageUrl,
-        price,
-        rating,
-      });
+      const res = await axios.put(
+        `/products/${productId}`,
+        {
+          productName,
+          description,
+          categoriesIds,
+          stocks,
+          imageUrl,
+          price,
+          rating,
+        }
+      );
+      
+      console.log(res.data)
       return dispatch({
         type: EDIT_PRODUCT,
-        payload: data,
+        payload: res.data,
       });
     };
     // eslint-disable-next-line no-unreachable
@@ -297,6 +314,7 @@ export const getProductById = (productId) => {
 export const getAllProducts = (clientAdminId) => {
   try {
     return async function (dispatch) {
+      console.log(clientAdminId);
       const { data } = await axios.get(`/products/${clientAdminId}`);
       return dispatch({
         type: GET_ALL_PRODUCTS,
@@ -482,12 +500,14 @@ export const searchUsers = (searchTerm) => ({
   payload: searchTerm,
 });
 
-export const getSession = () => {
+export const setTheme = (theme) => {
+  
   return {
-    type: ORDER_CLIENT_USERS,
-    payload: orden,
+    type: SET_THEME,
+    payload: theme,
   };
 };
+
 
 export const iniciarPago = (body) => {
   return async (dispatch) => {
@@ -509,3 +529,33 @@ export const iniciarPago = (body) => {
     }
   };
 };
+
+export const setSliderTheme = (sliderTheme) => {
+  
+  return {
+    type: SET_SLIDER_THEME,
+    payload: sliderTheme,
+  };
+};
+
+export const setSearchBarTheme = (searchBarTheme) => {
+  
+  return {
+    type: SET_SEARCH_BAR_THEME,
+    payload: searchBarTheme,
+  };
+};
+
+export const setCardStyle = (cardStyle) => {
+  return {
+    type: SET_CARD_STYLE,
+    payload: cardStyle
+  }
+}
+
+
+export const dataEditProduct = (obj) => ({
+  type: DATA_EDIT_PRODUCT,
+  payload: obj,
+});
+

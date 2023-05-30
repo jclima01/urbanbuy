@@ -27,8 +27,15 @@ import {
   ADD_PRODUCT_TO_CART,
   REMOVE_PRODUCT_FROM_CART,
   GET_CART_FROM_LS,
+
   PAGO_EXITOSO,
   PAGO_FALLIDO,
+
+  SET_THEME,
+  SET_SLIDER_THEME,
+  SET_SEARCH_BAR_THEME,
+  SET_CARD_STYLE,
+
 } from "../actions/index.js";
 
 const initialState = {
@@ -41,26 +48,35 @@ const initialState = {
   categories: [],
   ordersByUser: [],
 
+  theme: "urbanBuy",
+  sliderTheme: "urbanBuy",
+
   clientAdminUsers: [],
   cart: [],
+
   cargando: false,
   cargo: null,
   error: null,
+
+  searchBarTheme: "styleOne",
+  cardStyle: "",
+
 };
 
 const rootReducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case GET_CART_FROM_LS:
       JSON.parse(localStorage.getItem("cart"));
-      return{
+      return {
         ...state,
-      }
+      };
     case REMOVE_PRODUCT_FROM_CART:
       let prod = state.products.find((product) => product._id === payload._id);
       const cartWhitOutProduct = state.cart.filter(
         (product) => product._id !== prod._id
       );
       localStorage.setItem("cart", JSON.stringify(cartWhitOutProduct));
+      JSON.parse(localStorage.getItem("cart"));
       return {
         ...state,
         cart: cartWhitOutProduct,
@@ -169,14 +185,42 @@ const rootReducer = (state = initialState, { type, payload }) => {
     case DELETE_PRODUCT:
       return {
         ...state,
+        products: state.products.filter((item) => item._id !== payload),
       };
     case EDIT_PRODUCT:
+      console.log(payload)
       return {
         ...state,
+        products: state.products.map((item) => {
+          if (item._id === payload._id) {
+            return {
+              ...item,
+              ...payload,
+            };
+          }
+          return item;
+        }),
       };
     case POST_NEW_PRODUCT:
+      const updatedCategories = payload.categories.map((category) => {
+        const foundCategory = state.categories.find((c) => c._id === category);
+        if (foundCategory) {
+          return {
+            categoryId: category,
+            categoryName: foundCategory.categoryName,
+          };
+        }
+        return null;
+      });
+
+      const newProduct = {
+        ...payload,
+        categories: updatedCategories.filter((category) => category !== null),
+      };
+
       return {
         ...state,
+        products: [...state.products, newProduct],
       };
     case GET_PRODUCT_BY_ID:
       return {
@@ -252,6 +296,30 @@ const rootReducer = (state = initialState, { type, payload }) => {
           cargo: null,
           error: action.error,
         };
+
+    case SET_THEME:
+      return {
+        ...state,
+        theme: payload,
+      };
+
+    case SET_SLIDER_THEME:
+      return {
+        ...state,
+        sliderTheme: payload,
+      };
+
+    case SET_SEARCH_BAR_THEME:
+      return {
+        ...state,
+        searchBarTheme: payload,
+      };
+
+    case SET_CARD_STYLE:
+      return {
+        ...state,
+        cardStyle: payload,
+      };
 
     default:
       return {

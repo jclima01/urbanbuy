@@ -16,6 +16,7 @@ function HomeEcommerce() {
   const [filteredProduct, setFilteredProducts] = useState([]);
   const [searchTerm, setSearchTerm] = useState([]);
   const [orderedProduct, setOrderedProduct] = useState([]);
+  const theme = useSelector(state => state.theme)
 
 
   useEffect(() => {
@@ -115,9 +116,9 @@ function HomeEcommerce() {
         <div className={style.searchContainer}>
           <SearchBar onSearch={handleSearch} />
         </div>
-        <div className={style.filterContainer}>
+        <div className={`${style.filterContainer} ${style[theme]}`}>
           <p>Filtrar por rating:</p>
-          <select onChange={filterProduct}>
+          <select  onChange={filterProduct}>
             <option value="" default selected>
               Elegir rating
             </option>
@@ -134,10 +135,10 @@ function HomeEcommerce() {
 
 
       {/* Order */}
-      <div className={style.buttonDiv}>
+      <div className={`${style.buttonDiv} ${style[theme]}`} >
         <p>Ordenar por:</p>
 
-        <button onClick={() => handleOrder("priceAs")}>Precio Ascendente</button>
+        <button  onClick={() => handleOrder("priceAs")}>Precio Ascendente</button>
         <button onClick={() => handleOrder("priceDs")}>Precio Descendente</button>
         <button onClick={() => handleOrder("nameAs")}>Nombre A - Z</button>
         <button onClick={() => handleOrder("nameDs")}>Nombre Z - A</button>
