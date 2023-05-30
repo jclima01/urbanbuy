@@ -113,16 +113,24 @@ const updateProduct = async (
       // El producto no existe, puedes lanzar un error o manejarlo de otra manera
       throw new Error("Producto no encontrado");
     }
-
+    if (updatedProduct.categories === categoriesIds) {
+      updatedProduct.productName = productName;
+      updatedProduct.description = description;
+      updatedProduct.stocks = stocks;
+      updatedProduct.imageUrl = uploadResult.secure_url;
+      updatedProduct.price = price;
+      updatedProduct.rating = rating;
+    }
     updatedProduct.productName = productName;
     updatedProduct.description = description;
-    updatedProduct.categories = categoriesIds;
+    updatedProduct.categories = [...updatedProduct+ categoriesIds];
     updatedProduct.stocks = stocks;
     updatedProduct.imageUrl = uploadResult.secure_url;
     updatedProduct.price = price;
     updatedProduct.rating = rating;
 
     const savedProduct = await updatedProduct.save();
+    // savedProduct.populate('categories')
     return savedProduct;
   } catch (error) {
     throw new Error(error.message);

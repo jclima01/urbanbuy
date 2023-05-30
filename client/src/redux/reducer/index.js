@@ -177,7 +177,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
         products: state.products.filter((item) => item._id !== payload),
       };
     case EDIT_PRODUCT:
-      
+      console.log(payload)
       return {
         ...state,
         products: state.products.map((item) => {
