@@ -11,7 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getClientAdminUsers } from "../../redux/actions";
 import OrderDetail from "../../Components/OrderDetail/OrderDetail";
 
-const DashBoardShipping =() => {
+const DashBoardUser = () => {
   const navTab = {
     width: "100%",
     display: "flex",
@@ -139,4 +139,4 @@ const DashBoardShipping =() => {
   );
 };
 
-export default DashBoardShipping
+export default DashBoardUser;

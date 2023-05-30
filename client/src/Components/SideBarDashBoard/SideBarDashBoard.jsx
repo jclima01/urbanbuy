@@ -68,14 +68,14 @@ const SideBarDashBoard = () => {
                   <CiPenpot size={30} />
                 </li>
               </Link>
-              {/* <Link to={"dashboard/Shipping"} className="custom-link">
+              <Link to={"dashboard/Shipping"} className="custom-link">
                 <li
                   onClick={() => handleIsActiveHover("Shipping")}
                   className={isActive === "Shipping" ? "isActive" : "btn"}
                 >
                   <BsGraphUpArrow size={25} />
                 </li>
-              </Link> */}
+              </Link>
               {/* <Link to={"dashboard/settings"} className="custom-link">
                 <li
                   onClick={() => handleIsActiveHover("Settings")}
