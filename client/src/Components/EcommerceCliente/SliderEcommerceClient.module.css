@@ -32,3 +32,33 @@
 .carousel-indicators .active {
   background-color: #333; /* Color de fondo para la indicación activa */
 }
+
+.urbanBuy {
+  position: absolute;
+  z-index: 1;
+  background-color: rgba(243, 148, 7, 0.9);
+  color: white;
+  padding: 10px;
+  margin: 0;
+  border-radius: 0 10px 10px 0;
+}
+
+.marino {
+  position: absolute;
+  z-index: 1;
+  background-color: #112233;
+  color: white;
+  padding: 10px;
+  margin: 0;
+  border-radius: 0 10px 10px 0;
+}
+
+.floral {
+  position: absolute;
+  z-index: 1;
+  background-color: #793a96;
+  color: white;
+  padding: 10px;
+  margin: 0;
+  border-radius: 0 10px 10px 0;
+}

@@ -1,4 +1,3 @@
-
 .h2 {
   display: inline-block;
   justify-content: center;
@@ -66,3 +65,86 @@
   margin-left: 5px;
 }
 
+.urbanBuy button {
+  background-color: #ff9900;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  margin-left: 5px;
+}
+
+.marino button {
+  background-color: #112233;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  margin-left: 5px;
+}
+
+.floral button {
+  background-color: #793a96;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  margin-left: 5px;
+}
+
+.urbanBuy select {
+  background-color: #ff9900;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  margin-left: 5px;
+padding: 10px;
+margin-bottom: 10px;
+}
+
+.marino select {
+  background-color: #112233;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  margin-left: 5px;
+padding: 10px;
+margin-bottom: 10px;
+}
+
+.floral select {
+  background-color: #793a96;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  margin-left: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.urbanBuy option {
+  background-color: rgba(255, 153, 0, 0.5);
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  margin-left: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.marino option {
+  background-color: rgba(17, 34, 51, 0.5);
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  margin-left: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.floral option {
+  background-color: rgba(121, 58, 150, 0.5);
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  margin-left: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+}

@@ -27,6 +27,10 @@ import {
   ADD_PRODUCT_TO_CART,
   REMOVE_PRODUCT_FROM_CART,
   GET_CART_FROM_LS,
+  SET_THEME,
+  SET_SLIDER_THEME,
+  SET_SEARCH_BAR_THEME,
+  SET_CARD_STYLE
 } from "../actions/index.js";
 
 const initialState = {
@@ -38,8 +42,14 @@ const initialState = {
   product: {},
   categories: [],
   ordersByUser: [],
+
+  theme:"urbanBuy",
+  sliderTheme: "urbanBuy",
+
   clientAdminUsers: [],
   cart: [],
+  searchBarTheme: "styleOne",
+  cardStyle: ""
 };
 
 const rootReducer = (state = initialState, { type, payload }) => {
@@ -260,6 +270,30 @@ const rootReducer = (state = initialState, { type, payload }) => {
         user: {},
         UserSession: false,
       };
+
+      case SET_THEME:
+        return{
+          ...state,
+          theme: payload,
+        }
+
+        case SET_SLIDER_THEME:
+          return{
+            ...state,
+            sliderTheme: payload,
+          }
+
+          case SET_SEARCH_BAR_THEME:
+            return{
+              ...state,
+              searchBarTheme: payload,
+            }
+
+            case SET_CARD_STYLE:
+              return{
+                ...state,
+                cardStyle: payload,
+              }
 
     default:
       return {

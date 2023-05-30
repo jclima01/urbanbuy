@@ -29,6 +29,10 @@ export const ADD_PRODUCT_TO_CART = "ADD_PRODUCT_TO_CART";
 export const REMOVE_PRODUCT_FROM_CART = "REMOVE_PRODUCT_FROM_CART";
 export const GET_CART_FROM_LS = "GET_CART_FROM_LS";
 
+export const SET_SLIDER_THEME= "SET_SLIDER_THEME"
+export const SET_THEME = "SET_THEME"
+export const SET_SEARCH_BAR_THEME = "SET_SEARCH_BAR_THEME"
+export const SET_CARD_STYLE = "SET_CARD_STYLE"
 
 export const getCartFromLS = () => {
   try {
@@ -490,11 +494,43 @@ export const searchUsers = (searchTerm) => ({
   payload: searchTerm,
 });
 
+export const setTheme = (theme) => {
+  
+  return {
+    type: SET_THEME,
+    payload: theme,
+  };
+};
+
+export const setSliderTheme = (sliderTheme) => {
+  
+  return {
+    type: SET_SLIDER_THEME,
+    payload: sliderTheme,
+  };
+};
+
+export const setSearchBarTheme = (searchBarTheme) => {
+  
+  return {
+    type: SET_SEARCH_BAR_THEME,
+    payload: searchBarTheme,
+  };
+};
+
+export const setCardStyle = (cardStyle) => {
+  return {
+    type: SET_CARD_STYLE,
+    payload: cardStyle
+  }
+}
+
 
 export const dataEditProduct = (obj) => ({
   type: DATA_EDIT_PRODUCT,
   payload: obj,
 });
+
 
 
 
