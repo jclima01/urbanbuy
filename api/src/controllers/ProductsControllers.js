@@ -108,18 +108,22 @@ const updateProduct = async (
       imageUrl /*,{optiones}*/
     );
 
-    const product = await Product.findById(productId);
-    if (product) {
-      product.productName = productName;
-      product.description = description;
-      product.categories = categoriesIds;
-      product.stocks = stocks;
-      product.imageUrl = uploadResult.secure_url;
-      product.price = price;
-      product.rating = rating;
+    const updatedProduct = await Product.findById(productId);
+    if (!updatedProduct) {
+      // El producto no existe, puedes lanzar un error o manejarlo de otra manera
+      throw new Error("Producto no encontrado");
     }
-    const updatedProduct = await product.save();
-    return updatedProduct;
+
+    updatedProduct.productName = productName;
+    updatedProduct.description = description;
+    updatedProduct.categories = categoriesIds;
+    updatedProduct.stocks = stocks;
+    updatedProduct.imageUrl = uploadResult.secure_url;
+    updatedProduct.price = price;
+    updatedProduct.rating = rating;
+
+    const savedProduct = await updatedProduct.save();
+    return savedProduct;
   } catch (error) {
     throw new Error(error.message);
   }
@@ -127,7 +131,7 @@ const updateProduct = async (
 
 //DELETE
 const deleteProduct = async (productId) => {
-  console.log( productId)
+  console.log(productId);
   try {
     const deletedProduct = await Product.findByIdAndDelete(productId);
     return deletedProduct;

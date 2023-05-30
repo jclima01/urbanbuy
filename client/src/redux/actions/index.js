@@ -195,7 +195,7 @@ export const getOrdersByUser = (userId) => {
   try {
     return async function (dispatch) {
       const { data } = await axios.get(
-        `http://localhost:2800/orders/${userId}`
+        `/orders/${userId}`
       );
       return dispatch({
         type: GET_ORDERS_BY_USER,
@@ -211,7 +211,7 @@ export const deleteProduct = (productId) => {
   try {
     return async function (dispatch) {
 
-      await axios.delete(`http://localhost:2800/products/delete/${productId}`);
+      await axios.delete(`/products/delete/${productId}`);
 
       return dispatch({
         type: DELETE_PRODUCT,
@@ -239,7 +239,7 @@ export const editProduct = (
   try {
     return async function (dispatch) {
       const res = await axios.put(
-        `http://localhost:2800/products/${productId}`,
+        `/products/${productId}`,
         {
           productName,
           description,
@@ -250,7 +250,7 @@ export const editProduct = (
           rating,
         }
       );
-      console.log(res);
+      console.log(res.data)
       return dispatch({
         type: EDIT_PRODUCT,
         payload: res.data,
@@ -309,6 +309,7 @@ export const getProductById = (productId) => {
 export const getAllProducts = (clientAdminId) => {
   try {
     return async function (dispatch) {
+      console.log(clientAdminId);
       const { data } = await axios.get(`/products/${clientAdminId}`);
       return dispatch({
         type: GET_ALL_PRODUCTS,

@@ -17,7 +17,7 @@ const DashBoardModalEditProduct = ({
   stocks,
   price,
   rating,
-  id,
+  _id,
 }) => {
   const dispatch = useDispatch();
 
@@ -41,7 +41,7 @@ const DashBoardModalEditProduct = ({
     e.preventDefault();
     dispatch(
       editProduct(
-        id,
+        _id,
         dataEditProducts.productName,
         dataEditProducts.description,
         dataEditProducts.categories,
