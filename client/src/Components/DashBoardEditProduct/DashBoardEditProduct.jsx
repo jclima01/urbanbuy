@@ -1,10 +1,10 @@
 import { useState } from "react";
 import s from "./DashBoardEditProduct.module.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
-import { editProduct } from "../../redux/actions";
+import { editProduct, getAllProducts } from "../../redux/actions";
 import toast, { Toaster } from "react-hot-toast";
 
 const DashBoardModalEditProduct = ({
@@ -12,25 +12,28 @@ const DashBoardModalEditProduct = ({
   handleClose,
   productName,
   description,
-  categories,
+  // categories,
   imageUrl,
   stocks,
   price,
   rating,
   _id,
 }) => {
-  const dispatch = useDispatch();
+  const clientAdminId = useSelector(state => state.clientAdmin)
 
+  const dispatch = useDispatch();
+  const categories = useSelector((state) => state.categories);
+  // const [isChecked, setIsChecked] = useState(false)
   const [dataEditProducts, setDataEditProducts] = useState({
     productName,
     description,
-    categories,
+    categories: [],
     imageUrl,
     stocks,
     price,
     rating,
   });
-
+  console.log(dataEditProducts);
   const handleInputChange = (e) => {
     setDataEditProducts({
       ...dataEditProducts,
@@ -48,9 +51,10 @@ const DashBoardModalEditProduct = ({
         dataEditProducts.imageUrl,
         dataEditProducts.stocks,
         dataEditProducts.price,
-        dataEditProducts.rating
+        dataEditProducts.rating,
       )
     ).finally(() => {
+      dispatch(getAllProducts(clientAdminId))
       handleClose();
       toast.success("Product Updated Successfully");
     });
@@ -102,24 +106,42 @@ const DashBoardModalEditProduct = ({
               onChange={handleInputChange}
             />
           </Form.Group>
-          {/*  <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+          <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
             <Form.Label>Categroies</Form.Label>
             <Form.Check>
-              {categories?.map(category => (
-                <div className={s.categoriescheked}>
-                  
-                  <Form.Check.Input
-                    checked="true"
-                    type="radio"
-                    name={category.categoryName}
-                    id={category.categoryName}
-                    value={category.categoryName}
-                  />
-                  <Form.Check.Label>{category.categoryName}</Form.Check.Label>
-                </div>
-              ))}
+              <div className={s.categoriescheked}>
+                {categories?.map((category) => (
+                  <div key={category._id}>
+                    <Form.Check.Label>{category.categoryName}</Form.Check.Label>
+                    <Form.Check.Input
+                      type="checkbox"
+                      checked={dataEditProducts.categories.some(
+                        (c) => c._id === category._id
+                      )}
+                      name={category.categoryName}
+                      id={category._id}
+                      value={category.categoryName}
+                      onChange={(e) => {
+                        if (e.target.checked) {
+                          setDataEditProducts((prevData) => ({
+                            ...prevData,
+                            categories: [...prevData.categories, category._id],
+                          }));
+                        } else {
+                          setDataEditProducts((prevData) => ({
+                            ...prevData,
+                            categories: prevData.categories.filter(
+                              (c) => c._id !== category._id
+                            ),
+                          }));
+                        }
+                      }}
+                    />
+                  </div>
+                ))}
+              </div>
             </Form.Check>
-          </Form.Group> */}
+          </Form.Group>
 
           <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
             <Form.Label>Stocks</Form.Label>

@@ -232,7 +232,7 @@ export const editProduct = (
   imageUrl,
   stocks,
   price,
-  rating
+  rating,
 ) => {
   console.log("stocks", stocks);
 
@@ -250,6 +250,7 @@ export const editProduct = (
           rating,
         }
       );
+      
       console.log(res.data)
       return dispatch({
         type: EDIT_PRODUCT,

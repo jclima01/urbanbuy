@@ -14,6 +14,7 @@ const DashBoardTableCardProducts = ({
   rating,
   _id,
   setIsActive,
+  
 }) => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
