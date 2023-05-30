@@ -114,6 +114,7 @@ export const deleteCategory = (categoryId) => {
   }
 };
 export const editCategory = (categoryId, categoryName) => {
+  console.log('categoryName', categoryName)
   try {
     return async function (dispatch) {
       const { data } = await axios.put(`/category/${categoryId}`, {

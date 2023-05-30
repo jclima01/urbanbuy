@@ -3,24 +3,21 @@ import { deleteCategory, editCategory } from "../../redux/actions";
 import { BiEditAlt, BiCheck } from "react-icons/bi";
 import { useState, useEffect } from "react";
 
-const DashBoardSetCategory = ({ item, settest, cateriatest }) => {
+const DashBoardSetCategory = ({ item }) => {
   const dispatch = useDispatch();
   const [isActiveEdit, setIsActiveEdit] = useState(false);
-
-
-  const [data, setData] = useState({
-    categoryName: item.categoryName,
-  });
+  const [categoryName, setCategoryName] = useState(item.categoryName);
 
   const handleChange = (e) => {
-    e.preventDefault();
-    settest(e.target.value );
-
-    if (data.categoryName) {
-      dispatch(editCategory(item._id, cateriatest));
-    } else return;
+    const newValue = e.target.value;
+    setCategoryName(newValue);
   };
 
+  useEffect(() => {
+    if (isActiveEdit) {
+      dispatch(editCategory(item._id, categoryName));
+    }
+  }, [isActiveEdit, dispatch, item._id, categoryName]);
 
   return (
     <span
@@ -40,7 +37,7 @@ const DashBoardSetCategory = ({ item, settest, cateriatest }) => {
       {isActiveEdit ? (
         <input
           type="text"
-          name="categoryName"
+          value={categoryName}
           onChange={handleChange}
         />
       ) : (
