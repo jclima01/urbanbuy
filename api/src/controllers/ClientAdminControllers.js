@@ -1,7 +1,25 @@
 const ClientAdmin = require("../models/Users/ClientAdmin.js");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
+const transporter = require("../email/emailService.js");
 require("dotenv").config();
+
+const sendWelcomeEmail = (fullName, email) => {
+  const mailOptions = {
+    from: 'urbanbuy8@gmail.com',
+    to: email,
+    subject: '¡Bienvenido a nuestro sitio!',
+    text: `Hola ${fullName}, gracias por registrarte en nuestro sitio.`,
+  };
+
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      console.error("Error al enviar el correo electrónico de bienvenida:", error);
+    } else {
+      console.log("Correo electrónico de bienvenida enviado:", info.response);
+    }
+  });
+};
 
 const ClientAdminRegister = async (fullName, email, password) => {
   try {
@@ -16,6 +34,7 @@ const ClientAdminRegister = async (fullName, email, password) => {
     const newAdmin = new ClientAdmin({ fullName, email, password: hash });
 
     const savedAdmin = await newAdmin.save();
+    sendWelcomeEmail(fullName, email);
     return savedAdmin;
   } catch (error) {
     throw new Error(error.message);
