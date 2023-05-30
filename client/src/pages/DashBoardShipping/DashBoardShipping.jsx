@@ -2,7 +2,9 @@
 
 const DashBoardShipping = () => {
   return (
-    <h1>Upcoming...</h1>
+    <div>
+    <h1>Actualizando...</h1>
+    </div>
   )
 }
 
