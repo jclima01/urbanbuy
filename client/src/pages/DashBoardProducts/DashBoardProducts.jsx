@@ -2,15 +2,15 @@ import { CiSearch } from "react-icons/ci";
 import DashBoardTableProducts from "../../Components/DashBoardTableProducts/DashBoardTableProducts";
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllProducts } from "../../redux/actions";
+import { deleteCategory, getAllProducts, getCategories } from "../../redux/actions";
 import DashBoardAddProducts from "../../Components/DashBoardAddProducts/DashBoardAddProducts";
 import DashBoardModalAddCategories from "../../Components/DashBoardModalAddCategories/DashBoardModalAddCategories";
 
 import styles from "./DashBoardProducts.module.css";
 import DashBoardEditProduct from "../../Components/DashBoardEditProduct/DashBoardEditProduct";
 import Pagination from "../../../src/pages/DashBoardUser/Pagination/Pagination";
+import DashBoardSetCategory from "../../Components/DashBoardSetCategory/DashBoardSetCategory";
 const DashBoardProducts = () => {
-
   //Variables
   const dispatch = useDispatch();
   const clientAdminStorage =
@@ -19,18 +19,14 @@ const DashBoardProducts = () => {
   const refTransitionAddProduct = useRef();
   const products = useSelector((state) => state.products);
   const [isActive, setIsActive] = useState(1200);
-
+  const categories = useSelector((state) => state.categories);
+  console.log("categories", categories);
   // Pagination
   const [productsPerPage, setProductsPerPage] = useState(6);
   const [setActualPage, setSetActualPage] = useState(1);
 
-
   //Sort
-  const [sort, setSort] = useState('');
-  
-
-
-
+  const [sort, setSort] = useState("");
 
   //Handles and variables
 
@@ -41,11 +37,10 @@ const DashBoardProducts = () => {
     isActive ? setIsActive(0) : setIsActive(1200);
   };
 
-
   //Get All products
   useEffect(() => {
     dispatch(getAllProducts(clientAdminId));
-  }, [dispatch]);
+  }, []);
 
   return (
     <div
@@ -119,37 +114,36 @@ const DashBoardProducts = () => {
               justifyContent: "center",
               alignItems: "center",
               textAlign: "center",
-              gap:15
+              gap: 15,
             }}
           >
-            <span style={{ fontSize: "26px"  }}>
+            <span style={{ fontSize: "26px" }}>
               <strong>Total </strong> Products
             </span>
-            <span  className={styles.spanTotalProducst}>
-            {products.length}
-            </span>
+            <span className={styles.spanTotalProducst}>{products.length}</span>
           </div>
-         <div
-            style={{
-              width: 400,
-              height: 130,
-              boxShadow: "4px 3px 10px 4px #4644442b",
-              borderRadius: 20,
-            }}
-          >
-            <h1>test</h1>
-          </div> 
           <div
             style={{
-              width: 500,
+              width: 900,
               height: 130,
-              backgroundColor: "#ff7f2a",
               boxShadow: "4px 3px 10px 4px #4644442b",
               borderRadius: 20,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
             }}
           >
-            <h1>test</h1>
-          </div> 
+            <div className={styles.containertablecategories}>
+              <div className={styles.containertable}>
+                <h5>Categories</h5>
+                <div className={styles.ulcategories}>
+                  {categories?.map((item) => (
+                    <DashBoardSetCategory key={item._id} item={item} />
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
 
           <div
             style={{
@@ -211,7 +205,10 @@ const DashBoardProducts = () => {
                   borderRadius: 20,
                 }}
               >
-                <select className={styles.selectsortProduct} onChange={(e)=> setSort(e.target.value)} >
+                <select
+                  className={styles.selectsortProduct}
+                  onChange={(e) => setSort(e.target.value)}
+                >
                   <option value="">Seleccione</option>
                   <option value="az">A-Z</option>
                   <option value="za">Z-A</option>

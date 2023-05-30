@@ -48,3 +48,60 @@
     background-color: #ff7f2a;
     border-radius: 50%;
   }
+
+  .containertablecategories{
+    width: 700px;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ulcategories{
+    padding: 20px;
+    background-color: #ff7f2a;
+    width: 600px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    border-radius: 15px;
+    overflow: hidden;
+    overflow-y: auto;
+  }
+
+  .divcategories{
+    background-color:#ff7f2a;
+    width: 600px;
+    height: 100px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    overflow-y: auto;
+    border-radius: 13px;
+    gap: 10px;
+  }
+
+  .divcategories button{
+    border-radius: 10px;
+    background-color: #ff7f2a;
+    border:1px solid white;
+    color: #fff;
+  }
+
+  .licategories{
+  text-decoration: none;
+  list-style: none;
+  color: #222020;
+  }
+
+  .containertable{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+  }

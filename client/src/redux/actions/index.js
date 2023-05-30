@@ -24,7 +24,6 @@ export const GET_USER_BY_ID = "GET_USER_BY_ID";
 export const ORDER_CLIENT_USERS = "ORDER_CLIENT_USERS";
 export const SEARCH_USERS = "SEARCH_USERS";
 export const FILTER_CLIENT_USERS = "FILTER_CLIENT_USERS";
-export const DATA_EDIT_PRODUCT = "DATA_EDIT_PRODUCT";
 export const ADD_PRODUCT_TO_CART = "ADD_PRODUCT_TO_CART";
 export const REMOVE_PRODUCT_FROM_CART = "REMOVE_PRODUCT_FROM_CART";
 export const GET_CART_FROM_LS = "GET_CART_FROM_LS";
@@ -115,10 +114,11 @@ export const deleteCategory = (categoryId) => {
   }
 };
 export const editCategory = (categoryId, categoryName) => {
+  console.log('categoryName', categoryName)
   try {
     return async function (dispatch) {
       const { data } = await axios.put(`/category/${categoryId}`, {
-        categoryName,
+        categoryName
       });
       return dispatch({
         type: EDIT_CATEGORY,
@@ -238,23 +238,18 @@ export const editProduct = (
 
   try {
     return async function (dispatch) {
-      const res = await axios.put(
-        `/products/${productId}`,
-        {
-          productName,
-          description,
-          categoriesIds,
-          stocks,
-          imageUrl,
-          price,
-          rating,
-        }
-      );
-      
-      console.log(res.data)
+      const { data } = await axios.put(`/products/${productId}`, {
+        productName,
+        description,
+        categoriesIds,
+        stocks,
+        imageUrl,
+        price,
+        rating,
+      });
       return dispatch({
         type: EDIT_PRODUCT,
-        payload: res.data,
+        payload: data,
       });
     };
     // eslint-disable-next-line no-unreachable
