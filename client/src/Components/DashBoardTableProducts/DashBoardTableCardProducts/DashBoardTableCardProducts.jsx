@@ -12,7 +12,7 @@ const DashBoardTableCardProducts = ({
   stocks,
   price,
   rating,
-  _id,
+  id,
   setIsActive,
   
 }) => {
@@ -32,7 +32,7 @@ const DashBoardTableCardProducts = ({
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        setIdReference(_id);
+        setIdReference(id);
         Swal.fire("Deleted!", "Your file has been deleted.", "success");
       }
     });
@@ -100,7 +100,7 @@ const DashBoardTableCardProducts = ({
       stocks={stocks}
       price={price}
       rating={rating}
-      _id={_id}
+      id={id}
       />
     </tbody>
   );

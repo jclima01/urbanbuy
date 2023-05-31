@@ -237,12 +237,12 @@ export const editProduct = (
   stocks,
   price,
   rating,
-) => {
-  console.log("stocks", stocks);
+  ) => {
+    try {
 
-  try {
+    
     return async function (dispatch) {
-      const { data } = await axios.put(`/products/${productId}`, {
+      const {data} = await axios.put(`/products/${productId}`, {
         productName,
         description,
         categoriesIds,
@@ -309,7 +309,6 @@ export const getProductById = (productId) => {
 export const getAllProducts = (clientAdminId) => {
   try {
     return async function (dispatch) {
-      console.log(clientAdminId);
       const { data } = await axios.get(`/products/${clientAdminId}`);
       return dispatch({
         type: GET_ALL_PRODUCTS,

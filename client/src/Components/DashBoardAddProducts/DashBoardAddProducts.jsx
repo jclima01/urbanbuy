@@ -11,6 +11,7 @@ const DashBoardAddProducts = ({ setIsActive, clientAdminId }) => {
   const dispatch = useDispatch();
   const categorie = useSelector((state) => state.categories);
   const [Category, setsetCategory] = useState("");
+  let productCategories = [];
 
   const [dataProducts, setdataProducts] = useState({
     productName: "",
@@ -31,7 +32,9 @@ const DashBoardAddProducts = ({ setIsActive, clientAdminId }) => {
     price,
     rating,
   } = dataProducts;
-
+  
+  
+  
   const [errors, setErrors] = useState({
     productNameError: "",
     descriptionError: "",
@@ -170,7 +173,14 @@ const DashBoardAddProducts = ({ setIsActive, clientAdminId }) => {
         <MdOutlineKeyboardDoubleArrowRight size={30} cursor={"pointer"} />
       </div>
       <div className={s.containerImageViewAddProduct}>
-        <img className={s.imagenView  } src={dataProducts.imageUrl || "https://us.123rf.com/450wm/rastudio/rastudio1601/rastudio160103779/51365230-icono-de-l%C3%ADnea-de-la-c%C3%A1mara-para-web-m%C3%B3vil-e-infograf%C3%ADa-vector-icono-de-l%C3%ADnea-delgada-gris-en-el.jpg?ver=6"} alt="" />
+        <img
+          className={s.imagenView}
+          src={
+            dataProducts.imageUrl ||
+            "https://us.123rf.com/450wm/rastudio/rastudio1601/rastudio160103779/51365230-icono-de-l%C3%ADnea-de-la-c%C3%A1mara-para-web-m%C3%B3vil-e-infograf%C3%ADa-vector-icono-de-l%C3%ADnea-delgada-gris-en-el.jpg?ver=6"
+          }
+          alt=""
+        />
       </div>
       <label>Image Product</label>
       <UploadWidget
@@ -220,7 +230,7 @@ const DashBoardAddProducts = ({ setIsActive, clientAdminId }) => {
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Categories</Form.Label>
           <Form.Select
-          key="1"
+            key="1"
             onChange={(e) => {
               e.preventDefault();
               setsetCategory(e.target.value);
@@ -248,6 +258,25 @@ const DashBoardAddProducts = ({ setIsActive, clientAdminId }) => {
             ))}
           </Form.Select>
         </Form.Group>
+
+        <Form.Group>
+          <Form.Floating>
+            {dataProducts.categories?.map((item) => {
+              let foundCategory = categorie?.find(
+                (category) => category._id === item
+              );
+
+              if (foundCategory) {
+                // Paso 2: Añade el nombre de la categoría encontrada al arreglo
+                productCategories.push(foundCategory.categoryName);
+              }
+            })}
+            {productCategories.map((categoryName, i) => (
+              <div key={i}>{categoryName}</div>
+            ))}
+          </Form.Floating>
+        </Form.Group>
+
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Stocks</Form.Label>
           <Form.Control

@@ -88,7 +88,7 @@ const DashBoardTableProducts = ({
             stocks={product.stocks}
             price={product.price}
             rating={product.rating}
-            _id={product._id}
+            id={product._id}
             setIsActive={setIsActive}
           />
         ))}
