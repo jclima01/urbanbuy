@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import s from "./DashBoardEditProduct.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import Button from "react-bootstrap/Button";
@@ -12,18 +12,14 @@ const DashBoardModalEditProduct = ({
   handleClose,
   productName,
   description,
-  // categories,
+  categories,
   imageUrl,
   stocks,
   price,
   rating,
-  _id,
+  id,
 }) => {
-  const clientAdminId = useSelector((state) => state.clientAdmin);
-
   const dispatch = useDispatch();
-  const categories = useSelector((state) => state.categories);
-  const [isChecked, setIsChecked] = useState(false);
   const [dataEditProducts, setDataEditProducts] = useState({
     productName,
     description,
@@ -34,10 +30,6 @@ const DashBoardModalEditProduct = ({
     rating,
   });
 
-  const handleCheck = (category) => {
-    if (dataEditProducts.categories.some((c) => c === category._id))
-      setIsChecked(!isChecked);
-  };
   const handleInputChange = (e) => {
     setDataEditProducts({
       ...dataEditProducts,
@@ -48,7 +40,7 @@ const DashBoardModalEditProduct = ({
     e.preventDefault();
     dispatch(
       editProduct(
-        _id,
+        id,
         dataEditProducts.productName,
         dataEditProducts.description,
         dataEditProducts.categories,
@@ -57,12 +49,10 @@ const DashBoardModalEditProduct = ({
         dataEditProducts.price,
         dataEditProducts.rating
       )
-    )
-      .then(dispatch(getAllProducts(clientAdminId)))
-      .finally(() => {
-        handleClose();
-        toast.success("Product Updated Successfully");
-      });
+    ).finally(() => {
+      handleClose();
+      toast.success("Product Updated Successfully");
+    });
   };
 
   return (
@@ -113,42 +103,8 @@ const DashBoardModalEditProduct = ({
             />
           </Form.Group>
           <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-            <Form.Label>Categroies</Form.Label>
-            <Form.Check>
-              {categories?.map((category) => (
-                <div className={s.categoriescheked}>
-                  <div key={category._id}>
-                    <Form.Check.Label>{category.categoryName}</Form.Check.Label>
-                    <Form.Check.Input
-                      type="checkbox"
-                      checked={dataEditProducts.categories.some(
-                        (c) => c === category._id
-                      )}
-                      name={category.categoryName}
-                      id={category._id}
-                      value={category.categoryName}
-                      onChange={(e) => {
-                        if (e.target.checked) {
-                          setDataEditProducts((prevData) => ({
-                            ...prevData,
-                            categories: [...prevData.categories, category._id],
-                          }));
-                          // handleCheck(category);
-                        } else {
-                          setDataEditProducts((prevData) => ({
-                            ...prevData,
-                            categories: prevData.categories.filter(
-                              (c) => c._id !== category._id
-                            ),
-                          }));
-                          // handleCheck(category);
-                        }
-                      }}
-                    />
-                  </div>
-                </div>
-              ))}
-            </Form.Check>
+            <Form.Label>Categrories</Form.Label>
+            <Form.Check></Form.Check>
           </Form.Group>
 
           <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">

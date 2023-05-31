@@ -1,5 +1,6 @@
 const cloudinary = require("cloudinary").v2;
 const Product = require("../models/Product");
+const Category = require('../models/Category');
 const ClientAdmin = require("../models/Users/ClientAdmin");
 const mongoose = require("mongoose");
 
@@ -102,39 +103,33 @@ const updateProduct = async (
   imageUrl,
   price,
   rating
-) => {
-  try {
-    const uploadResult = await cloudinary.uploader.upload(
-      imageUrl /*,{optiones}*/
-    );
+  ) => {
+    
 
-    const updatedProduct = await Product.findById(productId);
-    if (!updatedProduct) {
-      // El producto no existe, puedes lanzar un error o manejarlo de otra manera
-      throw new Error("Producto no encontrado");
+    try {
+      const uploadResult = await cloudinary.uploader.upload(imageUrl /*,{optiones}*/);
+  
+      const updatedProduct = await Product.findByIdAndUpdate(
+        productId,
+        {
+          productName,
+          description,
+          $push: { categories: { $each: categoriesIds } },
+          stocks,
+          imageUrl: uploadResult.secure_url,
+          price,
+          rating, 
+        },
+        { new: true, upsert: true }
+        );
+        
+      if (!updatedProduct) {
+        throw new Error("Producto no encontrado");
+      }
+      return updatedProduct;
+    } catch (error) {
+      throw new Error(error.message);
     }
-    if (updatedProduct.categories === categoriesIds) {
-      updatedProduct.productName = productName;
-      updatedProduct.description = description;
-      updatedProduct.stocks = stocks;
-      updatedProduct.imageUrl = uploadResult.secure_url;
-      updatedProduct.price = price;
-      updatedProduct.rating = rating;
-    }
-    updatedProduct.productName = productName;
-    updatedProduct.description = description;
-    updatedProduct.categories = [...updatedProduct.categories + categoriesIds];
-    updatedProduct.stocks = stocks;
-    updatedProduct.imageUrl = uploadResult.secure_url;
-    updatedProduct.price = price;
-    updatedProduct.rating = rating;
-
-    const savedProduct = await updatedProduct.save();
-    // savedProduct.populate('categories')
-    return savedProduct;
-  } catch (error) {
-    throw new Error(error.message);
-  }
 };
 
 //DELETE
