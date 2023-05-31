@@ -1,7 +1,8 @@
 const {
   postOrder,
   getOrdersByUser,
-  
+  processPayment,
+  createCheckoutSession,
 } = require("../controllers/OrderControllers.js");
 
 const Order = require("../models/Order.js");
@@ -36,12 +37,18 @@ const postOrderHandlers = async (req, res) => {
   }
 };
 
-// const paymentHandler = async (req, res) => {
-//   const userId = await Order.findById(req.params.userId);
-//  return userId
-// };
+const paymentHandler = async (req, res) => {
+  try {
+    const { cart } = req.body;
+    const session = await createCheckoutSession(cart);
+    res.status(200).json(session);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
 
 module.exports = {
   getOrderHandlers,
   postOrderHandlers,
+  paymentHandler,
 };

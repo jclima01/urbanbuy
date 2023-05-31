@@ -32,10 +32,11 @@ export const GET_CART_FROM_LS = "GET_CART_FROM_LS";
 export const PAGO_EXITOSO = "PAGO_EXITOSO";
 export const PAGO_FALLIDO = "PAGO_FALLIDO";
 
-export const SET_SLIDER_THEME= "SET_SLIDER_THEME"
-export const SET_THEME = "SET_THEME"
-export const SET_SEARCH_BAR_THEME = "SET_SEARCH_BAR_THEME"
-export const SET_CARD_STYLE = "SET_CARD_STYLE"
+export const SET_SLIDER_THEME = "SET_SLIDER_THEME";
+export const SET_THEME = "SET_THEME";
+export const SET_SEARCH_BAR_THEME = "SET_SEARCH_BAR_THEME";
+export const SET_CARD_STYLE = "SET_CARD_STYLE";
+export const CREATE_CHECKOUT_SESSION = "CREATE_CHECKOUT_SESSION";
 
 export const getCartFromLS = () => {
   try {
@@ -121,7 +122,7 @@ export const editCategory = (categoryId, categoryName) => {
   try {
     return async function (dispatch) {
       const { data } = await axios.put(`/category/${categoryId}`, {
-        categoryName
+        categoryName,
       });
       return dispatch({
         type: EDIT_CATEGORY,
@@ -197,9 +198,7 @@ export const postOrder = (
 export const getOrdersByUser = (userId) => {
   try {
     return async function (dispatch) {
-      const { data } = await axios.get(
-        `/orders/${userId}`
-      );
+      const { data } = await axios.get(`/orders/${userId}`);
       return dispatch({
         type: GET_ORDERS_BY_USER,
         payload: data,
@@ -213,7 +212,6 @@ export const getOrdersByUser = (userId) => {
 export const deleteProduct = (productId) => {
   try {
     return async function (dispatch) {
-
       await axios.delete(`/products/delete/${productId}`);
 
       return dispatch({
@@ -235,7 +233,7 @@ export const editProduct = (
   imageUrl,
   stocks,
   price,
-  rating,
+  rating
 ) => {
   console.log("stocks", stocks);
 
@@ -495,13 +493,11 @@ export const searchUsers = (searchTerm) => ({
 });
 
 export const setTheme = (theme) => {
-  
   return {
     type: SET_THEME,
     payload: theme,
   };
 };
-
 
 export const iniciarPago = (body) => {
   return async (dispatch) => {
@@ -525,7 +521,6 @@ export const iniciarPago = (body) => {
 };
 
 export const setSliderTheme = (sliderTheme) => {
-  
   return {
     type: SET_SLIDER_THEME,
     payload: sliderTheme,
@@ -533,7 +528,6 @@ export const setSliderTheme = (sliderTheme) => {
 };
 
 export const setSearchBarTheme = (searchBarTheme) => {
-  
   return {
     type: SET_SEARCH_BAR_THEME,
     payload: searchBarTheme,
@@ -543,13 +537,26 @@ export const setSearchBarTheme = (searchBarTheme) => {
 export const setCardStyle = (cardStyle) => {
   return {
     type: SET_CARD_STYLE,
-    payload: cardStyle
-  }
-}
-
+    payload: cardStyle,
+  };
+};
 
 export const dataEditProduct = (obj) => ({
   type: DATA_EDIT_PRODUCT,
   payload: obj,
 });
 
+export const createCheckoutSession = (cart) => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.post(
+        "orders/checkout/create-checkout-session",
+        { cart }
+      );
+      return dispatch({
+        type: CREATE_CHECKOUT_SESSION,
+        payload: data.url,
+      });
+    } catch (error) {}
+  };
+};

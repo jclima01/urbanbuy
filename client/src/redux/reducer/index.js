@@ -35,6 +35,7 @@ import {
   SET_SLIDER_THEME,
   SET_SEARCH_BAR_THEME,
   SET_CARD_STYLE,
+  CREATE_CHECKOUT_SESSION
 
 } from "../actions/index.js";
 
@@ -60,7 +61,7 @@ const initialState = {
 
   searchBarTheme: "styleOne",
   cardStyle: "",
-
+  checkoutUrl: "",
 };
 
 const rootReducer = (state = initialState, { type, payload }) => {
@@ -329,6 +330,12 @@ const rootReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         cardStyle: payload,
+      };
+
+    case CREATE_CHECKOUT_SESSION:
+      return {
+        ...state,
+        checkoutUrl: payload,
       };
 
     default:

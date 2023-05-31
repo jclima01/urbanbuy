@@ -47,44 +47,45 @@ const getOrdersByUser = async (userId) => {
   }
 };
 
-const processPayment = async (req, res) => {
-  const { title, content, price, order } = req.body;
-  console.log(stripe);
+const createCheckoutSession = async (cart) => {
+  // console.log(cart)
   try {
-    // Crear el objeto del pago
-    const payment = new Purchase({
-      title,
-      content,
-      price,
-      order,
-      status: stripe.status,
+    const line_items = cart?.map((item) => {
+      return {
+        price_data: {
+          product_data: {
+            name: item.productName,
+            description: item.description,
+          },
+          currency: "usd",
+          unit_amount: Number(item.price * 100),
+        },
+        quantity: item.quantity,
+      };
     });
-
-    // Guardar el pago en MongoDB
-    await payment.save();
-
-    // Crear un producto en Stripe
-    const product = await stripe.products.create({
-      name: title,
-      type: "service",
+    const session = await stripe.checkout.sessions.create({
+      line_items: line_items,
+      mode: "payment",
+      success_url: "http://localhost:5173/paymentSuccess",
+      cancel_url: "http://localhost:5173/paymentCanceled",
     });
-
-    // Crear un precio para el producto en Stripe
-    await stripe.prices.create({
-      unit_amount: price * 100, // El precio se especifica en centavos
-      currency: "ars",
-      product: product.id,
+    console.log(session);
+    const newOrder = new Order({
+      fullName: "New Order",
+      status: session.payment_status,
+      cart: cart,
+      total: session.amount_total / 100,
     });
+    const savedOrder = newOrder.save();
 
-    res.status(201).json({ message: "Pago creado exitosamente" });
+    return session;
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Error al crear el pago" });
+    throw new Error(error.message);
   }
 };
 
 module.exports = {
   postOrder,
   getOrdersByUser,
-  processPayment,
+  createCheckoutSession,
 };
