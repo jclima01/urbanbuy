@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import s from "./Pagination.module.css";
 
 const Pagination = ({ usersPerPage, numberOfUsers, setActualPage }) => {
-    
   const [page, setPage] = useState(1);
   const numberOfPages = [];
   for (let i = 1; i <= Math.ceil(numberOfUsers / usersPerPage); i++) {
@@ -13,7 +12,10 @@ const Pagination = ({ usersPerPage, numberOfUsers, setActualPage }) => {
     setPage(num);
   };
   return (
-    <div className={s.paginationContainer}>
+    <div style={{
+      display: "flex",
+      gap:9
+    }}>
       {numberOfPages?.map((numberOfPage) => (
         <button
           key={numberOfPage}

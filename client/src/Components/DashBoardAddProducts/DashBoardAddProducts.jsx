@@ -4,11 +4,13 @@ import Form from "react-bootstrap/Form";
 import { MdOutlineKeyboardDoubleArrowRight } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { postNewProduct } from "../../redux/actions";
+import toast, { Toaster } from "react-hot-toast";
+import s from "./DashBoardAddProducts.module.css";
 
 const DashBoardAddProducts = ({ setIsActive, clientAdminId }) => {
   const dispatch = useDispatch();
   const categorie = useSelector((state) => state.categories);
-  const [Category, setsetCategory] = useState('');
+  const [Category, setsetCategory] = useState("");
 
   const [dataProducts, setdataProducts] = useState({
     productName: "",
@@ -20,7 +22,6 @@ const DashBoardAddProducts = ({ setIsActive, clientAdminId }) => {
     rating: 0,
   });
 
-  console.log(dataProducts);
   const {
     productName,
     description,
@@ -46,7 +47,7 @@ const DashBoardAddProducts = ({ setIsActive, clientAdminId }) => {
       ...dataProducts,
       [e.target.name]: e.target.value,
     });
-  
+
     // Verificar si hay errores en el campo actual y habilitar el botón si no hay errores
     if (e.target.name === "productName" && errors.productNameError) {
       setErrors({
@@ -108,7 +109,8 @@ const DashBoardAddProducts = ({ setIsActive, clientAdminId }) => {
           clientAdminId
         )
       ).finally(() => {
-        setIsActive(900);
+        toast.success("Successfully toasted!");
+        setIsActive(1200);
       });
 
       setdataProducts({
@@ -147,7 +149,18 @@ const DashBoardAddProducts = ({ setIsActive, clientAdminId }) => {
       }}
     >
       <div
-        onClick={() => setIsActive(900)}
+        onClick={() => {
+          setdataProducts({
+            productName: "",
+            description: "",
+            categories: [],
+            stocks: 0,
+            imageUrl: "",
+            price: 0,
+            rating: 0,
+          });
+          setIsActive(1200);
+        }}
         style={{
           position: "absolute",
           left: "-90px",
@@ -156,13 +169,25 @@ const DashBoardAddProducts = ({ setIsActive, clientAdminId }) => {
       >
         <MdOutlineKeyboardDoubleArrowRight size={30} cursor={"pointer"} />
       </div>
+      <div className={s.containerImageViewAddProduct}>
+        <img className={s.imagenView  } src={dataProducts.imageUrl || "https://us.123rf.com/450wm/rastudio/rastudio1601/rastudio160103779/51365230-icono-de-l%C3%ADnea-de-la-c%C3%A1mara-para-web-m%C3%B3vil-e-infograf%C3%ADa-vector-icono-de-l%C3%ADnea-delgada-gris-en-el.jpg?ver=6"} alt="" />
+      </div>
       <label>Image Product</label>
       <UploadWidget
         dataProducts={dataProducts}
         setdataProducts={setdataProducts}
       />
-
       <Form>
+        <Toaster
+          toastOptions={{
+            style: {
+              padding: "36px",
+              color: "#2f2b29",
+            },
+          }}
+          position="top-center"
+          reverseOrder={false}
+        />
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Product Name</Form.Label>
           <Form.Control
@@ -195,11 +220,12 @@ const DashBoardAddProducts = ({ setIsActive, clientAdminId }) => {
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Categories</Form.Label>
           <Form.Select
+          key="1"
             onChange={(e) => {
               e.preventDefault();
               setsetCategory(e.target.value);
 
-              if (dataProducts.categories.includes(e.target.value) ){
+              if (dataProducts.categories.includes(e.target.value)) {
                 setdataProducts({
                   ...dataProducts,
                   categories: [...categories],

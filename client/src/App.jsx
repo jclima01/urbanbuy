@@ -1,6 +1,5 @@
 import "./App.css";
-import { Routes, Route, Navigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import DashBoard from "./pages/DashBoard/DashBoard";
 import SideBarDashBoard from "./Components/SideBarDashBoard/SideBarDashBoard";
 import NavBarDashBoard from "./Components/NavBarDashBoard/NavBarDashBoard";
@@ -14,54 +13,48 @@ import FormLogin from "./Components/FormLogin/FormLogin";
 import SignIn from "./Components/SignIn/SignIn";
 import HomeEcommerce from "./Components/EcommerceCliente/HomeEcommerce";
 import ProductDetail from "./Components/ProductDetail/ProductDetail";
-import ShoppingCart from "./Components/EcommerceCliente/ShoppingCart/ShoppingCart.jsx";
 import ShoppingCartContainer from "./Components/EcommerceCliente/ShoppingCart/ShoppingCartContainer";
-function App() {
-  // const dispatch = useDispatch()
-  const session = useSelector((state) => state.UserSession);
-  const adminStorage = JSON.parse(localStorage.getItem("clientAdmin")) ?? false;
 
+import Payment from "./Components/EcommerceCliente/ShoppingCart/Payment/Payment";
+
+
+function App() {
+  const location = useLocation();
   return (
     <>
-      {adminStorage ? (
-        <div className="d-flex vh-100 vw-100 ">
+      <div className="d-flex w-100">
+        {location.pathname !== "/" &&
+        location.pathname !== "/test" &&
+        location.pathname !== "/login" &&
+        location.pathname !== "/singin" ? (
           <SideBarDashBoard />
-          <div className="d-flex flex-column">
-          <NavBarDashBoard />
-            <Routes>
-              <Route path="/dashBoard" element={<DashBoard />} />
-              <Route path="/dashBoard/User" element={<DashBoardUser />} />
-              <Route path="/dashBoard/Edit" element={<DashBoardEdit />} />
-              <Route
-                path="/dashBoard/Products"
-                element={<DashBoardProducts />}
-              />
-              <Route
-                path="/dashBoard/Shipping"
-                element={<DashBoardShipping />}
-              />
-              <Route
-                path="/dashBoard/Settings"
-                element={<DashBoardSettings />}
-              />
-
-              <Route path="/homecliente" element={<HomeEcommerce />} />
-              <Route path="/product/:productId" element={<ProductDetail />} />
-              <Route path="/cart" element={<ShoppingCartContainer />} />
-              <Route path="*" element={<Navigate to="/dashBoard" />} />
-            </Routes>
-          </div>
+        ) : null}
+        <div className="d-flex flex-column">
+          {location.pathname !== "/" &&
+          location.pathname !== "/test" &&
+          location.pathname !== "/login" &&
+          location.pathname !== "/singin" ? (
+            <NavBarDashBoard />
+          ) : null}
+          <Routes>
+            <Route path="/payment" element={<Payment />} /> 
+            <Route path="/" element={<Home />} /> {/* LadingPage */}
+            <Route path="/login" element={<FormLogin />} />
+            <Route path="/singin" element={<SignIn />} />
+            <Route path="/dashBoard" element={<DashBoard />} />
+            <Route path="/dashBoard/User" element={<DashBoardUser />} />
+            <Route path="/dashBoard/Edit" element={<DashBoardEdit />} />
+            <Route path="/dashBoard/Products" element={<DashBoardProducts />} />
+            <Route path="/dashBoard/Shipping" element={<DashBoardShipping />} />
+            <Route path="/dashBoard/Settings" element={<DashBoardSettings />} />
+            <Route path="/homecliente" element={<HomeEcommerce />} />
+            <Route path="/product/:productId" element={<ProductDetail />} />
+            <Route path="/cart" element={<ShoppingCartContainer />} />
+            <Route path="*" element={<Navigate to="/" />} />
+          </Routes>
         </div>
-      ) : (
-        <Routes>
-          <Route path="/" element={<Home />} /> {/* LadingPage */}
-          <Route path="/login" element={<FormLogin />} />
-          <Route path="/SignIn" element={<SignIn />} />
-          <Route path="*" element={<Navigate to="/" />} />
-        </Routes>
-      )}
+      </div>
     </>
   );
 }
-
 export default App;
