@@ -3,7 +3,7 @@ import NavEcommerce from "./NavEcommerce";
 import SliderEcommerceClient from "../EcommerceCliente/SliderEcommerceClient";
 import style from "./HomeEcommerce.module.css";
 import Card from "../Card/Card";
-
+import BANNER from '../../Img/BANNER.PNG'
 import { useDispatch, useSelector } from "react-redux";
 import { getAllProducts, getCategories } from "../../redux/actions";
 import SearchBar from "../../SearchBar/SearchBar";
@@ -90,7 +90,7 @@ function HomeEcommerce() {
   };
 
   /*Paginado*/
-  const [productsPerPage] = useState(4); // Number of products to display per page
+  const [productsPerPage] = useState(5); // Number of products to display per page
   const [currentPage, setCurrentPage] = useState(1);
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
@@ -107,12 +107,19 @@ function HomeEcommerce() {
   return (
     <div className={style.fondo}>
       <NavEcommerce/>
-      <SliderEcommerceClient products={products} />
+      {/* <SliderEcommerceClient products={products} /> */}
 
-      {/* <h2 className={style.h2}>PRODUCTOS</h2> */}
-
-      {/* Filter */}
-      <div className={style.filterSearchContainer}>
+     <div>
+      <img src={BANNER}  className={style.banner}></img>
+     </div>
+     <h1 className={style.h1}> LOS MAS VENDIDOS</h1>
+     <Card products={currentProducts} maxRating={rating} />
+<div className={style.faq}>
+<h6>Metodos de pago</h6>
+<h6>Compra segura</h6>
+</div>
+    
+      {/* <div className={style.filterSearchContainer}>
         <div className={style.searchContainer}>
           <SearchBar onSearch={handleSearch} />
         </div>
@@ -134,7 +141,7 @@ function HomeEcommerce() {
 
 
 
-      {/* Order */}
+     
       <div className={`${style.buttonDiv} ${style[theme]}`} >
         <p>Ordenar por:</p>
 
@@ -146,9 +153,9 @@ function HomeEcommerce() {
 
       </div>
 
-      <Card products={currentProducts} />
+     
 
-      {/* Pagination */}
+     
       <div>
         {filteredProduct.length > productsPerPage && (
           <ul className="pagination">
@@ -171,6 +178,9 @@ function HomeEcommerce() {
               ))}
           </ul>
         )}
+      </div> */}
+      <div>
+        <footer className={style.footer}>Derechos reservados UrbanBuy@copy2023</footer>
       </div>
     </div>
   );

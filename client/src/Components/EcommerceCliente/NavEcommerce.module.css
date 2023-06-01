@@ -1,24 +1,24 @@
-.container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  margin-left: 200px;
-  margin-top: 50px;
-  font-size: 40px;
-  color: rgb(66, 65, 65);
+.container{
+height: 150px;
+margin-bottom: 40px;
+background-color:#ff9900;
+display:block;
+justify-content: center;
+align-content: center;
 }
 
 .logoClient {
-  width: 10%;
-  margin-top: 4px;
+  width: 3%;
+  margin-top: 40px;
+  margin-left: 70px;
+  
 }
 
-.navEcommerce {
+/* .navEcommerce {
   background-color: rgb(218, 219, 215);
   padding: 100px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);
-}
+} */
 
 .urbanBuy {
   background-color: #ff9900;
@@ -32,5 +32,46 @@
 
 .floral {
   background-color: #793a96;
+  color: #000000;
+}
+
+.SingnIn{
+ margin-left: 1500px;
+ margin-top: -50px;
+ 
+}
+
+
+.input{
+  width: 35%;
+  margin-left: 500px;
+  margin-top: -35px;
+}
+ 
+.button1{
+  background-color: #000000;
+  color: white;
+  height: 50px;
+  width: 100px;
+  border: none;
+  border-radius: 10px;
+}
+.button1:hover{
+  background-color: whitesmoke;
+  color: #000000;
+}
+
+.button2{
+  background-color: #000000;
+  color: white;
+  height: 50px;
+  width: 100px;
+  border: none;
+  border-radius: 10px;
+  margin-left: 10px;
+}
+
+.button2:hover{
+  background-color: whitesmoke;
   color: #000000;
 }

@@ -32,6 +32,8 @@ const DashBoardEdit = () => {
      dispatch(setCardStyle(selectedCardStyle));
   }
 
+  
+
  return (
     <div>
       <h1 className={styles.title}>Tema Principal</h1>
