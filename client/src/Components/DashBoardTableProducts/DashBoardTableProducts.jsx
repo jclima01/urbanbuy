@@ -1,8 +1,8 @@
 import Table from "react-bootstrap/esm/Table";
 import DashBoardTableCardProducts from "./DashBoardTableCardProducts/DashBoardTableCardProducts";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import { getAllProducts } from "../../redux/actions";
+import s from "./DashBoardTableProducts.module.css";
+import { useSelector } from "react-redux";
+
 
 const DashBoardTableProducts = ({
   setIsActive,
@@ -10,20 +10,12 @@ const DashBoardTableProducts = ({
   productsPerPage,
   setActualPage,
   sort,
+  setIRefresh
 }) => {
-  //USER SESSION
-  const clientAdminStorage =
-    JSON.parse(localStorage.getItem("clientAdmin")) ?? false;
-  const clientAdminId = clientAdminStorage._id;
-
-  //Use Selector Products and Dispatch Actions
-  const dispatch = useDispatch();
+  //Use Selector Products and loading
   const products = useSelector((state) => state.products);
-
-  //Get all Products
-  useEffect(() => {
-    dispatch(getAllProducts(clientAdminId));
-  }, [dispatch]);
+  const loading = useSelector((state) => state.loading);
+  
 
   //InputToLowerCase for Fitler
   const searchInputLowerCase = searchInput.toLowerCase();
@@ -33,6 +25,8 @@ const DashBoardTableProducts = ({
   const firstUserIndex = lastUserIndex - productsPerPage;
   const productsSlice = products.slice(firstUserIndex, lastUserIndex);
   // Pagination
+
+
 
   return (
     <Table
@@ -53,45 +47,57 @@ const DashBoardTableProducts = ({
           <th>Options</th>
         </tr>
       </thead>
-      {productsSlice
-        ?.filter((item) =>
-          item.productName.toLowerCase().includes(searchInputLowerCase)
-        )
-        .sort((a, b) => {
-          if (sort) {
-            if (sort === "az") {
-              return a.productName.localeCompare(b.productName);
-            } else if (sort === "za") {
-              return b.productName.localeCompare(a.productName);
-            } else if (sort === "rasc") {
-              return b.rating - a.rating;
-            } else if (sort === "rdes") {
-              return a.rating - b.rating;
-            } else if (sort === "sasc") {
-              return b.stocks - a.stocks;
-            } else if (sort === "sdes") {
-              return a.stocks - b.stocks;
-            } else if (sort === "pasc") {
-              return b.price - a.price;
-            } else if (sort === "pdes") {
-              return a.price - b.price;
+      
+      {loading ? (
+      
+          <div className={s.ldsellipsis}>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+      ) : (
+        productsSlice
+          ?.filter((item) =>
+            item.productName.toLowerCase().includes(searchInputLowerCase)
+          )
+          .sort((a, b) => {
+            if (sort) {
+              if (sort === "az") {
+                return a.productName.localeCompare(b.productName);
+              } else if (sort === "za") {
+                return b.productName.localeCompare(a.productName);
+              } else if (sort === "rasc") {
+                return b.rating - a.rating;
+              } else if (sort === "rdes") {
+                return a.rating - b.rating;
+              } else if (sort === "sasc") {
+                return b.stocks - a.stocks;
+              } else if (sort === "sdes") {
+                return a.stocks - b.stocks;
+              } else if (sort === "pasc") {
+                return b.price - a.price;
+              } else if (sort === "pdes") {
+                return a.price - b.price;
+              }
             }
-          }
-        })
-        .map((product) => (
-          <DashBoardTableCardProducts
-            key={product._id}
-            productName={product.productName}
-            description={product.description}
-            categories={product.categories}
-            imageUrl={product.imageUrl}
-            stocks={product.stocks}
-            price={product.price}
-            rating={product.rating}
-            id={product._id}
-            setIsActive={setIsActive}
-          />
-        ))}
+          })
+          .map((product) => (
+            <DashBoardTableCardProducts
+              key={product._id}
+              productName={product.productName}
+              description={product.description}
+              categories={product.categories}
+              imageUrl={product.imageUrl}
+              stocks={product.stocks}
+              price={product.price}
+              rating={product.rating}
+              id={product._id}
+              setIsActive={setIsActive}
+              
+            />
+          ))
+      )}
+
     </Table>
   );
 };

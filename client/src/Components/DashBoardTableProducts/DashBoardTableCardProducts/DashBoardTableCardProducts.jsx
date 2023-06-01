@@ -14,10 +14,14 @@ const DashBoardTableCardProducts = ({
   rating,
   id,
   setIsActive,
-  
 }) => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
+
+  const clientAdminStorage =
+  JSON.parse(localStorage.getItem("clientAdmin")) ?? false;
+const clientAdminId = clientAdminStorage._id;
+  
   const handleShow = () => setShow(true);
   const [idReference, setIdReference] = useState("");
   const dispatch = useDispatch();
@@ -41,7 +45,6 @@ const DashBoardTableCardProducts = ({
 
   useEffect(() => {
     dispatch(deleteProduct(idReference));
-    dispatch(getAllProducts());
   }, [dispatch, idReference]);
   return (
     <tbody>
@@ -75,7 +78,7 @@ const DashBoardTableCardProducts = ({
         </td>
         <td>{productName}</td>
         <td className={styles.flexwrap}>
-          {categories.map((element) => element.categoryName).join("-")}
+          {categories?.map((element) => element.categoryName).join(", ")}
         </td>
         <td>{stocks}</td>
         <td>{price}</td>

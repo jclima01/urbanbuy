@@ -27,7 +27,7 @@ export const FILTER_CLIENT_USERS = "FILTER_CLIENT_USERS";
 export const ADD_PRODUCT_TO_CART = "ADD_PRODUCT_TO_CART";
 export const REMOVE_PRODUCT_FROM_CART = "REMOVE_PRODUCT_FROM_CART";
 export const GET_CART_FROM_LS = "GET_CART_FROM_LS";
-
+export const LOADING_PRODUCTS= "LOADING_PRODUCTS"
 export const SET_SLIDER_THEME= "SET_SLIDER_THEME"
 export const SET_THEME = "SET_THEME"
 export const SET_SEARCH_BAR_THEME = "SET_SEARCH_BAR_THEME"
@@ -247,6 +247,7 @@ export const editProduct = (
         price,
         rating,
       });
+      console.log('data', data)
       return dispatch({
         type: EDIT_PRODUCT,
         payload: data,
@@ -305,6 +306,13 @@ export const getProductById = (productId) => {
 export const getAllProducts = (clientAdminId) => {
   try {
     return async function (dispatch) {
+
+       dispatch({
+        type:LOADING_PRODUCTS,
+        payload: true,
+      });
+
+
       const { data } = await axios.get(`/products/${clientAdminId}`);
       return dispatch({
         type: GET_ALL_PRODUCTS,
