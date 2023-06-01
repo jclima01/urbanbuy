@@ -1,5 +1,5 @@
 .container{
-height: 150px;
+height: 100px;
 margin-bottom: 40px;
 background-color:#ff9900;
 display:block;
@@ -8,8 +8,8 @@ align-content: center;
 }
 
 .logoClient {
-  width: 3%;
-  margin-top: 40px;
+  width: 50PX;
+ margin-top: 10PX;
   margin-left: 70px;
   
 }
@@ -45,7 +45,7 @@ align-content: center;
 .input{
   width: 35%;
   margin-left: 500px;
-  margin-top: -35px;
+  margin-top: -45px;
 }
  
 .button1{
