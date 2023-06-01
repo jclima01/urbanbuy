@@ -5,6 +5,7 @@ import { getProductById } from "../../redux/actions/index.js";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import AddToCart from "../EcommerceCliente/AddToCart/AddToCart";
+import NavEcommerce from "../EcommerceCliente/NavEcommerce";
 
 const ProductDetail = () => {
   const product = useSelector((state) => state.product);
@@ -19,15 +20,7 @@ const ProductDetail = () => {
   return (
     <>
       <div className={style.detailContainer}>
-      <div className={style.navButtons}>
-          <Link to="/homecliente">
-            <button className={style.button}>go back</button>
-          </Link>
-
-          <Link to="/cart">
-            <button className={style.button}>go cart</button>
-          </Link>
-        </div>
+        <NavEcommerce />
         <div className={style.cardContainer}>
           <div>
             <h2 className={style.h2}>{product.productName}</h2>
@@ -51,7 +44,6 @@ const ProductDetail = () => {
 
           <AddToCart product={product} stock={product.stocks} />
         </div>
-        
       </div>
     </>
   );
