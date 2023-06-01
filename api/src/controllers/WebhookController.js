@@ -4,6 +4,7 @@ const updateOrder = async (sessionId,paymentStatus) => {
   try {
     const order = await Order.findOne({sessionId});
     order.status = paymentStatus
+    order.payment = true
     const savedOrder = await order.save();
     console.log(savedOrder)
     return savedOrder

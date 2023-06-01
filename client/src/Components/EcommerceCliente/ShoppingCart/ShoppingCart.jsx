@@ -12,7 +12,8 @@ export default function ShoppingCart() {
   const cart = JSON.parse(localStorage.getItem("cart")) ?? [];
   const [cartList, setCartList] = useState(cart);
   const dispatch = useDispatch();
-  const userId = "6476853888cbebbefc19ba18"
+  const user = useSelector((state) => state.user);
+  const userId = user ? user._id : "6476853888cbebbefc19ba18";
   const navigate = useNavigate();
   const checkoutUrl = useSelector((state) => state.checkoutUrl);
   const cartRef = useRef(null); // Add useRef
@@ -20,18 +21,14 @@ export default function ShoppingCart() {
   const checkout = async (cartList, userId) => {
     const { data } = await axios.post(
       "orders/checkout/create-checkout-session",
-      { cart: cartList,
-      userId: userId}
-
-    )
+      { cart: cartList, userId: userId }
+    );
 
     const popupWindow = window.open(
       data.url,
       "Checkout Popup",
       "width=1200,height=600"
     );
-
-   
   };
 
   useEffect(() => {
@@ -148,7 +145,7 @@ export default function ShoppingCart() {
           </div>
         ))}
         <div className={styles.total}>Total: ${calculateTotal()}</div>
-        <button onClick={() => checkout(cartList,userId)}>COMPRAR</button>
+        <button onClick={() => checkout(cartList, userId)}>COMPRAR</button>
       </div>
     </div>
   );
