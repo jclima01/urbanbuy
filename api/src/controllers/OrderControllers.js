@@ -1,6 +1,5 @@
 const { default: Stripe } = require("stripe");
 const Order = require("../models/Order.js");
-const Purchase = require("../models/Purchase.js");
 const User = require("../models/Users/User.js");
 const stripe = require("stripe")(
   "sk_test_51NCdNdL2efsICo3fzbVNZmlNnJaJyRuDxAQrBTJBORiye8bCFNq6PqVwqNAcfnqXgmQ9dwySNJ2L6yQHqz17E2js0059R0fJ9h"
@@ -78,7 +77,10 @@ const createCheckoutSession = async (cart, userId) => {
       user: userId,
     });
     const savedOrder = await newOrder.save();
-    console.log(savedOrder);
+
+    const user = await User.findById(userId);
+    user.orders.push(savedOrder._id);
+    await user.save();
     return session;
   } catch (error) {
     throw new Error(error.message);
