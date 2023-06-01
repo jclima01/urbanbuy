@@ -67,7 +67,8 @@ const createNewProduct = async (
   price,
   rating,
   clientAdminId
-) => {
+  ) => {
+  console.log('categoriesIds', categoriesIds)
   try {
     const uploadResult = await cloudinary.uploader.upload(
       imageUrl /*,{optiones}*/
@@ -106,6 +107,8 @@ const updateProduct = async (
   rating
   ) => {
     
+   
+
 
     try {
       const uploadResult = await cloudinary.uploader.upload(imageUrl /*,{optiones}*/);
@@ -115,19 +118,33 @@ const updateProduct = async (
         {
           productName,
           description,
-          $push: { categories: { $each: categoriesIds } },
           stocks,
           imageUrl: uploadResult.secure_url,
           price,
-          rating, 
+          rating,
         },
         { new: true, upsert: true }
-        );
-        
+      );
+      
       if (!updatedProduct) {
         throw new Error("Producto no encontrado");
       }
-      return updatedProduct;
+      
+      // Eliminamos todas las categorías del producto
+      await Product.findByIdAndUpdate(productId, { $set: { categories: [] } });
+      
+      // Agregamos las categorías nuevas al producto
+      if (categoriesIds.length > 0) {
+        await Product.findByIdAndUpdate(productId, { $addToSet: { categories: { $each: categoriesIds } } });
+      }
+      
+      const products = await Product.find({ clientAdmin: updatedProduct.clientAdmin })
+        .populate("categories") // Popula las categorías
+        .exec();
+      
+      return products;
+
+
     } catch (error) {
       throw new Error(error.message);
     }

@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import s from "./DashBoardEditProduct.module.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
@@ -20,17 +20,17 @@ const DashBoardModalEditProduct = ({
   id,
 }) => {
   const dispatch = useDispatch();
-  const [dataEditProducts, setDataEditProducts] = useState({
+  const category = useSelector((state) => state.categories);
+  let [dataEditProducts, setDataEditProducts] = useState({
     productName,
     description,
-    categories: categories,
+    categories,
     imageUrl,
     stocks,
     price,
     rating,
   });
 
-  console.log("dataEditProducts", dataEditProducts.categories);
   const handleInputChange = (e) => {
     setDataEditProducts({
       ...dataEditProducts,
@@ -55,6 +55,38 @@ const DashBoardModalEditProduct = ({
       toast.success("Product Updated Successfully");
     });
   };
+
+  const handleClickCtegoryEdit = (e) => {
+    e.preventDefault();
+
+    const _id = e.target.value;
+
+
+    if (_id.trim() !== "") {
+      if (dataEditProducts.categories.some((category) => category._id === _id)) {
+        // Si la categoría ya está seleccionada, la eliminamos del arreglo
+        setDataEditProducts((prevState) => ({
+          ...prevState,
+          categories: prevState.categories.filter((category) => category._id !== _id),
+        }));
+      } else {
+        // Si la categoría no está seleccionada, la agregamos al arreglo
+        const selectedCategory = category.find((category) => category._id === _id);
+        if (selectedCategory) {
+          setDataEditProducts((prevState) => ({
+            ...prevState,
+            categories: [...prevState.categories, selectedCategory],
+          }));
+        }
+      }
+    }
+  };
+
+
+   
+
+
+
 
   return (
     <Modal show={show} onHide={handleClose}>
@@ -105,20 +137,23 @@ const DashBoardModalEditProduct = ({
           </Form.Group>
           <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
             <Form.Label>Categrories</Form.Label>
-            <Form.Select>
-              <option value="">Add Category</option>
+            <Form.Select onChange={handleClickCtegoryEdit}>
+              <option key=" ">Seleccionar</option>
+              {category?.map((category) => (
+                <option key={category._id} id={category._id} value={category._id}>
+                  {category.categoryName}
+                </option>
+              ))}
             </Form.Select>
           </Form.Group>
 
-          <div  className={s.containercategorias}>
-          {dataEditProducts.categories?.map((item) => (
+          <div className={s.containercategorias}>
+            {dataEditProducts.categories?.map((item) => (
               <div key={item._id} className={s.containercate}>
-             
-              <label>{item.categoryName}</label>
-             </div>
-              ))
-            }
-            </div>
+                <label>{item.categoryName}</label>
+              </div>
+            ))}
+          </div>
 
           <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
             <Form.Label>Stocks</Form.Label>

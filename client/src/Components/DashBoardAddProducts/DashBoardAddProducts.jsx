@@ -7,7 +7,7 @@ import { postNewProduct } from "../../redux/actions";
 import toast, { Toaster } from "react-hot-toast";
 import s from "./DashBoardAddProducts.module.css";
 
-const DashBoardAddProducts = ({ setIsActive, clientAdminId }) => {
+const DashBoardAddProducts = ({ setIsActive, clientAdminId , setIsRefresh, refresh}) => {
   const dispatch = useDispatch();
   const categorie = useSelector((state) => state.categories);
   const [Category, setsetCategory] = useState("");
@@ -33,7 +33,7 @@ const DashBoardAddProducts = ({ setIsActive, clientAdminId }) => {
     price,
     rating,
   } = dataProducts;
-
+  
   const [errors, setErrors] = useState({
     productNameError: "",
     descriptionError: "",
@@ -113,6 +113,7 @@ const DashBoardAddProducts = ({ setIsActive, clientAdminId }) => {
       ).finally(() => {
         toast.success("Successfully toasted!");
         setIsActive(1200);
+        setIsRefresh(!refresh)
       });
 
       setdataProducts({
@@ -233,6 +234,7 @@ const DashBoardAddProducts = ({ setIsActive, clientAdminId }) => {
             onChange={(e) => {
               e.preventDefault();
               setsetCategory(e.target.value);
+              
               if (dataProducts.categories.includes(e.target.value)) {
                 setdataProducts({
                   ...dataProducts,
@@ -248,6 +250,7 @@ const DashBoardAddProducts = ({ setIsActive, clientAdminId }) => {
                 });
                 setsetCategory("");
               }
+         
             }}
           >
             <option value="">Selecionar</option>

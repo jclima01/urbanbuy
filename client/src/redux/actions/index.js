@@ -251,6 +251,7 @@ export const editProduct = (
         price,
         rating,
       });
+      console.log('data', data)
       return dispatch({
         type: EDIT_PRODUCT,
         payload: data,
@@ -309,6 +310,13 @@ export const getProductById = (productId) => {
 export const getAllProducts = (clientAdminId) => {
   try {
     return async function (dispatch) {
+
+       dispatch({
+        type:LOADING_PRODUCTS,
+        payload: true,
+      });
+
+
       const { data } = await axios.get(`/products/${clientAdminId}`);
       return dispatch({
         type: GET_ALL_PRODUCTS,
@@ -547,9 +555,4 @@ export const setCardStyle = (cardStyle) => {
   }
 }
 
-
-export const dataEditProduct = (obj) => ({
-  type: DATA_EDIT_PRODUCT,
-  payload: obj,
-});
 
