@@ -11,6 +11,7 @@ const DashBoardAddProducts = ({ setIsActive, clientAdminId }) => {
   const dispatch = useDispatch();
   const categorie = useSelector((state) => state.categories);
   const [Category, setsetCategory] = useState("");
+
   let productCategories = [];
 
   const [dataProducts, setdataProducts] = useState({
@@ -32,9 +33,7 @@ const DashBoardAddProducts = ({ setIsActive, clientAdminId }) => {
     price,
     rating,
   } = dataProducts;
-  
-  
-  
+
   const [errors, setErrors] = useState({
     productNameError: "",
     descriptionError: "",
@@ -234,21 +233,24 @@ const DashBoardAddProducts = ({ setIsActive, clientAdminId }) => {
             onChange={(e) => {
               e.preventDefault();
               setsetCategory(e.target.value);
-
               if (dataProducts.categories.includes(e.target.value)) {
                 setdataProducts({
                   ...dataProducts,
-                  categories: [...categories],
+                  categories: dataProducts.categories.filter(
+                    (item) => item !== e.target.value
+                  ),
                 });
+                setsetCategory("");
               } else {
                 setdataProducts({
                   ...dataProducts,
-                  categories: [...categories, e.target.value],
+                  categories: [...dataProducts.categories, e.target.value],
                 });
+                setsetCategory("");
               }
             }}
           >
-            <option value={Category}>Selecionar</option>
+            <option value="">Selecionar</option>
             {categorie?.map((category) => (
               <>
                 <option key={category._id} value={category._id}>
@@ -265,9 +267,7 @@ const DashBoardAddProducts = ({ setIsActive, clientAdminId }) => {
               let foundCategory = categorie?.find(
                 (category) => category._id === item
               );
-
               if (foundCategory) {
-                // Paso 2: Añade el nombre de la categoría encontrada al arreglo
                 productCategories.push(foundCategory.categoryName);
               }
             })}

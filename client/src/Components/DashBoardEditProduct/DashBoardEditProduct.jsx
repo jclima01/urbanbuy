@@ -1,10 +1,10 @@
 import { useState } from "react";
 import s from "./DashBoardEditProduct.module.css";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
-import { editProduct, getAllProducts } from "../../redux/actions";
+import { editProduct } from "../../redux/actions";
 import toast, { Toaster } from "react-hot-toast";
 
 const DashBoardModalEditProduct = ({
@@ -23,13 +23,14 @@ const DashBoardModalEditProduct = ({
   const [dataEditProducts, setDataEditProducts] = useState({
     productName,
     description,
-    categories: [],
+    categories: categories,
     imageUrl,
     stocks,
     price,
     rating,
   });
 
+  console.log("dataEditProducts", dataEditProducts.categories);
   const handleInputChange = (e) => {
     setDataEditProducts({
       ...dataEditProducts,
@@ -104,8 +105,20 @@ const DashBoardModalEditProduct = ({
           </Form.Group>
           <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
             <Form.Label>Categrories</Form.Label>
-            <Form.Check></Form.Check>
+            <Form.Select>
+              <option value="">Add Category</option>
+            </Form.Select>
           </Form.Group>
+
+          <div  className={s.containercategorias}>
+          {dataEditProducts.categories?.map((item) => (
+              <div key={item._id} className={s.containercate}>
+             
+              <label>{item.categoryName}</label>
+             </div>
+              ))
+            }
+            </div>
 
           <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
             <Form.Label>Stocks</Form.Label>
