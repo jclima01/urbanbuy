@@ -1,31 +1,19 @@
-const Review = require("../models/Review.js");
+const Order = require("../models/Order.js");
 
-const postReview = async (productId, userId, text) => {
+const updateOrder = async (sessionId,paymentStatus) => {
   try {
-    const newReview = new Review({
-      text: text,
-      user: userId,
-      product: productId,
-    });
-
-    const savedReview = await newReview.save();
-
-    return savedReview;
+    const order = await Order.findOne({sessionId});
+    order.status = paymentStatus
+    const savedOrder = await order.save();
+    console.log(savedOrder)
+    return savedOrder
   } catch (error) {
     throw new Error(error.message);
   }
 };
 
 
-const getProductReviews = async (productId) => {
-  try {
-    const reviews = await Review.find({ product: productId }).populate("user");
-    return reviews;
-  } catch (error) {
-    throw new Error(error.message);
-  }
-};
+
 module.exports = {
-  postReview,
-  getProductReviews
+  updateOrder
 };

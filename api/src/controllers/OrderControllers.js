@@ -47,8 +47,8 @@ const getOrdersByUser = async (userId) => {
   }
 };
 
-const createCheckoutSession = async (cart) => {
-  // console.log(cart)
+const createCheckoutSession = async (cart, userId) => {
+  console.log(userId);
   try {
     const line_items = cart?.map((item) => {
       return {
@@ -69,15 +69,16 @@ const createCheckoutSession = async (cart) => {
       success_url: "http://localhost:5173/paymentSuccess?success=true",
       cancel_url: "http://localhost:5173/paymentCanceled?canceled=true",
     });
-    console.log(session);
     const newOrder = new Order({
       fullName: "New Order",
       status: session.payment_status,
       cart: cart,
       total: session.amount_total / 100,
+      sessionId: session.id,
+      user: userId,
     });
-    const savedOrder = newOrder.save();
-
+    const savedOrder = await newOrder.save();
+    console.log(savedOrder);
     return session;
   } catch (error) {
     throw new Error(error.message);

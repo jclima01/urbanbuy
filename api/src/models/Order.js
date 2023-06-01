@@ -12,6 +12,7 @@ const OrderSchema = new Schema(
     total: { type: Number },
     adress: { type: String },
     user: { type: Schema.Types.ObjectId, ref: "User" },
+    sessionId: {type: String, required: true},
   },
   { timestamps: true }
 );
