@@ -66,8 +66,8 @@ const createCheckoutSession = async (cart) => {
     const session = await stripe.checkout.sessions.create({
       line_items: line_items,
       mode: "payment",
-      success_url: "http://localhost:5173/paymentSuccess",
-      cancel_url: "http://localhost:5173/paymentCanceled",
+      success_url: "http://localhost:5173/paymentSuccess?success=true",
+      cancel_url: "http://localhost:5173/paymentCanceled?canceled=true",
     });
     console.log(session);
     const newOrder = new Order({
