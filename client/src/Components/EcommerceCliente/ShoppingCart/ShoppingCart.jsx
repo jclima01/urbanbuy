@@ -13,7 +13,8 @@ export default function ShoppingCart() {
   const [cartList, setCartList] = useState(cart);
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
-  const userId = user ? user._id : "6476853888cbebbefc19ba18";
+
+  const userId = "6476853888cbebbefc19ba18"
   const navigate = useNavigate();
   const checkoutUrl = useSelector((state) => state.checkoutUrl);
   const cartRef = useRef(null); // Add useRef
