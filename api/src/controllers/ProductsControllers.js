@@ -107,7 +107,8 @@ const updateProduct = async (
   rating
   ) => {
     
-   
+    
+    console.log('categoriesIds', categoriesIds)
 
 
     try {
@@ -146,6 +147,7 @@ const updateProduct = async (
 
 
     } catch (error) {
+      console.log(error)
       throw new Error(error.message);
     }
 };

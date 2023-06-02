@@ -239,7 +239,8 @@ export const editProduct = (
   rating,
   ) => {
     try {
-
+      
+     
     
     return async function (dispatch) {
       const {data} = await axios.put(`/products/${productId}`, {
@@ -251,7 +252,7 @@ export const editProduct = (
         price,
         rating,
       });
-      console.log('data', data)
+    
       return dispatch({
         type: EDIT_PRODUCT,
         payload: data,

@@ -44,7 +44,7 @@ const DashBoardModalEditProduct = ({
         id,
         dataEditProducts.productName,
         dataEditProducts.description,
-        dataEditProducts.categories,
+        dataEditProducts.categories.map(item => item._id),
         dataEditProducts.imageUrl,
         dataEditProducts.stocks,
         dataEditProducts.price,
@@ -84,7 +84,6 @@ const DashBoardModalEditProduct = ({
 
 
    
-
 
 
 

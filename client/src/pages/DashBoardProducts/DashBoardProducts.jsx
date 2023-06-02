@@ -3,9 +3,7 @@ import DashBoardTableProducts from "../../Components/DashBoardTableProducts/Dash
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  deleteCategory,
   getAllProducts,
-  getCategories,
 } from "../../redux/actions";
 import DashBoardAddProducts from "../../Components/DashBoardAddProducts/DashBoardAddProducts";
 import DashBoardModalAddCategories from "../../Components/DashBoardModalAddCategories/DashBoardModalAddCategories";
