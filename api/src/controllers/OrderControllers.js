@@ -67,14 +67,28 @@ const createCheckoutSession = async (cart, userId) => {
       mode: "payment",
       success_url: "http://localhost:5173/paymentSuccess?success=true",
       cancel_url: "http://localhost:5173/paymentCanceled?canceled=true",
+      shipping_address_collection: {
+        allowed_countries: ['AR'], // Specify the allowed countries for shipping
+      },
+      // shipping_address: {
+      //   address: {
+      //     line2: address.line2,
+      //     city: address.city,
+      //     state: address.state,
+      //     postal_code: address.postalCode,
+      //     country: address.country,
+      //   },
+      //   name: address.fullName,
+      // },
     });
     const newOrder = new Order({
       fullName: "New Order",
-      status: session.payment_status,
+      status: session.payment_status === 'unpaid' ? "pending" : "unpaid",
       cart: cart,
       total: session.amount_total / 100,
       sessionId: session.id,
       user: userId,
+
     });
     const savedOrder = await newOrder.save();
 
