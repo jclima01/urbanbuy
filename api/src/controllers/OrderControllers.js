@@ -1,9 +1,9 @@
 const { default: Stripe } = require("stripe");
 const Order = require("../models/Order.js");
-const Purchase = require("../models/Purchase.js");
 const User = require("../models/Users/User.js");
+require('dotenv').config()
 const stripe = require("stripe")(
-  "sk_test_51NCdNdL2efsICo3fzbVNZmlNnJaJyRuDxAQrBTJBORiye8bCFNq6PqVwqNAcfnqXgmQ9dwySNJ2L6yQHqz17E2js0059R0fJ9h"
+  process.env.STRIPE_KEY
 );
 
 const postOrder = async (
@@ -47,44 +47,63 @@ const getOrdersByUser = async (userId) => {
   }
 };
 
-const processPayment = async (req, res) => {
-  const { title, content, price, order } = req.body;
-  console.log(stripe);
+const createCheckoutSession = async (cart, userId) => {
+  console.log(userId);
   try {
-    // Crear el objeto del pago
-    const payment = new Purchase({
-      title,
-      content,
-      price,
-      order,
-      status: stripe.status,
+    const line_items = cart?.map((item) => {
+      return {
+        price_data: {
+          product_data: {
+            name: item.productName,
+            description: item.description,
+          },
+          currency: "usd",
+          unit_amount: Number(item.price * 100),
+        },
+        quantity: item.quantity,
+      };
     });
-
-    // Guardar el pago en MongoDB
-    await payment.save();
-
-    // Crear un producto en Stripe
-    const product = await stripe.products.create({
-      name: title,
-      type: "service",
+    const session = await stripe.checkout.sessions.create({
+      line_items: line_items,
+      mode: "payment",
+      success_url: "http://localhost:5173/paymentSuccess?success=true",
+      cancel_url: "http://localhost:5173/paymentCanceled?canceled=true",
+      shipping_address_collection: {
+        allowed_countries: ['AR'], // Specify the allowed countries for shipping
+      },
+      // shipping_address: {
+      //   address: {
+      //     line2: address.line2,
+      //     city: address.city,
+      //     state: address.state,
+      //     postal_code: address.postalCode,
+      //     country: address.country,
+      //   },
+      //   name: address.fullName,
+      // },
     });
+    const newOrder = new Order({
+      fullName: "New Order",
+      status: session.payment_status === 'unpaid' ? "pending" : "unpaid",
+      cart: cart,
+      total: session.amount_total / 100,
+      sessionId: session.id,
+      user: userId,
 
-    // Crear un precio para el producto en Stripe
-    await stripe.prices.create({
-      unit_amount: price * 100, // El precio se especifica en centavos
-      currency: "ars",
-      product: product.id,
     });
+    const savedOrder = await newOrder.save();
 
-    res.status(201).json({ message: "Pago creado exitosamente" });
+    const user = await User.findById(userId);
+    user.orders.push(savedOrder._id);
+    await user.save();
+    return session;
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Error al crear el pago" });
+    throw new Error(error.message);
   }
 };
 
 module.exports = {
   postOrder,
   getOrdersByUser,
-  processPayment,
+  createCheckoutSession,
 };
