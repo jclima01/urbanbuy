@@ -35,7 +35,7 @@ import {
   SET_SLIDER_THEME,
   SET_SEARCH_BAR_THEME,
   SET_CARD_STYLE,
-  LOADING_PRODUCTS,
+  LOADING_PRODUCTS
 } from "../actions/index.js";
 
 const initialState = {
