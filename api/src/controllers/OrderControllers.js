@@ -1,8 +1,9 @@
 const { default: Stripe } = require("stripe");
 const Order = require("../models/Order.js");
 const User = require("../models/Users/User.js");
+require('dotenv').config()
 const stripe = require("stripe")(
-  "sk_test_51NCdNdL2efsICo3fzbVNZmlNnJaJyRuDxAQrBTJBORiye8bCFNq6PqVwqNAcfnqXgmQ9dwySNJ2L6yQHqz17E2js0059R0fJ9h"
+  process.env.STRIPE_KEY
 );
 
 const postOrder = async (

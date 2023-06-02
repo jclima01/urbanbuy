@@ -1,7 +1,6 @@
 const {
   postOrder,
   getOrdersByUser,
-  processPayment,
   createCheckoutSession,
 } = require("../controllers/OrderControllers.js");
 

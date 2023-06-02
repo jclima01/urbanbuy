@@ -1,12 +1,6 @@
-// const stripe = require("stripe")(
-//   "sk_test_51NCdNdL2efsICo3fzbVNZmlNnJaJyRuDxAQrBTJBORiye8bCFNq6PqVwqNAcfnqXgmQ9dwySNJ2L6yQHqz17E2js0059R0fJ9h"
-// );
-// const endpointSecret =
-
 const { updateOrder } = require("../controllers/WebhookController");
 
 
-//   "whsec_080e4339ac22924a4100a26a1726c269cf0fdde488cc78c435c33e96e783a08a";
 const webhookHandler = async (req, res) => {
   try {
     const event = req.body;
