@@ -10,6 +10,8 @@ import SearchBar from "../../SearchBar/SearchBar";
 import Modal from 'react-modal';
 import pagos from '../../Img/pagos.png'
 import envios from '../../Img/envios.png'
+import { Route, Routes } from "react-router-dom";
+import EcommerceUser from "./EcommerceUser";
 
 function HomeEcommerce() {
   const clientAdmin = JSON.parse(localStorage.getItem('clientAdmin')) ?? false
@@ -123,7 +125,9 @@ function HomeEcommerce() {
   return (
     <div className={style.fondo}>
       <NavEcommerce/>
-      {/* <SliderEcommerceClient products={products} /> */}
+    <Routes>
+      <Route exact path="ecommerceUser" Component={<EcommerceUser/>}/>
+    </Routes>
 
      <div>
       <img src={BANNER}  className={style.banner}></img>

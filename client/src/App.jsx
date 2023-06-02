@@ -17,6 +17,7 @@ import ShoppingCartContainer from "./Components/EcommerceCliente/ShoppingCart/Sh
 import LoginClient from './Components/EcommerceCliente/LoginClient/LoginClient'
 import Payment from "./Components/EcommerceCliente/ShoppingCart/Payment/Payment";
 import SignInClient from "./Components/EcommerceCliente/SignInClient/SignInClient";
+import EcommerceUser from "./Components/EcommerceCliente/EcommerceUser";
 
 
 function App() {
@@ -44,6 +45,7 @@ function App() {
             <Route path="/loginClient" element={<LoginClient/>}/>
             <Route path="/singin" element={<SignIn />} />
             <Route path="/signInClient" element={<SignInClient/>}/>
+            <Route path="/ecommerceuser" element={<EcommerceUser/>}/>
             <Route path="/dashBoard" element={<DashBoard />} />
             <Route path="/dashBoard/User" element={<DashBoardUser />} />
             <Route path="/dashBoard/Edit" element={<DashBoardEdit />} />
