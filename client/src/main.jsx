@@ -8,8 +8,10 @@ import store from "./redux/store/index.js";
 
 import axios from "axios";
 
+
 // axios.defaults.baseURL = "https://urbaybuy-back.up.railway.app";
 axios.defaults.baseURL = "http://localhost:2800";
+
 
 const auth0Domain = import.meta.env.VITE_AUTH0_DOMAIN;
 const auth0ClientId = import.meta.env.VITE_AUTH0_CLIENT_ID;

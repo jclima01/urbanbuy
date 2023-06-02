@@ -31,12 +31,13 @@ export const REMOVE_PRODUCT_FROM_CART = "REMOVE_PRODUCT_FROM_CART";
 export const GET_CART_FROM_LS = "GET_CART_FROM_LS";
 export const PAGO_EXITOSO = "PAGO_EXITOSO";
 export const PAGO_FALLIDO = "PAGO_FALLIDO";
-
-export const SET_SLIDER_THEME = "SET_SLIDER_THEME";
-export const SET_THEME = "SET_THEME";
-export const SET_SEARCH_BAR_THEME = "SET_SEARCH_BAR_THEME";
-export const SET_CARD_STYLE = "SET_CARD_STYLE";
+export const LOADING_PRODUCTS = "LOADING_PRODUCTS"
+export const SET_SLIDER_THEME= "SET_SLIDER_THEME"
+export const SET_THEME = "SET_THEME"
+export const SET_SEARCH_BAR_THEME = "SET_SEARCH_BAR_THEME"
+export const SET_CARD_STYLE = "SET_CARD_STYLE"
 export const CREATE_CHECKOUT_SESSION = "CREATE_CHECKOUT_SESSION";
+
 
 export const getCartFromLS = () => {
   try {
@@ -119,6 +120,7 @@ export const deleteCategory = (categoryId) => {
   }
 };
 export const editCategory = (categoryId, categoryName) => {
+  console.log('categoryName', categoryName)
   try {
     return async function (dispatch) {
       const { data } = await axios.put(`/category/${categoryId}`, {
@@ -233,13 +235,12 @@ export const editProduct = (
   imageUrl,
   stocks,
   price,
-  rating
-) => {
-  console.log("stocks", stocks);
-
-  try {
+  rating,
+  ) => {
+    try {
+     
     return async function (dispatch) {
-      const { data } = await axios.put(`/products/${productId}`, {
+      const {data} = await axios.put(`/products/${productId}`, {
         productName,
         description,
         categoriesIds,
@@ -248,6 +249,7 @@ export const editProduct = (
         price,
         rating,
       });
+    
       return dispatch({
         type: EDIT_PRODUCT,
         payload: data,
@@ -306,7 +308,13 @@ export const getProductById = (productId) => {
 export const getAllProducts = (clientAdminId) => {
   try {
     return async function (dispatch) {
-      console.log(clientAdminId);
+
+       dispatch({
+        type:LOADING_PRODUCTS,
+        payload: true,
+      });
+
+
       const { data } = await axios.get(`/products/${clientAdminId}`);
       return dispatch({
         type: GET_ALL_PRODUCTS,
@@ -541,6 +549,7 @@ export const setCardStyle = (cardStyle) => {
   };
 };
 
+
 export const dataEditProduct = (obj) => ({
   type: DATA_EDIT_PRODUCT,
   payload: obj,
@@ -560,3 +569,4 @@ export const createCheckoutSession = (cart) => {
     } catch (error) {}
   };
 };
+
