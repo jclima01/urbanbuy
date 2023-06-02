@@ -16,6 +16,8 @@ import ProductDetail from "./Components/ProductDetail/ProductDetail";
 import ShoppingCartContainer from "./Components/EcommerceCliente/ShoppingCart/ShoppingCartContainer";
 
 import Payment from "./Components/EcommerceCliente/ShoppingCart/Payment/Payment";
+import PaymentSuccess from "./Components/EcommerceCliente/ShoppingCart/Payment/PaymentSuccess";
+import PaymentCanceled from "./Components/EcommerceCliente/ShoppingCart/Payment/PaymentCanceled";
 
 
 function App() {
@@ -24,19 +26,23 @@ function App() {
     <>
       <div className="d-flex w-100">
         {location.pathname !== "/" &&
-        location.pathname !== "/test" &&
+        location.pathname !== "/paymentSuccess" &&
+        location.pathname !== "/paymentCanceled" &&
         location.pathname !== "/login" &&
         location.pathname !== "/singin" ? (
           <SideBarDashBoard />
         ) : null}
         <div className="d-flex flex-column">
           {location.pathname !== "/" &&
-          location.pathname !== "/test" &&
+          location.pathname !== "/paymentSuccess" &&
+          location.pathname !== "/paymentCanceled" &&
           location.pathname !== "/login" &&
           location.pathname !== "/singin" ? (
             <NavBarDashBoard />
           ) : null}
           <Routes>
+            <Route path="/paymentSuccess" element={<PaymentSuccess />} /> 
+            <Route path="/paymentCanceled" element={<PaymentCanceled />} /> 
             <Route path="/payment" element={<Payment />} /> 
             <Route path="/" element={<Home />} /> {/* LadingPage */}
             <Route path="/login" element={<FormLogin />} />
@@ -50,7 +56,7 @@ function App() {
             <Route path="/homecliente" element={<HomeEcommerce />} />
             <Route path="/product/:productId" element={<ProductDetail />} />
             <Route path="/cart" element={<ShoppingCartContainer />} />
-            <Route path="*" element={<Navigate to="/" />} />
+            {/* <Route path="*" element={<Navigate to="/" />} /> */}
           </Routes>
         </div>
       </div>

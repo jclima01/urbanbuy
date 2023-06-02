@@ -3,37 +3,55 @@ import styles from "./ShoppingCart.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { BsArrowLeftSquareFill } from "react-icons/bs";
 import RemoveFromCartButton from "../RemoveFromCartButton/RemoveFromCartButton";
-import { getCartFromLS } from "../../../redux/actions";
+import { createCheckoutSession, getCartFromLS } from "../../../redux/actions";
 import { useEffect, useRef, useState } from "react";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { GrAddCircle, GrSubtractCircle } from "react-icons/gr";
+import axios from "axios";
 export default function ShoppingCart() {
   const cart = JSON.parse(localStorage.getItem("cart")) ?? [];
   const [cartList, setCartList] = useState(cart);
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
 
+  const userId = "6476854188cbebbefc19ba22"
   const navigate = useNavigate();
-
+  const checkoutUrl = useSelector((state) => state.checkoutUrl);
   const cartRef = useRef(null); // Add useRef
 
+  const checkout = async (cartList, userId) => {
+    const { data } = await axios.post(
+      "orders/checkout/create-checkout-session",
+      { cart: cartList, userId: userId }
+    );
+
+    const popupWindow = window.open(
+      data.url,
+      "Checkout Popup",
+      "width=1200,height=600"
+    );
+  };
 
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cartList));
   }, [cartList]);
 
+  // useEffect(() => {
+  //   !checkoutUrl ? navigate(checkoutUrl) : null;
+  // }, [dispatch]);
   const calculateTotal = () => {
     console.log(cartList);
     let total = cartList.reduce(
       (count, product) => (count += product.quantity * product.price),
       0
-      );
-      return total;
-    };
-    
-    const calculateTotalQuantity = () => {
-      console.log(cartList);
-      const totalQuantity = cartList.reduce(
-        (count, product) => (count += product.quantity),
+    );
+    return total;
+  };
+
+  const calculateTotalQuantity = () => {
+    console.log(cartList);
+    const totalQuantity = cartList.reduce(
+      (count, product) => (count += product.quantity),
       0
     );
     return totalQuantity;
@@ -47,33 +65,34 @@ export default function ShoppingCart() {
   };
 
   const reduceProductQuantity = (productId) => {
-    const productIdx = cartList.findIndex((product) => product._id === productId);
-  
+    const productIdx = cartList.findIndex(
+      (product) => product._id === productId
+    );
+
     if (cartList[productIdx].quantity === 1) {
-      const cartWithoutProduct = cartList.filter((prod) => prod._id !== productId);
+      const cartWithoutProduct = cartList.filter(
+        (prod) => prod._id !== productId
+      );
       setCartList(cartWithoutProduct);
     } else {
       const updatedCartList = [...cartList]; // Crear una copia del array cartList
       updatedCartList[productIdx] = {
         ...updatedCartList[productIdx],
-        quantity: updatedCartList[productIdx].quantity - 1
+        quantity: updatedCartList[productIdx].quantity - 1,
       };
       setCartList(updatedCartList);
     }
   };
 
-
-  const Checkout = () => {
-navigate("/payment")
-  }
-
   const increaseProductQuantity = (productId) => {
-    const productIdx = cartList.findIndex((product) => product._id === productId);
-  
+    const productIdx = cartList.findIndex(
+      (product) => product._id === productId
+    );
+
     const updatedCartList = [...cartList]; // Crear una copia del array cartList
     updatedCartList[productIdx] = {
       ...updatedCartList[productIdx],
-      quantity: updatedCartList[productIdx].quantity + 1
+      quantity: updatedCartList[productIdx].quantity + 1,
     };
     setCartList(updatedCartList);
   };
@@ -127,7 +146,7 @@ navigate("/payment")
           </div>
         ))}
         <div className={styles.total}>Total: ${calculateTotal()}</div>
-        <button onClick= {Checkout}>COMPRAR</button>
+        <button onClick={() => checkout(cartList, userId)}>COMPRAR</button>
       </div>
     </div>
   );
