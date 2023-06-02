@@ -9,6 +9,9 @@ import DashBoardModalAddCategories from "../../Components/DashBoardModalAddCateg
 import styles from "./DashBoardProducts.module.css";
 import DashBoardEditProduct from "../../Components/DashBoardEditProduct/DashBoardEditProduct";
 import Pagination from "../../../src/pages/DashBoardUser/Pagination/Pagination";
+
+import ProductReview from "../../Components/ProductReview/ProductReview";
+
 const DashBoardProducts = () => {
 
   //Variables
@@ -278,6 +281,7 @@ const DashBoardProducts = () => {
             sort={sort}
           />
         </div>
+         <ProductReview/>
       </div>
     </div>
   );

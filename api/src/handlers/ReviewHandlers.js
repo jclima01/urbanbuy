@@ -14,9 +14,9 @@ const getReviewsHandler = async (req, res) => {
 };
 
 const postReviewHandler = async (req, res) => {
-  const { productId, userId, text } = req.body;
+  const { productId, userId, text, rating } = req.body;
   try {
-    const newReview = await postReview(productId, userId, text);
+    const newReview = await postReview(productId, userId, text, rating);
 
     res.status(200).json(newReview);
   } catch (error) {

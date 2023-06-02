@@ -31,6 +31,7 @@ import {
   SET_SLIDER_THEME,
   SET_SEARCH_BAR_THEME,
   SET_CARD_STYLE,
+  SET_REVIEW,
 } from "../actions/index.js";
 
 const initialState = {
@@ -295,6 +296,15 @@ const rootReducer = (state = initialState, { type, payload }) => {
         ...state,
         cardStyle: payload,
       };
+
+      case SET_REVIEW:
+        return {
+          ...state,
+          
+        };
+
+
+
 
     default:
       return {
