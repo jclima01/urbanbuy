@@ -58,6 +58,10 @@ const FormLogin = () => {
     });
   };
 
+  const google = () => {
+    window.open("http://localhost:2800/auth/google/callback", "_self")
+  }
+ 
   return (
     <div className={style.container}>
       <img
@@ -99,8 +103,12 @@ const FormLogin = () => {
             <button type="submit" className={style.buttom}>
               Iniciar sesión
             </button>
+           
           </form>
           <div >
+          <button type="submit" className={style.buttom} onClick={google}>
+              Iniciar sesión google
+            </button>
       <LoginAuth />
       </div>
         </div>

@@ -10,7 +10,7 @@ const ClientAdminSchema = new Schema(
     catalogue: [{ type: Schema.Types.ObjectId, ref: "Product" }],
     categories: [{ type: Schema.Types.ObjectId, ref:"Category" }],
     email: { type: String, required: true, unique: true },
-    password: { type: String, required: true },
+    password: { type: String },
     permissions: { type: String, default: "ClientAdmin" },
   },
   { timestamps: true }
