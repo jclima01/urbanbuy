@@ -23,6 +23,8 @@ const DashBoardTableProducts = ({
   const productsSlice = products.slice(firstUserIndex, lastUserIndex);
   // Pagination
 
+
+
   return (
     <Table
       striped="columns"
