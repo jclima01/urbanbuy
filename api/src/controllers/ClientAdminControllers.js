@@ -1,8 +1,10 @@
 const ClientAdmin = require("../models/Users/ClientAdmin.js");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
-const transporter = require("../email/emailService.js");
+
+// const transporter = require("../email/emailService.js");
 require("dotenv").config();
+
 
 const sendWelcomeEmail = (fullName, email) => {
   const mailOptions = {
@@ -60,6 +62,7 @@ const sendWelcomeEmail = (fullName, email) => {
   });
 };
 
+
 const ClientAdminRegister = async (fullName, email, password) => {
   try {
     if (!email) throw new Error("Email is required");
@@ -73,7 +76,9 @@ const ClientAdminRegister = async (fullName, email, password) => {
     const newAdmin = new ClientAdmin({ fullName, email, password: hash });
 
     const savedAdmin = await newAdmin.save();
-    sendWelcomeEmail(fullName, email);
+
+    // sendWelcomeEmail(fullName, email);
+
     return savedAdmin;
   } catch (error) {
     throw new Error(error.message);

@@ -84,9 +84,9 @@ const DashBoardTableCardProducts = ({
           <button className={styles.button} onClick={handleDelete}>
             delete
           </button>
-          <button className={styles.button} onClick={handleShow}>
+          {/* <button className={styles.button} onClick={handleShow}>
             Edit
-          </button>
+          </button> */}
         </td>
       </tr>
 
