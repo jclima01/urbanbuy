@@ -37,8 +37,26 @@ export const SET_THEME = "SET_THEME"
 export const SET_SEARCH_BAR_THEME = "SET_SEARCH_BAR_THEME"
 export const SET_CARD_STYLE = "SET_CARD_STYLE"
 export const CREATE_CHECKOUT_SESSION = "CREATE_CHECKOUT_SESSION";
+export const CREATE_ORDER = "CREATE_ORDER";
 
 
+export const createOrder = (fullName, email, cart, total, userId ) => {
+  try {
+    return async function (dispatch) {
+      const {data} = await axios.post('/orders/order',{
+        fullName, email, cart, total, userId 
+      })
+      console.log(data)
+      return await dispatch({
+        type: CREATE_ORDER,
+        payload: data
+      });
+    };
+    // eslint-disable-next-line no-unreachable
+  } catch (err) {
+    throw new Error(err.message);
+  }
+};
 export const getCartFromLS = () => {
   try {
     return async function (dispatch) {

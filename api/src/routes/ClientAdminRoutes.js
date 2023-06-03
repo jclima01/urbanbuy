@@ -4,9 +4,8 @@ const {
   loginClientAdminHandler,
   registerClientAdminHandler,
   updateClientHandler,
-  deleteClientHandler 
-  } = require("../handlers/ClientAdminHandlers.js");
-  
+  deleteClientHandler, 
+} = require("../handlers/ClientAdminHandlers.js");
 
 
 
