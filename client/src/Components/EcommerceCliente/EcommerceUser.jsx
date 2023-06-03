@@ -8,6 +8,8 @@ function EcommerceUser() {
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [sortBy, setSortBy] = useState('');
   const [ratingFilter, setRatingFilter] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+  const productsPerPage = 8;
 
   useEffect(() => {
     const urlSearchParams = new URLSearchParams(window.location.search);
@@ -64,37 +66,56 @@ function EcommerceUser() {
     setRatingFilter(e.target.value);
   };
 
+  // Calculate indexes of the first and last products to be shown on the current page
+  const indexOfLastProduct = currentPage * productsPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+  const currentProducts = filteredProducts.slice(
+    indexOfFirstProduct,
+    indexOfLastProduct
+  );
+
+  // Calculate total number of pages
+  const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
+
+  // Handle page change
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
   return (
     <div className={styles.container}>
-  <div className={styles.filters}>
-    <h1>Resultados de la búsqueda</h1>
-    <div className={styles.filtercontainer}>
-      <button onClick={handleSortByAZ}>A-Z</button>
-      <button onClick={handleSortByZA}>Z-A</button>
-      <button onClick={handleSortByPrice}>Mayor a Menor</button>
-      <button onClick={handleSortByPriceReverse}>Menor a Mayor</button>
-      <select value={ratingFilter} onChange={handleRatingFilter}>
-        <option value="">Filtrar por Rating</option>
-        <option value="3">3 estrella</option>
-        <option value="3,5">3,5 estrellas</option>
-        <option value="4">4 estrellas</option>
-        <option value="4,5">4,5 estrellas</option>
-        <option value="5">5 estrellas</option>
-      </select>
+      <div className={styles.filters}>
+        <h1>Resultados de la búsqueda</h1>
+        <div className={styles.filtercontainer}>
+          <button onClick={handleSortByAZ}>A-Z</button>
+          <button onClick={handleSortByZA}>Z-A</button>
+          <button onClick={handleSortByPrice}>Mayor a Menor</button>
+          <button onClick={handleSortByPriceReverse}>Menor a Mayor</button>
+          <select value={ratingFilter} onChange={handleRatingFilter}>
+            <option value="">Filtrar por Rating</option>
+            <option value="3">3 estrella</option>
+            <option value="3,5">3,5 estrellas</option>
+            <option value="4">4 estrellas</option>
+            <option value="4,5">4,5 estrellas</option>
+            <option value="5">5 estrellas</option>
+          </select>
+        </div>
+      </div>
+      <div className={styles.cards}>
+        <Card products={currentProducts} />
+      </div>
+      <div className={styles.pagination}>
+        {Array.from({ length: totalPages }, (_, index) => (
+          <button
+            key={index + 1}
+            onClick={() => handlePageChange(index + 1)}
+            className={currentPage === index + 1 ? styles.active : ''}
+          >
+            {index + 1}
+          </button>
+        ))}
+      </div>
     </div>
-  </div>
-  <div className={styles.cards}>
-    <Card products={filteredProducts} />
-  </div>
-</div>
-
-
-
-
-
-
-
-
   );
 }
 
