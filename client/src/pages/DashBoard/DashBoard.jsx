@@ -7,24 +7,32 @@ import { Products, User, categoryProducts } from "../../data";
 import { Link } from "react-router-dom";
 import { IoMdAddCircleOutline } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import { getAllProducts, getClientAdminUsers } from "../../redux/actions";
+import { useEffect, useState } from "react";
+import { addDomainToClientAdmin, getAllProducts, getClientAdminUsers } from "../../redux/actions";
 import LoginAuth from "../../Components/FormLogin/LoginAuth";
 const DashBoard = () => {
   const products = useSelector((state) => state.products);
-
-  const users = useSelector((state) => state.users);
-  const clientAdmin = useSelector((state) => state.clientAdmin);
+const clientAdminDomain  = useSelector((state) => state.clientAdminDomain)
   const productsSlice = products.slice(0, 4);
   const clientAdminStorage =
     JSON.parse(localStorage.getItem("clientAdmin")) ?? false;
-  const adminStorage = clientAdminStorage ? clientAdminStorage : clientAdmin;
   const dispatch = useDispatch();
-
+console.log(clientAdminDomain)
   useEffect(() => {
     dispatch(getAllProducts(clientAdminStorage._id));
     dispatch(getClientAdminUsers(clientAdminStorage._id));
   }, []);
+
+  const [domain, setDomain] = useState("");
+  console.log(domain)
+  const handleInputChange = (e) => {
+    setDomain(e.target.value);
+  }
+  const addDomain = (e) =>{
+    e.preventDefault();
+    dispatch(addDomainToClientAdmin(domain, clientAdminStorage._id));
+  }
+
 
   return (
     <div className="vh-100 w-100 d-flex justify-content-center align-items-center overflow-hidden ">
@@ -114,8 +122,9 @@ const DashBoard = () => {
                   type="text"
                   placeholder="Ej: Papa Jhones"
                   style={{ width: "80%",height: 30, border: "1px solid ligthgray" }}
+                  onChange={handleInputChange}
                 />
-                <button style={{height: 30}}>Add </button>
+                <button style={{height: 30}} onClick={addDomain}>Add </button>
               </div>
             </div>
           </div>

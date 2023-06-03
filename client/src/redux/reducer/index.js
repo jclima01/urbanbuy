@@ -34,7 +34,9 @@ import {
   SET_SEARCH_BAR_THEME,
   SET_CARD_STYLE,
   LOADING_PRODUCTS,
-  CREATE_CHECKOUT_SESSION
+  CREATE_CHECKOUT_SESSION,
+  ADD_DOMAIN,
+  GET_CLIENT_ADMIN_BY_DOMAIN,
 } from "../actions/index.js";
 
 const initialState = {
@@ -46,7 +48,7 @@ const initialState = {
   product: {},
   categories: [],
   ordersByUser: [],
-  loading : null,
+  loading: null,
   theme: "urbanBuy",
   sliderTheme: "urbanBuy",
 
@@ -60,10 +62,21 @@ const initialState = {
   searchBarTheme: "styleOne",
   cardStyle: "",
   checkoutUrl: "",
+  clientAdminDomain: "",
 };
 
 const rootReducer = (state = initialState, { type, payload }) => {
   switch (type) {
+    case GET_CLIENT_ADMIN_BY_DOMAIN:
+      return {
+        ...state,
+        clientAdmin: payload,
+      };
+    case ADD_DOMAIN:
+      return {
+        ...state,
+        clientAdminDomain: payload.domain,
+      };
     case GET_CART_FROM_LS:
       JSON.parse(localStorage.getItem("cart"));
       return {
@@ -160,7 +173,6 @@ const rootReducer = (state = initialState, { type, payload }) => {
       };
 
     case EDIT_CATEGORY:
-  
       return {
         ...state,
         categories: state.categories.map((category) => {
@@ -200,7 +212,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
     case EDIT_PRODUCT:
       return {
         ...state,
-        products: payload
+        products: payload,
       };
     case POST_NEW_PRODUCT:
       return {
@@ -216,13 +228,13 @@ const rootReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         products: [...payload],
-        loading: false
+        loading: false,
       };
-      case LOADING_PRODUCTS: 
+    case LOADING_PRODUCTS:
       return {
         ...state,
-        loading: payload
-      }
+        loading: payload,
+      };
     case LOGIN_ADMIN:
       return {
         ...state,
@@ -273,20 +285,20 @@ const rootReducer = (state = initialState, { type, payload }) => {
         user: {},
         UserSession: false,
       };
-      case PAGO_EXITOSO:
-        return {
-          ...state,
-          cargando: false,
-          cargo: payload,
-          error: null,
-        };
-      case PAGO_FALLIDO:
-        return {
-          ...state,
-          cargando: false,
-          cargo: null,
-          error: payload,
-        };
+    case PAGO_EXITOSO:
+      return {
+        ...state,
+        cargando: false,
+        cargo: payload,
+        error: null,
+      };
+    case PAGO_FALLIDO:
+      return {
+        ...state,
+        cargando: false,
+        cargo: null,
+        error: payload,
+      };
 
     case SET_THEME:
       return {

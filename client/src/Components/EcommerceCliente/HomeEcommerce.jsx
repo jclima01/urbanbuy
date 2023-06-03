@@ -5,11 +5,13 @@ import style from "./HomeEcommerce.module.css";
 import Card from "../Card/Card";
 
 import { useDispatch, useSelector } from "react-redux";
-import { getAllProducts, getCategories } from "../../redux/actions";
+import { getAllProducts, getCategories, getClientAdminByDomain } from "../../redux/actions";
 import SearchBar from "../../SearchBar/SearchBar";
+import { useParams } from "react-router-dom";
 
 function HomeEcommerce() {
-  const clientAdmin = JSON.parse(localStorage.getItem('clientAdmin')) ?? false
+  const {domain} = useParams()
+  const clientAdmin = useSelector(state => state.clientAdmin)
   const products = useSelector((state) => state.products);
   const dispatch = useDispatch();
   const clientAdminId = clientAdmin._id;
@@ -18,10 +20,14 @@ function HomeEcommerce() {
   const [orderedProduct, setOrderedProduct] = useState([]);
   const theme = useSelector(state => state.theme)
 
-
+console.log(domain)
+console.log(clientAdmin)
   useEffect(() => {
-    dispatch(getAllProducts(clientAdminId));
-    dispatch(getCategories(clientAdminId));
+    dispatch(getClientAdminByDomain(domain));
+    if(clientAdmin) {
+    dispatch(getAllProducts(clientAdmin._id));
+    dispatch(getCategories(clientAdmin._id));
+    }
   }, [dispatch, clientAdminId]);
 
   useEffect(() => {

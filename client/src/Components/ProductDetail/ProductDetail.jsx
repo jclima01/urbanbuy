@@ -8,6 +8,7 @@ import AddToCart from "../EcommerceCliente/AddToCart/AddToCart";
 
 const ProductDetail = () => {
   const product = useSelector((state) => state.product);
+  const clientAdmin = useSelector((state) => state.clientAdmin);
   const { productId } = useParams();
   const dispatch = useDispatch();
 
@@ -20,7 +21,7 @@ const ProductDetail = () => {
     <>
       <div className={style.detailContainer}>
       <div className={style.navButtons}>
-          <Link to="/homecliente">
+          <Link to={`/${clientAdmin.domain}`}>
             <button className={style.button}>go back</button>
           </Link>
 

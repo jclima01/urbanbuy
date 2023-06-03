@@ -13,6 +13,7 @@ export default function ShoppingCart() {
   const [cartList, setCartList] = useState(cart);
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
+  const clientAdmin = useSelector((state) => state.clientAdmin);
 
   const userId = "6476854188cbebbefc19ba22"
   const navigate = useNavigate();
@@ -100,7 +101,7 @@ export default function ShoppingCart() {
   return (
     <div className={styles.shoppingCart}>
       <div className={styles.continueShopping}>
-        <Link to="/homeCliente">
+        <Link to={`/${clientAdmin.domain}`}>
           <BsArrowLeftSquareFill className={styles.icon} />
         </Link>
         <h2>Continue Shopping</h2>

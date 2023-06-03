@@ -29,6 +29,7 @@ function App() {
         location.pathname !== "/paymentSuccess" &&
         location.pathname !== "/paymentCanceled" &&
         location.pathname !== "/login" &&
+        location.pathname !== "/domain" &&
         location.pathname !== "/singin" ? (
           <SideBarDashBoard />
         ) : null}
@@ -37,6 +38,7 @@ function App() {
           location.pathname !== "/paymentSuccess" &&
           location.pathname !== "/paymentCanceled" &&
           location.pathname !== "/login" &&
+          location.pathname !== "/:domain" &&
           location.pathname !== "/singin" ? (
             <NavBarDashBoard />
           ) : null}
@@ -54,6 +56,7 @@ function App() {
             <Route path="/dashBoard/Shipping" element={<DashBoardShipping />} />
             <Route path="/dashBoard/Settings" element={<DashBoardSettings />} />
             <Route path="/homecliente" element={<HomeEcommerce />} />
+            <Route path="/:domain" element={<HomeEcommerce />} />
             <Route path="/product/:productId" element={<ProductDetail />} />
             <Route path="/cart" element={<ShoppingCartContainer />} />
             {/* <Route path="*" element={<Navigate to="/" />} /> */}
