@@ -1,10 +1,8 @@
 const { default: Stripe } = require("stripe");
 const Order = require("../models/Order.js");
 const User = require("../models/Users/User.js");
-require('dotenv').config()
-const stripe = require("stripe")(
-  process.env.STRIPE_KEY
-);
+require("dotenv").config();
+const stripe = require("stripe")(process.env.STRIPE_KEY);
 
 const postOrder = async (
   fullName,
@@ -69,7 +67,7 @@ const createCheckoutSession = async (cart, userId) => {
       success_url: "https://urban-buy.netlify.com/paymentSuccess?success=true",
       cancel_url: "https://urban-buy.netlify.com/paymentCanceled?canceled=true",
       shipping_address_collection: {
-        allowed_countries: ['AR'], // Specify the allowed countries for shipping
+        allowed_countries: ["AR"], // Specify the allowed countries for shipping
       },
       // shipping_address: {
       //   address: {
@@ -84,12 +82,11 @@ const createCheckoutSession = async (cart, userId) => {
     });
     const newOrder = new Order({
       fullName: "New Order",
-      status: session.payment_status === 'unpaid' ? "pending" : "unpaid",
+      status: session.payment_status === "unpaid" ? "pending" : "unpaid",
       cart: cart,
       total: session.amount_total / 100,
       sessionId: session.id,
       user: userId,
-
     });
     const savedOrder = await newOrder.save();
 
@@ -102,8 +99,24 @@ const createCheckoutSession = async (cart, userId) => {
   }
 };
 
+const createOrder = async ({ fullName, email, cart, total, userId }) => {
+  try {
+    const orders = await Order.create({
+      fullName: fullName,
+      status: "pending",
+      email: email,
+      cart: cart,
+      total: total,
+      user: userId,
+    });
+    return orders;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
 module.exports = {
   postOrder,
   getOrdersByUser,
   createCheckoutSession,
+  createOrder,
 };

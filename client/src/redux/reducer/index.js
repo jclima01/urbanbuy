@@ -34,7 +34,8 @@ import {
   SET_SEARCH_BAR_THEME,
   SET_CARD_STYLE,
   LOADING_PRODUCTS,
-  CREATE_CHECKOUT_SESSION
+  CREATE_CHECKOUT_SESSION,
+  CREATE_ORDER
 } from "../actions/index.js";
 
 const initialState = {
@@ -60,10 +61,16 @@ const initialState = {
   searchBarTheme: "styleOne",
   cardStyle: "",
   checkoutUrl: "",
+  order:{}
 };
 
 const rootReducer = (state = initialState, { type, payload }) => {
   switch (type) {
+    case CREATE_ORDER:
+      return {
+        ...state,
+        order : {...payload}
+      };
     case GET_CART_FROM_LS:
       JSON.parse(localStorage.getItem("cart"));
       return {
