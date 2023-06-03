@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import Card from '../Card/Card';
+import styles from './EcommerceUser.module.css';
 
 function EcommerceUser() {
   const products = useSelector((state) => state.products);
@@ -64,24 +65,36 @@ function EcommerceUser() {
   };
 
   return (
-    <div>
-      <h1>Resultados de la búsqueda</h1>
-      <div>
-        <button onClick={handleSortByAZ}>A-Z</button>
-        <button onClick={handleSortByZA}>Z-A</button>
-        <button onClick={handleSortByPrice}>Mayor a Menor</button>
-        <button onClick={handleSortByPriceReverse}>Menor a Mayor</button>
-        <select value={ratingFilter} onChange={handleRatingFilter}>
-          <option value="">Filtrar por Rating</option>
-          <option value="3">3 estrella</option>
-          <option value="3,5">3,5 estrellas</option>
-          <option value="4">4 estrellas</option>
-          <option value="4,5">4,5 estrellas</option>
-          <option value="5">5 estrellas</option>
-        </select>
-      </div>
-      <Card products={filteredProducts} />
+    <div className={styles.container}>
+  <div className={styles.filters}>
+    <h1>Resultados de la búsqueda</h1>
+    <div className={styles.filtercontainer}>
+      <button onClick={handleSortByAZ}>A-Z</button>
+      <button onClick={handleSortByZA}>Z-A</button>
+      <button onClick={handleSortByPrice}>Mayor a Menor</button>
+      <button onClick={handleSortByPriceReverse}>Menor a Mayor</button>
+      <select value={ratingFilter} onChange={handleRatingFilter}>
+        <option value="">Filtrar por Rating</option>
+        <option value="3">3 estrella</option>
+        <option value="3,5">3,5 estrellas</option>
+        <option value="4">4 estrellas</option>
+        <option value="4,5">4,5 estrellas</option>
+        <option value="5">5 estrellas</option>
+      </select>
     </div>
+  </div>
+  <div className={styles.cards}>
+    <Card products={filteredProducts} />
+  </div>
+</div>
+
+
+
+
+
+
+
+
   );
 }
 

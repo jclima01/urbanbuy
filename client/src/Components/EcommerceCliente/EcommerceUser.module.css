@@ -1,0 +1,21 @@
+.container {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .filters {
+    flex: 1;
+  
+  }
+  
+  .filtercontainer {
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+  }
+  
+  .cards {
+    flex: 2;
+    margin-left: -550px;
+  }
+  
