@@ -9,6 +9,7 @@ const Order = require("../models/Order.js");
 const getOrderHandlers = async (req, res) => {
   try {
     const { userId } = req.params;
+    
     const orders = await getOrdersByUser(userId);
     res.status(200).json(orders);
   } catch (error) {

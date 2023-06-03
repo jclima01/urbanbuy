@@ -89,9 +89,42 @@ const ClientDelete = async (clientId) => {
   }
 };
 
+
+const OrdersClient = async (clientId) => {
+  try {
+    const clientAdmin = await ClientAdmin.findOne({ _id: clientId })
+      .populate("users")
+      .populate({
+        path: "users",
+        populate: {
+          path: "orders",
+          model: "Order",
+        },
+      })
+      .exec();
+
+    if (!clientAdmin) {
+      console.log("ClientAdmin no encontrado");
+      return;
+    }
+
+    const orders = clientAdmin.users.reduce(
+      (result, user) => result.concat(user.orders),
+      []
+    );
+
+    console.log("Órdenes del ClientAdmin:", orders);
+    return orders;
+  } catch (error) {
+    console.error(error);
+    throw new Error("Error al obtener las órdenes del ClientAdmin");
+  }
+};
+
 module.exports = {
   ClientAdminRegister,
   ClientAdminLogin,
   ClientUpdate,
   ClientDelete,
+  OrdersClient,
 };

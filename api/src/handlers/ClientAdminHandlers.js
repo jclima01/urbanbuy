@@ -1,4 +1,4 @@
-const { ClientAdminLogin, ClientAdminRegister, ClientUpdate, ClientDelete } = require("../controllers/ClientAdminControllers.js");
+const { ClientAdminLogin, ClientAdminRegister, ClientUpdate, ClientDelete, OrdersClient } = require("../controllers/ClientAdminControllers.js");
 
 
 const loginClientAdminHandler = async (req, res) => {
@@ -42,11 +42,24 @@ const loginClientAdminHandler = async (req, res) => {
     }
   };
 
+  const getAllOrdersClient = async (req, res) => {
+    try {
+      const { clientId } = req.params;
+      const orders = await OrdersClient(clientId)
+      res.status(200).json(orders);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: "Error al obtener las órdenes del ClientAdmin" });
+     // res.status(400).json({ error: error.message });
+
+    }
+  };
   
   module.exports = {
     loginClientAdminHandler,
     registerClientAdminHandler,
     updateClientHandler,
-    deleteClientHandler 
+    deleteClientHandler,
+    getAllOrdersClient
   };
   

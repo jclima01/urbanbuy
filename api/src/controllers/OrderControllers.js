@@ -47,6 +47,7 @@ const getOrdersByUser = async (userId) => {
   }
 };
 
+
 const processPayment = async (req, res) => {
   const { title, content, price, order } = req.body;
   console.log(stripe);

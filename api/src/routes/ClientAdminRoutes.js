@@ -4,11 +4,12 @@ const {
   loginClientAdminHandler,
   registerClientAdminHandler,
   updateClientHandler,
-  deleteClientHandler 
+  deleteClientHandler,
+  getAllOrdersClient 
   } = require("../handlers/ClientAdminHandlers.js");
   
-
-
+//traerOrdenes
+clientAdminRouter.get('/orders/:clientId',getAllOrdersClient)
 
 clientAdminRouter.post('/login', loginClientAdminHandler)
 clientAdminRouter.post('/register', registerClientAdminHandler)
