@@ -21,25 +21,24 @@ const DashBoard = () => {
   const adminStorage = clientAdminStorage ? clientAdminStorage : clientAdmin;
   const dispatch = useDispatch();
 
-
   useEffect(() => {
     dispatch(getAllProducts(clientAdminStorage._id));
     dispatch(getClientAdminUsers(clientAdminStorage._id));
   }, []);
 
   return (
-    <div className="vh-100 w-100 d-flex justify-content-center overflow-hidden ">
+    <div className="vh-100 w-100 d-flex justify-content-center align-items-center overflow-hidden ">
       <div className="contianer-home">
-        <div className="d-flex h-100 w-100">
+        <div className="d-flex h-50 d-flex justify-content-center align-items-center  ">
           <div className="freaturedSettion">
             <div
               style={{
                 height: "100%",
-                width: "70%",
+                width: "90%",
                 marginLeft: 30,
               }}
             >
-              {/* <p
+              <p
                 style={{
                   padding: 5,
                   background: "#eee6e6cc",
@@ -48,8 +47,8 @@ const DashBoard = () => {
                   borderRadius: 15,
                 }}
               >
-                Apr 11 2023 3:00 pm{" "}
-              </p> */}
+                Apr 11 2023 3:00 pm
+              </p>
               <p></p>
               <h1
                 style={{
@@ -95,7 +94,7 @@ const DashBoard = () => {
               />
             </div>
           </div>
-          {/* <div className="freaturedSettion2">
+          <div className="freaturedSettion2">
             <div className=" d-flex w-100 h-75 gap-4  align-items-center">
               <div className="container-image-logo">
                 <img src={logo} alt="" />
@@ -105,31 +104,43 @@ const DashBoard = () => {
                 <p className="Text2Freatured">Ecommerce</p>
               </div>
             </div>
-            <div className=" Todayshoppingvalue ">
-              <h4>Today</h4>
-              <h4>$ 350.000 CLP</h4>
+
+            <div className="d-flex  flex-column align-items-center ">
+              <p style={{ fontSize: 15, fontWeight: 500 }}>
+                Registra tu Dominio 
+              </p>
+              <div className="d-flex h">
+                <input
+                  type="text"
+                  placeholder="Ej: Papa Jhones"
+                  style={{ width: "80%",height: 30, border: "1px solid ligthgray" }}
+                />
+                <button style={{height: 30}}>Add </button>
+              </div>
             </div>
-          </div> */}
+          </div>
         </div>
         <div
           style={{
             display: "flex",
             alignItems: "center",
+            justifyContent:"space-between",
             height: "100%",
             width: "100%",
             padding: 20,
+
           }}
         >
           <div
             style={{
               height: "100%",
-              width: "70%",
+              width: "50%",
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
             }}
           >
-            {/* <div
+           {/*  <div
               style={{
                 width: "100%",
                 height: "25px",
@@ -180,7 +191,7 @@ const DashBoard = () => {
                 </div>
               )}
             </div> */}
-            <div
+           {/*  <div
               style={{
                 width: "100%",
                 height: 40,
@@ -196,14 +207,14 @@ const DashBoard = () => {
                 </h4>
               </div>
 
-              {/* <div style={{ cursor: "pointer" }}>View all</div> */}
-            </div>
+              <div style={{ cursor: "pointer" }}>View all</div>
+            </div> */}
 
             <div
               style={{
                 display: "flex",
                 width: "100%",
-                height: "100%",
+                height: "60%",
                 alignItems: "end",
                 justifyContent: "space-around",
               }}
@@ -216,7 +227,7 @@ const DashBoard = () => {
               ))}
             </div>
           </div>
-          {/* <div
+         {/*  <div
             style={{
               height: "100%",
               width: "35%",
