@@ -1,24 +1,36 @@
-const { Router } = require("express");
-const passport = require("passport")
-const PassportRouter = Router();
-
-const CLIENT_URL ="http://localhost:5173"
+const PassportRouter = require("express").Router();
+const passport = require('passport');
 
 
-PassportRouter.get('/login/failed', (req, res)=> {
-    res.send('llega')
+function isLogged( req, res, next) {
+    req.user ? next() : res.sendStatus(403);
+}
+
+
+PassportRouter.get('/auth/google',
+  passport.authenticate('google', { scope:
+      [ 'email', 'profile' ] }
+));
+
+PassportRouter.get( '/auth/google/callback',
+    passport.authenticate( 'google', {
+        successRedirect: '/auth/protected',
+        failureRedirect: '/auth/google/failure'
+}));
+
+PassportRouter.get('/auth/google/failure' , (req, res)=>{
+    res.send('Something wnet Wrong!');
 })
-PassportRouter.get('/login/success', (req, res)=> {
-    res.send('llega')
-})
-PassportRouter.get('/google/callback' , passport.authenticate('google',{ 
-    successRedirect:CLIENT_URL,
-    failureRedirect: '/login/failed' 
-},(req,res) => {
-    // Callback
-  }))
 
-  PassportRouter.get('/auth/google', passport.authenticate('google', { 
-    scope: ['openid','profile', 'email'] }));
+PassportRouter.get('/auth/logout' ,(req, res)=>{
+        req.session.destroy();
+        req.logout();
+        res.send('see you again')
+})
+
+PassportRouter.get('/auth/protected' , isLogged, (req, res)=>{
+    let name = req.user.picture
+    res.send(`'Hello ${name} '`);
+})
 
 module.exports = PassportRouter;

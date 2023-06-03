@@ -1,25 +1,23 @@
-const passport = require("passport");
+const passport = require('passport');
 require("dotenv").config();
-const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const GoogleStrategy = require( 'passport-google-oauth2' ).Strategy;
 const ClientAdmin = require("../models/Users/ClientAdmin");
 
-const GOOGLE_CLIENT_ID="385925683575-udkfb945r2vrb13gnqbqm8ark3ngvrjk.apps.googleusercontent.com"
-const GOOGLE_CLIENT_SECRET="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"
+const GOOGLE_CLIENT_ID = "385925683575-ph7ftv9rht4lask785mf2ggttt01cdpf.apps.googleusercontent.com";
+const GOOGLE_CLIENT_SECRET = "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";
 
 
-passport.use(
-  new GoogleStrategy(
-    {
-      clientID:GOOGLE_CLIENT_ID,
-      clientSecret:GOOGLE_CLIENT_SECRET,
-      callbackURL:`/auth/google/callback`,
-    },
-    function(accessToken, refreshToken, profile, cb) {
-        User.findOrCreate({ googleId: profile.id }, function (err, user) {
-          return cb(err, user);
-        });
-      }
-    ));
+passport.use(new GoogleStrategy({
+    clientID:     GOOGLE_CLIENT_ID,
+    clientSecret: GOOGLE_CLIENT_SECRET,
+    callbackURL: "http://localhost:5000/auth/google/callback",
+    passReqToCallback   : true
+  },
+  function(request, accessToken, refreshToken, profile, done) {
+    rafce
+    
+  }
+));
 
 passport.serializeUser((user, done) => {
   done(null, user);
@@ -28,3 +26,4 @@ passport.serializeUser((user, done) => {
 passport.deserializeUser((user, done) => {
   done(null, user);
 });
+

@@ -23,8 +23,7 @@
     "nodemailer-sendgrid-transport": "^0.2.0",
     "nodemon": "^2.0.22",
     "passport": "^0.6.0",
-    "passport-google-oauth20": "^2.0.0",
-    "passport-google-oidc": "^0.1.0",
+    "passport-google-oauth2": "^0.2.0",
     "passport-local": "^1.0.0",
     "stripe": "^12.7.0",
     "stripe-checkout": "^1.0.9"

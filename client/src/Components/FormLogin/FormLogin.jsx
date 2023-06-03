@@ -59,7 +59,7 @@ const FormLogin = () => {
   };
 
   const google = () => {
-    window.open("http://localhost:2800/auth/google/callback", "_self")
+    window.open("http://localhost:2800/auth/google", "_self")
   }
  
   return (

@@ -19,7 +19,7 @@ const PassportRouter = require('../routes/PassportRoutes.js')
 const mainRouter = Router();
 
 // Configurar los routers
-mainRouter.use("/auth", PassportRouter);
+mainRouter.use( PassportRouter);
 mainRouter.use("/products", ProductRouter);
 mainRouter.use("/users", UsersRouter); // ver este Handler, se repite en la ruta /user  !!
 mainRouter.use("/admin", AdminRouter);
