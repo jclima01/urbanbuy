@@ -1,5 +1,6 @@
 const PassportRouter = require("express").Router();
 const passport = require('passport');
+const ClientAdmin = require("../models/Users/ClientAdmin");
 
 
 function isLogged( req, res, next) {
@@ -14,7 +15,7 @@ PassportRouter.get('/auth/google',
 
 PassportRouter.get( '/auth/google/callback',
     passport.authenticate( 'google', {
-        successRedirect: '/auth/protected',
+        successRedirect: 'http://localhost:5173/login',
         failureRedirect: '/auth/google/failure'
 }));
 
@@ -24,13 +25,31 @@ PassportRouter.get('/auth/google/failure' , (req, res)=>{
 
 PassportRouter.get('/auth/logout' ,(req, res)=>{
         req.session.destroy();
-        req.logout();
         res.send('see you again')
 })
 
-PassportRouter.get('/auth/protected' , isLogged, (req, res)=>{
-    let name = req.user.picture
-    res.send(`'Hello ${name} '`);
+PassportRouter.get('/auth/protected' , isLogged, async (req, res)=>{
+    
+   const  userfind = ClientAdmin.find({email : req.user.email})
+   console.log('userfind', userfind)
+   
+    /* const newClientAdmin = new ClientAdmin({
+        fullName: req.user.displayName,
+        users: [],
+        logo: req.user.picture,
+        optionsDesing: [],
+        catalogue: [],
+        categories: [] ,
+        email: req.user.email,
+        password: '123456',
+        permissions: "ClientAdmin"
+      }) */
+  
+   
+        /*  const clientAdmin = await newClientAdmin.save() */
+   
+   
+    res.json(userfind);
 })
 
 module.exports = PassportRouter;
