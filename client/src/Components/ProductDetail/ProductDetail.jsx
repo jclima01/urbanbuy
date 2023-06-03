@@ -20,7 +20,7 @@ const ProductDetail = () => {
     <>
       <div className={style.detailContainer}>
       <div className={style.navButtons}>
-          <Link to="/homecliente">
+          <Link to="/ecommerceuser">
             <button className={style.button}>go back</button>
           </Link>
 
