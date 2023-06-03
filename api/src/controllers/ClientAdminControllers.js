@@ -1,17 +1,18 @@
 const ClientAdmin = require("../models/Users/ClientAdmin.js");
+const User = require("../models/Users/User.js");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 
 // const transporter = require("../email/emailService.js");
 require("dotenv").config();
 
-
 const sendWelcomeEmail = (fullName, email) => {
   const mailOptions = {
     from: "urbanbuy8@gmail.com",
     to: email,
     subject: "¡Bienvenido a UrbanBuy!",
-    html: '<html>\
+    html:
+      "<html>\
         <head>\
           <style>\
             /* Estilos CSS para el correo electrónico */\
@@ -30,7 +31,9 @@ const sendWelcomeEmail = (fullName, email) => {
           </style>\
         </head>\
         <body>\
-          <h1>Bienvenido a UrbanBuy. Hola ' + fullName + ',</h1>\
+          <h1>Bienvenido a UrbanBuy. Hola " +
+      fullName +
+      ',</h1>\
           <p>Gracias por registrarte en nuestro sitio.</p>\
           <p>UrbanBuy es un sitio web de comercio electrónico diseñado para facilitar la creación y gestión de tu propia tienda en línea.</p>\
           <p>Con UrbanBuy, tienes acceso a una amplia gama de características y opciones que te permiten personalizar y administrar tu tienda de manera sencilla y eficiente.</p>\
@@ -47,7 +50,7 @@ const sendWelcomeEmail = (fullName, email) => {
           <p>¡Gracias por elegir UrbanBuy!</p>\
           <p><span class="highlight">El equipo de UrbanBuy</span></p>\
         </body>\
-      </html>'
+      </html>',
   };
 
   transporter.sendMail(mailOptions, (error, info) => {
@@ -61,7 +64,6 @@ const sendWelcomeEmail = (fullName, email) => {
     }
   });
 };
-
 
 const ClientAdminRegister = async (fullName, email, password) => {
   try {
@@ -129,9 +131,11 @@ const ClientDelete = async (clientId) => {
   }
 };
 
+
 module.exports = {
   ClientAdminRegister,
   ClientAdminLogin,
   ClientUpdate,
   ClientDelete,
+
 };
