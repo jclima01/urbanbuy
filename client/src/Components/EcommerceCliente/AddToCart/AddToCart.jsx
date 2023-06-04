@@ -4,7 +4,6 @@ import { addProductToCart, createOrder } from "../../../redux/actions";
 import styles from "./AddToCart.module.css";
 import { GrAddCircle, GrSubtractCircle } from "react-icons/gr";
 import Swal from "sweetalert2";
-import axios from "axios";
 import { getUserById } from "../../../redux/actions";
 const AddToCart = ({ product, stock }) => {
   const user = useSelector((state) => state.user);
@@ -12,7 +11,7 @@ const AddToCart = ({ product, stock }) => {
   const order = useSelector((state) => state.order);
 
   useEffect(() => {
-    dispatch(getUserById("6476854688cbebbefc19ba27"));
+    dispatch(getUserById("6476854188cbebbefc19ba22"));
   }, []);
 
   const [quantity, setQuantity] = useState(1);
