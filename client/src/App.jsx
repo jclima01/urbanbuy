@@ -19,42 +19,39 @@ import Payment from "./Components/EcommerceCliente/ShoppingCart/Payment/Payment"
 import PaymentSuccess from "./Components/EcommerceCliente/ShoppingCart/Payment/PaymentSuccess";
 import PaymentCanceled from "./Components/EcommerceCliente/ShoppingCart/Payment/PaymentCanceled";
 
-
 function App() {
   const location = useLocation();
   return (
     <>
       <div className="d-flex w-100">
-        {location.pathname !== "/" &&
-        location.pathname !== "/paymentSuccess" &&
-        location.pathname !== "/paymentCanceled" &&
-        location.pathname !== "/login" &&
-        location.pathname !== "/:domain" &&
-        location.pathname !== "/singin" ? (
-          <SideBarDashBoard />
-        ) : null}
+        {location.pathname === "/dashboard" && <SideBarDashBoard />}
+        {location.pathname === "/dashboard/User" && <SideBarDashBoard />}
+        {location.pathname === "/dashboard/Edit" && <SideBarDashBoard />}
+        {location.pathname === "/dashboard/Products" && <SideBarDashBoard />}
+        {location.pathname === "/dashboard/Shipping" && <SideBarDashBoard />}
+        {location.pathname === "/dashboard/Settings" && <SideBarDashBoard />}
+
         <div className="d-flex flex-column">
-          {location.pathname !== "/" &&
-          location.pathname !== "/paymentSuccess" &&
-          location.pathname !== "/paymentCanceled" &&
-          location.pathname !== "/login" &&
-          location.pathname !== "/:domain" &&
-          location.pathname !== "/singin" ? (
-            <NavBarDashBoard />
-          ) : null}
+          {location.pathname === "/dashboard" && <NavBarDashBoard />}
+          {location.pathname === "/dashboard/User" && <NavBarDashBoard />}
+          {location.pathname === "/dashboard/Edit" && <NavBarDashBoard />}
+          {location.pathname === "/dashboard/Products" && <NavBarDashBoard />}
+          {location.pathname === "/dashboard/Shipping" && <NavBarDashBoard />}
+          {location.pathname === "/dashboard/Settings" && <NavBarDashBoard />}
+
           <Routes>
-            <Route path="/paymentSuccess" element={<PaymentSuccess />} /> 
-            <Route path="/paymentCanceled" element={<PaymentCanceled />} /> 
-            <Route path="/payment" element={<Payment />} /> 
+            <Route path="/paymentSuccess" element={<PaymentSuccess />} />
+            <Route path="/paymentCanceled" element={<PaymentCanceled />} />
+            <Route path="/payment" element={<Payment />} />
             <Route path="/" element={<Home />} /> {/* LadingPage */}
             <Route path="/login" element={<FormLogin />} />
             <Route path="/singin" element={<SignIn />} />
-            <Route path="/dashBoard" element={<DashBoard />} />
-            <Route path="/dashBoard/User" element={<DashBoardUser />} />
-            <Route path="/dashBoard/Edit" element={<DashBoardEdit />} />
-            <Route path="/dashBoard/Products" element={<DashBoardProducts />} />
-            <Route path="/dashBoard/Shipping" element={<DashBoardShipping />} />
-            <Route path="/dashBoard/Settings" element={<DashBoardSettings />} />
+            <Route path="/dashboard" element={<DashBoard />} />
+            <Route path="/dashboard/User" element={<DashBoardUser />} />
+            <Route path="/dashboard/Edit" element={<DashBoardEdit />} />
+            <Route path="/dashboard/Products" element={<DashBoardProducts />} />
+            <Route path="/dashboard/Shipping" element={<DashBoardShipping />} />
+            <Route path="/dashboard/Settings" element={<DashBoardSettings />} />
             <Route path="/homecliente" element={<HomeEcommerce />} />
             <Route path="/:domain" element={<HomeEcommerce />} />
             <Route path="/product/:productId" element={<ProductDetail />} />

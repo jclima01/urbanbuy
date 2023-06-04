@@ -2,9 +2,7 @@ import { CiSearch } from "react-icons/ci";
 import DashBoardTableProducts from "../../Components/DashBoardTableProducts/DashBoardTableProducts";
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getAllProducts,
-} from "../../redux/actions";
+import { getAllProducts } from "../../redux/actions";
 import DashBoardAddProducts from "../../Components/DashBoardAddProducts/DashBoardAddProducts";
 import DashBoardModalAddCategories from "../../Components/DashBoardModalAddCategories/DashBoardModalAddCategories";
 
@@ -41,7 +39,7 @@ const DashBoardProducts = () => {
 
   //Get All products
   useEffect(() => {
-    dispatch(getAllProducts(clientAdminId))
+    dispatch(getAllProducts(clientAdminId));
   }, [refresh]);
 
   return (
@@ -162,7 +160,6 @@ const DashBoardProducts = () => {
               width: 200,
               height: 160,
               borderRadius: 20,
-              
             }}
           >
             <button
@@ -184,8 +181,6 @@ const DashBoardProducts = () => {
             height: "8%",
             width: "95%",
             padding: 10,
-           
-            
           }}
         >
           <div
@@ -197,7 +192,6 @@ const DashBoardProducts = () => {
               justifyContent: "space-between",
               padding: 5,
               gap: 30,
-              
             }}
           >
             <div
@@ -275,9 +269,8 @@ const DashBoardProducts = () => {
             overflow: "hidden",
             overflowY: "auto",
             overflowX: "hidden",
-            display:"flex",
-            flexDirection:"column",
-
+            display: "flex",
+            flexDirection: "column",
           }}
         >
           <DashBoardTableProducts
