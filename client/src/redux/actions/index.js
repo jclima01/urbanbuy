@@ -37,6 +37,8 @@ export const SET_THEME = "SET_THEME"
 export const SET_SEARCH_BAR_THEME = "SET_SEARCH_BAR_THEME"
 export const SET_CARD_STYLE = "SET_CARD_STYLE"
 export const ORDER_CLIENT = "ORDER_CLIENT";
+export const DELETE_ORDER = "DELETE_ORDER";
+export const UPDATE_ORDER = "UPDATE_ORDER";
 
 export const getCartFromLS = () => {
   try {
@@ -566,6 +568,24 @@ export const orderClient = (clientId) => {
     } catch (error) {
       console.error(error);
       throw new Error("Error al obtener las órdenes del ClientAdmin");
+    }
+  };
+};
+
+
+export const deleteOrder = (orderId) => {
+  return {
+    type: DELETE_ORDER,
+    payload: orderId
+  };
+};
+
+export const updateOrder = (orderId) => {
+  return {
+    type: UPDATE_ORDER,
+    payload: {
+      orderId,
+      updatedFields
     }
   };
 };

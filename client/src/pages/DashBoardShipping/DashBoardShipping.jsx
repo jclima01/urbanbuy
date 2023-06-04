@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {  orderClient } from "../../redux/actions";
+import {  orderClient, deleteOrder, updateOrder } from "../../redux/actions";
 import "./DashBoardShipping.css";
 
 
@@ -16,8 +16,19 @@ const DashBoardShipping =() => {
 
   const clientAdmin = useSelector((state) => state.clientAdmin);
   
+  const handleDeleteOrder = (orderId) => {
+    dispatch(deleteOrder(orderId));
+  };
+  const handleUpdateOrder = (orderId) => {
+    const updatedFields = {
+      status: "Nuevo estado",
+      
+    };
+  
+    dispatch(updateOrder(orderId, updatedFields));
+  };
+  
 
-   //Get All Users of 
    useEffect(() => {
     dispatch(orderClient(clientAdminId));
     
@@ -32,7 +43,7 @@ return <>
   <thead>
     <tr>
       <th>Id</th>
-      <th>Full Name</th>
+      <th>FullName</th>
       <th>Email</th>
       <th>Address</th>
       <th>Total</th>

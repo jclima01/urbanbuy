@@ -1,6 +1,7 @@
 const {
   postOrder,
   getOrdersByUser,
+  updateOrder,
   
 } = require("../controllers/OrderControllers.js");
 
@@ -37,12 +38,21 @@ const postOrderHandlers = async (req, res) => {
   }
 };
 
-// const paymentHandler = async (req, res) => {
-//   const userId = await Order.findById(req.params.userId);
-//  return userId
-// };
+const updateOrderHandlers = async (req, res) => {
+  try {
+    const {orderId} = req.params;
+    const {status} = req.body;
+
+    const updatedOrder= await updateOrder(orderId, status);
+    res.status(200).json(updatedOrder);
+
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
 
 module.exports = {
   getOrderHandlers,
   postOrderHandlers,
+  updateOrderHandlers,
 };

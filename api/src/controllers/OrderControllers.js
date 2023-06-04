@@ -84,8 +84,28 @@ const processPayment = async (req, res) => {
   }
 };
 
+const updateOrder = async(orderId, status) => {
+  try {
+   const updatedOrder = await Order.findById(orderId);
+
+    if (!updatedOrder) {
+      
+      throw new Error("Order no encontrada");
+    }
+    
+    updatedOrder.status = status;
+  
+    const savedOrder = await updatedOrder.save();
+    return savedOrder;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+
+
 module.exports = {
   postOrder,
   getOrdersByUser,
   processPayment,
+  updateOrder 
 };

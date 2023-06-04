@@ -36,7 +36,8 @@ import {
   SET_SEARCH_BAR_THEME,
   SET_CARD_STYLE,
   ORDER_CLIENT,
-
+  DELETE_ORDER,
+  UPDATE_ORDER
 } from "../actions/index.js";
 
 const initialState = {
@@ -341,6 +342,17 @@ const rootReducer = (state = initialState, { type, payload }) => {
           ...state,
           orders: payload,
         };
+        case DELETE_ORDER:
+      return {
+        ...state,
+        orders: payload
+      };
+      case UPDATE_ORDER:
+      
+      return {
+        ...state,
+        orders: payload
+      };
 
     default:
       return {
