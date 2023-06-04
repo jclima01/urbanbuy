@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {  orderClient } from "../../redux/actions";
 import "./DashBoardShipping.css";
@@ -70,4 +70,4 @@ return <>
 
 };
 
-export default DashBoardShipping
+export default DashBoardShipping;
