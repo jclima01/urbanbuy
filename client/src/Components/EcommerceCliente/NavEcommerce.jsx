@@ -36,19 +36,12 @@ const handleSelectChange = (selectedOptions) => {
   const query = new URLSearchParams({ search: selectedProductIds.join(','), products: selectedProductIds.join(',') }).toString();
   navigate(`/ecommerceuser?${query}`);
 };
-  {/*const handleSelectChange = (selectedOptions) => {
+{/* const handleSelectChange = (selectedOptions) => {
   const selectedProductIds = selectedOptions.map((option) => option.value);
-  setSearchValue(selectedProductIds.join(','));
-  const query = new URLSearchParams({ search: selectedProductIds.join(','), products: selectedProductIds.join(',') }).toString();
+  setSearchValue(selectedOptions.value)
+  const query = new URLSearchParams({ search: searchValue, products: selectedProductIds.join(',') }).toString();
   navigate(`/ecommerceuser?${query}`);
-};
-
-  const handleSelectChange = (selectedOptions) => {
-  const selectedProductIds = selectedOptions.map((option) => option.value);
-    setSearchValue(selectedOptions.value)
-    const query = new URLSearchParams({ search: searchValue, products: selectedProductIds.join(',') }).toString();
-    navigate(`/ecommerceuser?${query}`);
-  };*/}
+};*/}
   
 
   return (

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import Card from '../Card/Card';
 import styles from './EcommerceUser.module.css';
@@ -11,7 +11,7 @@ function EcommerceUser() {
   const [ratingFilter, setRatingFilter] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedCategory, setSelectedCategory] = useState('');
-  const productsPerPage = 5;
+  const productsPerPage = 8;
 
   useEffect(() => {
     const urlSearchParams = new URLSearchParams(window.location.search);
@@ -152,7 +152,6 @@ function EcommerceUser() {
           <button
             key={index + 1}
             onClick={() => handlePageChange(index + 1)}
-            className={currentPage === index + 1 ? styles.active : ''}
           >
             {index + 1}
           </button>
