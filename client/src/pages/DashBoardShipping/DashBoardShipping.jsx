@@ -1,6 +1,9 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getClientAdminUsers, orderClient } from "../../redux/actions";
+import {  orderClient } from "../../redux/actions";
+import "./DashBoardShipping.css";
+
+
 
 const DashBoardShipping =() => {
   const dispatch = useDispatch();
@@ -14,45 +17,54 @@ const DashBoardShipping =() => {
   const clientAdmin = useSelector((state) => state.clientAdmin);
   
 
-  // const handleClick = (user) => {
-  //   setSelectedUser(user);
-  //   //dispatch(getUserById(user._id));
-  //   setActiveTab("userDetail");
-  //   setActualPage(1)
-  // };
-
    //Get All Users of 
    useEffect(() => {
     dispatch(orderClient(clientAdminId));
     
-  }, [dispatch,orderClient]);
+  }, [dispatch]);
   
 console.log("response", orders);
   
 return <>
 
-<h1>Actualizando</h1>
-<div>
-      <h2>User List Cliente Administrador - Vendedor</h2>
-      <ul >
-              <li>Id:</li><li>FullName:</li><li>Status:</li><li>Payment:</li><li>Email:</li><li>Cart:</li><li>Total: $</li><li>Adress:</li>
-              <li>User:</li><li>CreatedAt:</li><li>UpdateAt:</li>
-              </ul>
-              <ul>
-                
-              <h2>Order List</h2>
-        <ul>
-          {orders.data && orders.data.map((order) => (
-            <li key={order._id}>
-              {order._id} - {order.fullName} - {order.status} - {order.payment === true ? "yes" : "no"} - {order.email} - {order.cart} - {order.total} - {order.adress} - {order.user} - {order.createdAt} - {order.updatedAt}
-              {/* Otros campos de la orden de compra */}
-              <button onClick={() => handleUpdateOrder(order.id)}>Update</button>
-              <button onClick={() => handleDeleteOrder(order.id)}>Delete</button>
-            </li>
-          ))}
-        </ul>
-            </ul>
-    </div>
+<h1>Ordenes de - {clientAdminStorage.fullName}</h1>
+    <table className="datosUser">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Full Name</th>
+      <th>Email</th>
+      <th>Address</th>
+      <th>Total</th>
+      <th>Cart</th>
+      <th>Permissions</th>
+      <th>Payment</th>
+      <th>Options</th>
+    </tr>
+  </thead>
+   <tbody>
+   {orders?.data?.map((order) => (
+      <tr key={order._id}>
+        <td>
+          {order._id}
+        </td>
+        <td>{order.fullName}</td>
+        <td>{order.email}</td>
+        <td>{order.adress}</td>
+        <td>{order.total}</td>
+        <td>{order.Cart}</td>
+        <td>{order.permissions}</td>
+        <td>{order.payment}</td>
+        <td>
+          <button onClick={() => handleUpdateOrder(order._id)}>Update</button>
+          <button onClick={() => handleDeleteOrder(order._id)}>Delete</button>
+        </td>
+      </tr>
+    ))}
+  </tbody>
+</table>
+                  
+  
 </>
 
 };
