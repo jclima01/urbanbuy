@@ -82,20 +82,11 @@ const getClientAdminUsers = async (clientAdminId) => {
 };
 const getUserById = async (userId) => {
   try {
-<<<<<<< HEAD
     console.log(userId);
     const user = await User.findById(userId)
       .populate("orders") // Popula las categorías
       // .populate("clientAdmin") // Popula el modelo ClientAdmin
       .exec();
-=======
-    console.log(userId)
-    const user = await User.find({ _id: userId })
-      .populate("orders") // Popula las categorías
-      // .populate("clientAdmin") // Popula el modelo ClientAdmin
-      .exec();
-console.log(user)
->>>>>>> c0761a1f3276e8f8b62f1cc5233467c5b97bcf6b
     return user;
   } catch (error) {
     throw new Error(error.message);

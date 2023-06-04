@@ -43,7 +43,6 @@ export const CREATE_ORDER = "CREATE_ORDER";
 export const createOrder = (fullName, email, cart, total, userId ) => {
   try {
     return async function (dispatch) {
-<<<<<<< HEAD
       console.log(fullName)
       console.log(email)
       console.log(cart)
@@ -51,10 +50,6 @@ export const createOrder = (fullName, email, cart, total, userId ) => {
       console.log(userId)
       const {data} = await axios.post(`/orders/order/${userId}`,{
         fullName, email, cart, total 
-=======
-      const {data} = await axios.post('/orders/order',{
-        fullName, email, cart, total, userId 
->>>>>>> c0761a1f3276e8f8b62f1cc5233467c5b97bcf6b
       })
       console.log(data)
       return await dispatch({
