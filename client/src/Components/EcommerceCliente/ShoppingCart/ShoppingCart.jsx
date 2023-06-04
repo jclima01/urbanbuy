@@ -12,12 +12,10 @@ export default function ShoppingCart() {
   const cart = JSON.parse(localStorage.getItem("cart")) ?? [];
   const [cartList, setCartList] = useState(cart);
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.user);
 
   const userId = "6476854188cbebbefc19ba22"
   const navigate = useNavigate();
-  const checkoutUrl = useSelector((state) => state.checkoutUrl);
-  const cartRef = useRef(null); // Add useRef
+
 
   const checkout = async (cartList, userId) => {
     const { data } = await axios.post(

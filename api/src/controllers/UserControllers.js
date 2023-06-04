@@ -82,12 +82,11 @@ const getClientAdminUsers = async (clientAdminId) => {
 };
 const getUserById = async (userId) => {
   try {
-    console.log(userId)
-    const user = await User.find({ _id: userId })
+    console.log(userId);
+    const user = await User.findById(userId)
       .populate("orders") // Popula las categorías
       // .populate("clientAdmin") // Popula el modelo ClientAdmin
       .exec();
-console.log(user)
     return user;
   } catch (error) {
     throw new Error(error.message);

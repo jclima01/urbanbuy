@@ -99,9 +99,9 @@ const createCheckoutSession = async (cart, userId) => {
   }
 };
 
-const createOrder = async ({ fullName, email, cart, total, userId }) => {
+const createOrder = async (fullName, email, cart, total, userId) => {
   try {
-    const orders = await Order.create({
+    const newOrder = new Order({
       fullName: fullName,
       status: "pending",
       email: email,
@@ -109,7 +109,11 @@ const createOrder = async ({ fullName, email, cart, total, userId }) => {
       total: total,
       user: userId,
     });
-    return orders;
+    const savedOrder = await newOrder.save();
+    const user = await User.findById(userId);
+    user.orders.push(savedOrder._id);
+    await user.save();
+    return savedOrder;
   } catch (error) {
     throw new Error(error.message);
   }
