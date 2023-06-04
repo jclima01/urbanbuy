@@ -84,7 +84,7 @@ const processPayment = async (req, res) => {
   }
 };
 
-const updateOrder = async(orderId, status) => {
+const updateOrder = async(orderId, status, adress) => {
   try {
    const updatedOrder = await Order.findById(orderId);
 
@@ -94,6 +94,7 @@ const updateOrder = async(orderId, status) => {
     }
     
     updatedOrder.status = status;
+    updatedOrder.adress = adress;
   
     const savedOrder = await updatedOrder.save();
     return savedOrder;

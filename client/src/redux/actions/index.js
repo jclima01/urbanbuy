@@ -580,12 +580,16 @@ export const deleteOrder = (orderId) => {
   };
 };
 
-export const updateOrder = (orderId) => {
-  return {
-    type: UPDATE_ORDER,
-    payload: {
-      orderId,
-      updatedFields
+export const updateOrder = (orderId, status, adress) => {
+  try {
+  return async function (dispatch) {
+      const {data} = await axios.put(`/orders/${orderId}`, {status}, {adress});
+      return dispatch ({
+        type: UPDATE_ORDER,
+        payload: data,
+      });
     }
-  };
+  } catch (error) {
+    throw new Error(error.message)
+  }
 };

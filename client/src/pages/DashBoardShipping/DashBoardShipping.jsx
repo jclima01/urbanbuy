@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {  orderClient, deleteOrder, updateOrder } from "../../redux/actions";
 import "./DashBoardShipping.css";
@@ -11,8 +11,8 @@ const DashBoardShipping =() => {
     JSON.parse(localStorage.getItem("clientAdmin")) ?? false;
   const clientAdminId = clientAdminStorage._id;
   const orders = useSelector((state) => state.orders);
- 
-  
+ const [status, setStatus] = useState("")
+  const [adress, setAdress] = useState("")
 
   const clientAdmin = useSelector((state) => state.clientAdmin);
   
@@ -20,21 +20,22 @@ const DashBoardShipping =() => {
     dispatch(deleteOrder(orderId));
   };
   const handleUpdateOrder = (orderId) => {
-    const updatedFields = {
-      status: "Nuevo estado",
-      
+    
+     setStatus("Nuevo estado")
+    setAdress("nueva direccion")
+     
+     dispatch(updateOrder(orderId, status, adress));
     };
   
-    dispatch(updateOrder(orderId, updatedFields));
-  };
+  
   
 
    useEffect(() => {
     dispatch(orderClient(clientAdminId));
     
-  }, [dispatch]);
+  }, [dispatch,updateOrder]);
   
-console.log("response", orders);
+console.log(adress)
   
 return <>
 <div className="containerTodoDashboarShipping">
@@ -50,7 +51,7 @@ return <>
       <th>Address</th>
       <th>Total</th>
       <th>Cart</th>
-      <th>Permissions</th>
+      <th>Date</th>
       <th>Payment</th>
       <th>Options</th>
     </tr>
@@ -62,11 +63,11 @@ return <>
         <td>{order.status}</td>
         <td>{order.fullName}</td>
         <td>{order.email}</td>
-        <td>{order.adress}</td>
+        <td><input name="address" type="text" defaultValue={order.adress} onChange={(e) => setAdress(e.target.value)}/></td>
         <td>{order.total}</td>
-        <td>{order.Cart?.map(prod=>prod)}</td>
-        <td>{order.permissions}</td>
-        <td>{order.payment}</td>
+        <td>{order.cart?.map(prod=>prod)}</td>
+        <td>{order.createdAt}</td>
+        <td>{order.payment === true ? "Yes" : "No"}</td>
         <td>
           <button onClick={() => handleUpdateOrder(order._id)}>Update</button>
           <button onClick={() => handleDeleteOrder(order._id)}>Delete</button>

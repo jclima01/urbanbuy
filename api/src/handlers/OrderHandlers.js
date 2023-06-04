@@ -41,9 +41,9 @@ const postOrderHandlers = async (req, res) => {
 const updateOrderHandlers = async (req, res) => {
   try {
     const {orderId} = req.params;
-    const {status} = req.body;
+    const {status, adress} = req.body;
 
-    const updatedOrder= await updateOrder(orderId, status);
+    const updatedOrder= await updateOrder(orderId, status, adress);
     res.status(200).json(updatedOrder);
 
   } catch (error) {
