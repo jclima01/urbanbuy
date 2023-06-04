@@ -37,13 +37,15 @@ const DashBoardShipping =() => {
 console.log("response", orders);
   
 return <>
-
+<div className="containerTodoDashboarShipping">
 <h1>Ordenes de - {clientAdminStorage.fullName}</h1>
+<div className="containerOrders">
     <table className="datosUser">
   <thead>
     <tr>
       <th>Id</th>
-      <th>FullName</th>
+      <th>Status</th>
+      <th>Full Name</th>
       <th>Email</th>
       <th>Address</th>
       <th>Total</th>
@@ -56,14 +58,13 @@ return <>
    <tbody>
    {orders?.data?.map((order) => (
       <tr key={order._id}>
-        <td>
-          {order._id}
-        </td>
+        <td>{order._id}</td>
+        <td>{order.status}</td>
         <td>{order.fullName}</td>
         <td>{order.email}</td>
         <td>{order.adress}</td>
         <td>{order.total}</td>
-        <td>{order.Cart}</td>
+        <td>{order.Cart?.map(prod=>prod)}</td>
         <td>{order.permissions}</td>
         <td>{order.payment}</td>
         <td>
@@ -74,8 +75,8 @@ return <>
     ))}
   </tbody>
 </table>
-                  
-  
+</div>
+</div>
 </>
 
 };

@@ -1,7 +1,22 @@
-.datosUser {
-    width: 100%;
-    border-collapse: collapse;
-  }
+.containerTodoDashboarShipping{
+  /*width: 90%;*/
+  margin-top: 20px;
+  width: 100%;
+    box-shadow: 4px 3px 20px 4px #4644442b;
+    padding: 18px;
+    border-radius: 10px;
+}
+.containerOrders{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 50px;
+  margin: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 16px;
+  background-color: #F5F4F4;
+}
   
   .datosUser th,
   .datosUser td {
