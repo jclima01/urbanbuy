@@ -35,6 +35,7 @@ export const SET_SEARCH_BAR_THEME = "SET_SEARCH_BAR_THEME";
 export const SET_CARD_STYLE = "SET_CARD_STYLE";
 
 export const SET_REVIEW = "SET_REVIEW";
+export const GET_REVIEWS = "GET_REVIEWS"
 
 export const getCartFromLS = () => {
   try {
@@ -548,6 +549,24 @@ export const setReview = (productId, userId, text, rating) => {
 
       return dispatch({
         type: SET_REVIEW,
+      });
+    };
+    // eslint-disable-next-line no-unreachable
+  } catch (err) {
+    throw new Error(err.message);
+  }
+};
+
+export const getReviews = (productId) => {
+  try {
+    return async function (dispatch) {
+      const { data } = await axios.get("/reviews/", {
+        productId,
+      });
+
+      return dispatch({
+        type: GET_REVIEWS,
+        payload: data,
       });
     };
     // eslint-disable-next-line no-unreachable

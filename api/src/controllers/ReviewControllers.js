@@ -20,7 +20,7 @@ const postReview = async (productId, userId, text, rating) => {
 
 const getProductReviews = async (productId) => {
   try {
-    const reviews = await Review.find({ product: productId }).populate("user");
+    const reviews = await Review.find({ product: productId });
     return reviews;
   } catch (error) {
     throw new Error(error.message);
