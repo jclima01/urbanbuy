@@ -2,6 +2,7 @@ const {
   postOrder,
   getOrdersByUser,
   updateOrder,
+  deleteOrder
   
 } = require("../controllers/OrderControllers.js");
 
@@ -41,11 +42,22 @@ const postOrderHandlers = async (req, res) => {
 const updateOrderHandlers = async (req, res) => {
   try {
     const {orderId} = req.params;
-    const {status, adress} = req.body;
+    const {status, adress,clientId} = req.body;
 
-    const updatedOrder= await updateOrder(orderId, status, adress);
+    const updatedOrder= await updateOrder(orderId, status, adress,clientId);
     res.status(200).json(updatedOrder);
 
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
+
+const deleteOrderHandler = async (req, res) => {
+  try {
+    const { orderId } = req.params;
+    
+    const orders = await deleteOrder(orderId);
+    res.status(200).json(orders);
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
@@ -55,4 +67,5 @@ module.exports = {
   getOrderHandlers,
   postOrderHandlers,
   updateOrderHandlers,
+  deleteOrderHandler
 };

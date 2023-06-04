@@ -2,6 +2,7 @@ const { default: Stripe } = require("stripe");
 const Order = require("../models/Order.js");
 const Purchase = require("../models/Purchase.js");
 const User = require("../models/Users/User.js");
+const ClientAdmin = require("../models/Users/ClientAdmin.js");
 const stripe = require("stripe")(
   "sk_test_51NCdNdL2efsICo3fzbVNZmlNnJaJyRuDxAQrBTJBORiye8bCFNq6PqVwqNAcfnqXgmQ9dwySNJ2L6yQHqz17E2js0059R0fJ9h"
 );
@@ -46,11 +47,20 @@ const getOrdersByUser = async (userId) => {
     throw new Error(error.message);
   }
 };
+const deleteOrder = async (orderId) => {
+  try {
+    const orders = await Order.findByIdAndDelete(orderId);
+    return orders;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+
 
 
 const processPayment = async (req, res) => {
   const { title, content, price, order } = req.body;
-  console.log(stripe);
+  
   try {
     // Crear el objeto del pago
     const payment = new Purchase({
@@ -84,7 +94,38 @@ const processPayment = async (req, res) => {
   }
 };
 
-const updateOrder = async(orderId, status, adress) => {
+const OrdersClient = async (clientId) => {
+  try {
+    const clientAdmin = await ClientAdmin.findOne({ _id: clientId })
+      .populate("users")
+      .populate({
+        path: "users",
+        populate: {
+          path: "orders",
+          model: "Order",
+        },
+      })
+      .exec();
+
+    if (!clientAdmin) {
+      console.log("ClientAdmin no encontrado");
+      return;
+    }
+
+    const orders = clientAdmin.users.reduce(
+      (result, user) => result.concat(user.orders),
+      []
+    );
+
+    console.log("Órdenes del ClientAdmin:", orders);
+    return orders;
+  } catch (error) {
+    console.error(error);
+    throw new Error("Error al obtener las órdenes del ClientAdmin");
+  }
+};
+
+const updateOrder = async(orderId, status, adress,clientId) => {
   try {
    const updatedOrder = await Order.findById(orderId);
 
@@ -97,7 +138,9 @@ const updateOrder = async(orderId, status, adress) => {
     updatedOrder.adress = adress;
   
     const savedOrder = await updatedOrder.save();
-    return savedOrder;
+    
+    const orderAll = await OrdersClient(clientId);
+    return orderAll;
   } catch (error) {
     throw new Error(error.message);
   }
@@ -108,5 +151,7 @@ module.exports = {
   postOrder,
   getOrdersByUser,
   processPayment,
-  updateOrder 
+  OrdersClient,
+  updateOrder,
+  deleteOrder
 };

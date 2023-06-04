@@ -560,10 +560,10 @@ export const dataEditProduct = (obj) => ({
 export const orderClient = (clientId) => {
   return async (dispatch) => {
     try {
-      const orders = await axios.get(`/clientAdmin/orders/${clientId}`);
+      const {data} = await axios.get(`/clientAdmin/orders/${clientId}`);
       dispatch({
         type: ORDER_CLIENT,
-        payload: orders,
+        payload: data,
       });
     } catch (error) {
       console.error(error);
@@ -574,16 +574,25 @@ export const orderClient = (clientId) => {
 
 
 export const deleteOrder = (orderId) => {
-  return {
-    type: DELETE_ORDER,
-    payload: orderId
-  };
+  try {
+
+    return async function (dispatch) {
+    await axios.delete(`/orders/${orderId}`);
+    return  dispatch ({
+      type: DELETE_ORDER,
+      payload: orderId
+    });
+  }
+  } catch (error) {
+    throw new Error(error.message)
+  }
 };
 
-export const updateOrder = (orderId, status, adress) => {
+export const updateOrder = (orderId, status, adress,clientId) => {
   try {
   return async function (dispatch) {
-      const {data} = await axios.put(`/orders/${orderId}`, {status}, {adress});
+      const {data} = await axios.put(`/orders/${orderId}`, {status, adress,clientId});
+      console.log(data);
       return dispatch ({
         type: UPDATE_ORDER,
         payload: data,

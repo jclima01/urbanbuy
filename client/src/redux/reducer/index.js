@@ -345,13 +345,13 @@ const rootReducer = (state = initialState, { type, payload }) => {
         case DELETE_ORDER:
       return {
         ...state,
-        orders: payload
+        orders:state.orders.filter((e)=>e._id!==payload)
       };
       case UPDATE_ORDER:
       
       return {
         ...state,
-        orders: payload
+        orders:[...payload]
       };
 
     default:
