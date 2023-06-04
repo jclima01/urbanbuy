@@ -35,6 +35,7 @@ import {
   SET_SLIDER_THEME,
   SET_SEARCH_BAR_THEME,
   SET_CARD_STYLE,
+  ORDER_CLIENT,
 
 } from "../actions/index.js";
 
@@ -60,7 +61,7 @@ const initialState = {
 
   searchBarTheme: "styleOne",
   cardStyle: "",
-
+  orders: [],
 };
 
 const rootReducer = (state = initialState, { type, payload }) => {
@@ -330,6 +331,16 @@ const rootReducer = (state = initialState, { type, payload }) => {
         ...state,
         cardStyle: payload,
       };
+      case SET_CARD_STYLE:
+      return {
+        ...state,
+        cardStyle: payload,
+      };
+      case ORDER_CLIENT:
+        return {
+          ...state,
+          orders: payload,
+        };
 
     default:
       return {

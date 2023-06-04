@@ -36,6 +36,7 @@ export const SET_SLIDER_THEME= "SET_SLIDER_THEME"
 export const SET_THEME = "SET_THEME"
 export const SET_SEARCH_BAR_THEME = "SET_SEARCH_BAR_THEME"
 export const SET_CARD_STYLE = "SET_CARD_STYLE"
+export const ORDER_CLIENT = "ORDER_CLIENT";
 
 export const getCartFromLS = () => {
   try {
@@ -553,3 +554,18 @@ export const dataEditProduct = (obj) => ({
   payload: obj,
 });
 
+
+export const orderClient = (clientId) => {
+  return async (dispatch) => {
+    try {
+      const orders = await axios.get(`/clientAdmin/orders/${clientId}`);
+      dispatch({
+        type: ORDER_CLIENT,
+        payload: orders,
+      });
+    } catch (error) {
+      console.error(error);
+      throw new Error("Error al obtener las órdenes del ClientAdmin");
+    }
+  };
+};
