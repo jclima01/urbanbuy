@@ -14,8 +14,10 @@ import SignIn from "./Components/SignIn/SignIn";
 import HomeEcommerce from "./Components/EcommerceCliente/HomeEcommerce";
 import ProductDetail from "./Components/ProductDetail/ProductDetail";
 import ShoppingCartContainer from "./Components/EcommerceCliente/ShoppingCart/ShoppingCartContainer";
-
+import LoginClient from './Components/EcommerceCliente/LoginClient/LoginClient'
 import Payment from "./Components/EcommerceCliente/ShoppingCart/Payment/Payment";
+import SignInClient from "./Components/EcommerceCliente/SignInClient/SignInClient";
+import EcommerceUser from "./Components/EcommerceCliente/EcommerceUser";
 import PaymentSuccess from "./Components/EcommerceCliente/ShoppingCart/Payment/PaymentSuccess";
 import PaymentCanceled from "./Components/EcommerceCliente/ShoppingCart/Payment/PaymentCanceled";
 
@@ -46,7 +48,10 @@ function App() {
             <Route path="/payment" element={<Payment />} /> 
             <Route path="/" element={<Home />} /> {/* LadingPage */}
             <Route path="/login" element={<FormLogin />} />
+            <Route path="/loginClient" element={<LoginClient/>}/>
             <Route path="/singin" element={<SignIn />} />
+            <Route path="/signInClient" element={<SignInClient/>}/>
+            <Route path="/ecommerceuser" element={<EcommerceUser/>}/>
             <Route path="/dashBoard" element={<DashBoard />} />
             <Route path="/dashBoard/User" element={<DashBoardUser />} />
             <Route path="/dashBoard/Edit" element={<DashBoardEdit />} />

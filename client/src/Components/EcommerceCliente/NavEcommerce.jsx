@@ -1,20 +1,78 @@
-import React from "react";
-import { Navbar, Container } from "react-bootstrap";
-import logoClient from "../../Img/logoClient.png";
-import style from "./NavEcommerce.module.css";
-import { useSelector } from "react-redux";
+// NavEcommerce.js
+import React, { useEffect, useRef, useState } from 'react';
+import { useSelector } from 'react-redux';
+import Select from "react-select";
+import { Link, useNavigate } from 'react-router-dom';
+import logoBlanco from '../../Img/logoBlanco.png'
+import style from '../EcommerceCliente/NavEcommerce.module.css'
+import EcommerceUser from './EcommerceUser'
 
 function NavEcommerce() {
-  const theme = useSelector(state => state.theme)
+  const [searchValue, setSearchValue] = useState("");
+  const products = useSelector((state) => state.products);
+  const [filteredProducts, setFilteredProducts] = useState([]);
+  const navigate = useNavigate();
+  
+  const filterProducts = (inputValue) => {
+    if (inputValue.length > 0) {
+      const searchResult = products.filter((product) =>
+        product.productName.toLowerCase().includes(inputValue.toLowerCase())
+      );
+      setFilteredProducts(searchResult);
+    } else {
+      setFilteredProducts([]);
+    }
+  };
+
+  const formatOptionLabel = ({ label, value }) => (
+    <div>
+      <span>{label}</span>
+    </div>
+  );
+
+const handleSelectChange = (selectedOptions) => {
+  const selectedProductIds = selectedOptions.map((option) => option.value);
+  setSearchValue(selectedOptions.length > 0 ? selectedProductIds.join(',') : '');
+  const query = new URLSearchParams({ search: selectedProductIds.join(','), products: selectedProductIds.join(',') }).toString();
+  navigate(`/ecommerceuser?${query}`);
+};
+{/* const handleSelectChange = (selectedOptions) => {
+  const selectedProductIds = selectedOptions.map((option) => option.value);
+  setSearchValue(selectedOptions.value)
+  const query = new URLSearchParams({ search: searchValue, products: selectedProductIds.join(',') }).toString();
+  navigate(`/ecommerceuser?${query}`);
+};*/}
+  
 
   return (
-    <Navbar className={`${style.navEcommerce} ${style[theme]}`}>
-      <Container >
-        <Navbar.Brand>
-          <img src={logoClient} className={style.logoClient} />
-        </Navbar.Brand>
-      </Container>
-    </Navbar>
+    <div className={style.container}>
+      <img src={logoBlanco} alt='' className={style.logoClient} />
+      <div className={style.SingnIn}>
+        <Link to='/signInClient'>
+          <button className={style.button1}>SignIn</button>
+        </Link>
+        <Link to='/loginClient'>
+          <button className={style.button2}>Login</button>
+        </Link>
+      </div>
+      <Select
+        options={filteredProducts.map((product) => ({
+          label: product.productName,
+          value: product.productName,
+        }))}
+        className={style.input}
+        onInputChange={(inputValue) => {
+          setSearchValue(inputValue);
+          filterProducts(inputValue);
+        }}
+        menuIsOpen={Boolean(searchValue)}
+        formatOptionLabel={formatOptionLabel}
+        placeholder="Buscar producto"
+        isMulti
+        onChange={handleSelectChange}
+      />
+    
+    </div>
   );
 }
 

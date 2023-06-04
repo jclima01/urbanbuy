@@ -35,6 +35,7 @@ import {
   SET_CARD_STYLE,
   LOADING_PRODUCTS,
   CREATE_CHECKOUT_SESSION
+
 } from "../actions/index.js";
 
 const initialState = {
@@ -59,7 +60,9 @@ const initialState = {
 
   searchBarTheme: "styleOne",
   cardStyle: "",
+
   checkoutUrl: "",
+
 };
 
 const rootReducer = (state = initialState, { type, payload }) => {
@@ -160,7 +163,6 @@ const rootReducer = (state = initialState, { type, payload }) => {
       };
 
     case EDIT_CATEGORY:
-  
       return {
         ...state,
         categories: state.categories.map((category) => {
@@ -273,20 +275,20 @@ const rootReducer = (state = initialState, { type, payload }) => {
         user: {},
         UserSession: false,
       };
-      case PAGO_EXITOSO:
-        return {
-          ...state,
-          cargando: false,
-          cargo: payload,
-          error: null,
-        };
-      case PAGO_FALLIDO:
-        return {
-          ...state,
-          cargando: false,
-          cargo: null,
-          error: payload,
-        };
+    case PAGO_EXITOSO:
+      return {
+        ...state,
+        cargando: false,
+        cargo: payload,
+        error: null,
+      };
+    case PAGO_FALLIDO:
+      return {
+        ...state,
+        cargando: false,
+        cargo: null,
+        error: payload,
+      };
 
     case SET_THEME:
       return {
