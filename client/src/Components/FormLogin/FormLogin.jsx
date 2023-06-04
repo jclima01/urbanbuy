@@ -12,7 +12,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 const FormLogin = () => {
   const { user } = useAuth0();
-  const { isAuthenticated } = useAuth0();
+
   console.log(user)
   // useEffect(() => {
   //   if (isAuthenticated)

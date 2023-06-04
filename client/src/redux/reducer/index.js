@@ -33,6 +33,9 @@ import {
   SET_SLIDER_THEME,
   SET_SEARCH_BAR_THEME,
   SET_CARD_STYLE,
+  LOADING_PRODUCTS,
+  CREATE_CHECKOUT_SESSION
+
 } from "../actions/index.js";
 
 const initialState = {
@@ -44,7 +47,7 @@ const initialState = {
   product: {},
   categories: [],
   ordersByUser: [],
-
+  loading : null,
   theme: "urbanBuy",
   sliderTheme: "urbanBuy",
 
@@ -57,6 +60,9 @@ const initialState = {
 
   searchBarTheme: "styleOne",
   cardStyle: "",
+
+  checkoutUrl: "",
+
 };
 
 const rootReducer = (state = initialState, { type, payload }) => {
@@ -196,36 +202,12 @@ const rootReducer = (state = initialState, { type, payload }) => {
     case EDIT_PRODUCT:
       return {
         ...state,
-        products: state.products.map((item) => {
-          if (item._id === payload._id) {
-            return {
-              ...item,
-              ...payload,
-            };
-          }
-          return item;
-        }),
+        products: payload
       };
     case POST_NEW_PRODUCT:
-      const updatedCategories = payload.categories.map((category) => {
-        const foundCategory = state.categories.find((c) => c._id === category);
-        if (foundCategory) {
-          return {
-            categoryId: category,
-            categoryName: foundCategory.categoryName,
-          };
-        }
-        return null;
-      });
-
-      const newProduct = {
-        ...payload,
-        categories: updatedCategories.filter((category) => category !== null),
-      };
-
       return {
         ...state,
-        products: [...state.products, newProduct],
+        products: [...state.products, payload],
       };
     case GET_PRODUCT_BY_ID:
       return {
@@ -236,7 +218,13 @@ const rootReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         products: [...payload],
+        loading: false
       };
+      case LOADING_PRODUCTS: 
+      return {
+        ...state,
+        loading: payload
+      }
     case LOGIN_ADMIN:
       return {
         ...state,
@@ -324,6 +312,12 @@ const rootReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         cardStyle: payload,
+      };
+
+    case CREATE_CHECKOUT_SESSION:
+      return {
+        ...state,
+        checkoutUrl: payload,
       };
 
     default:
