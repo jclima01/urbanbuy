@@ -43,8 +43,13 @@ export const CREATE_ORDER = "CREATE_ORDER";
 export const createOrder = (fullName, email, cart, total, userId ) => {
   try {
     return async function (dispatch) {
-      const {data} = await axios.post('/orders/order',{
-        fullName, email, cart, total, userId 
+      console.log(fullName)
+      console.log(email)
+      console.log(cart)
+      console.log(total)
+      console.log(userId)
+      const {data} = await axios.post(`/orders/order/${userId}`,{
+        fullName, email, cart, total 
       })
       console.log(data)
       return await dispatch({
@@ -99,9 +104,10 @@ export const getUserById = (userId) => {
   try {
     return async function (dispatch) {
       const { data } = await axios.get(`/users/user/${userId}`);
+      console.log(data)
       return dispatch({
         type: GET_USER_BY_ID,
-        payload: data,
+        payload: {...data},
       });
     };
     // eslint-disable-next-line no-unreachable

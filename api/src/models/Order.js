@@ -9,7 +9,7 @@ const OrderSchema = new Schema(
     // permissions: { type: String },
     email: { type: String },
     cart: { type: Array, required: true },
-    total: { type: Number, required: true },
+    total: { type: Number},
     //agregar el adress
     // adress: { type: String },
     user: { type: Schema.Types.ObjectId, ref: "User" },
