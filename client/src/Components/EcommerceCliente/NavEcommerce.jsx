@@ -1,5 +1,5 @@
 // NavEcommerce.js
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import Select from "react-select";
 import { Link, useNavigate } from 'react-router-dom';
@@ -12,7 +12,7 @@ function NavEcommerce() {
   const products = useSelector((state) => state.products);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const navigate = useNavigate();
-
+  
   const filterProducts = (inputValue) => {
     if (inputValue.length > 0) {
       const searchResult = products.filter((product) =>
@@ -30,11 +30,25 @@ function NavEcommerce() {
     </div>
   );
 
+const handleSelectChange = (selectedOptions) => {
+  const selectedProductIds = selectedOptions.map((option) => option.value);
+  setSearchValue(selectedOptions.length > 0 ? selectedProductIds.join(',') : '');
+  const query = new URLSearchParams({ search: selectedProductIds.join(','), products: selectedProductIds.join(',') }).toString();
+  navigate(`/ecommerceuser?${query}`);
+};
+  {/*const handleSelectChange = (selectedOptions) => {
+  const selectedProductIds = selectedOptions.map((option) => option.value);
+  setSearchValue(selectedProductIds.join(','));
+  const query = new URLSearchParams({ search: selectedProductIds.join(','), products: selectedProductIds.join(',') }).toString();
+  navigate(`/ecommerceuser?${query}`);
+};
+
   const handleSelectChange = (selectedOptions) => {
-    const selectedProductIds = selectedOptions.map((option) => option.value);
+  const selectedProductIds = selectedOptions.map((option) => option.value);
+    setSearchValue(selectedOptions.value)
     const query = new URLSearchParams({ search: searchValue, products: selectedProductIds.join(',') }).toString();
     navigate(`/ecommerceuser?${query}`);
-  };
+  };*/}
   
 
   return (
@@ -51,7 +65,7 @@ function NavEcommerce() {
       <Select
         options={filteredProducts.map((product) => ({
           label: product.productName,
-          value: product.id,
+          value: product.productName,
         }))}
         className={style.input}
         onInputChange={(inputValue) => {

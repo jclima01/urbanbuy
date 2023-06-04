@@ -5,11 +5,13 @@ import styles from './EcommerceUser.module.css';
 
 function EcommerceUser() {
   const products = useSelector((state) => state.products);
+  const categories = useSelector((state) => state.categories)
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [sortBy, setSortBy] = useState('');
   const [ratingFilter, setRatingFilter] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
-  const productsPerPage = 8;
+  const [selectedCategory, setSelectedCategory] = useState('');
+  const productsPerPage = 5;
 
   useEffect(() => {
     const urlSearchParams = new URLSearchParams(window.location.search);
@@ -22,13 +24,19 @@ function EcommerceUser() {
         product.productName.toLowerCase().includes(searchValue.toLowerCase())
       );
     }
-
+ 
     if (ratingFilter) {
       filteredResult = filteredResult.filter(
         (product) => product.rating >= parseInt(ratingFilter)
       );
     }
-
+    if (selectedCategory) {
+      filteredResult = filteredResult.filter((product) =>
+        product.categories.some(
+          (category) => category.categoryName === selectedCategory
+        )
+      );
+    }
     if (sortBy === 'az') {
       filteredResult = filteredResult.sort((a, b) =>
         a.productName.localeCompare(b.productName)
@@ -41,10 +49,34 @@ function EcommerceUser() {
       filteredResult = filteredResult.sort((a, b) => b.price - a.price);
     } else if (sortBy === 'menorMayor') {
       filteredResult = filteredResult.sort((a, b) => a.price - b.price);
+    
+    } else if (sortBy === 'mayorMenorR') {
+      filteredResult = filteredResult.sort((a, b) => b.rating - a.rating);
+    } else if (sortBy === 'menorMayorR') {
+      filteredResult = filteredResult.sort((a, b) => a.rating - b.rating);
     }
-
     setFilteredProducts(filteredResult);
-  }, [products, sortBy, ratingFilter]);
+  }, [products, sortBy, ratingFilter, selectedCategory]);
+
+  {/*const filterProduct = (e) => {  
+    if (e.target.value == "") {
+        setFilteredProducts(products);
+      } else {
+        const filteredCategory = e.target.value;
+        const filterResult = products.filter((p) => {
+          return p.categories.some(
+          (c) => c.categoryName === filteredCategory
+        )
+        })
+        setFilteredProducts(filterResult)
+        console.log('filter: ', filterResult)
+  }}*/}
+
+  const filterProduct = (e) => {
+    const selectedCategory = e.target.value
+    setSelectedCategory(selectedCategory)
+  }
+
 
   const handleSortByAZ = () => {
     setSortBy('az');
@@ -60,6 +92,12 @@ function EcommerceUser() {
 
   const handleSortByPriceReverse = () => {
     setSortBy('menorMayor');
+  };
+  const handleSortByRating = () => {
+    setSortBy('mayorMenorR');
+  };
+  const handleSortByRatingReverse = () => {
+    setSortBy('menorMayorR');
   };
 
   const handleRatingFilter = (e) => {
@@ -89,16 +127,21 @@ function EcommerceUser() {
         <div className={styles.filtercontainer}>
           <button onClick={handleSortByAZ}>A-Z</button>
           <button onClick={handleSortByZA}>Z-A</button>
-          <button onClick={handleSortByPrice}>Mayor a Menor</button>
-          <button onClick={handleSortByPriceReverse}>Menor a Mayor</button>
-          <select value={ratingFilter} onChange={handleRatingFilter}>
-            <option value="">Filtrar por Rating</option>
-            <option value="3">3 estrella</option>
-            <option value="3,5">3,5 estrellas</option>
-            <option value="4">4 estrellas</option>
-            <option value="4,5">4,5 estrellas</option>
-            <option value="5">5 estrellas</option>
-          </select>
+          <button onClick={handleSortByPrice}>Mayor a Menor Precio</button>
+          <button onClick={handleSortByPriceReverse}>Menor a Mayor Precio</button>
+          <button onClick={handleSortByRating}>Menor a Mayor Rating</button>
+          <button onClick={handleSortByRatingReverse}>Menor a Mayor Rating</button>
+          <select onChange={filterProduct}>
+              <option value="">Elegir Categoria</option>
+            {categories.map((c) => {
+                  return (
+                    <option key={c._id} value={c.categoryName}>
+                      {c.categoryName}
+                    </option>
+                  );
+                })}
+            </select>
+          
         </div>
       </div>
       <div className={styles.cards}>
