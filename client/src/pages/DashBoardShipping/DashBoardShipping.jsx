@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getClientAdminUsers, orderClient } from "../../redux/actions";
 
@@ -42,7 +42,7 @@ return <>
                 
               <h2>Order List</h2>
         <ul>
-          {orders.data.map((order) => (
+          {orders.data && orders.data.map((order) => (
             <li key={order._id}>
               {order._id} - {order.fullName} - {order.status} - {order.payment === true ? "yes" : "no"} - {order.email} - {order.cart} - {order.total} - {order.adress} - {order.user} - {order.createdAt} - {order.updatedAt}
               {/* Otros campos de la orden de compra */}
@@ -57,4 +57,4 @@ return <>
 
 };
 
-export default DashBoardShipping
+export default DashBoardShipping;
