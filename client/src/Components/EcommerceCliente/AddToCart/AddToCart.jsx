@@ -47,7 +47,11 @@ const AddToCart = ({ product, stock }) => {
 
     Swal.fire({
       title: "Product added to Cart",
+      title: "Product added to Cart",
       // text: 'Do you want to continue',
+      icon: "success",
+      confirmButtonText: "Ok",
+    });
       icon: "success",
       confirmButtonText: "Ok",
     });

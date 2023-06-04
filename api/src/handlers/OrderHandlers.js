@@ -49,10 +49,15 @@ const paymentHandler = async (req, res) => {
 
 const createOrderHandler = async (req, res) => {
   try {
+<<<<<<< HEAD
     const { userId } = req.params;
     console.log("params:" + userId)
     const { fullName, email, cart, total } = req.body;
     const order = await createOrder(fullName, email, cart, total, userId);
+=======
+    const { cart,userId } = req.body;
+    const order = await createOrder(cart,userId);
+>>>>>>> c0761a1f3276e8f8b62f1cc5233467c5b97bcf6b
     res.status(200).json(order);
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -63,5 +68,9 @@ module.exports = {
   getOrderHandlers,
   postOrderHandlers,
   paymentHandler,
+<<<<<<< HEAD
   createOrderHandler,
+=======
+  createOrderHandler
+>>>>>>> c0761a1f3276e8f8b62f1cc5233467c5b97bcf6b
 };
