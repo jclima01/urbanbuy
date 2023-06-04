@@ -68,7 +68,7 @@ console.log(clientAdminDomain)
               <p style={{ fontSize: 20 }}>
                 Improve your products in our section.
               </p>
-              <Link to={"/homecliente"}>
+              <Link to={`/${clientAdminDomain}`}>
                 <button
                   style={{
                     cursor: "pointer",

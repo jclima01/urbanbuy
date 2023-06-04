@@ -70,7 +70,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
     case GET_CLIENT_ADMIN_BY_DOMAIN:
       return {
         ...state,
-        clientAdmin: payload,
+        clientAdmin: {...payload},
       };
     case ADD_DOMAIN:
       return {

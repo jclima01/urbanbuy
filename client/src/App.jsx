@@ -29,7 +29,7 @@ function App() {
         location.pathname !== "/paymentSuccess" &&
         location.pathname !== "/paymentCanceled" &&
         location.pathname !== "/login" &&
-        location.pathname !== "/domain" &&
+        location.pathname !== "/:domain" &&
         location.pathname !== "/singin" ? (
           <SideBarDashBoard />
         ) : null}

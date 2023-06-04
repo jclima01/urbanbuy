@@ -21,12 +21,12 @@ function HomeEcommerce() {
   const theme = useSelector(state => state.theme)
 
 console.log(domain)
-console.log(clientAdmin)
+console.log(clientAdminId)
   useEffect(() => {
     dispatch(getClientAdminByDomain(domain));
     if(clientAdmin) {
-    dispatch(getAllProducts(clientAdmin._id));
-    dispatch(getCategories(clientAdmin._id));
+    dispatch(getAllProducts(clientAdminId));
+    dispatch(getCategories(clientAdminId));
     }
   }, [dispatch, clientAdminId]);
 
