@@ -82,12 +82,26 @@ const getClientAdminUsers = async (clientAdminId) => {
 };
 const getUserById = async (userId) => {
   try {
+    console.log(userId);
     const user = await User.findById(userId)
       .populate("orders") // Popula las categorías
       // .populate("clientAdmin") // Popula el modelo ClientAdmin
       .exec();
-
     return user;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+const getLastOrderFromUser = async (userId) => {
+  try {
+    console.log(userId);
+    const user = await User.findById(userId)
+      .populate("orders") // Popula las categorías
+      // .populate("clientAdmin") // Popula el modelo ClientAdmin
+      .exec();
+    const lastOrder = user.orders[user.orders.length - 1];
+    if(lastOrder.status === "pending")
+    return lastOrder;
   } catch (error) {
     throw new Error(error.message);
   }
@@ -100,4 +114,5 @@ module.exports = {
   UserDelete,
   getClientAdminUsers,
   getUserById,
+  getLastOrderFromUser,
 };

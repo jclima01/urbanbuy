@@ -1,4 +1,5 @@
 const ClientAdmin = require("../models/Users/ClientAdmin.js");
+const User = require("../models/Users/User.js");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const { errorMonitor } = require("nodemailer/lib/xoauth2/index.js");
@@ -103,9 +104,11 @@ const ClientDelete = async (clientId) => {
   }
 };
 
+
 module.exports = {
   ClientAdminRegister,
   ClientAdminLogin,
   ClientUpdate,
   ClientDelete,
+
 };

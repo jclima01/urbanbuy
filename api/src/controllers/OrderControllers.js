@@ -1,10 +1,10 @@
 const { default: Stripe } = require("stripe");
 const Order = require("../models/Order.js");
 const User = require("../models/Users/User.js");
-require('dotenv').config()
-const stripe = require("stripe")(
-  process.env.STRIPE_KEY
-);
+const Product = require("../models/Product.js");
+const { default: mongoose } = require("mongoose");
+require("dotenv").config();
+const stripe = require("stripe")(process.env.STRIPE_KEY);
 
 const postOrder = async (
   fullName,
@@ -47,10 +47,10 @@ const getOrdersByUser = async (userId) => {
   }
 };
 
-const createCheckoutSession = async (cart, userId) => {
-  console.log(userId);
+const createCheckoutSession = async (orderId) => {
   try {
-    const line_items = cart?.map((item) => {
+    const order = await Order.findById(orderId);
+    const line_items = order.cart?.map((item) => {
       return {
         price_data: {
           product_data: {
@@ -66,10 +66,10 @@ const createCheckoutSession = async (cart, userId) => {
     const session = await stripe.checkout.sessions.create({
       line_items: line_items,
       mode: "payment",
-      success_url: "https://urban-buy.netlify.com/paymentSuccess?success=true",
-      cancel_url: "https://urban-buy.netlify.com/paymentCanceled?canceled=true",
+      success_url: "http://localhost:5173/paymentSuccess?success=true",
+      cancel_url: "http://localhost:5173/paymentCanceled?canceled=true",
       shipping_address_collection: {
-        allowed_countries: ['AR'], // Specify the allowed countries for shipping
+        allowed_countries: ["AR"], // Specify the allowed countries for shipping
       },
       // shipping_address: {
       //   address: {
@@ -82,21 +82,170 @@ const createCheckoutSession = async (cart, userId) => {
       //   name: address.fullName,
       // },
     });
-    const newOrder = new Order({
-      fullName: "New Order",
-      status: session.payment_status === 'unpaid' ? "pending" : "unpaid",
-      cart: cart,
-      total: session.amount_total / 100,
-      sessionId: session.id,
-      user: userId,
+    order.sessionId = session.id;
+    const orderSaved = await order.save();
+    return session;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
 
+const createOrder = async (productId, quantity, fullName, email, userId) => {
+  try {
+    const item = await Product.findById(productId);
+    const product = item._doc;
+    const cart = [];
+    cart.push({ ...product, quantity: quantity });
+    const total = cart.reduce(
+      (count, product) => (count += product.quantity * product.price),
+      0
+    );
+    const newOrder = new Order({
+      fullName: fullName,
+      status: "pending",
+      email: email,
+      cart: cart,
+      total: total,
+      user: userId,
     });
     const savedOrder = await newOrder.save();
-
     const user = await User.findById(userId);
     user.orders.push(savedOrder._id);
     await user.save();
-    return session;
+    console.log(savedOrder);
+    return savedOrder;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+
+const updateOrder = async (orderId, productId, quantity) => {
+  try {
+    const order = await Order.findById(orderId);
+    const item = await Product.findById(productId);
+    const prod = item._doc;
+    const prodId = new mongoose.Types.ObjectId(prod._id);
+    const inCart = order.cart.some((product) => product._id.equals(prodId));
+    let newCart;
+    if (inCart) {
+      newCart = order.cart.map((product) =>
+        product._id.equals(prodId)
+          ? { ...product, quantity: product.quantity + quantity } // Utilizar 'product' en lugar de 'prod'
+          : { ...product }
+      );
+    } else {
+      newCart = [...order.cart, { ...prod, quantity: quantity }];
+    }
+    const total = newCart.reduce(
+      (count, product) => (count += product.quantity * product.price),
+      0
+    );
+    order.cart = newCart; // Actualizar el carrito de la orden con el nuevo carrito
+    order.total = Number(total);
+    const savedOrder = await order.save();
+    console.log("total: " + savedOrder.total);
+    console.log(savedOrder);
+    return savedOrder;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+
+const removeProductFormCart = async (orderId, productId) => {
+  try {
+    const order = await Order.findById(orderId);
+    const item = await Product.findById(productId);
+    const prod = item._doc;
+    const prodId = new mongoose.Types.ObjectId(prod._id);
+
+    const cartWithoutProduct = order.cart.filter(
+      (product) => !product._id.equals(prodId)
+    );
+    order.cart = cartWithoutProduct;
+
+    let total = 0;
+    if (order.cart.length > 0) {
+      total = order.cart.reduce(
+        (count, product) => (count += product.quantity * product.price),
+        0
+      );
+    }
+
+    order.total = Number(total);
+
+    const orderSaved = await order.save();
+    return orderSaved;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+const reduceQuantity = async (orderId, productId) => {
+  try {
+    const order = await Order.findById(orderId);
+    const item = await Product.findById(productId);
+    const prod = item._doc;
+    const prodId = new mongoose.Types.ObjectId(prod._id);
+
+    const productIdx = order.cart.findIndex((product) =>
+      product._id.equals(prodId)
+    );
+
+    const updatedCartList = [...order.cart]; // Crear una copia del array cartList
+    if (updatedCartList[productIdx].quantity === 1) {
+      updatedCartList.splice(productIdx, 1);
+    } else {
+      updatedCartList[productIdx] = {
+        ...updatedCartList[productIdx],
+        quantity: updatedCartList[productIdx].quantity - 1,
+      };
+    }
+
+    let total = 0;
+    if (updatedCartList.length > 0) {
+      total = updatedCartList.reduce(
+        (count, product) => count + product.quantity * product.price,
+        0
+      );
+    }
+
+    order.total = Number(total);
+    order.cart = updatedCartList;
+    const orderSaved = await order.save();
+    return orderSaved;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+
+const increaseQuantity = async (orderId, productId) => {
+  try {
+    const order = await Order.findById(orderId);
+    const item = await Product.findById(productId);
+    const prod = item._doc;
+    const prodId = new mongoose.Types.ObjectId(prod._id);
+
+    const productIdx = order.cart.findIndex((product) =>
+      product._id.equals(prodId)
+    );
+
+    const updatedCartList = [...order.cart]; // Crear una copia del array cartList
+    updatedCartList[productIdx] = {
+      ...updatedCartList[productIdx],
+      quantity: updatedCartList[productIdx].quantity + 1,
+    };
+    console.log(updatedCartList);
+    let total = 0;
+    if (updatedCartList.length > 0) {
+      total = updatedCartList.reduce(
+        (count, product) => (count += product.quantity * product.price),
+        0
+      );
+    }
+    order.cart = updatedCartList;
+    order.total = Number(total);
+
+    const orderSaved = await order.save();
+    return orderSaved;
   } catch (error) {
     throw new Error(error.message);
   }
@@ -106,4 +255,9 @@ module.exports = {
   postOrder,
   getOrdersByUser,
   createCheckoutSession,
+  createOrder,
+  updateOrder,
+  removeProductFormCart,
+  reduceQuantity,
+  increaseQuantity,
 };

@@ -5,6 +5,7 @@ const updateOrder = async (sessionId, paymentStatus) => {
     const order = await Order.findOne({ sessionId });
     order.status = paymentStatus === "paid" ? "sending products" : "pending";
     order.payment = paymentStatus === "paid" ? true : false;
+    order.cart = paymentStatus === "paid" ? [] : order.cart;
     //agregar el adress
     // order.adress = customerDetails;
     const savedOrder = await order.save();
