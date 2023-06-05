@@ -88,6 +88,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         clientAdminDomain: payload.domain,
+        clientAdmin: payload,
       };
     case REDUCE_QUANTITY_FROM_CART:
       return {
