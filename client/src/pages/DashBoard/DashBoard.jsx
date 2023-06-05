@@ -16,6 +16,7 @@ import {
 import LoginAuth from "../../Components/FormLogin/LoginAuth";
 const DashBoard = () => {
   const products = useSelector((state) => state.products);
+  const clientAdminDomain = useSelector((state) => state.clientAdminDomain);
   const clientAdmin = useSelector((state) => state.clientAdmin);
   const productsSlice = products.slice(0, 4);
   const clientAdminStorage =
@@ -70,7 +71,7 @@ const DashBoard = () => {
               <p style={{ fontSize: 20 }}>
                 Improve your products in our section.
               </p>
-              <Link to={`/${clientAdmin.domain}`}>
+              <Link to={`/${clientAdmin.domain || clientAdminDomain}`}>
                 <button
                   style={{
                     cursor: "pointer",
