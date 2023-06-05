@@ -19,8 +19,8 @@ app.use(morgan("dev"));
 app.use(express.urlencoded({ extended: true }));
 app.use(session({
   secret: 'secreto',
-  resave: false,
-  saveUninitialized: false
+  resave: true,
+  saveUninitialized: true
 }))
 app.use(passport.initialize())
 app.use(passport.session())

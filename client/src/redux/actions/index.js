@@ -454,7 +454,7 @@ export const logOutAdmin = () => {
 export const logOutClientAdmin = () => {
   try {
     localStorage.removeItem("clientAdmin");
-
+     axios.post('auth/logout')
     return async function (dispatch) {
       dispatch({
         type: LOGOUT_CLIENT_ADMIN,
