@@ -19,7 +19,7 @@ import axios from "axios";
 export default function ShoppingCart() {
   const order = useSelector((state) => state.order);
   const user = useSelector((state) => state.user);
-
+  const clientAdmin = useSelector((state) => state.clientAdmin);
   const [cartList, setCartList] = useState([]);
   useEffect(() => {
     dispatch(getUserById("6476854188cbebbefc19ba22"));
