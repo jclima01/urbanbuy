@@ -13,7 +13,7 @@ const OrderSchema = new Schema(
     //agregar el adress
     // adress: { type: String },
     user: { type: Schema.Types.ObjectId, ref: "User" },
-    sessionId: { type: String, required: true },
+    sessionId: { type: String},
   },
   { timestamps: true }
 );
