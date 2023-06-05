@@ -28,10 +28,10 @@ export default function ShoppingCart() {
   // setCartList(order.cart)
   const dispatch = useDispatch();
 
-  const checkout = async (cartList, userId) => {
+  const checkout = async (orderId) => {
     const { data } = await axios.post(
       "orders/checkout/create-checkout-session",
-      { cart: cartList, userId: userId }
+      { orderId: orderId }
     );
 
     const popupWindow = window.open(
@@ -102,7 +102,9 @@ export default function ShoppingCart() {
           </div>
         ))}
         <div className={styles.total}>Total: ${order.total}</div>
-        <button onClick={() => checkout(cartList, user._id)}>COMPRAR</button>
+        <button onClick={() => checkout(order._id)}>
+          COMPRAR
+        </button>
       </div>
     </div>
   );

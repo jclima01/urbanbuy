@@ -47,10 +47,10 @@ const getOrdersByUser = async (userId) => {
   }
 };
 
-const createCheckoutSession = async (cart, userId) => {
-  console.log(userId);
+const createCheckoutSession = async (orderId) => {
   try {
-    const line_items = cart?.map((item) => {
+    const order = await Order.findById(orderId);
+    const line_items = order.cart?.map((item) => {
       return {
         price_data: {
           product_data: {
@@ -82,19 +82,8 @@ const createCheckoutSession = async (cart, userId) => {
       //   name: address.fullName,
       // },
     });
-    const newOrder = new Order({
-      fullName: "New Order",
-      status: session.payment_status === "unpaid" ? "pending" : "unpaid",
-      cart: cart,
-      total: session.amount_total / 100,
-      sessionId: session.id,
-      user: userId,
-    });
-    const savedOrder = await newOrder.save();
-
-    const user = await User.findById(userId);
-    user.orders.push(savedOrder._id);
-    await user.save();
+    order.sessionId = session.id;
+    const orderSaved = await order.save();
     return session;
   } catch (error) {
     throw new Error(error.message);

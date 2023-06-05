@@ -44,8 +44,8 @@ const postOrderHandlers = async (req, res) => {
 
 const paymentHandler = async (req, res) => {
   try {
-    const { cart, userId } = req.body;
-    const session = await createCheckoutSession(cart, userId);
+    const { orderId } = req.body;
+    const session = await createCheckoutSession(orderId);
     res.status(200).json(session);
   } catch (error) {
     res.status(400).json({ error: error.message });
