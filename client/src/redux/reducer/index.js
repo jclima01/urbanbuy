@@ -35,7 +35,8 @@ import {
   SET_CARD_STYLE,
   LOADING_PRODUCTS,
   CREATE_CHECKOUT_SESSION,
-  CREATE_ORDER
+  CREATE_ORDER,
+  GET_LAST_ORDER_FROM_USER,
 } from "../actions/index.js";
 
 const initialState = {
@@ -47,7 +48,7 @@ const initialState = {
   product: {},
   categories: [],
   ordersByUser: [],
-  loading : null,
+  loading: null,
   theme: "urbanBuy",
   sliderTheme: "urbanBuy",
 
@@ -62,15 +63,20 @@ const initialState = {
   cardStyle: "",
 
   checkoutUrl: "",
-  order:{}
+  order: {},
 };
 
 const rootReducer = (state = initialState, { type, payload }) => {
   switch (type) {
+    case GET_LAST_ORDER_FROM_USER:
+      return {
+        ...state,
+        order: { ...payload },
+      };
     case CREATE_ORDER:
       return {
         ...state,
-        order : {...payload}
+        order: { ...payload },
       };
     case GET_CART_FROM_LS:
       JSON.parse(localStorage.getItem("cart"));
@@ -89,26 +95,9 @@ const rootReducer = (state = initialState, { type, payload }) => {
         cart: cartWhitOutProduct,
       };
     case ADD_PRODUCT_TO_CART:
-      const item = state.products.find(
-        (product) => product._id === payload.productId
-      );
-      const inCart = state.cart.some(
-        (product) => product._id === payload.productId
-      );
-
-      const newCart = inCart
-        ? state.cart.map((product) =>
-            product._id === item._id
-              ? { ...item, quantity: product.quantity + payload.quantity }
-              : item
-          )
-        : [...state.cart, { ...item, quantity: payload.quantity }];
-
-      localStorage.setItem("cart", JSON.stringify(newCart));
-
       return {
         ...state,
-        cart: newCart,
+        order: payload,
       };
     case GET_USER_BY_ID:
       return {
@@ -207,7 +196,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
     case EDIT_PRODUCT:
       return {
         ...state,
-        products: payload
+        products: payload,
       };
     case POST_NEW_PRODUCT:
       return {
@@ -223,13 +212,13 @@ const rootReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         products: [...payload],
-        loading: false
+        loading: false,
       };
-      case LOADING_PRODUCTS: 
+    case LOADING_PRODUCTS:
       return {
         ...state,
-        loading: payload
-      }
+        loading: payload,
+      };
     case LOGIN_ADMIN:
       return {
         ...state,

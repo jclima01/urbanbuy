@@ -3,19 +3,27 @@ import styles from "./ShoppingCart.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { BsArrowLeftSquareFill } from "react-icons/bs";
 import RemoveFromCartButton from "../RemoveFromCartButton/RemoveFromCartButton";
-import { createCheckoutSession, getCartFromLS } from "../../../redux/actions";
+import {
+  createCheckoutSession,
+  getCartFromLS,
+  getLastOrderFromUser,
+  getUserById,
+} from "../../../redux/actions";
 import { useEffect, useRef, useState } from "react";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { GrAddCircle, GrSubtractCircle } from "react-icons/gr";
 import axios from "axios";
 export default function ShoppingCart() {
-  const cart = JSON.parse(localStorage.getItem("cart")) ?? [];
-  const [cartList, setCartList] = useState(cart);
+  const order = useSelector((state) => state.order);
+  const user = useSelector((state) => state.user);
+  const [cartList, setCartList] = useState([]);
+  useEffect(() => {
+    dispatch(getUserById("6476854188cbebbefc19ba22"));
+    dispatch(getLastOrderFromUser("6476854188cbebbefc19ba22"));
+    setCartList(order.cart);
+  }, []);
+  // setCartList(order.cart)
   const dispatch = useDispatch();
-
-  const userId = "6476854188cbebbefc19ba22"
-  const navigate = useNavigate();
-
 
   const checkout = async (cartList, userId) => {
     const { data } = await axios.post(
@@ -30,30 +38,24 @@ export default function ShoppingCart() {
     );
   };
 
-  useEffect(() => {
-    localStorage.setItem("cart", JSON.stringify(cartList));
-  }, [cartList]);
-
   // useEffect(() => {
   //   !checkoutUrl ? navigate(checkoutUrl) : null;
   // }, [dispatch]);
-  const calculateTotal = () => {
-    console.log(cartList);
-    let total = cartList.reduce(
-      (count, product) => (count += product.quantity * product.price),
-      0
-    );
-    return total;
-  };
+  // const calculateTotal = () => {
+  //   let total = cartList.reduce(
+  //     (count, product) => (count += product.quantity * product.price),
+  //     0
+  //   );
+  //   return total;
+  // };
 
-  const calculateTotalQuantity = () => {
-    console.log(cartList);
-    const totalQuantity = cartList.reduce(
-      (count, product) => (count += product.quantity),
-      0
-    );
-    return totalQuantity;
-  };
+  // const calculateTotalQuantity = () => {
+  //   const totalQuantity = cartList.reduce(
+  //     (count, product) => (count += product.quantity),
+  //     0
+  //   );
+  //   return totalQuantity;
+  // };
 
   const removeProductFromCart = (productId) => {
     const cartWhitOutProduct = cartList.filter(
@@ -106,11 +108,11 @@ export default function ShoppingCart() {
 
       <div className={styles.titlesContainer}>
         <h2>Shopping cart</h2>
-        <h4>You have {calculateTotalQuantity()} items in your cart</h4>
+        {/* <h4>You have {calculateTotalQuantity()} items in your cart</h4> */}
       </div>
 
       <div className={styles.listContainer}>
-        {cartList?.map((product) => (
+        {order.cart?.map((product) => (
           <div key={product._id} className={styles.cardProduct}>
             <img
               src={product.imageUrl}
@@ -143,8 +145,8 @@ export default function ShoppingCart() {
             {/* <RemoveFromCartButton product={product} /> */}
           </div>
         ))}
-        <div className={styles.total}>Total: ${calculateTotal()}</div>
-        <button onClick={() => checkout(cartList, userId)}>COMPRAR</button>
+        <div className={styles.total}>Total: ${order.total}</div>
+        <button onClick={() => checkout(cartList, user._id)}>COMPRAR</button>
       </div>
     </div>
   );

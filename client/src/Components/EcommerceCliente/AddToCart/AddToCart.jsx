@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addProductToCart, createOrder } from "../../../redux/actions";
+import {
+  addProductToCart,
+  createOrder,
+  getLastOrderFromUser,
+} from "../../../redux/actions";
 import styles from "./AddToCart.module.css";
 import { GrAddCircle, GrSubtractCircle } from "react-icons/gr";
 import Swal from "sweetalert2";
@@ -9,9 +13,10 @@ const AddToCart = ({ product, stock }) => {
   const user = useSelector((state) => state.user);
   const cart = useSelector((state) => state.cart);
   const order = useSelector((state) => state.order);
-
+  console.log(order)
   useEffect(() => {
     dispatch(getUserById("6476854188cbebbefc19ba22"));
+    dispatch(getLastOrderFromUser("6476854188cbebbefc19ba22"));
   }, []);
 
   const [quantity, setQuantity] = useState(1);
@@ -25,24 +30,16 @@ const AddToCart = ({ product, stock }) => {
   };
 
   const handleDispatch = (productId, quantity) => {
-    dispatch(getUserById("6476854188cbebbefc19ba22"))
-      .then(dispatch(addProductToCart(productId, quantity)))
-      .then(
-        dispatch(
-          createOrder(
-            user.fullName,
-            user.email,
-            cart,
-            Number(
-              cart.reduce(
-                (count, product) => (count += product.quantity * product.price),
-                0
-              )
-            ),
-            user._id
-          )
-        )
-      );
+    dispatch(
+      addProductToCart(
+        productId,
+        quantity,
+        user.fullName,
+        user.email,
+        user._id,
+        order._id
+      )
+    );
 
     Swal.fire({
       title: "Product added to Cart",
