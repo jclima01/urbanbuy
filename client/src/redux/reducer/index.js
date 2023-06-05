@@ -88,7 +88,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         clientAdminDomain: payload.domain,
-
+      };
     case REDUCE_QUANTITY_FROM_CART:
       return {
         ...state,
@@ -113,7 +113,6 @@ const rootReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         order: { ...payload },
-
       };
     case GET_CART_FROM_LS:
       JSON.parse(localStorage.getItem("cart"));
