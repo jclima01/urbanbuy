@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {  orderClient, deleteOrder, updateOrder } from "../../redux/actions";
+import {  orderClient, deleteOrder} from "../../redux/actions";
 import OrderView from "./OrderView";
 
 import "./DashBoardShipping.css";
-
-
 
 const DashBoardShipping =() => {
   const dispatch = useDispatch();
@@ -15,6 +13,7 @@ const DashBoardShipping =() => {
   const orders = useSelector((state) => state.orders);
   
   const [show, setShow] = useState(false);
+  //eslint-disable-next-line
   const handleShow = () => setShow(true);
   
   const [orderSelected,setOrderSelected] = useState('')
@@ -34,22 +33,9 @@ const orderElegida= orders.find((order)=>order._id ===orderId);
     }
 
   
-
-
-  //const handleDeleteOrder = (orderId) => {
-   // dispatch(deleteOrder(orderId));
-  //};
-  const handleUpdateOrder= (orderId) => {
- 
-     //dispatch(updateOrder(orderId, status, adress));
-  };
-  
-  
-  
    useEffect(() => {
     dispatch(orderClient(clientAdminId));
-    
-  }, [dispatch]);
+  }, [dispatch,clientAdminId]);
   
 
   
@@ -79,7 +65,7 @@ return <>
       <tr key={order._id}>
         {/* <td>{order._id}</td> */}
         <td>
-            <select disabled name={"status-"+order._id} className="seleccion" onChange={(e)=>setStatus(e.target.value)}>
+            <select disabled name={"status-"+order._id} className="seleccion">
               {estadosOrden.map((estado,index) => (
               <option value={estado} key={index}  selected={order?.status===estado}>{estado}</option>
               ))}
