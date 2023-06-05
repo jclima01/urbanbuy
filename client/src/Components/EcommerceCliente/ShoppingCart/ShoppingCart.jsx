@@ -23,7 +23,7 @@ export default function ShoppingCart() {
   useEffect(() => {
     dispatch(getUserById("6476854188cbebbefc19ba22"));
     dispatch(getLastOrderFromUser("6476854188cbebbefc19ba22"));
-    setCartList(order.cart);
+    setCartList(order.cart,checkout);
   }, []);
   // setCartList(order.cart)
   const dispatch = useDispatch();
