@@ -66,8 +66,8 @@ const createCheckoutSession = async (orderId) => {
     const session = await stripe.checkout.sessions.create({
       line_items: line_items,
       mode: "payment",
-      success_url: "https://urban-buy.netlify.com/paymentSuccess?success=true",
-      cancel_url: "https://urban-buy.netlify.com/paymentCanceled?canceled=true",
+      success_url: "http://localhost:5173/paymentSuccess?success=true",
+      cancel_url: "http://localhost:5173/paymentCanceled?canceled=true",
       shipping_address_collection: {
         allowed_countries: ["AR"], // Specify the allowed countries for shipping
       },
