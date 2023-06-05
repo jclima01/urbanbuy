@@ -37,6 +37,9 @@ import {
   CREATE_CHECKOUT_SESSION,
   CREATE_ORDER,
   GET_LAST_ORDER_FROM_USER,
+  DELETE_PRODUCT_FROM_CART,
+  REDUCE_QUANTITY_FROM_CART,
+  INCREASE_QUANTITY_FROM_CART,
 } from "../actions/index.js";
 
 const initialState = {
@@ -68,6 +71,21 @@ const initialState = {
 
 const rootReducer = (state = initialState, { type, payload }) => {
   switch (type) {
+    case REDUCE_QUANTITY_FROM_CART:
+      return {
+        ...state,
+        order: { ...payload },
+      };
+    case INCREASE_QUANTITY_FROM_CART:
+      return {
+        ...state,
+        order: { ...payload },
+      };
+    case DELETE_PRODUCT_FROM_CART:
+      return {
+        ...state,
+        order: { ...payload },
+      };
     case GET_LAST_ORDER_FROM_USER:
       return {
         ...state,

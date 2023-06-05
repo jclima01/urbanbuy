@@ -5,9 +5,12 @@ import { BsArrowLeftSquareFill } from "react-icons/bs";
 import RemoveFromCartButton from "../RemoveFromCartButton/RemoveFromCartButton";
 import {
   createCheckoutSession,
+  deleteProductFromCart,
   getCartFromLS,
   getLastOrderFromUser,
   getUserById,
+  increasePoductQuantityInCart,
+  reducePoductQuantityInCart,
 } from "../../../redux/actions";
 import { useEffect, useRef, useState } from "react";
 import { FaRegTrashAlt } from "react-icons/fa";
@@ -38,63 +41,16 @@ export default function ShoppingCart() {
     );
   };
 
-  // useEffect(() => {
-  //   !checkoutUrl ? navigate(checkoutUrl) : null;
-  // }, [dispatch]);
-  // const calculateTotal = () => {
-  //   let total = cartList.reduce(
-  //     (count, product) => (count += product.quantity * product.price),
-  //     0
-  //   );
-  //   return total;
-  // };
-
-  // const calculateTotalQuantity = () => {
-  //   const totalQuantity = cartList.reduce(
-  //     (count, product) => (count += product.quantity),
-  //     0
-  //   );
-  //   return totalQuantity;
-  // };
-
-  const removeProductFromCart = (productId) => {
-    const cartWhitOutProduct = cartList.filter(
-      (product) => product._id !== productId
-    );
-    setCartList(cartWhitOutProduct);
+  const removeProductFromCart = (productId, orderId) => {
+    dispatch(deleteProductFromCart(productId, orderId));
   };
 
-  const reduceProductQuantity = (productId) => {
-    const productIdx = cartList.findIndex(
-      (product) => product._id === productId
-    );
-
-    if (cartList[productIdx].quantity === 1) {
-      const cartWithoutProduct = cartList.filter(
-        (prod) => prod._id !== productId
-      );
-      setCartList(cartWithoutProduct);
-    } else {
-      const updatedCartList = [...cartList]; // Crear una copia del array cartList
-      updatedCartList[productIdx] = {
-        ...updatedCartList[productIdx],
-        quantity: updatedCartList[productIdx].quantity - 1,
-      };
-      setCartList(updatedCartList);
-    }
+  const reduceProductQuantity = (productId, orderId, reduce = true) => {
+    dispatch(reducePoductQuantityInCart(productId, orderId, reduce));
   };
 
-  const increaseProductQuantity = (productId) => {
-    const productIdx = cartList.findIndex(
-      (product) => product._id === productId
-    );
-
-    const updatedCartList = [...cartList]; // Crear una copia del array cartList
-    updatedCartList[productIdx] = {
-      ...updatedCartList[productIdx],
-      quantity: updatedCartList[productIdx].quantity + 1,
-    };
-    setCartList(updatedCartList);
+  const increaseProductQuantity = (productId, orderId, increase = true) => {
+    dispatch(increasePoductQuantityInCart(productId, orderId, increase));
   };
 
   return (
@@ -123,13 +79,13 @@ export default function ShoppingCart() {
             <h5>${product.price}</h5>
             <div className={styles.counterButtons}>
               <GrAddCircle
-                onClick={() => increaseProductQuantity(product._id)}
+                onClick={() => increaseProductQuantity(product._id, order._id)}
                 className={styles.btn}
               >
                 {" "}
               </GrAddCircle>
               <GrSubtractCircle
-                onClick={() => reduceProductQuantity(product._id)}
+                onClick={() => reduceProductQuantity(product._id, order._id)}
                 className={styles.btn}
               >
                 {" "}
@@ -139,7 +95,7 @@ export default function ShoppingCart() {
             <h4>$ {product.price * product.quantity}</h4>
             <div className={styles.trashIcon}>
               <FaRegTrashAlt
-                onClick={() => removeProductFromCart(product._id)}
+                onClick={() => removeProductFromCart(product._id, order._id)}
               />
             </div>
             {/* <RemoveFromCartButton product={product} /> */}

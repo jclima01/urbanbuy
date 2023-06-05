@@ -129,6 +129,7 @@ const createOrder = async (productId, quantity, fullName, email, userId) => {
     throw new Error(error.message);
   }
 };
+
 const updateOrder = async (orderId, productId, quantity) => {
   try {
     const order = await Order.findById(orderId);
@@ -136,21 +137,126 @@ const updateOrder = async (orderId, productId, quantity) => {
     const prod = item._doc;
     const prodId = new mongoose.Types.ObjectId(prod._id);
     const inCart = order.cart.some((product) => product._id.equals(prodId));
-    const newCart = inCart
-      ? order.cart.map((product) =>
-          product._id.equals(prodId)
-            ? { ...prod, quantity: product.quantity + quantity }
-            : {...prod}
-        )
-      : [...order.cart, { ...prod, quantity: quantity }];
-    order.cart = newCart;
-    const total = order.cart.reduce(
+    let newCart;
+    if (inCart) {
+      newCart = order.cart.map((product) =>
+        product._id.equals(prodId)
+          ? { ...product, quantity: product.quantity + quantity } // Utilizar 'product' en lugar de 'prod'
+          : { ...product }
+      );
+    } else {
+      newCart = [...order.cart, { ...prod, quantity: quantity }];
+    }
+    const total = newCart.reduce(
       (count, product) => (count += product.quantity * product.price),
       0
     );
-    // order.total = Number(total);
+    order.cart = newCart; // Actualizar el carrito de la orden con el nuevo carrito
+    order.total = Number(total);
     const savedOrder = await order.save();
+    console.log("total: " + savedOrder.total);
+    console.log(savedOrder);
     return savedOrder;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+
+const removeProductFormCart = async (orderId, productId) => {
+  try {
+    const order = await Order.findById(orderId);
+    const item = await Product.findById(productId);
+    const prod = item._doc;
+    const prodId = new mongoose.Types.ObjectId(prod._id);
+
+    const cartWithoutProduct = order.cart.filter(
+      (product) => !product._id.equals(prodId)
+    );
+    order.cart = cartWithoutProduct;
+
+    let total = 0;
+    if (order.cart.length > 0) {
+      total = order.cart.reduce(
+        (count, product) => (count += product.quantity * product.price),
+        0
+      );
+    }
+
+    order.total = Number(total);
+
+    const orderSaved = await order.save();
+    return orderSaved;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+const reduceQuantity = async (orderId, productId) => {
+  try {
+    const order = await Order.findById(orderId);
+    const item = await Product.findById(productId);
+    const prod = item._doc;
+    const prodId = new mongoose.Types.ObjectId(prod._id);
+
+    const productIdx = order.cart.findIndex((product) =>
+      product._id.equals(prodId)
+    );
+
+    const updatedCartList = [...order.cart]; // Crear una copia del array cartList
+    if (updatedCartList[productIdx].quantity === 1) {
+      updatedCartList.splice(productIdx, 1);
+    } else {
+      updatedCartList[productIdx] = {
+        ...updatedCartList[productIdx],
+        quantity: updatedCartList[productIdx].quantity - 1,
+      };
+    }
+
+    let total = 0;
+    if (updatedCartList.length > 0) {
+      total = updatedCartList.reduce(
+        (count, product) => count + product.quantity * product.price,
+        0
+      );
+    }
+
+    order.total = Number(total);
+    order.cart = updatedCartList;
+    const orderSaved = await order.save();
+    return orderSaved;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+
+const increaseQuantity = async (orderId, productId) => {
+  try {
+    const order = await Order.findById(orderId);
+    const item = await Product.findById(productId);
+    const prod = item._doc;
+    const prodId = new mongoose.Types.ObjectId(prod._id);
+
+    const productIdx = order.cart.findIndex((product) =>
+      product._id.equals(prodId)
+    );
+
+    const updatedCartList = [...order.cart]; // Crear una copia del array cartList
+    updatedCartList[productIdx] = {
+      ...updatedCartList[productIdx],
+      quantity: updatedCartList[productIdx].quantity + 1,
+    };
+    console.log(updatedCartList);
+    let total = 0;
+    if (updatedCartList.length > 0) {
+      total = updatedCartList.reduce(
+        (count, product) => (count += product.quantity * product.price),
+        0
+      );
+    }
+    order.cart = updatedCartList;
+    order.total = Number(total);
+
+    const orderSaved = await order.save();
+    return orderSaved;
   } catch (error) {
     throw new Error(error.message);
   }
@@ -162,4 +268,7 @@ module.exports = {
   createCheckoutSession,
   createOrder,
   updateOrder,
+  removeProductFormCart,
+  reduceQuantity,
+  increaseQuantity,
 };

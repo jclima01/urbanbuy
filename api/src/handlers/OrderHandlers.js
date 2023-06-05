@@ -4,6 +4,9 @@ const {
   createCheckoutSession,
   createOrder,
   updateOrder,
+  removeProductFormCart,
+  reduceQuantity,
+  increaseQuantity,
 } = require("../controllers/OrderControllers.js");
 const { getLastOrderFromUser } = require("../controllers/UserControllers.js");
 
@@ -69,8 +72,28 @@ const createOrderHandler = async (req, res) => {
 const updateOrderHandler = async (req, res) => {
   try {
     const { orderId } = req.params;
-    const { productId, quantity } = req.body;
-    const order = await updateOrder(orderId, productId, quantity);
+    const { productId, quantity, increase, reduce } = req.body;
+    let order;
+    console.log("quantity: " + quantity);
+    console.log("increase: " + increase);
+    console.log("reduce: " + reduce);
+    if (quantity) {
+      order = await updateOrder(orderId, productId, quantity);
+      console.log(order);
+    }
+    if (reduce) {
+      order = await reduceQuantity(orderId, productId);
+      console.log(order);
+    }
+    if (increase) {
+      order = await increaseQuantity(orderId, productId);
+      console.log(order);
+    }
+    if (!quantity && !reduce && !increase) {
+      order = await removeProductFormCart(orderId, productId);
+      console.log("productId: " + productId);
+      console.log(order);
+    }
     res.status(200).json(order);
   } catch (error) {
     res.status(400).json({ error: error.message });
