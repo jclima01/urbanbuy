@@ -3,7 +3,9 @@ const {
   getOrdersByUser,
   createCheckoutSession,
   createOrder,
+  updateOrder,
 } = require("../controllers/OrderControllers.js");
+const { getLastOrderFromUser } = require("../controllers/UserControllers.js");
 
 const Order = require("../models/Order.js");
 
@@ -50,9 +52,34 @@ const paymentHandler = async (req, res) => {
 const createOrderHandler = async (req, res) => {
   try {
     const { userId } = req.params;
-    console.log("params:" + userId)
-    const { fullName, email, cart, total } = req.body;
-    const order = await createOrder(fullName, email, cart, total, userId);
+    console.log("params:" + userId);
+    const { productId, quantity, fullName, email } = req.body;
+    const order = await createOrder(
+      productId,
+      quantity,
+      fullName,
+      email,
+      userId
+    );
+    res.status(200).json(order);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
+const updateOrderHandler = async (req, res) => {
+  try {
+    const { orderId } = req.params;
+    const { productId, quantity } = req.body;
+    const order = await updateOrder(orderId, productId, quantity);
+    res.status(200).json(order);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
+const getLastOrderFromUserHandler = async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const order = await getLastOrderFromUser(userId);
     res.status(200).json(order);
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -64,4 +91,6 @@ module.exports = {
   postOrderHandlers,
   paymentHandler,
   createOrderHandler,
+  getLastOrderFromUserHandler,
+  updateOrderHandler,
 };
