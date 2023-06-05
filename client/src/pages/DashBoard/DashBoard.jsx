@@ -8,31 +8,33 @@ import { Link } from "react-router-dom";
 import { IoMdAddCircleOutline } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { addDomainToClientAdmin, getAllProducts, getClientAdminUsers } from "../../redux/actions";
+import {
+  addDomainToClientAdmin,
+  getAllProducts,
+  getClientAdminUsers,
+} from "../../redux/actions";
 import LoginAuth from "../../Components/FormLogin/LoginAuth";
 const DashBoard = () => {
   const products = useSelector((state) => state.products);
-const clientAdminDomain  = useSelector((state) => state.clientAdminDomain)
+  const clientAdmin = useSelector((state) => state.clientAdmin);
   const productsSlice = products.slice(0, 4);
   const clientAdminStorage =
     JSON.parse(localStorage.getItem("clientAdmin")) ?? false;
   const dispatch = useDispatch();
-console.log(clientAdminDomain)
   useEffect(() => {
     dispatch(getAllProducts(clientAdminStorage._id));
     dispatch(getClientAdminUsers(clientAdminStorage._id));
   }, []);
 
   const [domain, setDomain] = useState("");
-  console.log(domain)
+  console.log(domain);
   const handleInputChange = (e) => {
     setDomain(e.target.value);
-  }
-  const addDomain = (e) =>{
+  };
+  const addDomain = (e) => {
     e.preventDefault();
     dispatch(addDomainToClientAdmin(domain, clientAdminStorage._id));
-  }
-
+  };
 
   return (
     <div className="vh-100 w-100 d-flex justify-content-center align-items-center overflow-hidden ">
@@ -68,7 +70,7 @@ console.log(clientAdminDomain)
               <p style={{ fontSize: 20 }}>
                 Improve your products in our section.
               </p>
-              <Link to={`/${clientAdminDomain}`}>
+              <Link to={`/${clientAdmin.domain}`}>
                 <button
                   style={{
                     cursor: "pointer",
@@ -115,16 +117,22 @@ console.log(clientAdminDomain)
 
             <div className="d-flex  flex-column align-items-center ">
               <p style={{ fontSize: 15, fontWeight: 500 }}>
-                Registra tu Dominio 
+                Registra tu Dominio
               </p>
               <div className="d-flex h">
                 <input
                   type="text"
                   placeholder="Ej: Papa Jhones"
-                  style={{ width: "80%",height: 30, border: "1px solid ligthgray" }}
+                  style={{
+                    width: "80%",
+                    height: 30,
+                    border: "1px solid ligthgray",
+                  }}
                   onChange={handleInputChange}
                 />
-                <button style={{height: 30}} onClick={addDomain}>Add </button>
+                <button style={{ height: 30 }} onClick={addDomain}>
+                  Add{" "}
+                </button>
               </div>
             </div>
           </div>
@@ -133,11 +141,10 @@ console.log(clientAdminDomain)
           style={{
             display: "flex",
             alignItems: "center",
-            justifyContent:"space-between",
+            justifyContent: "space-between",
             height: "100%",
             width: "100%",
             padding: 20,
-
           }}
         >
           <div
@@ -149,7 +156,7 @@ console.log(clientAdminDomain)
               alignItems: "center",
             }}
           >
-           {/*  <div
+            {/*  <div
               style={{
                 width: "100%",
                 height: "25px",
@@ -200,7 +207,7 @@ console.log(clientAdminDomain)
                 </div>
               )}
             </div> */}
-           {/*  <div
+            {/*  <div
               style={{
                 width: "100%",
                 height: 40,
@@ -236,7 +243,7 @@ console.log(clientAdminDomain)
               ))}
             </div>
           </div>
-         {/*  <div
+          {/*  <div
             style={{
               height: "100%",
               width: "35%",
