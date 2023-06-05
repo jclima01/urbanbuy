@@ -6,8 +6,7 @@ const {
 
   addDomain,
   getClientAdminByDomain,
-  getAllOrders
-
+  getAllOrders,
 } = require("../controllers/ClientAdminControllers.js");
 
 const loginClientAdminHandler = async (req, res) => {
@@ -19,7 +18,6 @@ const loginClientAdminHandler = async (req, res) => {
     res.status(400).json({ error: error.message });
   }
 };
-
 
 const registerClientAdminHandler = async (req, res) => {
   try {
@@ -64,7 +62,6 @@ const domainHandler = async (req, res) => {
 
     const clientAdminWithDomain = await addDomain(domain, clientAdminId);
     res.status(200).json(clientAdminWithDomain);
-
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
@@ -75,31 +72,6 @@ const getClientAdminByDomainHandler = async (req, res) => {
 
     const clientAdminWithDomain = await getClientAdminByDomain(domain);
     res.status(200).json(clientAdminWithDomain);
-
-
-const updateClientHandler = async (req, res) => {
-  try {
-    const { clientId } = req.params;
-    const { fullName, email, password, logo } = req.body;
-    const clientUpdated = await ClientUpdate(
-      clientId,
-      fullName,
-      email,
-      password,
-      logo
-    );
-    res.status(200).json(clientUpdated);
-  } catch (error) {
-    res.status(400).json({ error: error.message });
-  }
-};
-
-const deleteClientHandler = async (req, res) => {
-  try {
-    const { clientId } = req.params;
-    const clientDeleted = await ClientDelete(clientId);
-    res.status(200).json(clientDeleted);
-
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
@@ -113,5 +85,4 @@ module.exports = {
 
   domainHandler,
   getClientAdminByDomainHandler,
-
 };
