@@ -5,16 +5,21 @@ import style from "./HomeEcommerce.module.css";
 import Card from "../Card/Card";
 import BANNER from '../../Img/BANNER.png'
 import { useDispatch, useSelector } from "react-redux";
-import { getAllProducts, getCategories } from "../../redux/actions";
+import { getAllProducts, getCategories, getClientAdminByDomain } from "../../redux/actions";
 import SearchBar from "../../SearchBar/SearchBar";
+
+import { useParams } from "react-router-dom";
+
 import Modal from 'react-modal';
 import pagos from '../../Img/pagos.png'
 import envios from '../../Img/envios.png'
 import { Route, Routes } from "react-router-dom";
 import EcommerceUser from "./EcommerceUser";
 
+
 function HomeEcommerce() {
-  const clientAdmin = JSON.parse(localStorage.getItem('clientAdmin')) ?? false
+  const {domain} = useParams()
+  const clientAdmin = useSelector(state => state.clientAdmin)
   const products = useSelector((state) => state.products);
   const categories = useSelector((state) => state.categories)
   const dispatch = useDispatch();
@@ -24,10 +29,14 @@ function HomeEcommerce() {
   const [orderedProduct, setOrderedProduct] = useState([]);
   const theme = useSelector(state => state.theme)
 
-
+console.log(domain)
+console.log(clientAdminId)
   useEffect(() => {
+    dispatch(getClientAdminByDomain(domain));
+    if(clientAdmin) {
     dispatch(getAllProducts(clientAdminId));
     dispatch(getCategories(clientAdminId));
+    }
   }, [dispatch, clientAdminId]);
 
   useEffect(() => {

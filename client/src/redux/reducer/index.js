@@ -35,11 +35,14 @@ import {
   SET_CARD_STYLE,
   LOADING_PRODUCTS,
   CREATE_CHECKOUT_SESSION,
+  ADD_DOMAIN,
+  GET_CLIENT_ADMIN_BY_DOMAIN,
   CREATE_ORDER,
   GET_LAST_ORDER_FROM_USER,
   DELETE_PRODUCT_FROM_CART,
   REDUCE_QUANTITY_FROM_CART,
   INCREASE_QUANTITY_FROM_CART,
+
 } from "../actions/index.js";
 
 const initialState = {
@@ -66,11 +69,26 @@ const initialState = {
   cardStyle: "",
 
   checkoutUrl: "",
+
+  clientAdminDomain: "",
+
   order: {},
+
 };
 
 const rootReducer = (state = initialState, { type, payload }) => {
   switch (type) {
+
+    case GET_CLIENT_ADMIN_BY_DOMAIN:
+      return {
+        ...state,
+        clientAdmin: {...payload},
+      };
+    case ADD_DOMAIN:
+      return {
+        ...state,
+        clientAdminDomain: payload.domain,
+      };
     case REDUCE_QUANTITY_FROM_CART:
       return {
         ...state,

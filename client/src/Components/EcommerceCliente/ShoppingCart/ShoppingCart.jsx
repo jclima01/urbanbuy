@@ -19,14 +19,16 @@ import axios from "axios";
 export default function ShoppingCart() {
   const order = useSelector((state) => state.order);
   const user = useSelector((state) => state.user);
+
   const [cartList, setCartList] = useState([]);
   useEffect(() => {
     dispatch(getUserById("6476854188cbebbefc19ba22"));
     dispatch(getLastOrderFromUser("6476854188cbebbefc19ba22"));
-    setCartList(order.cart,checkout);
+    setCartList(order.cart);
   }, []);
   // setCartList(order.cart)
   const dispatch = useDispatch();
+
 
   const checkout = async (orderId) => {
     const { data } = await axios.post(
@@ -56,7 +58,7 @@ export default function ShoppingCart() {
   return (
     <div className={styles.shoppingCart}>
       <div className={styles.continueShopping}>
-        <Link to="/homeCliente">
+        <Link to={`/${clientAdmin.domain}`}>
           <BsArrowLeftSquareFill className={styles.icon} />
         </Link>
         <h2>Continue Shopping</h2>

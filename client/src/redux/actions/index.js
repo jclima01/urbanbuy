@@ -37,6 +37,8 @@ export const SET_THEME = "SET_THEME";
 export const SET_SEARCH_BAR_THEME = "SET_SEARCH_BAR_THEME";
 export const SET_CARD_STYLE = "SET_CARD_STYLE";
 export const CREATE_CHECKOUT_SESSION = "CREATE_CHECKOUT_SESSION";
+export const ADD_DOMAIN = "ADD_DOMAIN";
+export const GET_CLIENT_ADMIN_BY_DOMAIN = "GET_CLIENT_ADMIN_BY_DOMAIN";
 export const CREATE_ORDER = "CREATE_ORDER";
 export const GET_LAST_ORDER_FROM_USER = "GET_LAST_ORDER_FROM_USER";
 export const DELETE_PRODUCT_FROM_CART = "DELETE_PRODUCT_FROM_CART";
@@ -103,6 +105,7 @@ export const getLastOrderFromUser = (userId) => {
       console.log(data);
       return await dispatch({
         type: GET_LAST_ORDER_FROM_USER,
+
         payload: data,
       });
     };
@@ -111,6 +114,39 @@ export const getLastOrderFromUser = (userId) => {
     throw new Error(err.message);
   }
 };
+
+export const addDomainToClientAdmin = (domain, clientAdminId) => {
+  try {
+    return async function (dispatch) {
+      const { data } = await axios.put(`/clientAdmin/domain/${clientAdminId}`, {
+        domain: domain,
+      });
+      return await dispatch({
+        type: ADD_DOMAIN,
+        payload: data,
+      });
+    };
+    // eslint-disable-next-line no-unreachable
+  } catch (err) {
+    throw new Error(err.message);
+  }
+};
+
+export const getClientAdminByDomain = (domain) => {
+  try {
+    return async function (dispatch) {
+      const { data } = await axios.get(`/clientAdmin/${domain}`);
+      return await dispatch({
+        type: GET_CLIENT_ADMIN_BY_DOMAIN,
+        payload: data,
+      });
+    };
+    // eslint-disable-next-line no-unreachable
+  } catch (err) {
+    throw new Error(err.message);
+  }
+};
+        
 export const createOrder = (fullName, email, cart, total, userId) => {
   try {
     return async function (dispatch) {
@@ -128,6 +164,7 @@ export const createOrder = (fullName, email, cart, total, userId) => {
       console.log(data);
       return await dispatch({
         type: CREATE_ORDER,
+
         payload: data,
       });
     };

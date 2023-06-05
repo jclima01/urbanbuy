@@ -6,11 +6,12 @@ const { errorMonitor } = require("nodemailer/lib/xoauth2/index.js");
 require("dotenv").config();
 const sgMail = require('@sendgrid/mail');
 
+
 // Configurar el transporte de correo
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 const welcomeEmail = async (fullname, email) => {
- 
+
   try {
     const msg = {
       to: email,
@@ -103,6 +104,29 @@ const ClientDelete = async (clientId) => {
     throw new Error(error.message);
   }
 };
+const addDomain = async (domain, clientAdminId) => {
+  try {
+    console.log(domain);
+    console.log(clientAdminId);
+    const clientAdmin = await ClientAdmin.findById(clientAdminId);
+    clientAdmin.domain = domain;
+    const savedClientAdmin = await clientAdmin.save();
+    console.log(savedClientAdmin);
+    return savedClientAdmin;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+const getClientAdminByDomain = async (domain) => {
+  try {
+    const clientAdmin = await ClientAdmin.findOne({ domain: domain });
+    // const savedClientAdmin = await clientAdmin.save();
+    console.log(clientAdmin);
+    return clientAdmin;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
 
 
 module.exports = {
@@ -110,5 +134,7 @@ module.exports = {
   ClientAdminLogin,
   ClientUpdate,
   ClientDelete,
+  addDomain,
+  getClientAdminByDomain
 
 };
