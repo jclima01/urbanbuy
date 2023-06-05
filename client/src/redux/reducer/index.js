@@ -37,6 +37,12 @@ import {
   CREATE_CHECKOUT_SESSION,
   ADD_DOMAIN,
   GET_CLIENT_ADMIN_BY_DOMAIN,
+  CREATE_ORDER,
+  GET_LAST_ORDER_FROM_USER,
+  DELETE_PRODUCT_FROM_CART,
+  REDUCE_QUANTITY_FROM_CART,
+  INCREASE_QUANTITY_FROM_CART,
+
 } from "../actions/index.js";
 
 const initialState = {
@@ -61,12 +67,18 @@ const initialState = {
 
   searchBarTheme: "styleOne",
   cardStyle: "",
+
   checkoutUrl: "",
+
   clientAdminDomain: "",
+
+  order: {},
+
 };
 
 const rootReducer = (state = initialState, { type, payload }) => {
   switch (type) {
+
     case GET_CLIENT_ADMIN_BY_DOMAIN:
       return {
         ...state,
@@ -76,6 +88,32 @@ const rootReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         clientAdminDomain: payload.domain,
+
+    case REDUCE_QUANTITY_FROM_CART:
+      return {
+        ...state,
+        order: { ...payload },
+      };
+    case INCREASE_QUANTITY_FROM_CART:
+      return {
+        ...state,
+        order: { ...payload },
+      };
+    case DELETE_PRODUCT_FROM_CART:
+      return {
+        ...state,
+        order: { ...payload },
+      };
+    case GET_LAST_ORDER_FROM_USER:
+      return {
+        ...state,
+        order: { ...payload },
+      };
+    case CREATE_ORDER:
+      return {
+        ...state,
+        order: { ...payload },
+
       };
     case GET_CART_FROM_LS:
       JSON.parse(localStorage.getItem("cart"));
@@ -94,26 +132,9 @@ const rootReducer = (state = initialState, { type, payload }) => {
         cart: cartWhitOutProduct,
       };
     case ADD_PRODUCT_TO_CART:
-      const item = state.products.find(
-        (product) => product._id === payload.productId
-      );
-      const inCart = state.cart.some(
-        (product) => product._id === payload.productId
-      );
-
-      const newCart = inCart
-        ? state.cart.map((product) =>
-            product._id === item._id
-              ? { ...item, quantity: product.quantity + payload.quantity }
-              : item
-          )
-        : [...state.cart, { ...item, quantity: payload.quantity }];
-
-      localStorage.setItem("cart", JSON.stringify(newCart));
-
       return {
         ...state,
-        cart: newCart,
+        order: payload,
       };
     case GET_USER_BY_ID:
       return {

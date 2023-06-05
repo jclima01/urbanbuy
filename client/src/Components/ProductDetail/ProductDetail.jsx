@@ -21,7 +21,9 @@ const ProductDetail = () => {
     <>
       <div className={style.detailContainer}>
       <div className={style.navButtons}>
+
           <Link to={`/${clientAdmin.domain}`}>
+
             <button className={style.button}>go back</button>
           </Link>
 

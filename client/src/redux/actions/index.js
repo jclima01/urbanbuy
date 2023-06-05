@@ -39,6 +39,98 @@ export const SET_CARD_STYLE = "SET_CARD_STYLE";
 export const CREATE_CHECKOUT_SESSION = "CREATE_CHECKOUT_SESSION";
 export const ADD_DOMAIN = "ADD_DOMAIN";
 export const GET_CLIENT_ADMIN_BY_DOMAIN = "GET_CLIENT_ADMIN_BY_DOMAIN";
+export const CREATE_ORDER = "CREATE_ORDER";
+export const GET_LAST_ORDER_FROM_USER = "GET_LAST_ORDER_FROM_USER";
+export const DELETE_PRODUCT_FROM_CART = "DELETE_PRODUCT_FROM_CART";
+export const REDUCE_QUANTITY_FROM_CART = "REDUCE_QUANTITY_FROM_CART";
+export const INCREASE_QUANTITY_FROM_CART = "INCREASE_QUANTITY_FROM_CART";
+
+export const increasePoductQuantityInCart = (productId, orderId,increase) => {
+  try {
+    return async function (dispatch) {
+      const { data } = await axios.put(`/orders/order/${orderId}`, {
+        productId,
+        increase
+      });
+      console.log(data);
+      return await dispatch({
+        type: INCREASE_QUANTITY_FROM_CART,
+        payload: data,
+      });
+    };
+    // eslint-disable-next-line no-unreachable
+  } catch (err) {
+    throw new Error(err.message);
+  }
+};
+export const reducePoductQuantityInCart = (productId, orderId,reduce) => {
+  try {
+    return async function (dispatch) {
+      const { data } = await axios.put(`/orders/order/${orderId}`, {
+        productId,
+        reduce
+      });
+      console.log(data);
+      return await dispatch({
+        type: REDUCE_QUANTITY_FROM_CART,
+        payload: data,
+      });
+    };
+    // eslint-disable-next-line no-unreachable
+  } catch (err) {
+    throw new Error(err.message);
+  }
+};
+export const deleteProductFromCart = (productId, orderId) => {
+  try {
+    return async function (dispatch) {
+      const { data } = await axios.put(`/orders/order/${orderId}`, {
+        productId,
+      });
+      console.log(data);
+      return await dispatch({
+        type: DELETE_PRODUCT_FROM_CART,
+        payload: data,
+      });
+    };
+    // eslint-disable-next-line no-unreachable
+  } catch (err) {
+    throw new Error(err.message);
+  }
+};
+export const getLastOrderFromUser = (userId) => {
+  try {
+    return async function (dispatch) {
+      const { data } = await axios.get(`/orders/order/${userId}`);
+      console.log(data);
+      return await dispatch({
+        type: GET_LAST_ORDER_FROM_USER,
+
+        payload: data,
+      });
+    };
+    // eslint-disable-next-line no-unreachable
+  } catch (err) {
+    throw new Error(err.message);
+  }
+};
+
+export const addDomainToClientAdmin = (domain, clientAdminId) => {
+  try {
+    return async function (dispatch) {
+      const { data } = await axios.put(`/clientAdmin/domain/${clientAdminId}`, {
+        domain: domain,
+      });
+      return await dispatch({
+        type: ADD_DOMAIN,
+        payload: data,
+      });
+    };
+    // eslint-disable-next-line no-unreachable
+  } catch (err) {
+    throw new Error(err.message);
+  }
+};
 
 export const getClientAdminByDomain = (domain) => {
   try {
@@ -54,14 +146,25 @@ export const getClientAdminByDomain = (domain) => {
     throw new Error(err.message);
   }
 };
-export const addDomainToClientAdmin = (domain, clientAdminId) => {
+        
+export const createOrder = (fullName, email, cart, total, userId) => {
   try {
     return async function (dispatch) {
-      const { data } = await axios.put(`/clientAdmin/domain/${clientAdminId}`, {
-        domain: domain,
+      console.log(fullName);
+      console.log(email);
+      console.log(cart);
+      console.log(total);
+      console.log(userId);
+      const { data } = await axios.post(`/orders/order/${userId}`, {
+        fullName,
+        email,
+        cart,
+        total,
       });
+      console.log(data);
       return await dispatch({
-        type: ADD_DOMAIN,
+        type: CREATE_ORDER,
+
         payload: data,
       });
     };
@@ -95,12 +198,37 @@ export const RemoveProductFromCart = (product) => {
     throw new Error(err.message);
   }
 };
-export const addProductToCart = (productId, quantity) => {
+export const addProductToCart = (
+  productId,
+  quantity,
+  fullName,
+  email,
+  userId,
+  orderId
+) => {
   try {
     return async function (dispatch) {
+      let data;
+      if (orderId) {
+        const res = await axios.put(`/orders/order/${orderId}`, {
+          productId,
+          quantity,
+        });
+        data = res.data;
+      }
+      if (!orderId) {
+        const response = await axios.post(`/orders/order/${userId}`, {
+          productId,
+          quantity,
+          fullName,
+          email,
+        });
+        data = response.data;
+      }
+
       return await dispatch({
         type: ADD_PRODUCT_TO_CART,
-        payload: { productId, quantity },
+        payload: data,
       });
     };
     // eslint-disable-next-line no-unreachable
@@ -112,9 +240,10 @@ export const getUserById = (userId) => {
   try {
     return async function (dispatch) {
       const { data } = await axios.get(`/users/user/${userId}`);
+      console.log(data);
       return dispatch({
         type: GET_USER_BY_ID,
-        payload: data,
+        payload: { ...data },
       });
     };
     // eslint-disable-next-line no-unreachable

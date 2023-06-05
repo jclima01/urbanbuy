@@ -4,11 +4,11 @@ const {
   loginClientAdminHandler,
   registerClientAdminHandler,
   updateClientHandler,
+
   deleteClientHandler ,
   domainHandler,
   getClientAdminByDomainHandler
-  } = require("../handlers/ClientAdminHandlers.js");
-  
+} = require("../handlers/ClientAdminHandlers.js");
 
 
 
