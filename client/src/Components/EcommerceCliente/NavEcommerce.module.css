@@ -81,3 +81,27 @@ align-content: center;
   background-color: whitesmoke;
   color: #000000;
 }
+
+.categorias{
+background-color: #ff9900;
+  margin-left: -900px;
+  height: 40px;
+  width: 150px;
+  color: white;
+  font-size: 20px;
+}
+.select {
+  border: none;
+  outline: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.option{
+  border: none;
+  outline: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
