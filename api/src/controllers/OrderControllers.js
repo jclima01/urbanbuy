@@ -95,6 +95,8 @@ const createOrder = async (productId, quantity, fullName, email, userId) => {
     const item = await Product.findById(productId);
     const product = item._doc;
     const cart = [];
+    if (quantity > product.stocks)
+      throw new Error("Quantity exceeds stock limit");
     cart.push({ ...product, quantity: quantity });
     const total = cart.reduce(
       (count, product) => (count += product.quantity * product.price),
@@ -111,9 +113,10 @@ const createOrder = async (productId, quantity, fullName, email, userId) => {
     const savedOrder = await newOrder.save();
     const user = await User.findById(userId);
     user.orders.push(savedOrder._id);
+    item.stocks -= quantity;
+    const savedItem = await item.save();
     await user.save();
-    console.log(savedOrder);
-    return savedOrder;
+    return { savedOrder, savedItem };
   } catch (error) {
     throw new Error(error.message);
   }
@@ -124,6 +127,7 @@ const updateOrder = async (orderId, productId, quantity) => {
     const order = await Order.findById(orderId);
     const item = await Product.findById(productId);
     const prod = item._doc;
+    if (quantity > prod.stocks) throw new Error("Quantity exceeds stock limit");
     const prodId = new mongoose.Types.ObjectId(prod._id);
     const inCart = order.cart.some((product) => product._id.equals(prodId));
     let newCart;
@@ -142,10 +146,14 @@ const updateOrder = async (orderId, productId, quantity) => {
     );
     order.cart = newCart; // Actualizar el carrito de la orden con el nuevo carrito
     order.total = Number(total);
+
+    item.stocks -= quantity;
+    const savedItem = await item.save();
+
     const savedOrder = await order.save();
     console.log("total: " + savedOrder.total);
     console.log(savedOrder);
-    return savedOrder;
+    return { savedOrder, savedItem };
   } catch (error) {
     throw new Error(error.message);
   }
@@ -157,10 +165,11 @@ const removeProductFormCart = async (orderId, productId) => {
     const item = await Product.findById(productId);
     const prod = item._doc;
     const prodId = new mongoose.Types.ObjectId(prod._id);
-
     const cartWithoutProduct = order.cart.filter(
       (product) => !product._id.equals(prodId)
     );
+    const itemInCart = order.cart.find((product) => product._id.equals(prodId));
+
     order.cart = cartWithoutProduct;
 
     let total = 0;
@@ -170,11 +179,15 @@ const removeProductFormCart = async (orderId, productId) => {
         0
       );
     }
+    console.log("itemInCart: ");
+    console.log(itemInCart);
+    item.stocks += itemInCart.quantity;
 
     order.total = Number(total);
 
     const orderSaved = await order.save();
-    return orderSaved;
+    const itemSaved = await item.save();
+    return { orderSaved, itemSaved };
   } catch (error) {
     throw new Error(error.message);
   }
@@ -223,7 +236,8 @@ const increaseQuantity = async (orderId, productId) => {
     const item = await Product.findById(productId);
     const prod = item._doc;
     const prodId = new mongoose.Types.ObjectId(prod._id);
-
+    if ((item.quantity = prod.stocks))
+      throw new Error("Quantity exceeds stock limit");
     const productIdx = order.cart.findIndex((product) =>
       product._id.equals(prodId)
     );
@@ -233,7 +247,6 @@ const increaseQuantity = async (orderId, productId) => {
       ...updatedCartList[productIdx],
       quantity: updatedCartList[productIdx].quantity + 1,
     };
-    console.log(updatedCartList);
     let total = 0;
     if (updatedCartList.length > 0) {
       total = updatedCartList.reduce(
@@ -241,11 +254,15 @@ const increaseQuantity = async (orderId, productId) => {
         0
       );
     }
+    item.stocks -= 1;
+    const itemSaved = await item.save();
+
     order.cart = updatedCartList;
     order.total = Number(total);
 
     const orderSaved = await order.save();
-    return orderSaved;
+    return { orderSaved, itemSaved };
+    
   } catch (error) {
     throw new Error(error.message);
   }

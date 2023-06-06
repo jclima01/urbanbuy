@@ -79,20 +79,19 @@ const updateOrderHandler = async (req, res) => {
     console.log("reduce: " + reduce);
     if (quantity) {
       order = await updateOrder(orderId, productId, quantity);
-      console.log(order);
+  
     }
     if (reduce) {
       order = await reduceQuantity(orderId, productId);
-      console.log(order);
+   
     }
     if (increase) {
       order = await increaseQuantity(orderId, productId);
-      console.log(order);
+ 
     }
     if (!quantity && !reduce && !increase) {
       order = await removeProductFormCart(orderId, productId);
-      console.log("productId: " + productId);
-      console.log(order);
+
     }
     res.status(200).json(order);
   } catch (error) {

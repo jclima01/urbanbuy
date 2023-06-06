@@ -14,7 +14,7 @@ const ProductDetail = () => {
 
   useEffect(() => {
     dispatch(getProductById(productId));
-  }, []);
+  }, [product.stocks]);
 
   console.log(product.description);
   return (
