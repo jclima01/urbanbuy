@@ -150,11 +150,6 @@ export const getClientAdminByDomain = (domain) => {
 export const createOrder = (fullName, email, cart, total, userId) => {
   try {
     return async function (dispatch) {
-      console.log(fullName);
-      console.log(email);
-      console.log(cart);
-      console.log(total);
-      console.log(userId);
       const { data } = await axios.post(`/orders/order/${userId}`, {
         fullName,
         email,
