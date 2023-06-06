@@ -3,7 +3,7 @@ import logo2 from "../../../Img/logo2.png";
 import style from "../../SignIn/SignIn.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { registerClientAdmin } from "../../../redux/actions";
+import { registerUser } from "../../../redux/actions";
 import RegisterButton from "../../SignIn/RegisterButton/RegisterButton";
 import { useAuth0 } from "@auth0/auth0-react";
 
@@ -78,7 +78,7 @@ const SignInClient = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(registerClientAdmin(fullName, email, password)).finally(() => {
+    dispatch(registerUser(fullName, email, password)).finally(() => {
       navigate("/loginClient");
     });
   };

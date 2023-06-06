@@ -1,48 +1,30 @@
 // NavEcommerce.js
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import Select from "react-select";
 import { Link, useNavigate } from 'react-router-dom';
-import logoBlanco from '../../Img/logoBlanco.png'
-import style from '../EcommerceCliente/NavEcommerce.module.css'
-import EcommerceUser from './EcommerceUser'
+import logoBlanco from '../../Img/logoBlanco.png';
+import style from '../EcommerceCliente/NavEcommerce.module.css';
+import EcommerceUser from './EcommerceUser';
 
 function NavEcommerce() {
-  const [searchValue, setSearchValue] = useState("");
+  const [searchValue, setSearchValue] = useState('');
   const products = useSelector((state) => state.products);
-  const [filteredProducts, setFilteredProducts] = useState([]);
   const navigate = useNavigate();
-  
-  const filterProducts = (inputValue) => {
-    if (inputValue.length > 0) {
-      const searchResult = products.filter((product) =>
-        product.productName.toLowerCase().includes(inputValue.toLowerCase())
-      );
-      setFilteredProducts(searchResult);
-    } else {
-      setFilteredProducts([]);
-    }
+
+  const handleInputChange = (event) => {
+    setSearchValue(event.target.value);
   };
 
-  const formatOptionLabel = ({ label, value }) => (
-    <div>
-      <span>{label}</span>
-    </div>
-  );
-
-const handleSelectChange = (selectedOptions) => {
-  const selectedProductIds = selectedOptions.map((option) => option.value);
-  setSearchValue(selectedOptions.length > 0 ? selectedProductIds.join(',') : '');
-  const query = new URLSearchParams({ search: selectedProductIds.join(','), products: selectedProductIds.join(',') }).toString();
-  navigate(`/ecommerceuser?${query}`);
-};
-{/* const handleSelectChange = (selectedOptions) => {
-  const selectedProductIds = selectedOptions.map((option) => option.value);
-  setSearchValue(selectedOptions.value)
-  const query = new URLSearchParams({ search: searchValue, products: selectedProductIds.join(',') }).toString();
-  navigate(`/ecommerceuser?${query}`);
-};*/}
-  
+  const handleKeyPress = (event) => {
+    if (event.key === 'Enter') {
+      const searchResult = products.filter((product) =>
+        product.productName.toLowerCase().includes(searchValue.toLowerCase())
+      );
+      const selectedProductIds = searchResult.map((product) => product.productName);
+      const query = new URLSearchParams({ search: searchValue, products: selectedProductIds.join(',') }).toString();
+      navigate(`/ecommerceuser?${query}`);
+    }
+  };
 
   return (
     <div className={style.container}>
@@ -55,23 +37,16 @@ const handleSelectChange = (selectedOptions) => {
           <button className={style.button2}>Login</button>
         </Link>
       </div>
-      <Select
-        options={filteredProducts.map((product) => ({
-          label: product.productName,
-          value: product.productName,
-        }))}
-        className={style.input}
-        onInputChange={(inputValue) => {
-          setSearchValue(inputValue);
-          filterProducts(inputValue);
-        }}
-        menuIsOpen={Boolean(searchValue)}
-        formatOptionLabel={formatOptionLabel}
-        placeholder="Buscar producto"
-        isMulti
-        onChange={handleSelectChange}
+      <div className={style.input}>
+      <input
+        type="text"
+        value={searchValue}
+        onChange={handleInputChange}
+        onKeyPress={handleKeyPress}
+       className={style.inputSearch}
+        placeholder="  Buscar producto"
       />
-    
+      </div>
     </div>
   );
 }
