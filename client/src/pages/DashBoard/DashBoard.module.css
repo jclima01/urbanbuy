@@ -1,0 +1,9 @@
+.emptyLink {
+    background-color: gray;
+  }
+  
+  .disabled {
+    pointer-events: none;
+    opacity: 0.3;
+  }
+  
