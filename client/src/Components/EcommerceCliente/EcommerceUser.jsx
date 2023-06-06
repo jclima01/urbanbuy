@@ -123,7 +123,7 @@ function EcommerceUser() {
   return (
     <div className={styles.container}>
       <div className={styles.filters}>
-        <h1>Resultados de la búsqueda</h1>
+      
         <div className={styles.filtercontainer}>
           <button onClick={handleSortByAZ}>A-Z</button>
           <button onClick={handleSortByZA}>Z-A</button>

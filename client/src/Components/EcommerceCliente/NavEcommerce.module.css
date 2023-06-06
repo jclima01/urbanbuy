@@ -43,11 +43,17 @@ align-content: center;
 
 
 .input{
-  width: 35%;
-  margin-left: 500px;
-  margin-top: -45px;
+ 
+  margin-left: 600px;
+  margin-top: -43px;
 }
  
+.inputSearch{
+  width: 45%;
+  height: 40px;
+  border-radius: 10px;
+  border:#ff7300
+}
 .button1{
   background-color: #000000;
   color: white;

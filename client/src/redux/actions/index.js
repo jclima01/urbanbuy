@@ -573,10 +573,11 @@ export const registerClientAdmin = (fullName, email, password) => {
     throw new Error(err.message);
   }
 };
-export const registerUser = (email, password) => {
+export const registerUser = (fullName,email, password) => {
   try {
     return async function (dispatch) {
-      await axios.post("/admin/register", {
+      await axios.post(`/users/register/$(clientAdminId)`, {
+        fullName,
         email,
         password,
       });
