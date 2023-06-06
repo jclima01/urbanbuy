@@ -5,11 +5,9 @@ import { setReview } from '../../redux/actions';
 
 
 
-
-
 const ProductReview = () => {
-  
-  const dispatch = useDispatch();
+  //Agregar validaciones!!!
+const dispatch = useDispatch();
 const navigate = useNavigate();
   
   const [rating, setRating] = useState(0);

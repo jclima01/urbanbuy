@@ -11,13 +11,19 @@ import ProductReview from "../../Components/ProductReview/ProductReview";
 const ProductDetail = () => {
   const product = useSelector((state) => state.product);
   const reviews = useSelector((state) => state.reviews);
-  const sumRatings = reviews.reduce((acc, review) => acc + review.rating, 0); // Suma de los elementos del array
-  const averageRatings = sumRatings / reviews.length; // Promedio de las revisiones
-  
+  //const sumRatings = reviews.reduce((acc, review) => acc + review.rating, 0); // Suma de los elementos del array
+ // const averageRatings = sumRatings / reviews.length; // Promedio de las revisiones
+ const sumRatings = reviews.length > 0 ? reviews.reduce((acc, review) => acc + review.rating, 0) : 0;
+ const averageRatings = reviews.length > 0 ? sumRatings / reviews.length : 0;
+ const comments = reviews.map((review) => review.text);
+
+
+  console.log('commetns:', comments);
   console.log('Reviews:', reviews);
   console.log('Rating:', averageRatings);
   console.log('Description:', product.description);
   console.log('Product:', product);
+
   
   const { productId } = useParams();
   const dispatch = useDispatch();
@@ -49,10 +55,15 @@ const ProductDetail = () => {
               alt={product.productName}
               className={style.img}
             />
-            <p>Rating: {averageRatings} </p> 
+            <p>Rating: {averageRatings.toFixed(1)} </p> 
             <p>Stock: {product.stocks}</p>
             <p>Price: ${product.price}</p>  
-            <p>Comments: {product.comments}</p>
+            <p>Comments:</p>
+            <ul>
+            {comments.map((comment, index) => (
+              <li key={index}>{comment}</li>
+            ))}
+          </ul>
           </div>
           <div className={style.descriptionContainer}>
             <p className={style.description}>{product?.description}</p>

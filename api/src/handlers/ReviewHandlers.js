@@ -4,9 +4,9 @@ const {postReview,getProductReviews} = require("../controllers/ReviewControllers
 
 const getReviewsHandler = async (req, res) => {
   try {
-    const { productId} = req.body;
+    const { productId } = req.params;
     const productReviews = await getProductReviews(productId);
-
+    console.log('DataAction:', productId);
     res.status(200).json(productReviews);
   } catch (error) {
     res.status(400).json({ error: error.message });

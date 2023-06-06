@@ -307,7 +307,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
     case GET_REVIEWS:
       return {
         ...state,
-        reviews: [...payload],
+        reviews: payload,
       };
 
     default:

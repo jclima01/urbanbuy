@@ -560,10 +560,8 @@ export const setReview = (productId, userId, text, rating) => {
 export const getReviews = (productId) => {
   try {
     return async function (dispatch) {
-      const { data } = await axios.get("/reviews/", {
-        productId,
-      });
-
+      const { data } = await axios.get(`/reviews/${productId}`);
+      //console.log('DataAction:',productId)
       return dispatch({
         type: GET_REVIEWS,
         payload: data,
@@ -576,5 +574,3 @@ export const getReviews = (productId) => {
 };
 
 
-
-  
