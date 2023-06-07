@@ -19,7 +19,6 @@ export default function ShoppingCart() {
   const user = useSelector((state) => state.user);
 
   const clientAdmin = useSelector((state) => state.clientAdmin);
-  const [cartList, setCartList] = useState([]);
 
   const checkout = async (orderId) => {
     const { data } = await axios.post(
@@ -48,7 +47,6 @@ export default function ShoppingCart() {
 
   useEffect(() => {
     dispatch(getLastOrderFromUser(user?._id));
-    setCartList(order.cart);
   }, [increasePoductQuantityInCart, reducePoductQuantityInCart]);
 
   return (

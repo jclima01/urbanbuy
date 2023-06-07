@@ -13,7 +13,6 @@ import { useAuth0 } from "@auth0/auth0-react";
 const FormLogin = () => {
   const { user } = useAuth0();
 
-  console.log(user);
   // useEffect(() => {
   //   if (isAuthenticated)
   //     dispatch(loginClientAdmin("jc@123.com", "123asdASD")).finally(() => {

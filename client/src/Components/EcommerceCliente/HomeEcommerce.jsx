@@ -29,8 +29,6 @@ function HomeEcommerce() {
   const [orderedProduct, setOrderedProduct] = useState([]);
   const theme = useSelector(state => state.theme)
 
-console.log(domain)
-console.log(clientAdminId)
   useEffect(() => {
     dispatch(getClientAdminByDomain(domain));
     if(clientAdmin) {
@@ -84,7 +82,6 @@ console.log(clientAdminId)
       orderResult = [...filteredProduct].sort((a, b) =>
         a.price > b.price ? 1 : -1
       );
-      console.log("price", orderResult);
 
     } else if (order === "priceDs") {
       orderResult = [...filteredProduct].sort((a, b) =>
@@ -94,7 +91,6 @@ console.log(clientAdminId)
       orderResult = [...filteredProduct].sort((a, b) =>
         a.productName.localeCompare(b.productName)
       );
-      console.log("name", orderResult);
     } else if (order === "nameDs") {
       orderResult = [...filteredProduct].sort((a, b) =>
         b.productName.localeCompare(a.productName))
@@ -130,7 +126,6 @@ console.log(clientAdminId)
   const closeModalS = () => {
     setIsModalOpenS(false);
   };
-  console.log("filterProduct: ", filteredProduct);
 
   return (
           <div className={style.fondo}>

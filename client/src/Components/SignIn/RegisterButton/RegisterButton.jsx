@@ -13,10 +13,9 @@ const handleRegister = async () => {
     });
 
     // El usuario se ha registrado exitosamente
-    console.log('Usuario registrado con éxito');
   } catch (error) {
     // Error en el registro
-    console.error('Error al registrar el usuario', error);
+    throw new Error('Error al registrar el usuario', error);
   }
 };
 

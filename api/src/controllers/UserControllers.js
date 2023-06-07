@@ -82,7 +82,6 @@ const getClientAdminUsers = async (clientAdminId) => {
 };
 const getUserById = async (userId) => {
   try {
-    console.log(userId);
     const user = await User.findById(userId)
       .populate("orders") // Popula las categorías
       // .populate("clientAdmin") // Popula el modelo ClientAdmin
@@ -94,7 +93,6 @@ const getUserById = async (userId) => {
 };
 const getLastOrderFromUser = async (userId) => {
   try {
-    console.log(userId);
     const user = await User.findById(userId)
       .populate("orders") // Popula las categorías
       // .populate("clientAdmin") // Popula el modelo ClientAdmin
