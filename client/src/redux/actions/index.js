@@ -39,6 +39,8 @@ export const SET_CARD_STYLE = "SET_CARD_STYLE"
 export const ORDER_CLIENT = "ORDER_CLIENT";
 export const DELETE_ORDER = "DELETE_ORDER";
 export const UPDATE_ORDER = "UPDATE_ORDER";
+export const SORT_ORDERS_BY_DATE = "SORT_ORDERS_BY_DATE";
+export const FILTER_ORDERS = "FILTER_ORDERS";
 
 export const getCartFromLS = () => {
   try {
@@ -602,3 +604,14 @@ export const updateOrder = (orderId, status, adress,clientId) => {
     throw new Error(error.message)
   }
 };
+
+export const sortOrdersByDate = () => ({
+  type: SORT_ORDERS_BY_DATE
+});
+
+export const filterOrders =(status) => (
+{
+  type: FILTER_ORDERS,
+  payload: status
+  }
+);

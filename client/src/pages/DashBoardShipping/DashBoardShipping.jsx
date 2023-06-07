@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useRef } from "react";
+
 import { useDispatch, useSelector } from "react-redux";
-import { orderClient, deleteOrder } from "../../redux/actions";
+import { orderClient, deleteOrder, sortOrdersByDate, filterOrders } from "../../redux/actions";
 import OrderView from "./OrderView";
 import { CiSearch } from "react-icons/ci";
 
@@ -12,6 +13,9 @@ const DashBoardShipping = () => {
     JSON.parse(localStorage.getItem("clientAdmin")) ?? false;
   const clientAdminId = clientAdminStorage._id;
   const orders = useSelector((state) => state.orders);
+  const filter=useRef(null);
+  const order=useRef(null);
+
 
   const [show, setShow] = useState(false);
   //eslint-disable-next-line
@@ -50,12 +54,20 @@ const DashBoardShipping = () => {
       // dispatch(getClientAdminUsers(clientAdmin._id))
     }
   };
-
+  
   const OrdenamientoOrders = (e) => {
     //(e)=>dispatch(orderClientUsers(e.target.value))
     //status - date -
+    dispatch(sortOrdersByDate(e.target.value));
     console.log(e.target.value);
   };
+
+  const handleFilter = (e) => {
+    if(e.target.value==='All'){
+      dispatch(orderClient(clientAdminId));
+    }
+    else{dispatch(filterOrders(e.target.value))}
+  }
 
   useEffect(() => {
     dispatch(orderClient(clientAdminId));
@@ -77,7 +89,7 @@ const DashBoardShipping = () => {
             <div className="contentOrdenamiento">
               <select
                 className="ordenamientoUsers"
-                ref={orders}
+                ref={order}
                 onChange={OrdenamientoOrders}
               >
                 <option value="default">Ordenamiento</option>
@@ -104,7 +116,8 @@ const DashBoardShipping = () => {
             </div>
 
             <div className="filter">
-              <select className="filters">
+              <select className="filters" ref={filter}  onChange={handleFilter}>
+                <option value="All">All</option>
               {estadosOrden.map((estado, index) => (
                         <option
                           value={estado}
@@ -120,7 +133,6 @@ const DashBoardShipping = () => {
           <table className="datosUser">
             <thead>
               <tr>
-                {/* <th>Id</th> */}
                 <th>Status</th>
                 <th>Full Name</th>
                 <th>Email</th>
@@ -159,6 +171,7 @@ const DashBoardShipping = () => {
                   <td>${order?.total}</td>
                   <td className="carrito">
                     {order?.cart?.map((prod) => (
+                      //eslint(react/jsx-key)
                       <React.Fragment>
                         {prod}
                         {/* //hace falta ver el tema de como vienen el producto desde la base de datos */}

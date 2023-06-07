@@ -37,7 +37,9 @@ import {
   SET_CARD_STYLE,
   ORDER_CLIENT,
   DELETE_ORDER,
-  UPDATE_ORDER
+  UPDATE_ORDER,
+  SORT_ORDERS_BY_DATE,
+  FILTER_ORDERS
 } from "../actions/index.js";
 
 const initialState = {
@@ -49,6 +51,7 @@ const initialState = {
   product: {},
   categories: [],
   ordersByUser: [],
+  ordersByClient:[],
 
   theme: "urbanBuy",
   sliderTheme: "urbanBuy",
@@ -340,6 +343,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
       case ORDER_CLIENT:
         return {
           ...state,
+          ordersByClient: payload,
           orders: payload,
         };
         case DELETE_ORDER:
@@ -353,6 +357,24 @@ const rootReducer = (state = initialState, { type, payload }) => {
         ...state,
         orders:[...payload]
       };
+
+      case SORT_ORDERS_BY_DATE:
+        // Utiliza el spread operator (...) para crear una copia de la lista de órdenes actual
+        const sortedOrders = [...state.orders];
+
+        // Ordena la lista de órdenes por fecha (suponiendo que tienes una propiedad "date" en cada objeto de orden)
+        sortedOrders.sort((a, b) => a.date - b.date);
+
+        return {
+          ...state,
+          orders: sortedOrders
+        };
+        case FILTER_ORDERS:
+          
+          return{
+            ...state,
+             orders: state.orders.filter((e)=>e.status==payload)
+          }
 
     default:
       return {
