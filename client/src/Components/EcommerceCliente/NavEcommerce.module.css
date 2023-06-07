@@ -49,10 +49,11 @@ align-content: center;
 }
  
 .inputSearch{
-  width: 45%;
+  width: 55%;
   height: 40px;
   border-radius: 10px;
-  border:#ff7300
+  border:#ff7300;
+  margin-left: -100px;
 }
 .button1{
   background-color: #000000;
@@ -84,7 +85,7 @@ align-content: center;
 
 .categorias{
 background-color: #ff9900;
-  margin-left: -900px;
+  margin-left: -600px;
   height: 40px;
   width: 150px;
   color: white;
@@ -105,3 +106,13 @@ background-color: #ff9900;
   -moz-appearance: none;
   appearance: none;
 }
+.avatar{
+  margin-left: 1000px;
+  margin-top: -65px;
+}
+.hola{
+  margin-left: 830px;
+  margin-top: -20px;
+}
+
+
