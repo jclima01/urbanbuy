@@ -28,7 +28,6 @@ const DashBoard = () => {
   }, []);
 
   const [domain, setDomain] = useState("");
-  console.log(domain);
   const handleInputChange = (e) => {
     setDomain(e.target.value);
   };
