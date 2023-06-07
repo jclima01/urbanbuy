@@ -39,7 +39,8 @@ import {
   DELETE_ORDER,
   UPDATE_ORDER,
   SORT_ORDERS_BY_DATE,
-  FILTER_ORDERS
+  FILTER_ORDERS,
+  SEARCH_ORDERS,
 } from "../actions/index.js";
 
 const initialState = {
@@ -375,6 +376,16 @@ const rootReducer = (state = initialState, { type, payload }) => {
             ...state,
              orders: state.orders.filter((e)=>e.status==payload)
           }
+
+          case SEARCH_ORDERS:
+            let searchOrders;
+            searchOrders = state.orders.filter((ord) =>
+              ord.adress.toLowerCase().includes(payload.toLowerCase())
+            );
+            return {
+              ...state,
+              orders: [...searchOrders],
+            };
 
     default:
       return {

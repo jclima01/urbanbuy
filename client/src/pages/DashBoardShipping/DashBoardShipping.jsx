@@ -1,7 +1,7 @@
 import React, { useEffect, useState,useRef } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
-import { orderClient, deleteOrder, sortOrdersByDate, filterOrders } from "../../redux/actions";
+import { orderClient, deleteOrder, sortOrdersByDate, filterOrders, searchOrders } from "../../redux/actions";
 import OrderView from "./OrderView";
 import { CiSearch } from "react-icons/ci";
 
@@ -42,18 +42,16 @@ const DashBoardShipping = () => {
 
   const [searchTerm, setSearchTerm] = useState("");
 
-  const handleInputChange = (e) => {
+ const handleInputChange = (e) =>{
     setSearchTerm(e.target.value);
-
-    if (e.target.value !== "") {
-      //dispatch(searchOrders(e.target.value));
-      orders.filter((order) =>
-        order.fullName.tolowerCase().includes(searchTerm)
-      );
-    } else {
-      // dispatch(getClientAdminUsers(clientAdmin._id))
+    if(e.target.value!==''){
+      dispatch(searchOrders(e.target.value));
+    //  orders.filter((ord) =>ord.email.includes(e.target.value));
+    }else{
+      dispatch(orderClient(clientAdminId));
     }
-  };
+  
+ }
   
   const OrdenamientoOrders = (e) => {
     //(e)=>dispatch(orderClientUsers(e.target.value))

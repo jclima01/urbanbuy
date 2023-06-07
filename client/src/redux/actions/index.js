@@ -41,6 +41,7 @@ export const DELETE_ORDER = "DELETE_ORDER";
 export const UPDATE_ORDER = "UPDATE_ORDER";
 export const SORT_ORDERS_BY_DATE = "SORT_ORDERS_BY_DATE";
 export const FILTER_ORDERS = "FILTER_ORDERS";
+export const SEARCH_ORDERS = "SEARCH_ORDERS";
 
 export const getCartFromLS = () => {
   try {
@@ -615,3 +616,8 @@ export const filterOrders =(status) => (
   payload: status
   }
 );
+
+export const searchOrders = (searchTerm) => ({
+  type: SEARCH_ORDERS,
+  payload: searchTerm,
+});
