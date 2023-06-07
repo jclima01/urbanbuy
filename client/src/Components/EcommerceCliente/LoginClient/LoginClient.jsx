@@ -13,7 +13,6 @@ import LoginAuth from "../../FormLogin/LoginAuth";
 const FormLogin = () => {
   // const { user } = useAuth0();
 
-  // console.log(user);
   // useEffect(() => {
   //   if (isAuthenticated)
   //     dispatch(loginClientAdmin("jc@123.com", "123asdASD")).finally(() => {

@@ -52,7 +52,6 @@ export const increasePoductQuantityInCart = (productId, orderId, increase) => {
         productId,
         increase,
       });
-      console.log(data);
       return await dispatch({
         type: INCREASE_QUANTITY_FROM_CART,
         payload: data,
@@ -70,7 +69,6 @@ export const reducePoductQuantityInCart = (productId, orderId, reduce) => {
         productId,
         reduce,
       });
-      console.log(data);
       return await dispatch({
         type: REDUCE_QUANTITY_FROM_CART,
         payload: data,
@@ -87,7 +85,6 @@ export const deleteProductFromCart = (productId, orderId) => {
       const { data } = await axios.put(`/orders/order/${orderId}`, {
         productId,
       });
-      console.log(data);
       return await dispatch({
         type: DELETE_PRODUCT_FROM_CART,
         payload: data,
@@ -102,7 +99,6 @@ export const getLastOrderFromUser = (userId) => {
   try {
     return async function (dispatch) {
       const { data } = await axios.get(`/orders/order/${userId}`);
-      console.log(data);
       return await dispatch({
         type: GET_LAST_ORDER_FROM_USER,
 
@@ -156,7 +152,6 @@ export const createOrder = (fullName, email, cart, total, userId) => {
         cart,
         total,
       });
-      console.log(data);
       return await dispatch({
         type: CREATE_ORDER,
 
@@ -235,7 +230,6 @@ export const getUserById = (userId) => {
   try {
     return async function (dispatch) {
       const { data } = await axios.get(`/users/user/${userId}`);
-      console.log(data);
       return dispatch({
         type: GET_USER_BY_ID,
         payload: { ...data },
@@ -275,7 +269,6 @@ export const deleteCategory = (categoryId) => {
   }
 };
 export const editCategory = (categoryId, categoryName) => {
-  console.log("categoryName", categoryName);
   try {
     return async function (dispatch) {
       const { data } = await axios.put(`/category/${categoryId}`, {
@@ -625,7 +618,6 @@ export const logOutClientAdmin = () => {
 
 export const logOutUser = () => {
   try {
-    localStorage.removeItem("dataUser");
     return async function (dispatch) {
       dispatch({
         type: LOGOUT_USER,
@@ -718,6 +710,8 @@ export const createCheckoutSession = (cart) => {
         type: CREATE_CHECKOUT_SESSION,
         payload: data.url,
       });
-    } catch (error) {}
+    } catch (error) {
+      throw new Error(error.message);
+    }
   };
 };

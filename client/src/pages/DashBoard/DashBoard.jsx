@@ -14,6 +14,10 @@ import {
   getClientAdminUsers,
 } from "../../redux/actions";
 import LoginAuth from "../../Components/FormLogin/LoginAuth";
+import alt from "./DashBoard.module.css";
+
+//Importante: Las modificiaciones al boton "go site View" estan hechas para que cuando no este definido el dominio se deshabilite el link
+
 const DashBoard = () => {
   const products = useSelector((state) => state.products);
   const clientAdminDomain = useSelector((state) => state.clientAdminDomain);
@@ -28,7 +32,6 @@ const DashBoard = () => {
   }, []);
 
   const [domain, setDomain] = useState("");
-  console.log(domain);
   const handleInputChange = (e) => {
     setDomain(e.target.value);
   };
@@ -71,10 +74,34 @@ const DashBoard = () => {
               <p style={{ fontSize: 20 }}>
                 Improve your products in our section.
               </p>
-              <Link to={`/${clientAdmin.domain || clientAdminDomain}`}>
+              {clientAdmin.domain !== undefined ? (
+                <Link to={`/${clientAdmin.domain}`}>
+                  <button
+                    className={`${alt.button} ${
+                      clientAdmin.domain === "" ? alt.disabled : ""
+                    }`}
+                    style={{
+                      cursor: "pointer",
+                      fontSize: 20,
+                      width: 200,
+                      marginTop: 15,
+                      padding: 15,
+                      borderRadius: 15,
+                      background: "#ff7f2a",
+                      border: "none",
+                      color: "white",
+                      fontWeight: 400,
+                    }}
+                    disabled={clientAdmin.domain === ""}
+                  >
+                    Go Site View.
+                  </button>
+                </Link>
+              ) : (
                 <button
+                  className={`${alt.button} ${alt.disabled}`}
                   style={{
-                    cursor: "pointer",
+                    cursor: "not-allowed",
                     fontSize: 20,
                     width: 200,
                     marginTop: 15,
@@ -85,10 +112,11 @@ const DashBoard = () => {
                     color: "white",
                     fontWeight: 400,
                   }}
+                  disabled={true}
                 >
                   Go Site View.
                 </button>
-              </Link>
+              )}
             </div>
 
             <div style={{ width: "30%", height: "100%" }}>
@@ -107,34 +135,37 @@ const DashBoard = () => {
           </div>
           <div className="freaturedSettion2">
             <div className=" d-flex w-100 h-75 gap-4  align-items-center">
-              <div className="container-image-logo">
-                <img src={logo} alt="" />
-              </div>
+                {/* <div className="container-image-logo">
+                  <img src={logo} alt="" />
+                </div> */}
               <div className="d-flex flex-column h-50">
                 <h1 className="TextlogoFreatured">UrbanBuy</h1>
                 <p className="Text2Freatured">Ecommerce</p>
+                <p style={{ fontSize: 15, fontWeight: 500, textAlign: "left" }}>
+                  El dominio es la dirección única de tu tienda en línea.
+                  Registra un dominio para que los clientes puedan acceder
+                  fácilmente a tu tienda.
+                </p>
               </div>
             </div>
 
-            <div className="d-flex  flex-column align-items-center ">
-              <p style={{ fontSize: 15, fontWeight: 500 }}>
-                Registra tu Dominio
-              </p>
-              <div className="d-flex h">
-                <input
-                  type="text"
-                  placeholder="Ej: Papa Jhones"
-                  style={{
-                    width: "80%",
-                    height: 30,
-                    border: "1px solid ligthgray",
-                  }}
-                  onChange={handleInputChange}
-                />
-                <button style={{ height: 30 }} onClick={addDomain}>
-                  Add{" "}
-                </button>
-              </div>
+            <div className="d-flex h">
+              <input
+                type="text"
+                placeholder="Ej: Papa Jhones"
+                style={{
+                  width: "80%",
+                  height: 30,
+                  border: "1px solid ligthgray",
+                  marginTop: "20px",
+                }}
+                onChange={handleInputChange}
+              />
+              <button className={alt.addButton}
+                onClick={addDomain}
+              >
+                Add{" "}
+              </button>
             </div>
           </div>
         </div>

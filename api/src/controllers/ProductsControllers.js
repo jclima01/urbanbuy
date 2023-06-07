@@ -68,7 +68,6 @@ const createNewProduct = async (
   rating,
   clientAdminId
   ) => {
-  console.log('categoriesIds', categoriesIds)
   try {
     const uploadResult = await cloudinary.uploader.upload(
       imageUrl /*,{optiones}*/
@@ -152,7 +151,6 @@ const updateProduct = async (
 
 //DELETE
 const deleteProduct = async (productId) => {
-  console.log(productId);
   try {
     const deletedProduct = await Product.findByIdAndDelete(productId);
     return deletedProduct;

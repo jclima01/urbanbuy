@@ -348,9 +348,14 @@ const rootReducer = (state = initialState, { type, payload }) => {
       };
 
     case CREATE_CHECKOUT_SESSION:
+      const order = { ...state.order };
+      console.log(order)
+      order.cart = [];
+      console.log(order)
       return {
         ...state,
         checkoutUrl: payload,
+        order: order,
       };
 
     default:

@@ -55,7 +55,6 @@ const paymentHandler = async (req, res) => {
 const createOrderHandler = async (req, res) => {
   try {
     const { userId } = req.params;
-    console.log("params:" + userId);
     const { productId, quantity, fullName, email } = req.body;
     const order = await createOrder(
       productId,
