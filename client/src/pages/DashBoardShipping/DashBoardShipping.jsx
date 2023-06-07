@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {  orderClient, deleteOrder} from "../../redux/actions";
 import OrderView from "./OrderView";
+import { CiSearch } from "react-icons/ci"
 
 import "./DashBoardShipping.css";
 
@@ -23,15 +24,32 @@ const DashBoardShipping =() => {
     "Pending","In Progress","In Transition","Dispatched","Cancelled","Received","Reembold","Proccess"];
 
     const handlerClick =(orderId)=>{
-      
-
-const orderElegida= orders.find((order)=>order._id ===orderId);
-
+ 
+     const orderElegida= orders.find((order)=>order._id ===orderId);
      setOrderSelected(orderElegida);
       setShow(!show);
 
     }
+    
+    const [searchTerm, setSearchTerm] = useState('');
+  
+   
+    const handleInputChange = (e) =>{
+      setSearchTerm(e.target.value);
+    
+      if(e.target.value!==''){
+        //dispatch(searchOrders(e.target.value));
+        orders.filter(order=>order.fullName.tolowerCase().includes(searchTerm))
+      }else{
+       // dispatch(getClientAdminUsers(clientAdmin._id))
+      }
+    
+   }
 
+   const OrdenamientoOrders=(e)=>{
+    //(e)=>dispatch(orderClientUsers(e.target.value))
+    console.log(e.target.value);
+   }
   
    useEffect(() => {
     dispatch(orderClient(clientAdminId));
@@ -44,7 +62,53 @@ return <>
 <div className="containerTodoDashboarShipping">
 <OrderView show={show} setShow={setShow} orderSelected={orderSelected} clientId={clientAdminId}/>
 <h1>{clientAdminStorage.fullName} Orders</h1>
+
 <div className="containerOrders">
+<div className="contentOrderSearchAndFilters">
+
+<div className="contentOrdenamiento">
+
+  <select className="ordenamientoUsers" ref={orders} onChange={OrdenamientoOrders} >
+  <option  value="default">Ordenamiento</option>
+    <option  value="fullName_az">FullName A-Z</option>
+    <option value="fullName_za">FullName Z-A</option>
+    <option  value="email_az">Mail A-Z</option>
+    <option value="email_za">Mail Z-A</option>
+    {/* test */}
+  </select>
+</div>
+
+<div className="contentSearchUsers">
+
+  <div className=" input-container-navbar inputSearchUser">
+    <input
+      type="text"
+      placeholder="Search Users..."
+      className="inputsearch-navbar"
+      onChange={handleInputChange}
+    />
+    <hr />
+    <CiSearch size={25} cursor={"pointer"} />
+  </div>
+
+</div>
+
+
+
+ {/* <div className="filter">
+
+  <select className="filters">
+
+    <option value="Filters">Filters</option>
+    <option value="Filters">Filter 1</option>
+    <option value="Filters">Filter 2</option>
+    <option value="Filters">Filter 3</option>
+  </select>
+</div>  */}
+
+
+
+</div>
     <table className="datosUser">
   <thead>
     <tr>

@@ -240,7 +240,7 @@ export const editProduct = (
   price,
   rating,
 ) => {
-  console.log("stocks", stocks);
+  
 
   try {
     return async function (dispatch) {
@@ -311,7 +311,7 @@ export const getProductById = (productId) => {
 export const getAllProducts = (clientAdminId) => {
   try {
     return async function (dispatch) {
-      console.log(clientAdminId);
+      
       const { data } = await axios.get(`/products/${clientAdminId}`);
       return dispatch({
         type: GET_ALL_PRODUCTS,
@@ -566,7 +566,7 @@ export const orderClient = (clientId) => {
         payload: data,
       });
     } catch (error) {
-      console.error(error);
+     
       throw new Error("Error al obtener las órdenes del ClientAdmin");
     }
   };
@@ -592,7 +592,7 @@ export const updateOrder = (orderId, status, adress,clientId) => {
   try {
   return async function (dispatch) {
       const {data} = await axios.put(`/orders/${orderId}`, {status, adress,clientId});
-      console.log(data);
+      
       return dispatch ({
         type: UPDATE_ORDER,
         payload: data,
