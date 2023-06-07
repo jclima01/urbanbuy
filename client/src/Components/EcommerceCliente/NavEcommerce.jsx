@@ -68,10 +68,12 @@ console.log(user)
       <img src={logoBlanco} alt='' className={style.logoClient} />
       {Object.entries(user).length !== 0 ? (
         <div>
+          <h4 className={style.hola}>Hola <strong>{user.fullName} !</strong></h4>
           <div className={style.avatar} onClick={openModal}>
             <Avatar />
           </div>
           <Modal isOpen={mostrarModal} onRequestClose={closeModal} className={style.modal}>
+            <h6> Bienvenid@ a tu area de usuario <strong>{user.fullName}</strong> </h6>
             <button onClick={closeModal} className={style.closeButton}>
               Cerrar
             </button>
