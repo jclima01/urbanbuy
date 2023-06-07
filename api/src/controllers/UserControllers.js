@@ -85,7 +85,7 @@ const getUserById = async (userId) => {
     console.log(userId);
     const user = await User.findById(userId)
       .populate("orders") // Popula las categorías
-      // .populate("clientAdmin") // Popula el modelo ClientAdmin
+      .populate("clientAdmin") // Popula el modelo ClientAdmin
       .exec();
     return user;
   } catch (error) {
@@ -100,8 +100,7 @@ const getLastOrderFromUser = async (userId) => {
       // .populate("clientAdmin") // Popula el modelo ClientAdmin
       .exec();
     const lastOrder = user.orders[user.orders.length - 1];
-    if(lastOrder.status === "pending")
-    return lastOrder;
+    if (lastOrder.status === "pending") return lastOrder;
   } catch (error) {
     throw new Error(error.message);
   }

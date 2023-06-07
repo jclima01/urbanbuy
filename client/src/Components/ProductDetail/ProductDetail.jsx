@@ -52,7 +52,7 @@ const ProductDetail = () => {
             </div>
           </div>
 
-          <AddToCart product={product} stock={product.stocks} />
+          <AddToCart stock={product.stocks} />
         </div>
         
       </div>

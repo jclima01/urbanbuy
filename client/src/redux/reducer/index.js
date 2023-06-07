@@ -90,16 +90,18 @@ const rootReducer = (state = initialState, { type, payload }) => {
     case REDUCE_QUANTITY_FROM_CART:
       return {
         ...state,
-        order: { ...payload },
+        order: { ...payload.orderSaved },
+        product: { ...payload.itemSaved },
       };
     case INCREASE_QUANTITY_FROM_CART:
       return {
         ...state,
-        order: { ...payload },
+        order: { ...payload.orderSaved },
+        product: { ...payload.itemSaved },
       };
     case DELETE_PRODUCT_FROM_CART:
-      console.log(payload.orderSaved)
-      console.log(payload.itemSaved)
+      console.log(payload.orderSaved);
+      console.log(payload.itemSaved);
       return {
         ...state,
         order: { ...payload.orderSaved },
@@ -113,8 +115,8 @@ const rootReducer = (state = initialState, { type, payload }) => {
     case CREATE_ORDER:
       return {
         ...state,
-        order: { ...payload.savedOrder },
-        product: { ...payload.savedProduct },
+        order: { ...payload.orderSaved },
+        product: { ...payload.itemSaved },
       };
     case GET_CART_FROM_LS:
       JSON.parse(localStorage.getItem("cart"));
@@ -135,7 +137,8 @@ const rootReducer = (state = initialState, { type, payload }) => {
     case ADD_PRODUCT_TO_CART:
       return {
         ...state,
-        order: payload,
+        order: { ...payload.savedOrder },
+        product: { ...payload.savedProduct },
       };
     case GET_USER_BY_ID:
       return {

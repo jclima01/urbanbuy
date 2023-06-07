@@ -9,11 +9,10 @@ import styles from "./AddToCart.module.css";
 import { GrAddCircle, GrSubtractCircle } from "react-icons/gr";
 import Swal from "sweetalert2";
 import { getUserById } from "../../../redux/actions";
-const AddToCart = ({ product, stock }) => {
+const AddToCart = ({ stock }) => {
   const user = useSelector((state) => state.user);
-  const cart = useSelector((state) => state.cart);
+  const product = useSelector((state) => state.product);
   const order = useSelector((state) => state.order);
-  console.log(order);
   useEffect(() => {
     dispatch(getUserById("6476854188cbebbefc19ba22"));
     dispatch(getLastOrderFromUser("6476854188cbebbefc19ba22"));
