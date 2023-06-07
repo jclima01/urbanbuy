@@ -27,7 +27,10 @@ const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    
+    if (rating === 0 || comment === '' ) {
+      alert("Por favor, selecciona una calificación y deja un comentario antes de enviar la reseña.");
+      return;
+    }
     dispatch(setReview(productId, userId, comment, rating)).finally(() => {
       navigate("/homecliente");
     });
