@@ -40,13 +40,11 @@ const DashBoardShipping = () => {
     setShow(!show);
   };
 
-  const [searchTerm, setSearchTerm] = useState("");
-
  const handleInputChange = (e) =>{
-    setSearchTerm(e.target.value);
+  
     if(e.target.value!==''){
       dispatch(searchOrders(e.target.value));
-    //  orders.filter((ord) =>ord.email.includes(e.target.value));
+
     }else{
       dispatch(orderClient(clientAdminId));
     }
@@ -104,7 +102,7 @@ const DashBoardShipping = () => {
               <div className=" input-container-navbar inputSearchUser">
                 <input
                   type="text"
-                  placeholder="Search Users..."
+                  placeholder="Search Orders by address..."
                   className="inputsearch-navbar"
                   onChange={handleInputChange}
                 />
