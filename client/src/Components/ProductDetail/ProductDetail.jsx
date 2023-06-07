@@ -18,11 +18,11 @@ const ProductDetail = () => {
  const comments = reviews.map((review) => review.text);
 
 
-  console.log('commetns:', comments);
-  console.log('Reviews:', reviews);
-  console.log('Rating:', averageRatings);
-  console.log('Description:', product.description);
-  console.log('Product:', product);
+  //console.log('commetns:', comments);
+  //console.log('Reviews:', reviews);
+  //console.log('Rating:', averageRatings);
+  //console.log('Description:', product.description);
+  //console.log('Product:', product);
 
   
   const { productId } = useParams();
