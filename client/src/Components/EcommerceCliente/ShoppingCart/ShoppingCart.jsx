@@ -1,12 +1,9 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import styles from "./ShoppingCart.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { BsArrowLeftSquareFill } from "react-icons/bs";
-import RemoveFromCartButton from "../RemoveFromCartButton/RemoveFromCartButton";
 import {
-  createCheckoutSession,
   deleteProductFromCart,
-  getCartFromLS,
   getLastOrderFromUser,
   getUserById,
   increasePoductQuantityInCart,
@@ -18,17 +15,11 @@ import { GrAddCircle, GrSubtractCircle } from "react-icons/gr";
 import axios from "axios";
 export default function ShoppingCart() {
   const order = useSelector((state) => state.order);
+  const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
+
   const clientAdmin = useSelector((state) => state.clientAdmin);
   const [cartList, setCartList] = useState([]);
-  useEffect(() => {
-    dispatch(getUserById("6476854188cbebbefc19ba22"));
-    dispatch(getLastOrderFromUser("6476854188cbebbefc19ba22"));
-    setCartList(order.cart);
-  }, []);
-  // setCartList(order.cart)
-  const dispatch = useDispatch();
-
 
   const checkout = async (orderId) => {
     const { data } = await axios.post(
@@ -55,6 +46,11 @@ export default function ShoppingCart() {
     dispatch(increasePoductQuantityInCart(productId, orderId, increase));
   };
 
+  useEffect(() => {
+    dispatch(getLastOrderFromUser(user?._id));
+    setCartList(order.cart);
+  }, [increasePoductQuantityInCart, reducePoductQuantityInCart]);
+
   return (
     <div className={styles.shoppingCart}>
       <div className={styles.continueShopping}>
@@ -70,7 +66,7 @@ export default function ShoppingCart() {
       </div>
 
       <div className={styles.listContainer}>
-        {order.cart?.map((product) => (
+        {order?.cart?.map((product) => (
           <div key={product._id} className={styles.cardProduct}>
             <img
               src={product.imageUrl}
@@ -100,13 +96,10 @@ export default function ShoppingCart() {
                 onClick={() => removeProductFromCart(product._id, order._id)}
               />
             </div>
-            {/* <RemoveFromCartButton product={product} /> */}
           </div>
         ))}
         <div className={styles.total}>Total: ${order.total}</div>
-        <button onClick={() => checkout(order._id)}>
-          COMPRAR
-        </button>
+        <button onClick={() => checkout(order._id)}>COMPRAR</button>
       </div>
     </div>
   );

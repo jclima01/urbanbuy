@@ -14,9 +14,8 @@ const ProductDetail = () => {
 
   useEffect(() => {
     dispatch(getProductById(productId));
-  }, []);
+  }, [product.stocks]);
 
-  console.log(product.description);
   return (
     <>
       <div className={style.detailContainer}>
@@ -44,7 +43,7 @@ const ProductDetail = () => {
             <p>Price: ${product.price}</p>
           </div>
           <div className={style.descriptionContainer}>
-            <p className={style.description}>{product?.description}</p>
+            <p className={style.description}>{product.description}</p>
             <div>
               {product.categories?.map((categorie) => {
                 return <div>{categorie.categoryName}</div>;
@@ -52,7 +51,7 @@ const ProductDetail = () => {
             </div>
           </div>
 
-          <AddToCart product={product} stock={product.stocks} />
+          <AddToCart stock={product.stocks} />
         </div>
         
       </div>

@@ -42,7 +42,6 @@ import {
   DELETE_PRODUCT_FROM_CART,
   REDUCE_QUANTITY_FROM_CART,
   INCREASE_QUANTITY_FROM_CART,
-
 } from "../actions/index.js";
 
 const initialState = {
@@ -73,16 +72,14 @@ const initialState = {
   clientAdminDomain: "",
 
   order: {},
-
 };
 
 const rootReducer = (state = initialState, { type, payload }) => {
   switch (type) {
-
     case GET_CLIENT_ADMIN_BY_DOMAIN:
       return {
         ...state,
-        clientAdmin: {...payload},
+        clientAdmin: { ...payload },
       };
     case ADD_DOMAIN:
       return {
@@ -93,17 +90,20 @@ const rootReducer = (state = initialState, { type, payload }) => {
     case REDUCE_QUANTITY_FROM_CART:
       return {
         ...state,
-        order: { ...payload },
+        order: { ...payload.orderSaved },
+        product: { ...payload.itemSaved },
       };
     case INCREASE_QUANTITY_FROM_CART:
       return {
         ...state,
-        order: { ...payload },
+        order: { ...payload.orderSaved },
+        product: { ...payload.itemSaved },
       };
     case DELETE_PRODUCT_FROM_CART:
       return {
         ...state,
-        order: { ...payload },
+        order: { ...payload.orderSaved },
+        product: { ...payload.itemSaved },
       };
     case GET_LAST_ORDER_FROM_USER:
       return {
@@ -113,7 +113,8 @@ const rootReducer = (state = initialState, { type, payload }) => {
     case CREATE_ORDER:
       return {
         ...state,
-        order: { ...payload },
+        order: { ...payload.orderSaved },
+        product: { ...payload.itemSaved },
       };
     case GET_CART_FROM_LS:
       JSON.parse(localStorage.getItem("cart"));
@@ -134,7 +135,8 @@ const rootReducer = (state = initialState, { type, payload }) => {
     case ADD_PRODUCT_TO_CART:
       return {
         ...state,
-        order: payload,
+        order: { ...payload.orderSaved },
+        product: { ...payload.itemSaved },
       };
     case GET_USER_BY_ID:
       return {

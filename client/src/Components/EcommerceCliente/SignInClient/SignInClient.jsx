@@ -2,13 +2,13 @@ import React, { useEffect, useState } from "react";
 import logo2 from "../../../Img/logo2.png";
 import style from "../../SignIn/SignIn.module.css";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { registerUser } from "../../../redux/actions";
 import RegisterButton from "../../SignIn/RegisterButton/RegisterButton";
 import { useAuth0 } from "@auth0/auth0-react";
 
 const SignInClient = () => {
-
+  const clientAdmin = useSelector((state) => state.clientAdmin);
   // const { user } = useAuth0();
 
   // useEffect(() => {
@@ -18,9 +18,6 @@ const SignInClient = () => {
   //     //   navigate("/login");
   //     // });
   // }, [user]);
-
-
-
 
   //   const [username, setUsername] = useState("");
   //   const [userError, setUserError] = useState("");
@@ -78,9 +75,11 @@ const SignInClient = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(registerUser(fullName, email, password)).finally(() => {
-      navigate("/loginClient");
-    });
+    dispatch(registerUser(fullName, email, password, clientAdmin._id)).finally(
+      () => {
+        navigate("/loginClient");
+      }
+    );
   };
 
   const validateConfirmPassword = (value) => {
@@ -188,9 +187,8 @@ const SignInClient = () => {
               Registrarse
             </button>
           </form>
-            <RegisterButton />
+          <RegisterButton />
         </div>
-
       </div>
     </div>
   );
