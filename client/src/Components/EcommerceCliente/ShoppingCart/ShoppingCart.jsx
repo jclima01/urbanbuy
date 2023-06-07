@@ -47,12 +47,10 @@ export default function ShoppingCart() {
   };
 
   useEffect(() => {
-    dispatch(getUserById("6476854188cbebbefc19ba22"));
-    dispatch(getLastOrderFromUser("6476854188cbebbefc19ba22"));
+    dispatch(getLastOrderFromUser(user?._id));
     setCartList(order.cart);
   }, [increasePoductQuantityInCart, reducePoductQuantityInCart]);
 
-  
   return (
     <div className={styles.shoppingCart}>
       <div className={styles.continueShopping}>

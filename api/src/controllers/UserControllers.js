@@ -85,7 +85,7 @@ const getUserById = async (userId) => {
     console.log(userId);
     const user = await User.findById(userId)
       .populate("orders") // Popula las categorías
-      .populate("clientAdmin") // Popula el modelo ClientAdmin
+      // .populate("clientAdmin") // Popula el modelo ClientAdmin
       .exec();
     return user;
   } catch (error) {

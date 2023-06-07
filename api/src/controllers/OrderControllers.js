@@ -112,7 +112,7 @@ const createOrder = async (productId, quantity, fullName, email, userId) => {
     });
     const orderSaved = await newOrder.save();
     const user = await User.findById(userId);
-    user.orders.push(savedOrder._id);
+    user.orders.push(orderSaved._id);
     item.stocks -= quantity;
     const itemSaved = await item.save();
     await user.save();

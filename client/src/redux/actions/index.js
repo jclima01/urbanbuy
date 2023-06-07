@@ -45,12 +45,12 @@ export const DELETE_PRODUCT_FROM_CART = "DELETE_PRODUCT_FROM_CART";
 export const REDUCE_QUANTITY_FROM_CART = "REDUCE_QUANTITY_FROM_CART";
 export const INCREASE_QUANTITY_FROM_CART = "INCREASE_QUANTITY_FROM_CART";
 
-export const increasePoductQuantityInCart = (productId, orderId,increase) => {
+export const increasePoductQuantityInCart = (productId, orderId, increase) => {
   try {
     return async function (dispatch) {
       const { data } = await axios.put(`/orders/order/${orderId}`, {
         productId,
-        increase
+        increase,
       });
       console.log(data);
       return await dispatch({
@@ -63,12 +63,12 @@ export const increasePoductQuantityInCart = (productId, orderId,increase) => {
     throw new Error(err.message);
   }
 };
-export const reducePoductQuantityInCart = (productId, orderId,reduce) => {
+export const reducePoductQuantityInCart = (productId, orderId, reduce) => {
   try {
     return async function (dispatch) {
       const { data } = await axios.put(`/orders/order/${orderId}`, {
         productId,
-        reduce
+        reduce,
       });
       console.log(data);
       return await dispatch({
@@ -146,7 +146,7 @@ export const getClientAdminByDomain = (domain) => {
     throw new Error(err.message);
   }
 };
-        
+
 export const createOrder = (fullName, email, cart, total, userId) => {
   try {
     return async function (dispatch) {
@@ -568,10 +568,10 @@ export const registerClientAdmin = (fullName, email, password) => {
     throw new Error(err.message);
   }
 };
-export const registerUser = (fullName,email, password) => {
+export const registerUser = (fullName, email, password, clientAdminId) => {
   try {
     return async function (dispatch) {
-      await axios.post(`/users/register/$(clientAdminId)`, {
+      await axios.post(`/users/register/${clientAdminId}`, {
         fullName,
         email,
         password,

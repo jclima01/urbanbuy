@@ -1,21 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  addProductToCart,
-  createOrder,
-  getLastOrderFromUser,
-} from "../../../redux/actions";
+import { addProductToCart, getLastOrderFromUser } from "../../../redux/actions";
 import styles from "./AddToCart.module.css";
 import { GrAddCircle, GrSubtractCircle } from "react-icons/gr";
 import Swal from "sweetalert2";
-import { getUserById } from "../../../redux/actions";
 const AddToCart = ({ stock }) => {
   const user = useSelector((state) => state.user);
   const product = useSelector((state) => state.product);
   const order = useSelector((state) => state.order);
   useEffect(() => {
-    dispatch(getUserById("6476854188cbebbefc19ba22"));
-    dispatch(getLastOrderFromUser("6476854188cbebbefc19ba22"));
+    dispatch(getLastOrderFromUser(user._id));
   }, []);
 
   const [quantity, setQuantity] = useState(1);

@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import logo2 from '../../../Img/logo2.png'
-import style from '../../FormLogin/FormLogin.module.css'
-import { useDispatch } from "react-redux";
+import logo2 from "../../../Img/logo2.png";
+import style from "../../FormLogin/FormLogin.module.css";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import ventas from '../../../Img/ventas.png'
-import { loginUser } from '../../../redux/actions'
-import LoginAuth from '../../FormLogin/LoginAuth'
+import ventas from "../../../Img/ventas.png";
+import { loginUser } from "../../../redux/actions";
+import LoginAuth from "../../FormLogin/LoginAuth";
 import { useAuth0 } from "@auth0/auth0-react";
 
 // Falta crear una funcion que asocie email y contraseña para dar acceso
@@ -13,7 +13,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 const FormLogin = () => {
   const { user } = useAuth0();
 
-  console.log(user)
+  console.log(user);
   // useEffect(() => {
   //   if (isAuthenticated)
   //     dispatch(loginClientAdmin("jc@123.com", "123asdASD")).finally(() => {
@@ -25,7 +25,7 @@ const FormLogin = () => {
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
-
+  const clientAdmin = useSelector((state) => state.clientAdmin);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -53,8 +53,8 @@ const FormLogin = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Aquí puedes agregar la lógica para procesar el inicio de sesión
-    dispatch(loginUser(email,password)).finally(() => {
-      navigate("/homecliente");
+    dispatch(loginUser(email, password)).finally(() => {
+      navigate(`/${clientAdmin.domain}`);
     });
   };
 
@@ -100,9 +100,9 @@ const FormLogin = () => {
               Iniciar sesión
             </button>
           </form>
-          <div >
-      <LoginAuth />
-      </div>
+          <div>
+            <LoginAuth />
+          </div>
         </div>
       </div>
     </div>
