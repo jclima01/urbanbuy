@@ -134,7 +134,7 @@ console.log(clientAdminId)
 
   return (
           <div className={style.fondo}>
-            <NavEcommerce/>
+            <NavEcommerce clientAdmin={clientAdmin}/>
             
             <Routes>
               <Route exact path="ecommerceUser" Component={<EcommerceUser/>}/>

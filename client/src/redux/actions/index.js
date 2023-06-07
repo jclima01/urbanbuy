@@ -631,9 +631,9 @@ export const logOutUser = () => {
         type: LOGOUT_USER,
       });
 
-      setTimeout(() => {
-        window.location.href = "/";
-      }, 100);
+      // setTimeout(() => {
+      //   window.location.href = "/";
+      // }, 100);
     };
     // eslint-disable-next-line no-unreachable
   } catch (err) {
