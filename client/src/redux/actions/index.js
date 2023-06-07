@@ -522,7 +522,7 @@ export const loginClientAdmin = (email, password) => {
 export const loginUser = (email, password) => {
   try {
     return async function (dispatch) {
-      const { data } = await axios.post("/user/login", {
+      const { data } = await axios.post("/users/login", {
         email,
         password,
       });
