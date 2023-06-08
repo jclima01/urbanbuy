@@ -1,9 +1,25 @@
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Card from '../Card/Card';
 import styles from './EcommerceUser.module.css';
+import { useParams } from 'react-router-dom';
+import { getAllProducts, getCategories, getClientAdminByDomain } from '../../redux/actions';
+import NavEcommerce from './NavEcommerce';
 
 function EcommerceUser() {
+  // const {domain} = useParams()
+  const clientAdmin = useSelector(state => state.clientAdmin)
+  const clientAdminId = clientAdmin._id;
+const dispatch = useDispatch()
+
+  useEffect(() => {
+    // dispatch(getClientAdminByDomain(domain));
+    // if(clientAdmin) {
+    dispatch(getAllProducts(clientAdminId));
+    dispatch(getCategories(clientAdminId));
+    // }
+  }, [dispatch, clientAdminId]);
+
   const products = useSelector((state) => state.products);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [sortBy, setSortBy] = useState('');
@@ -57,7 +73,7 @@ function EcommerceUser() {
     }
 
     setFilteredProducts(filteredResult);
-  }, [products, sortBy, ratingFilter]);
+  }, [products, sortBy, ratingFilter, window.location.pathname]);
 
   const handleSortByAZ = () => {
     setSortBy('az');
@@ -101,7 +117,10 @@ function EcommerceUser() {
   };
 
   return (
+    <>
+    <NavEcommerce clientAdmin={clientAdmin}/>
     <div className={styles.container}>
+
       <div className={styles.filters}>
         <div className={styles.filtercontainer}>
           <button onClick={handleSortByAZ}>A-Z</button>
@@ -126,6 +145,7 @@ function EcommerceUser() {
         ))}
       </div>
     </div>
+    </>
   );
 }
 

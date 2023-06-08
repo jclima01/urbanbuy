@@ -127,23 +127,24 @@ function HomeEcommerce() {
 
 
   return (
+
     <div className={containerClass}>
 
       <NavEcommerce clientAdmin={clientAdmin} />
       <div className={style.switchContainer}>
-      <label className={style.switch}>
-  <input
-    type="checkbox"
-    checked={isDarkMode}
-    onChange={() => setIsDarkMode(!isDarkMode)}
-  />
-  <span className={style.slider}></span>
-</label>
-</div>
+        <label className={style.switch}>
+        <input
+          type="checkbox"
+          checked={isDarkMode}
+          onChange={() => setIsDarkMode(!isDarkMode)}
+        />
+        <span className={style.slider}></span>
+        </label>
+      </div>
 
 
       <Routes>
-        <Route exact path="ecommerceUser" element={<EcommerceUser />} />
+        <Route exact path={`${clientAdmin.domain}/s`} element={<EcommerceUser />} />
       </Routes>
       <div>
         <img src={BANNER} className={style.banner} alt="Banner"></img>
