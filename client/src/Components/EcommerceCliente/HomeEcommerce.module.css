@@ -40,6 +40,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  width: 100%;
 }
 
 .filterSearchContainer {
@@ -184,6 +186,11 @@ margin-bottom: 10px;
   border-radius: 10px;
   display: flex;
   justify-content: center;
+  
+}
+.darkMode {
+  background-color: rgb(36, 35, 35);
+  color: white;
 }
 
 .pagos{
@@ -236,4 +243,61 @@ margin-bottom: 10px;
   height: 50px;
   border-radius: 10px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+
+.switchContainer {
+  position: relative;
+  width: 60px;
+  height: 34px;
+  margin-left: 910px;
+  margin-top: -80px;
+  transform: scale(0.7);
+}
+
+.switch {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  border-radius: 34px;
+  transition: background-color 0.3s;
+  cursor: pointer;
+}
+
+.switch input {
+  display: none;
+}
+
+.slider {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  right: 2px;
+  bottom: 2px;
+  background-color: white;
+  border-radius: 34px;
+  transition: transform 0.3s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 2px;
+  bottom: 2px;
+  background-color: #999;
+  border-radius: 50%;
+  transition: transform 0.3s;
+}
+
+input:checked + .slider {
+  background-color: #3a3937;
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
 }
