@@ -19,14 +19,6 @@ const ProductDetail = () => {
  const comments = reviews.map((review) => review.text);
 
 
-  //console.log('commetns:', comments);
-  //console.log('Reviews:', reviews);
-  //console.log('Rating:', averageRatings);
-  //console.log('Description:', product.description);
-  //console.log('Product:', product);
-
-  
-
   const clientAdmin = useSelector((state) => state.clientAdmin);
 
   const { productId } = useParams();
@@ -36,11 +28,6 @@ const ProductDetail = () => {
     dispatch(getProductById(productId));
 
     dispatch(getReviews(productId))
-  }, []);
-
-  
-
-
   }, [product.stocks]);
 
 
