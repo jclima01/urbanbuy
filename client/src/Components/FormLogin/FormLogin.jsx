@@ -53,6 +53,7 @@ const FormLogin = () => {
     e.preventDefault();
     // Aquí puedes agregar la lógica para procesar el inicio de sesión
     dispatch(loginClientAdmin(email,password)).finally(() => {
+
       navigate("/dashboard");
     });
   };

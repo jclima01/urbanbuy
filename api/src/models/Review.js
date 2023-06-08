@@ -5,7 +5,8 @@ const ReviewSchema = new Schema(
   {
     text: { type: String },
     user: { type: Schema.Types.ObjectId, ref: "User" },
-    product: { type: Schema.Types.ObjectId, ref: "Product"}
+    product: { type: Schema.Types.ObjectId, ref: "Product"},
+    rating:{ type: Number }, 
   },
   { timestamps: true }
 );

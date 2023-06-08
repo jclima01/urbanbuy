@@ -9,8 +9,8 @@ import store from "./redux/store/index.js";
 import axios from "axios";
 
 
+
 axios.defaults.baseURL = "https://urbaybuy-back.up.railway.app";
-// axios.defaults.baseURL = "https://urbaybuy-back.up.railway.app";
 // axios.defaults.baseURL = "http://localhost:2800";
 
 

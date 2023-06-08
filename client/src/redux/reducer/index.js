@@ -33,6 +33,10 @@ import {
   SET_SLIDER_THEME,
   SET_SEARCH_BAR_THEME,
   SET_CARD_STYLE,
+
+  SET_REVIEW,
+  GET_REVIEWS,
+
   LOADING_PRODUCTS,
   CREATE_CHECKOUT_SESSION,
   ADD_DOMAIN,
@@ -43,6 +47,7 @@ import {
   REDUCE_QUANTITY_FROM_CART,
   INCREASE_QUANTITY_FROM_CART,
   CLEAR_CART,
+
 } from "../actions/index.js";
 
 const initialState = {
@@ -54,23 +59,18 @@ const initialState = {
   product: {},
   categories: [],
   ordersByUser: [],
+  reviews:[],
   loading: null,
   theme: "urbanBuy",
   sliderTheme: "urbanBuy",
-
   clientAdminUsers: [],
-
   cargando: false,
   cargo: null,
   error: null,
-
   searchBarTheme: "styleOne",
   cardStyle: "",
-
   checkoutUrl: "",
-
   clientAdminDomain: "",
-
   order: {},
 };
 
@@ -355,15 +355,27 @@ const rootReducer = (state = initialState, { type, payload }) => {
         cardStyle: payload,
       };
 
+
+    case SET_REVIEW:
+      return {
+        ...state,
+      };
+
+    case GET_REVIEWS:
+      return {
+        ...state,
+        reviews: payload,
+      };
     case CREATE_CHECKOUT_SESSION:
       const order = { ...state.order };
-      console.log(order)
+    
       order.cart = [];
-      console.log(order)
+     
       return {
         ...state,
         checkoutUrl: payload,
         order: order,
+
       };
 
     default:

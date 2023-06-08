@@ -45,14 +45,14 @@ export const DELETE_PRODUCT_FROM_CART = "DELETE_PRODUCT_FROM_CART";
 export const REDUCE_QUANTITY_FROM_CART = "REDUCE_QUANTITY_FROM_CART";
 export const INCREASE_QUANTITY_FROM_CART = "INCREASE_QUANTITY_FROM_CART";
 export const CLEAR_CART = "CLEAR_CART";
-
+export const SET_REVIEW = "SET_REVIEW";
+export const GET_REVIEWS = "GET_REVIEWS"
 
 
 
 export const clearCart = () => {
   try {
     return async function (dispatch) {
-
       return await dispatch({
         type: CLEAR_CART,
       });
@@ -62,6 +62,7 @@ export const clearCart = () => {
     throw new Error(err.message);
   }
 };
+
 
 export const increasePoductQuantityInCart = (productId, orderId, increase) => {
   try {
@@ -717,6 +718,46 @@ export const dataEditProduct = (obj) => ({
   payload: obj,
 });
 
+
+
+export const setReview = (productId, userId, text, rating) => {
+  try {
+    return async function (dispatch) {
+      await axios.post("/reviews/", {
+        productId,
+        userId,
+        text,
+        rating
+      });
+
+      return dispatch({
+        type: SET_REVIEW,
+      });
+    };
+    // eslint-disable-next-line no-unreachable
+  } catch (err) {
+    throw new Error(err.message);
+  }
+};
+
+export const getReviews = (productId) => {
+  try {
+    return async function (dispatch) {
+      const { data } = await axios.get(`/reviews/${productId}`);
+      //console.log('DataAction:',productId)
+      return dispatch({
+        type: GET_REVIEWS,
+        payload: data,
+      });
+    };
+    // eslint-disable-next-line no-unreachable
+  } catch (err) {
+    throw new Error(err.message);
+  }
+};
+
+
+
 export const createCheckoutSession = (cart) => {
   return async (dispatch) => {
     try {
@@ -733,3 +774,4 @@ export const createCheckoutSession = (cart) => {
     }
   };
 };
+

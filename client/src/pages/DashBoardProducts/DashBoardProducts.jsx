@@ -9,7 +9,9 @@ import DashBoardModalAddCategories from "../../Components/DashBoardModalAddCateg
 import styles from "./DashBoardProducts.module.css";
 import DashBoardEditProduct from "../../Components/DashBoardEditProduct/DashBoardEditProduct";
 import Pagination from "../../../src/pages/DashBoardUser/Pagination/Pagination";
+
 import DashBoardSetCategory from "../../Components/DashBoardSetCategory/DashBoardSetCategory";
+
 const DashBoardProducts = () => {
   //Variables
   const categories = useSelector((state) => state.categories);
@@ -281,7 +283,9 @@ const DashBoardProducts = () => {
             sort={sort}
           />
         </div>
+        
       </div>
+      
     </div>
   );
 };
