@@ -54,7 +54,7 @@ function App() {
             <Route path="/singin" element={<SignIn />} />
 
             <Route path="/signInClient" element={<SignInClient/>}/>
-            <Route path="/ecommerceuser" element={<EcommerceUser/>}/>
+            <Route path="/:domain/s" element={<EcommerceUser/>}/>
             <Route path="/dashBoard" element={<DashBoard />} />
             <Route path="/dashBoard/User" element={<DashBoardUser />} />
             <Route path="/dashBoard/Edit" element={<DashBoardEdit />} />

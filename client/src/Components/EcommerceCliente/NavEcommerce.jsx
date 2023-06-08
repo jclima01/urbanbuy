@@ -34,7 +34,7 @@ function NavEcommerce({clientAdmin}) {
     const queryString = selectedCategory
       ? `?category=${encodeURIComponent(selectedCategory)}`
       : '';
-    navigate(`/ecommerceuser${queryString}`);
+    navigate(`/${clientAdmin.domain}/s${queryString}`);
   };
 
   const handleKeyPress = (event) => {
@@ -44,7 +44,7 @@ function NavEcommerce({clientAdmin}) {
             selectedCategory
           )}`
         : `?search=${encodeURIComponent(searchValue)}`;
-      navigate(`/ecommerceuser${queryString}`);
+      navigate(`/${clientAdmin.domain}/s${queryString}`);
     }
   };
 
@@ -59,7 +59,6 @@ function NavEcommerce({clientAdmin}) {
   const handleLogout = (e) => {
     e.preventDefault()
     dispatch(logOutUser());
-   console.log(logOutUser)
     navigate(`/${clientAdmin.domain}`); // Redirige al inicio de la aplicación
   };
 console.log(user)

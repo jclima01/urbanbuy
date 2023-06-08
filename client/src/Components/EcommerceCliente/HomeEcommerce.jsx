@@ -129,10 +129,10 @@ function HomeEcommerce() {
 
   return (
           <div className={style.fondo}>
-            <NavEcommerce clientAdmin={clientAdmin}/>
+            <NavEcommerce clientAdmin={clientAdmin} />
             
             <Routes>
-              <Route exact path="ecommerceUser" Component={<EcommerceUser/>}/>
+              <Route exact path={`${clientAdmin.domain}/s`}Component={<EcommerceUser/>}/>
             </Routes>
             <div>
               <img src={BANNER}  className={style.banner}></img>
