@@ -3,6 +3,7 @@ import styles from "./ShoppingCart.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { BsArrowLeftSquareFill } from "react-icons/bs";
 import {
+  clearCart,
   deleteProductFromCart,
   getLastOrderFromUser,
   getUserById,
@@ -20,18 +21,15 @@ export default function ShoppingCart() {
 
   const clientAdmin = useSelector((state) => state.clientAdmin);
 
-  const checkout = async (orderId) => {
-    const { data } = await axios.post(
-      "orders/checkout/create-checkout-session",
-      { orderId: orderId }
-    );
+const checkout = async (orderId) => {
+  const { data } = await axios.post(
+    "orders/checkout/create-checkout-session",
+    { orderId: orderId }
+  );
 
-    const popupWindow = window.open(
-      data.url,
-      "Checkout Popup",
-      "width=1200,height=600"
-    );
-  };
+  window.open(data.url, "_blank");
+  dispatch(clearCart());
+};
 
   const removeProductFromCart = (productId, orderId) => {
     dispatch(deleteProductFromCart(productId, orderId));

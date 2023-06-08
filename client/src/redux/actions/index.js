@@ -44,6 +44,24 @@ export const GET_LAST_ORDER_FROM_USER = "GET_LAST_ORDER_FROM_USER";
 export const DELETE_PRODUCT_FROM_CART = "DELETE_PRODUCT_FROM_CART";
 export const REDUCE_QUANTITY_FROM_CART = "REDUCE_QUANTITY_FROM_CART";
 export const INCREASE_QUANTITY_FROM_CART = "INCREASE_QUANTITY_FROM_CART";
+export const CLEAR_CART = "CLEAR_CART";
+
+
+
+
+export const clearCart = () => {
+  try {
+    return async function (dispatch) {
+
+      return await dispatch({
+        type: CLEAR_CART,
+      });
+    };
+    // eslint-disable-next-line no-unreachable
+  } catch (err) {
+    throw new Error(err.message);
+  }
+};
 
 export const increasePoductQuantityInCart = (productId, orderId, increase) => {
   try {

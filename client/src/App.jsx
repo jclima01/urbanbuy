@@ -20,9 +20,12 @@ import SignInClient from "./Components/EcommerceCliente/SignInClient/SignInClien
 import EcommerceUser from "./Components/EcommerceCliente/EcommerceUser";
 import PaymentSuccess from "./Components/EcommerceCliente/ShoppingCart/Payment/PaymentSuccess";
 import PaymentCanceled from "./Components/EcommerceCliente/ShoppingCart/Payment/PaymentCanceled";
+import { useSelector } from "react-redux";
 
 function App() {
   const location = useLocation();
+  const user = useSelector(state => state.user)
+  const clientAdmin = useSelector(state => state.clientAdmin)
   return (
     <>
       <div className="d-flex w-100">
@@ -42,8 +45,8 @@ function App() {
           {location.pathname === "/dashboard/Settings" && <NavBarDashBoard />}
 
           <Routes>
-            <Route path="/paymentSuccess" element={<PaymentSuccess />} />
-            <Route path="/paymentCanceled" element={<PaymentCanceled />} />
+            <Route path="/paymentSuccess" element={<PaymentSuccess clientAdmin={clientAdmin} user={user} />} />
+            <Route path="/paymentCanceled" element={<PaymentCanceled clientAdmin={clientAdmin} user={user}/>} />
             <Route path="/payment" element={<Payment />} />
             <Route path="/" element={<Home />} /> {/* LadingPage */}
             <Route path="/login" element={<FormLogin />} />

@@ -42,6 +42,7 @@ import {
   DELETE_PRODUCT_FROM_CART,
   REDUCE_QUANTITY_FROM_CART,
   INCREASE_QUANTITY_FROM_CART,
+  CLEAR_CART,
 } from "../actions/index.js";
 
 const initialState = {
@@ -58,7 +59,6 @@ const initialState = {
   sliderTheme: "urbanBuy",
 
   clientAdminUsers: [],
-  cart: [],
 
   cargando: false,
   cargo: null,
@@ -76,6 +76,14 @@ const initialState = {
 
 const rootReducer = (state = initialState, { type, payload }) => {
   switch (type) {
+    case CLEAR_CART:
+      const orderCart = {...state.order}
+      orderCart.cart = []
+      orderCart.total = 0
+      return {
+        ...state,
+        order: { ...orderCart },
+      };
     case GET_CLIENT_ADMIN_BY_DOMAIN:
       return {
         ...state,
