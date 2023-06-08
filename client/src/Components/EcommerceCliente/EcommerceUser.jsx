@@ -18,7 +18,7 @@ const dispatch = useDispatch()
     dispatch(getAllProducts(clientAdminId));
     dispatch(getCategories(clientAdminId));
     // }
-  }, [dispatch, clientAdminId]);
+  }, [dispatch, clientAdminId,window.location.search]);
 
   const products = useSelector((state) => state.products);
   const [filteredProducts, setFilteredProducts] = useState([]);
