@@ -18,24 +18,25 @@ import EcommerceUser from "./EcommerceUser";
 
 
 function HomeEcommerce() {
-  const {domain} = useParams()
-  const clientAdmin = useSelector(state => state.clientAdmin)
+  const { domain } = useParams();
+  const clientAdmin = useSelector(state => state.clientAdmin);
   const products = useSelector((state) => state.products);
-  const categories = useSelector((state) => state.categories)
+  const categories = useSelector((state) => state.categories);
   const dispatch = useDispatch();
   const clientAdminId = clientAdmin._id;
   const [filteredProduct, setFilteredProducts] = useState([]);
   const [searchTerm, setSearchTerm] = useState([]);
   const [orderedProduct, setOrderedProduct] = useState([]);
-  const theme = useSelector(state => state.theme)
+  const theme = useSelector(state => state.theme);
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
-console.log(domain)
-console.log(clientAdminId)
+  
+
   useEffect(() => {
     dispatch(getClientAdminByDomain(domain));
-    if(clientAdmin) {
-    dispatch(getAllProducts(clientAdminId));
-    dispatch(getCategories(clientAdminId));
+    if (clientAdmin) {
+      dispatch(getAllProducts(clientAdminId));
+      dispatch(getCategories(clientAdminId));
     }
   }, [dispatch, clientAdminId]);
 
@@ -46,9 +47,7 @@ console.log(clientAdminId)
 
   const rating = Array.from(new Set(products.map((p) => p.rating)));
 
-  {
-    /* Filter */
-  }
+  // Filter
   const filterProduct = (e) => {
     if (e.target.value === "") {
       setFilteredProducts(products);
@@ -60,9 +59,7 @@ console.log(clientAdminId)
     }
   };
 
-  {
-    /* Search */
-  }
+  // Search
   const handleSearch = (searchTerm) => {
     setSearchTerm(searchTerm);
     if (searchTerm.length > 0) {
@@ -75,26 +72,22 @@ console.log(clientAdminId)
     }
   };
 
-  {
-    /* Order */
-  }
+  // Order
   const handleOrder = (order) => {
     let orderResult = [];
     if (order === "priceAs") {
       orderResult = [...filteredProduct].sort((a, b) =>
         a.price > b.price ? 1 : -1
       );
-      console.log("price", orderResult);
 
     } else if (order === "priceDs") {
       orderResult = [...filteredProduct].sort((a, b) =>
         a.price > b.price ? -1 : 1)
-    } else if  (order === "nameAs") {
+    } else if (order === "nameAs") {
 
       orderResult = [...filteredProduct].sort((a, b) =>
         a.productName.localeCompare(b.productName)
       );
-      console.log("name", orderResult);
     } else if (order === "nameDs") {
       orderResult = [...filteredProduct].sort((a, b) =>
         b.productName.localeCompare(a.productName))
@@ -104,7 +97,7 @@ console.log(clientAdminId)
     paginate(1);
   };
 
-  /*Paginado*/
+  // Paginado
   const [productsPerPage] = useState(5); // Number of products to display per page
   const [currentPage, setCurrentPage] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -130,124 +123,138 @@ console.log(clientAdminId)
   const closeModalS = () => {
     setIsModalOpenS(false);
   };
-  console.log("filterProduct: ", filteredProduct);
+  const containerClass = isDarkMode ? `${style.fondo} ${style.darkMode}` : style.fondo;
+
 
   return (
-          <div className={style.fondo}>
-            <NavEcommerce clientAdmin={clientAdmin}/>
-            
-            <Routes>
-              <Route exact path="ecommerceUser" Component={<EcommerceUser/>}/>
-            </Routes>
-            <div>
-              <img src={BANNER}  className={style.banner}></img>
-            </div>
-            
-            <h1 className={style.h1}> LOS MAS VENDIDOS</h1>
-            
-              <div className={style.card}>
-              <Card products={currentProducts} maxRating={rating} />
-            </div>
-            
-            <div className={style.faq}>
-              <img src={pagos} alt='' className={style.iconopagos}/>
-              <h6 className={style.pagos} onClick={openModal}>Metodos de pago</h6>
-              <img src={envios} alt="" className={style.iconoenvios}/>
-              <h6  className={style.envios} onClick={openModalS}>Compra segura</h6>
-            </div>
+    <div className={containerClass}>
 
-            <Modal isOpen={isModalOpen} onRequestClose={closeModal} >
-              <h2>Información sobre métodos de pago</h2>
-              <br/>
-              <p className={style.texto1}>¡Bienvenido a nuestro ecommerce! Estamos emocionados de ofrecerte una experiencia de compra segura y confiable. Entendemos la importancia de proteger tus datos y garantizar que tus transacciones sean seguras al momento de realizar tus pagos con tarjeta de crédito. Permíteme explicarte cómo garantizamos la seguridad en nuestros métodos de pago.
-              <br/>
-              <br/>
-              En primer lugar, debes saber que utilizamos tecnología de encriptación de última generación. Esto significa que toda la información que compartes con nosotros, como los detalles de tu tarjeta de crédito, se codifica y se transmite de manera segura a través de Internet. De esta manera, cualquier dato que ingreses en nuestro sitio web estará protegido contra accesos no autorizados.
-              <br/>
-              <br/>
-              Además, contamos con la certificación PCI DSS (Estándar de Seguridad de Datos de la Industria de Tarjetas de Pago). Esta certificación es un estándar reconocido internacionalmente para proteger la información confidencial de tarjetas de crédito y débito. Cumplimos con los requisitos más estrictos para garantizar que tu información personal esté segura y protegida.
-              <br/>
-              <br/>
-              Para realizar tus pagos, trabajamos con proveedores de servicios de pago confiables. Estos proveedores están especializados en procesar transacciones seguras en línea y cumplen con los más altos estándares de seguridad. Al elegir estas pasarelas de pago, nos aseguramos de que tus datos estén en buenas manos y de que tu experiencia de compra sea lo más segura posible.
-              <br/>
-              <br/>
-              Recuerda que siempre estamos monitoreando y actualizando nuestras medidas de seguridad para estar al tanto de las últimas amenazas y proteger tus datos de manera eficaz. Si en algún momento tienes alguna inquietud o pregunta sobre la seguridad de tus pagos, nuestro equipo de atención al cliente está aquí para ayudarte. Puedes contactarnos a través de correo electrónico o por teléfono, y estaremos encantados de brindarte toda la información adicional que necesites.
-              <br/>
-              <br/>
-              En resumen, en nuestro ecommerce priorizamos la seguridad de tus pagos con tarjeta de crédito. Utilizamos tecnología de encriptación, contamos con la certificación PCI DSS, trabajamos con proveedores de servicios de pago confiables y contamos con un certificado SSL. Tu confianza y satisfacción son fundamentales para nosotros, por lo que nos esforzamos por ofrecerte una experiencia de compra segura y sin preocupaciones.
-              <br/>
-              <br/>
-              ¡Gracias por elegirnos y disfruta de tus compras en nuestro ecommerce!</p>
-              <button onClick={closeModal} className={style.cerrar1}>Cerrar</button>
-            </Modal>
-            
-            <Modal isOpen={isModalOpenS} onRequestClose={closeModalS}>
-                <h2>Información sobre formas de envio</h2>
-                <p>Aquí puedes agregar el contenido que deseas mostrar en la ventana emergente.</p>
-                <button onClick={closeModalS} className={style.cerrar1}>Cerrar</button>
-            </Modal>
-        
-          {/* <div className={style.filterSearchContainer}>
-            <div className={style.searchContainer}>
-              <SearchBar onSearch={handleSearch} />
-            </div>
-            <div className={`${style.filterContainer} ${style[theme]}`}>
-              <p>Filtrar por rating:</p>
-              <select  onChange={filterProduct}>
-                <option value="" default selected>
-                  Elegir rating
+      <NavEcommerce clientAdmin={clientAdmin} />
+      <div className={style.switchContainer}>
+      <label className={style.switch}>
+  <input
+    type="checkbox"
+    checked={isDarkMode}
+    onChange={() => setIsDarkMode(!isDarkMode)}
+  />
+  <span className={style.slider}></span>
+</label>
+</div>
+
+
+      <Routes>
+        <Route exact path="ecommerceUser" element={<EcommerceUser />} />
+      </Routes>
+      <div>
+        <img src={BANNER} className={style.banner} alt="Banner"></img>
+      </div>
+
+      <h1 className={style.h1}> LOS MAS VENDIDOS</h1>
+
+      <div className={style.card}>
+        <Card products={currentProducts} maxRating={rating} />
+      </div>
+
+      <div className={style.faq}>
+        <img src={pagos} alt='' className={style.iconopagos} />
+        <h6 className={style.pagos} onClick={openModal}>Metodos de pago</h6>
+        <img src={envios} alt="" className={style.iconoenvios} />
+        <h6 className={style.envios} onClick={openModalS}>Compra segura</h6>
+      </div>
+
+      <Modal isOpen={isModalOpen} onRequestClose={closeModal} >
+        <h2>Información sobre métodos de pago</h2>
+        <br />
+        <p className={style.texto1}>¡Bienvenido a nuestro ecommerce! Estamos emocionados de ofrecerte una experiencia de compra segura y confiable. Entendemos la importancia de proteger tus datos y garantizar que tus transacciones sean seguras al momento de realizar tus pagos con tarjeta de crédito. Permíteme explicarte cómo garantizamos la seguridad en nuestros métodos de pago.
+        <br />
+        <br />
+        En primer lugar, debes saber que utilizamos tecnología de encriptación de última generación. Esto significa que toda la información que compartes con nosotros, como los detalles de tu tarjeta de crédito, se codifica y se transmite de manera segura a través de Internet. De esta manera, cualquier dato que ingreses en nuestro sitio web estará protegido contra accesos no autorizados.
+        <br />
+        <br />
+        Además, contamos con la certificación PCI DSS (Estándar de Seguridad de Datos de la Industria de Tarjetas de Pago). Esta certificación es un estándar reconocido internacionalmente para proteger la información confidencial de tarjetas de crédito y débito. Cumplimos con los requisitos más estrictos para garantizar que tu información personal esté segura y protegida.
+        <br />
+        <br />
+        Para realizar tus pagos, trabajamos con proveedores de servicios de pago confiables. Estos proveedores están especializados en procesar transacciones seguras en línea y cumplen con los más altos estándares de seguridad. Al elegir estas pasarelas de pago, nos aseguramos de que tus datos estén en buenas manos y de que tu experiencia de compra sea lo más segura posible.
+        <br />
+        <br />
+        Recuerda que siempre estamos monitoreando y actualizando nuestras medidas de seguridad para estar al tanto de las últimas amenazas y proteger tus datos de manera eficaz. Si en algún momento tienes alguna inquietud o pregunta sobre la seguridad de tus pagos, nuestro equipo de atención al cliente está aquí para ayudarte. Puedes contactarnos a través de correo electrónico o por teléfono, y estaremos encantados de brindarte toda la información adicional que necesites.
+        <br />
+        <br />
+        En resumen, en nuestro ecommerce priorizamos la seguridad de tus pagos con tarjeta de crédito. Utilizamos tecnología de encriptación, contamos con la certificación PCI DSS, trabajamos con proveedores de servicios de pago confiables y contamos con un certificado SSL. Tu confianza y satisfacción son fundamentales para nosotros, por lo que nos esforzamos por ofrecerte una experiencia de compra segura y sin preocupaciones.
+        <br />
+        <br />
+        ¡Gracias por elegirnos y disfruta de tus compras en nuestro ecommerce!</p>
+        <button onClick={closeModal} className={style.cerrar1}>Cerrar</button>
+      </Modal>
+
+      <Modal isOpen={isModalOpenS} onRequestClose={closeModalS}>
+        <h2>Información sobre formas de envio</h2>
+        <p>Aquí puedes agregar el contenido que deseas mostrar en la ventana emergente.</p>
+        <button onClick={closeModalS} className={style.cerrar1}>Cerrar</button>
+      </Modal>
+
+      {/* <div className={style.filterSearchContainer}>
+        <div className={style.searchContainer}>
+          <SearchBar onSearch={handleSearch} />
+        </div>
+        <div className={`${style.filterContainer} ${style[theme]}`}>
+          <p>Filtrar por rating:</p>
+          <select onChange={filterProduct}>
+            <option value="" defaultSelected>
+              Elegir rating
+            </option>
+            {rating.map((r) => {
+              return (
+                <option key={r} value={r}>
+                  {r}
                 </option>
-                {rating.map((r) => {
-                  return (
-                    <option key={r} value={r}>
-                      {r}
-                    </option>
-                  );
-                })}
-              </select>
-            </div>
-         
-          <div className={`${style.buttonDiv} ${style[theme]}`} >
-            <p>Ordenar por:</p>
+              );
+            })}
+          </select>
+        </div>
 
-            <button onClick={() => handleOrder("priceAs")}>Precio Ascendente</button>
-            <button onClick={() => handleOrder("priceDs")}>Precio Descendente</button>
-            <button onClick={() => handleOrder("nameAs")}>Nombre A - Z</button>
-            <button onClick={() => handleOrder("nameDs")}>Nombre Z - A</button>
-          </div>
+        <div className={`${style.buttonDiv} ${style[theme]}`} >
+          <p>Ordenar por:</p>
 
-          </div>
+          <button onClick={() => handleOrder("priceAs")}>Precio Ascendente</button>
+          <button onClick={() => handleOrder("priceDs")}>Precio Descendente</button>
+          <button onClick={() => handleOrder("nameAs")}>Nombre A - Z</button>
+          <button onClick={() => handleOrder("nameDs")}>Nombre Z - A</button>
+        </div>
 
-          <div>
-            {filteredProduct.length > productsPerPage && (
-              <ul className="pagination">
-                {Array(Math.ceil(filteredProduct.length / productsPerPage))
-                  .fill()
-                  .map((_, index) => (
-                    <li
-                      key={index}
-                      className={`page-item ${
-                        currentPage === index + 1 ? "active" : ""
-                      }`}
-                    >
-                      <button
-                        onClick={() => paginate(index + 1)}
-                        className="page-link"
-                      >
-                        {index + 1}
-                      </button>
-                    </li>
-                  ))}
-              </ul>
-            )}
-          </div> */}
-          
-            <div>
-              <footer className={style.footer}>Derechos reservados UrbanBuy@copy2023</footer>
-            </div>
-     
-          </div>
-    );
+      </div>
+
+      <div>
+        {filteredProduct.length > productsPerPage && (
+          <ul className="pagination">
+            {Array(Math.ceil(filteredProduct.length / productsPerPage))
+              .fill()
+              .map((_, index) => (
+                <li
+                  key={index}
+                  className={`page-item ${
+                    currentPage === index + 1 ? "active" : ""
+                    }`}
+                >
+                  <button
+                    onClick={() => paginate(index + 1)}
+                    className="page-link"
+                  >
+                    {index + 1}
+                  </button>
+                </li>
+              ))}
+          </ul>
+        )}
+      </div> */}
+
+      <div>
+        <footer className={style.footer}>
+          <h2>Todos los derechos reservados. {clientAdmin.businessName} &copy;</h2>
+        </footer>
+      </div>
+    </div>
+  );
 }
 
 export default HomeEcommerce;
