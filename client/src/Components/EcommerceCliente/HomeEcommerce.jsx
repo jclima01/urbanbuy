@@ -144,7 +144,7 @@ function HomeEcommerce() {
 
 
       <Routes>
-        <Route exact path=`${clientAdmin.domain}/s` element={<EcommerceUser />} />
+        <Route exact path={`${clientAdmin.domain}/s`} element={<EcommerceUser />} />
       </Routes>
       <div>
         <img src={BANNER} className={style.banner} alt="Banner"></img>
