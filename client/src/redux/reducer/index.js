@@ -59,28 +59,18 @@ const initialState = {
   product: {},
   categories: [],
   ordersByUser: [],
-
   reviews:[],
-
-
   loading: null,
-
   theme: "urbanBuy",
   sliderTheme: "urbanBuy",
-
   clientAdminUsers: [],
-
   cargando: false,
   cargo: null,
   error: null,
-
   searchBarTheme: "styleOne",
   cardStyle: "",
-
   checkoutUrl: "",
-
   clientAdminDomain: "",
-
   order: {},
 };
 
@@ -375,7 +365,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         reviews: payload,
-
+      };
     case CREATE_CHECKOUT_SESSION:
       const order = { ...state.order };
     
