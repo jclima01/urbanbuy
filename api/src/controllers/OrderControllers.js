@@ -177,8 +177,7 @@ const removeProductFormCart = async (orderId, productId) => {
         0
       );
     }
-    console.log("itemInCart: ");
-    console.log(itemInCart);
+
     item.stocks += itemInCart.quantity;
 
     order.total = Number(total);
@@ -256,7 +255,6 @@ const increaseQuantity = async (orderId, productId) => {
         0
       );
     }
-    console.log(item.stocks);
     if (item.stocks === 0) {
       throw new Error("Quantity exceeds stock limit");
     } else {

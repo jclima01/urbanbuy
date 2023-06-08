@@ -28,7 +28,7 @@ const DashBoardUserDetail = ({setActiveTab,activeTab,setActualPage,onOrderSelect
               <li>status:</li><li>date:</li><li>created:</li><li>prod:</li><li>price:</li><li>payment</li><li>option</li>
               </ul>
               <ul>
-              {user?.orders?.map((order) => {console.log(order);
+              {user?.orders?.map((order) => {
                 return (
                   <li className={styles.liUsers} key={order._id}>
                     <h5> {order.status}</h5>

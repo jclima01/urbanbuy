@@ -73,7 +73,6 @@ const ClientAdminLogin = async (email, password) => {
     const token = jwt.sign({ id: clientAdmin._id }, process.env.KEY_JWT, {
       expiresIn: "1h",
     });
-    console.log({ token, ...clientAdmin._doc });
     return await ClientAdmin.findOne({ email });
   } catch (error) {
     throw new Error(error.message);
@@ -106,12 +105,9 @@ const ClientDelete = async (clientId) => {
 };
 const addDomain = async (domain, clientAdminId) => {
   try {
-    console.log(domain);
-    console.log(clientAdminId);
     const clientAdmin = await ClientAdmin.findById(clientAdminId);
     clientAdmin.domain = domain;
     const savedClientAdmin = await clientAdmin.save();
-    console.log(savedClientAdmin);
     return savedClientAdmin;
   } catch (error) {
     throw new Error(error.message);
@@ -121,7 +117,6 @@ const getClientAdminByDomain = async (domain) => {
   try {
     const clientAdmin = await ClientAdmin.findOne({ domain: domain });
     // const savedClientAdmin = await clientAdmin.save();
-    console.log(clientAdmin);
     return clientAdmin;
   } catch (error) {
     throw new Error(error.message);
