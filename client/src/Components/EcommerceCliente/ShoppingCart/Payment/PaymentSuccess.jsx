@@ -1,9 +1,23 @@
-import React from 'react'
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { clearCart } from "../../../../redux/actions";
 
-const PaymentSuccess = () => {
+const PaymentSuccess = ({clientAdmin, user}) => {
+
+
+  const handleNavigate = (e) => {
+    e.preventDefault()
+    
+    window.close();
+  }
+
   return (
-    <div>Payment Success, now you can close this window</div>
-  )
-}
+    <>
+      <div>Payment Success, now you can close this window</div>
+      <button onClick={handleNavigate}>go back</button>
+    </>
+  );
+};
 
-export default PaymentSuccess
+export default PaymentSuccess;
