@@ -1,118 +1,92 @@
-.container{
-height: 100px;
-margin-bottom: 40px;
-background-color:#ff9900;
-display:block;
-justify-content: center;
-align-content: center;
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ff9900;
+  height: 100px;
+  margin-bottom: 40px;
 }
 
 .logoClient {
-  width: 50PX;
- margin-top: 10PX;
-  margin-left: 70px;
-  
+  width: 50px;
+  margin-left: 20px;
 }
 
-/* .navEcommerce {
-  background-color: rgb(218, 219, 215);
-  padding: 100px;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);
-} */
-
-.urbanBuy {
+.select {
   background-color: #ff9900;
-  color: #ffffff;
+  margin-left: 60px;
+  height: 40px;
+  color: white;
+  font-size: 20px;
+  border: none;
+  outline: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 }
 
-.marino {
-  background-color: #112233;
-  color: #ffffff;
+.middleSection {
+  flex-grow: 1;
 }
 
-.floral {
-  background-color: #793a96;
-  color: #000000;
-}
-
-.SingnIn{
- margin-left: 1500px;
- margin-top: -50px;
- 
-}
-
-
-.input{
- 
-  margin-left: 600px;
-  margin-top: -43px;
-}
- 
-.inputSearch{
-  width: 55%;
+.inputSearch {
+  width: 70%;
   height: 40px;
   border-radius: 10px;
-  border:#ff7300;
-  margin-left: -100px;
-}
-.button1{
-  background-color: #000000;
-  color: white;
-  height: 50px;
-  width: 100px;
   border: none;
-  border-radius: 10px;
-}
-.button1:hover{
-  background-color: whitesmoke;
-  color: #000000;
+  padding: 0 10px;
+  margin-left: 90px;
 }
 
-.button2{
-  background-color: #000000;
-  color: white;
-  height: 50px;
-  width: 100px;
-  border: none;
-  border-radius: 10px;
+.userContainer {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+  position: relative; /* Agregado para establecer el contexto de posicionamiento */
+}
+
+.hola {
+ font-size: 18px;
+ margin-left: 20px;
+}
+
+.avatar {
+  position: relative; /* Agregado para establecer el contexto de posicionamiento */
+  cursor: pointer;
   margin-left: 10px;
 }
 
-.button2:hover{
-  background-color: whitesmoke;
-  color: #000000;
+.dropdownContainer {
+  position: absolute;
+  top: 100%; /* Posiciona el menú desplegable justo debajo del avatar */
+  right: 0;
+  margin-top: 5px; /* Ajusta el margen superior para separarlo del avatar */
 }
 
-.categorias{
-background-color: #ff9900;
-  margin-left: -600px;
-  height: 40px;
-  width: 150px;
-  color: white;
-  font-size: 20px;
-}
-.select {
-  border: none;
-  outline: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-}
-
-.option{
-  border: none;
-  outline: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-}
-.avatar{
-  margin-left: 1000px;
-  margin-top: -65px;
-}
-.hola{
-  margin-left: 830px;
-  margin-top: -20px;
+.dropdownMenu {
+  background-color: #e9e7eb;
+  width: 200px;
+  border-radius: 5px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);
 }
 
 
+.dropdownItem {
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.dropdownItem:hover {
+  background-color: #d3d0d4;
+}
+
+.dropdownDivider {
+  margin: 5px 0;
+  border-top: 1px solid #d3d0d4;
+  color:#ff9900
+}
+
+.dropdownItem:last-child {
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
