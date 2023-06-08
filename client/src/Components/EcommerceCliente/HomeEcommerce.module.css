@@ -40,6 +40,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  width: 100%;
 }
 
 .filterSearchContainer {
@@ -97,6 +99,7 @@
   margin-left: 5px;
 padding: 10px;
 margin-bottom: 10px;
+
 }
 
 .marino select {
@@ -107,6 +110,7 @@ margin-bottom: 10px;
   margin-left: 5px;
 padding: 10px;
 margin-bottom: 10px;
+
 }
 
 .floral select {
@@ -147,4 +151,153 @@ margin-bottom: 10px;
   margin-left: 5px;
   padding: 10px;
   margin-bottom: 10px;
+}
+
+.banner{
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  width: 100%;
+  margin-top: 50px;
+}
+
+.footer{
+  background-color: rgb(243, 147, 4);
+  padding: 50px;
+  margin-top: 50px;
+  position:absolute;
+  width: 88.8%;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  color:white
+}
+
+.h1{
+  margin-top: 50px;
+  margin-left: 650px;
+  color:#ff9900
+}
+
+.faq{
+  
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.6);
+  height: 150px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  
+}
+.darkMode {
+  background-color: rgb(36, 35, 35);
+  color: white;
+}
+
+.pagos{
+  font-size: 35px;
+  color:#ff9900;
+  margin-top: 50px;
+}
+  
+ .pagos:hover{
+  color: black;
+ }
+
+.envios{
+  font-size: 35px;
+  color:#ff9900;
+  margin-left: 20px;
+  margin-top: 50px;
+}
+
+.envios:hover{
+  color: black;
+}
+.card{
+  margin-bottom: 30px;
+}
+
+.iconopagos{
+  width: 60px;
+  height: 60px;
+  margin-top: 40px;
+  margin-right: 20px;
+}
+
+.iconoenvios{
+  margin-left:400px;
+  width: 110px;
+  height: 110px;
+  margin-top: 5px;
+}
+
+.text1{
+  font-size: 30px;
+  color: #793a96;
+}
+
+.cerrar1{
+  background-color: #ff9900;
+  border: none;
+  width: 100px;
+  height: 50px;
+  border-radius: 10px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+
+.switchContainer {
+  position: relative;
+  width: 60px;
+  height: 34px;
+  margin-left: 910px;
+  margin-top: -80px;
+  transform: scale(0.7);
+}
+
+.switch {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  border-radius: 34px;
+  transition: background-color 0.3s;
+  cursor: pointer;
+}
+
+.switch input {
+  display: none;
+}
+
+.slider {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  right: 2px;
+  bottom: 2px;
+  background-color: white;
+  border-radius: 34px;
+  transition: transform 0.3s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 2px;
+  bottom: 2px;
+  background-color: #999;
+  border-radius: 50%;
+  transition: transform 0.3s;
+}
+
+input:checked + .slider {
+  background-color: #3a3937;
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
 }

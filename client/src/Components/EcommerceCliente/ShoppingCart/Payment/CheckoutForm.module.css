@@ -1,0 +1,19 @@
+.checkForm {
+  width: 50%;
+}
+
+.checkForm p {
+  background-color: rgb(243, 156, 18);
+  color: white;
+  padding: 10px 25px;
+  border-radius: 10px;
+}
+
+.checkForm button {
+  border: none;
+  border-radius: 5px;
+  color: white;
+  background-color: rgb(243, 156, 18);
+  margin: 25px 0 0 5px;
+  padding: 10px;
+}

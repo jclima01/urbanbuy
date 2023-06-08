@@ -10,6 +10,7 @@ import ProductReview from "../../Components/ProductReview/ProductReview";
 
 const ProductDetail = () => {
   const product = useSelector((state) => state.product);
+
   const reviews = useSelector((state) => state.reviews);
   //const sumRatings = reviews.reduce((acc, review) => acc + review.rating, 0); // Suma de los elementos del array
  // const averageRatings = sumRatings / reviews.length; // Promedio de las revisiones
@@ -25,21 +26,31 @@ const ProductDetail = () => {
   //console.log('Product:', product);
 
   
+
+  const clientAdmin = useSelector((state) => state.clientAdmin);
+
   const { productId } = useParams();
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getProductById(productId));
+
     dispatch(getReviews(productId))
   }, []);
 
   
 
+
+  }, [product.stocks]);
+
+
   return (
     <>
       <div className={style.detailContainer}>
       <div className={style.navButtons}>
-          <Link to="/homecliente">
+
+          <Link to={`/${clientAdmin.domain}`}>
+
             <button className={style.button}>go back</button>
           </Link>
 
@@ -66,7 +77,7 @@ const ProductDetail = () => {
           </ul>
           </div>
           <div className={style.descriptionContainer}>
-            <p className={style.description}>{product?.description}</p>
+            <p className={style.description}>{product.description}</p>
             <div>
               {product.categories?.map((categorie) => {
                 return <div>{categorie.categoryName}</div>;
@@ -74,7 +85,7 @@ const ProductDetail = () => {
             </div>
           </div>
 
-          <AddToCart product={product} stock={product.stocks} />
+          <AddToCart stock={product.stocks} />
         </div>
         <ProductReview/>
       </div>

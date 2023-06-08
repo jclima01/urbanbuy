@@ -77,7 +77,6 @@ const DashBoardModalAddCategories = ({ show, setShow }) => {
                 }}
                 key={item._id}
               >
-                {" "}
                 {item.categoryName}
                 <button
                   style={{

@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
-import { editProduct, getAllProducts } from "../../redux/actions";
+import { editProduct } from "../../redux/actions";
 import toast, { Toaster } from "react-hot-toast";
 
 const DashBoardModalEditProduct = ({
@@ -12,32 +12,25 @@ const DashBoardModalEditProduct = ({
   handleClose,
   productName,
   description,
-  // categories,
+  categories,
   imageUrl,
   stocks,
   price,
   rating,
-  _id,
+  id,
 }) => {
-  const clientAdminId = useSelector((state) => state.clientAdmin);
-
   const dispatch = useDispatch();
-  const categories = useSelector((state) => state.categories);
-  const [isChecked, setIsChecked] = useState(false);
-  const [dataEditProducts, setDataEditProducts] = useState({
+  const category = useSelector((state) => state.categories);
+  let [dataEditProducts, setDataEditProducts] = useState({
     productName,
     description,
-    categories: [],
+    categories,
     imageUrl,
     stocks,
     price,
     rating,
   });
 
-  const handleCheck = (category) => {
-    if (dataEditProducts.categories.some((c) => c === category._id))
-      setIsChecked(!isChecked);
-  };
   const handleInputChange = (e) => {
     setDataEditProducts({
       ...dataEditProducts,
@@ -48,22 +41,51 @@ const DashBoardModalEditProduct = ({
     e.preventDefault();
     dispatch(
       editProduct(
-        _id,
+        id,
         dataEditProducts.productName,
         dataEditProducts.description,
-        dataEditProducts.categories,
+        dataEditProducts.categories.map(item => item._id),
         dataEditProducts.imageUrl,
         dataEditProducts.stocks,
         dataEditProducts.price,
         dataEditProducts.rating
       )
-    )
-      .then(dispatch(getAllProducts(clientAdminId)))
-      .finally(() => {
-        handleClose();
-        toast.success("Product Updated Successfully");
-      });
+    ).finally(() => {
+      handleClose();
+      toast.success("Product Updated Successfully");
+    });
   };
+
+  const handleClickCtegoryEdit = (e) => {
+    e.preventDefault();
+
+    const _id = e.target.value;
+
+
+    if (_id.trim() !== "") {
+      if (dataEditProducts.categories.some((category) => category._id === _id)) {
+        // Si la categoría ya está seleccionada, la eliminamos del arreglo
+        setDataEditProducts((prevState) => ({
+          ...prevState,
+          categories: prevState.categories.filter((category) => category._id !== _id),
+        }));
+      } else {
+        // Si la categoría no está seleccionada, la agregamos al arreglo
+        const selectedCategory = category.find((category) => category._id === _id);
+        if (selectedCategory) {
+          setDataEditProducts((prevState) => ({
+            ...prevState,
+            categories: [...prevState.categories, selectedCategory],
+          }));
+        }
+      }
+    }
+  };
+
+
+   
+
+
 
   return (
     <Modal show={show} onHide={handleClose}>
@@ -113,43 +135,24 @@ const DashBoardModalEditProduct = ({
             />
           </Form.Group>
           <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-            <Form.Label>Categroies</Form.Label>
-            <Form.Check>
-              {categories?.map((category) => (
-                <div className={s.categoriescheked}>
-                  <div key={category._id}>
-                    <Form.Check.Label>{category.categoryName}</Form.Check.Label>
-                    <Form.Check.Input
-                      type="checkbox"
-                      checked={dataEditProducts.categories.some(
-                        (c) => c === category._id
-                      )}
-                      name={category.categoryName}
-                      id={category._id}
-                      value={category.categoryName}
-                      onChange={(e) => {
-                        if (e.target.checked) {
-                          setDataEditProducts((prevData) => ({
-                            ...prevData,
-                            categories: [...prevData.categories, category._id],
-                          }));
-                          // handleCheck(category);
-                        } else {
-                          setDataEditProducts((prevData) => ({
-                            ...prevData,
-                            categories: prevData.categories.filter(
-                              (c) => c._id !== category._id
-                            ),
-                          }));
-                          // handleCheck(category);
-                        }
-                      }}
-                    />
-                  </div>
-                </div>
+            <Form.Label>Categrories</Form.Label>
+            <Form.Select onChange={handleClickCtegoryEdit}>
+              <option key=" ">Seleccionar</option>
+              {category?.map((category) => (
+                <option key={category._id} id={category._id} value={category._id}>
+                  {category.categoryName}
+                </option>
               ))}
-            </Form.Check>
+            </Form.Select>
           </Form.Group>
+
+          <div className={s.containercategorias}>
+            {dataEditProducts.categories?.map((item) => (
+              <div key={item._id} className={s.containercate}>
+                <label>{item.categoryName}</label>
+              </div>
+            ))}
+          </div>
 
           <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
             <Form.Label>Stocks</Form.Label>

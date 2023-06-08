@@ -1,4 +1,6 @@
 import axios from "axios";
+// import {stripe } from 'stripe-api-library';
+
 export const LOGIN_ADMIN = "LOGIN_ADMIN";
 export const LOGIN_CLIENT_ADMIN = "LOGIN_CLIENT_ADMIN";
 export const LOGIN_USER = "LOGIN_USER";
@@ -24,19 +26,162 @@ export const GET_USER_BY_ID = "GET_USER_BY_ID";
 export const ORDER_CLIENT_USERS = "ORDER_CLIENT_USERS";
 export const SEARCH_USERS = "SEARCH_USERS";
 export const FILTER_CLIENT_USERS = "FILTER_CLIENT_USERS";
-export const DATA_EDIT_PRODUCT = "DATA_EDIT_PRODUCT";
 export const ADD_PRODUCT_TO_CART = "ADD_PRODUCT_TO_CART";
 export const REMOVE_PRODUCT_FROM_CART = "REMOVE_PRODUCT_FROM_CART";
 export const GET_CART_FROM_LS = "GET_CART_FROM_LS";
-
-export const SET_SLIDER_THEME= "SET_SLIDER_THEME";
+export const PAGO_EXITOSO = "PAGO_EXITOSO";
+export const PAGO_FALLIDO = "PAGO_FALLIDO";
+export const LOADING_PRODUCTS = "LOADING_PRODUCTS";
+export const SET_SLIDER_THEME = "SET_SLIDER_THEME";
 export const SET_THEME = "SET_THEME";
 export const SET_SEARCH_BAR_THEME = "SET_SEARCH_BAR_THEME";
 export const SET_CARD_STYLE = "SET_CARD_STYLE";
-
+export const CREATE_CHECKOUT_SESSION = "CREATE_CHECKOUT_SESSION";
+export const ADD_DOMAIN = "ADD_DOMAIN";
+export const GET_CLIENT_ADMIN_BY_DOMAIN = "GET_CLIENT_ADMIN_BY_DOMAIN";
+export const CREATE_ORDER = "CREATE_ORDER";
+export const GET_LAST_ORDER_FROM_USER = "GET_LAST_ORDER_FROM_USER";
+export const DELETE_PRODUCT_FROM_CART = "DELETE_PRODUCT_FROM_CART";
+export const REDUCE_QUANTITY_FROM_CART = "REDUCE_QUANTITY_FROM_CART";
+export const INCREASE_QUANTITY_FROM_CART = "INCREASE_QUANTITY_FROM_CART";
+export const CLEAR_CART = "CLEAR_CART";
 export const SET_REVIEW = "SET_REVIEW";
 export const GET_REVIEWS = "GET_REVIEWS"
 
+
+
+export const clearCart = () => {
+  try {
+    return async function (dispatch) {
+      return await dispatch({
+        type: CLEAR_CART,
+      });
+    };
+    // eslint-disable-next-line no-unreachable
+  } catch (err) {
+    throw new Error(err.message);
+  }
+};
+
+
+export const increasePoductQuantityInCart = (productId, orderId, increase) => {
+  try {
+    return async function (dispatch) {
+      const { data } = await axios.put(`/orders/order/${orderId}`, {
+        productId,
+        increase,
+      });
+      return await dispatch({
+        type: INCREASE_QUANTITY_FROM_CART,
+        payload: data,
+      });
+    };
+    // eslint-disable-next-line no-unreachable
+  } catch (err) {
+    throw new Error(err.message);
+  }
+};
+export const reducePoductQuantityInCart = (productId, orderId, reduce) => {
+  try {
+    return async function (dispatch) {
+      const { data } = await axios.put(`/orders/order/${orderId}`, {
+        productId,
+        reduce,
+      });
+      return await dispatch({
+        type: REDUCE_QUANTITY_FROM_CART,
+        payload: data,
+      });
+    };
+    // eslint-disable-next-line no-unreachable
+  } catch (err) {
+    throw new Error(err.message);
+  }
+};
+export const deleteProductFromCart = (productId, orderId) => {
+  try {
+    return async function (dispatch) {
+      const { data } = await axios.put(`/orders/order/${orderId}`, {
+        productId,
+      });
+      return await dispatch({
+        type: DELETE_PRODUCT_FROM_CART,
+        payload: data,
+      });
+    };
+    // eslint-disable-next-line no-unreachable
+  } catch (err) {
+    throw new Error(err.message);
+  }
+};
+export const getLastOrderFromUser = (userId) => {
+  try {
+    return async function (dispatch) {
+      const { data } = await axios.get(`/orders/order/${userId}`);
+      return await dispatch({
+        type: GET_LAST_ORDER_FROM_USER,
+
+        payload: data,
+      });
+    };
+    // eslint-disable-next-line no-unreachable
+  } catch (err) {
+    throw new Error(err.message);
+  }
+};
+
+export const addDomainToClientAdmin = (domain, clientAdminId) => {
+  try {
+    return async function (dispatch) {
+      const { data } = await axios.put(`/clientAdmin/domain/${clientAdminId}`, {
+        domain: domain,
+      });
+      return await dispatch({
+        type: ADD_DOMAIN,
+        payload: data,
+      });
+    };
+    // eslint-disable-next-line no-unreachable
+  } catch (err) {
+    throw new Error(err.message);
+  }
+};
+
+export const getClientAdminByDomain = (domain) => {
+  try {
+    return async function (dispatch) {
+      const { data } = await axios.get(`/clientAdmin/${domain}`);
+      return await dispatch({
+        type: GET_CLIENT_ADMIN_BY_DOMAIN,
+        payload: data,
+      });
+    };
+    // eslint-disable-next-line no-unreachable
+  } catch (err) {
+    throw new Error(err.message);
+  }
+};
+
+export const createOrder = (fullName, email, cart, total, userId) => {
+  try {
+    return async function (dispatch) {
+      const { data } = await axios.post(`/orders/order/${userId}`, {
+        fullName,
+        email,
+        cart,
+        total,
+      });
+      return await dispatch({
+        type: CREATE_ORDER,
+
+        payload: data,
+      });
+    };
+    // eslint-disable-next-line no-unreachable
+  } catch (err) {
+    throw new Error(err.message);
+  }
+};
 export const getCartFromLS = () => {
   try {
     return async function (dispatch) {
@@ -62,12 +207,37 @@ export const RemoveProductFromCart = (product) => {
     throw new Error(err.message);
   }
 };
-export const addProductToCart = (productId, quantity) => {
+export const addProductToCart = (
+  productId,
+  quantity,
+  fullName,
+  email,
+  userId,
+  orderId
+) => {
   try {
     return async function (dispatch) {
+      let data;
+      if (orderId) {
+        const res = await axios.put(`/orders/order/${orderId}`, {
+          productId,
+          quantity,
+        });
+        data = res.data;
+      }
+      if (!orderId) {
+        const response = await axios.post(`/orders/order/${userId}`, {
+          productId,
+          quantity,
+          fullName,
+          email,
+        });
+        data = response.data;
+      }
+
       return await dispatch({
         type: ADD_PRODUCT_TO_CART,
-        payload: { productId, quantity },
+        payload: data,
       });
     };
     // eslint-disable-next-line no-unreachable
@@ -81,7 +251,7 @@ export const getUserById = (userId) => {
       const { data } = await axios.get(`/users/user/${userId}`);
       return dispatch({
         type: GET_USER_BY_ID,
-        payload: data,
+        payload: { ...data },
       });
     };
     // eslint-disable-next-line no-unreachable
@@ -197,9 +367,7 @@ export const postOrder = (
 export const getOrdersByUser = (userId) => {
   try {
     return async function (dispatch) {
-      const { data } = await axios.get(
-        `/orders/${userId}`
-      );
+      const { data } = await axios.get(`/orders/${userId}`);
       return dispatch({
         type: GET_ORDERS_BY_USER,
         payload: data,
@@ -213,7 +381,6 @@ export const getOrdersByUser = (userId) => {
 export const deleteProduct = (productId) => {
   try {
     return async function (dispatch) {
-
       await axios.delete(`/products/delete/${productId}`);
 
       return dispatch({
@@ -235,29 +402,23 @@ export const editProduct = (
   imageUrl,
   stocks,
   price,
-  rating,
+  rating
 ) => {
-  console.log("stocks", stocks);
-
   try {
     return async function (dispatch) {
-      const res = await axios.put(
-        `/products/${productId}`,
-        {
-          productName,
-          description,
-          categoriesIds,
-          stocks,
-          imageUrl,
-          price,
-          rating,
-        }
-      );
-      
-      console.log(res.data)
+      const { data } = await axios.put(`/products/${productId}`, {
+        productName,
+        description,
+        categoriesIds,
+        stocks,
+        imageUrl,
+        price,
+        rating,
+      });
+
       return dispatch({
         type: EDIT_PRODUCT,
-        payload: res.data,
+        payload: data,
       });
     };
     // eslint-disable-next-line no-unreachable
@@ -313,7 +474,11 @@ export const getProductById = (productId) => {
 export const getAllProducts = (clientAdminId) => {
   try {
     return async function (dispatch) {
-      console.log(clientAdminId);
+      dispatch({
+        type: LOADING_PRODUCTS,
+        payload: true,
+      });
+
       const { data } = await axios.get(`/products/${clientAdminId}`);
       return dispatch({
         type: GET_ALL_PRODUCTS,
@@ -364,7 +529,7 @@ export const loginClientAdmin = (email, password) => {
 export const loginUser = (email, password) => {
   try {
     return async function (dispatch) {
-      const { data } = await axios.post("/user/login", {
+      const { data } = await axios.post("/users/login", {
         email,
         password,
       });
@@ -415,10 +580,11 @@ export const registerClientAdmin = (fullName, email, password) => {
     throw new Error(err.message);
   }
 };
-export const registerUser = (email, password) => {
+export const registerUser = (fullName, email, password, clientAdminId) => {
   try {
     return async function (dispatch) {
-      await axios.post("/admin/register", {
+      await axios.post(`/users/register/${clientAdminId}`, {
+        fullName,
         email,
         password,
       });
@@ -471,15 +637,14 @@ export const logOutClientAdmin = () => {
 
 export const logOutUser = () => {
   try {
-    localStorage.removeItem("dataUser");
     return async function (dispatch) {
       dispatch({
         type: LOGOUT_USER,
       });
 
-      setTimeout(() => {
-        window.location.href = "/";
-      }, 100);
+      // setTimeout(() => {
+      //   window.location.href = "/";
+      // }, 100);
     };
     // eslint-disable-next-line no-unreachable
   } catch (err) {
@@ -500,15 +665,34 @@ export const searchUsers = (searchTerm) => ({
 });
 
 export const setTheme = (theme) => {
-  
   return {
     type: SET_THEME,
     payload: theme,
   };
 };
 
+export const iniciarPago = (body) => {
+  return async (dispatch) => {
+    try {
+      // Realizar la solicitud a la API de Stripe para crear un cargo
+      const cargo = await axios.post("http://localhost:2800/orders/", body);
+
+      // Manejar la respuesta exitosa del cargo
+      dispatch({
+        type: PAGO_EXITOSO,
+        payload: cargo.data,
+      });
+    } catch (error) {
+      // Manejar errores durante el proceso de pago
+      dispatch({
+        type: PAGO_FALLIDO,
+        payload: console.log(error),
+      });
+    }
+  };
+};
+
 export const setSliderTheme = (sliderTheme) => {
-  
   return {
     type: SET_SLIDER_THEME,
     payload: sliderTheme,
@@ -516,7 +700,6 @@ export const setSliderTheme = (sliderTheme) => {
 };
 
 export const setSearchBarTheme = (searchBarTheme) => {
-  
   return {
     type: SET_SEARCH_BAR_THEME,
     payload: searchBarTheme,
@@ -526,15 +709,15 @@ export const setSearchBarTheme = (searchBarTheme) => {
 export const setCardStyle = (cardStyle) => {
   return {
     type: SET_CARD_STYLE,
-    payload: cardStyle
-  }
-}
-
+    payload: cardStyle,
+  };
+};
 
 export const dataEditProduct = (obj) => ({
   type: DATA_EDIT_PRODUCT,
   payload: obj,
 });
+
 
 
 export const setReview = (productId, userId, text, rating) => {
@@ -573,4 +756,22 @@ export const getReviews = (productId) => {
   }
 };
 
+
+
+export const createCheckoutSession = (cart) => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.post(
+        "orders/checkout/create-checkout-session",
+        { cart }
+      );
+      return dispatch({
+        type: CREATE_CHECKOUT_SESSION,
+        payload: data.url,
+      });
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  };
+};
 

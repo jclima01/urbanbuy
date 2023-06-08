@@ -1,5 +1,6 @@
 import React from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
+import style from '../../SignIn/SignIn.module.css'
 
 const RegisterButton = () => {
   const { loginWithRedirect } = useAuth0();
@@ -12,15 +13,14 @@ const handleRegister = async () => {
     });
 
     // El usuario se ha registrado exitosamente
-    console.log('Usuario registrado con éxito');
   } catch (error) {
     // Error en el registro
-    console.error('Error al registrar el usuario', error);
+    throw new Error('Error al registrar el usuario', error);
   }
 };
 
   return (
-    <button onClick={handleRegister}>Registrarse con Google</button>
+    <button className={style.buttonGoogle} onClick={handleRegister}>Registrarse con Google</button>
   );
 };
 

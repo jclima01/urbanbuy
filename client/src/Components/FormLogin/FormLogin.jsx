@@ -12,8 +12,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 const FormLogin = () => {
   const { user } = useAuth0();
-  const { isAuthenticated } = useAuth0();
-  console.log(user)
+
   // useEffect(() => {
   //   if (isAuthenticated)
   //     dispatch(loginClientAdmin("jc@123.com", "123asdASD")).finally(() => {
@@ -53,7 +52,8 @@ const FormLogin = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Aquí puedes agregar la lógica para procesar el inicio de sesión
-    dispatch(loginClientAdmin(email, password)).finally(() => {
+    dispatch(loginClientAdmin(email,password)).finally(() => {
+
       navigate("/dashboard");
     });
   };
@@ -100,9 +100,11 @@ const FormLogin = () => {
               Iniciar sesión
             </button>
           </form>
+          <div >
+      <LoginAuth />
+      </div>
         </div>
       </div>
-      <LoginAuth />
     </div>
   );
 };

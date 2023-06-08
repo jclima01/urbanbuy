@@ -7,10 +7,12 @@ import { postNewProduct } from "../../redux/actions";
 import toast, { Toaster } from "react-hot-toast";
 import s from "./DashBoardAddProducts.module.css";
 
-const DashBoardAddProducts = ({ setIsActive, clientAdminId }) => {
+const DashBoardAddProducts = ({ setIsActive, clientAdminId , setIsRefresh, refresh}) => {
   const dispatch = useDispatch();
   const categorie = useSelector((state) => state.categories);
   const [Category, setsetCategory] = useState("");
+
+  let productCategories = [];
 
   const [dataProducts, setdataProducts] = useState({
     productName: "",
@@ -31,7 +33,7 @@ const DashBoardAddProducts = ({ setIsActive, clientAdminId }) => {
     price,
     rating,
   } = dataProducts;
-
+  
   const [errors, setErrors] = useState({
     productNameError: "",
     descriptionError: "",
@@ -111,6 +113,7 @@ const DashBoardAddProducts = ({ setIsActive, clientAdminId }) => {
       ).finally(() => {
         toast.success("Successfully toasted!");
         setIsActive(1200);
+        setIsRefresh(!refresh)
       });
 
       setdataProducts({
@@ -170,7 +173,14 @@ const DashBoardAddProducts = ({ setIsActive, clientAdminId }) => {
         <MdOutlineKeyboardDoubleArrowRight size={30} cursor={"pointer"} />
       </div>
       <div className={s.containerImageViewAddProduct}>
-        <img className={s.imagenView  } src={dataProducts.imageUrl || "https://us.123rf.com/450wm/rastudio/rastudio1601/rastudio160103779/51365230-icono-de-l%C3%ADnea-de-la-c%C3%A1mara-para-web-m%C3%B3vil-e-infograf%C3%ADa-vector-icono-de-l%C3%ADnea-delgada-gris-en-el.jpg?ver=6"} alt="" />
+        <img
+          className={s.imagenView}
+          src={
+            dataProducts.imageUrl ||
+            "https://us.123rf.com/450wm/rastudio/rastudio1601/rastudio160103779/51365230-icono-de-l%C3%ADnea-de-la-c%C3%A1mara-para-web-m%C3%B3vil-e-infograf%C3%ADa-vector-icono-de-l%C3%ADnea-delgada-gris-en-el.jpg?ver=6"
+          }
+          alt=""
+        />
       </div>
       <label>Image Product</label>
       <UploadWidget
@@ -220,25 +230,30 @@ const DashBoardAddProducts = ({ setIsActive, clientAdminId }) => {
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Categories</Form.Label>
           <Form.Select
-          key="1"
+            key="1"
             onChange={(e) => {
               e.preventDefault();
               setsetCategory(e.target.value);
-
+              
               if (dataProducts.categories.includes(e.target.value)) {
                 setdataProducts({
                   ...dataProducts,
-                  categories: [...categories],
+                  categories: dataProducts.categories.filter(
+                    (item) => item !== e.target.value
+                  ),
                 });
+                setsetCategory("");
               } else {
                 setdataProducts({
                   ...dataProducts,
-                  categories: [...categories, e.target.value],
+                  categories: [...dataProducts.categories, e.target.value],
                 });
+                setsetCategory("");
               }
+         
             }}
           >
-            <option value={Category}>Selecionar</option>
+            <option value="">Selecionar</option>
             {categorie?.map((category) => (
               <>
                 <option key={category._id} value={category._id}>
@@ -248,6 +263,23 @@ const DashBoardAddProducts = ({ setIsActive, clientAdminId }) => {
             ))}
           </Form.Select>
         </Form.Group>
+
+        <Form.Group>
+          <Form.Floating>
+            {dataProducts.categories?.map((item) => {
+              let foundCategory = categorie?.find(
+                (category) => category._id === item
+              );
+              if (foundCategory) {
+                productCategories.push(foundCategory.categoryName);
+              }
+            })}
+            {productCategories.map((categoryName, i) => (
+              <div key={i}>{categoryName}</div>
+            ))}
+          </Form.Floating>
+        </Form.Group>
+
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Stocks</Form.Label>
           <Form.Control
