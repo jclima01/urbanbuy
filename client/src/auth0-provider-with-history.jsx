@@ -6,7 +6,8 @@ const Auth0ProviderWithHistory = ({ children }) => {
   const navigate = useNavigate();
   const auth0Domain = import.meta.env.VITE_AUTH0_DOMAIN;
   const auth0ClientId = import.meta.env.VITE_AUTH0_CLIENT_ID;
-
+  const auth0Audience = import.meta.env.VITE_AUTH0_AUDIENCE
+  
   const onRedirectCallback = (appState) => {
     navigate(appState?.returnTo || window.location.pathname);
   };
@@ -16,6 +17,7 @@ const Auth0ProviderWithHistory = ({ children }) => {
       clientId={auth0ClientId}
       redirectUri={window.location.origin}
       onRedirectCallback={onRedirectCallback}
+      auth0Audience={auth0Audience}
     >
       {children}
     </Auth0Provider>
