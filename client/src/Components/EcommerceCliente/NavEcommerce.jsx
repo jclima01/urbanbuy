@@ -7,7 +7,7 @@ import Avatar from "../Avatares/AvatarUser";
 import Modal from "react-modal";
 import { logOutUser } from "../../redux/actions";
 import { Dropdown } from "react-bootstrap";
-import CartWidget from "./CartWidget/CartWidget";
+import CartWidget from "../EcommerceCliente/CartWidget/CartWidget.jsx";
 
 function NavEcommerce({ clientAdmin }) {
   const [searchValue, setSearchValue] = useState("");
@@ -109,10 +109,9 @@ function NavEcommerce({ clientAdmin }) {
             <div className={style.avatar} onClick={openMenu}>
               <Avatar size={40} />
             </div>
-            
-              <CartWidget />
-            
 
+
+            <CartWidget />
             {showMenu && (
               <div className={style.dropdownContainer}>
                 <div className={style.dropdownMenu}>
