@@ -19,6 +19,7 @@ export default function ShoppingCart() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
 
+
   const clientAdmin = useSelector((state) => state.clientAdmin);
 
 const checkout = async (orderId) => {
