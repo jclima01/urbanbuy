@@ -37,14 +37,12 @@ function Home(props) {
   return (
     <div className="home-landing">
       <AppNavbar />
-
       <Introduction />
       <Slider />
       <CompraSegura />
       <Faq />
       <Team />
       {/* <ProductDetail productId={productId}/> */}
-
       <Footer />
     </div>
   );
