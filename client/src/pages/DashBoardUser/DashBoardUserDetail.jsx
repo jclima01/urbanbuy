@@ -43,7 +43,7 @@ const DashBoardUserDetail = ({
               <li className={styles.liUsers} key={order._id}>
                 <h5> {order.status}</h5>
                 <h5>{order.createdAt.slice(0, 10)}</h5>
-                <div>
+                {/* <div>
                   {order.adress.city && <h6>{order.adress.city}</h6>}
                   {order.adress.country && <h6>{order.adress.country}</h6>}
                   {order.adress.line1 && <h6>{order.adress.line1}</h6>}
@@ -52,7 +52,7 @@ const DashBoardUserDetail = ({
                     <h6>{order.adress.postal_code}</h6>
                   )}
                   {order.adress.state && <h6>{order.adress.state}</h6>}
-                </div>
+                </div> */}
 
                 <h5>{order.cart.length}</h5>
                 <h5 className={styles.orderPrice}> {order.total}</h5>

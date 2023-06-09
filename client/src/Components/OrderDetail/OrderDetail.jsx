@@ -11,16 +11,14 @@ const OrderDetail = ({ orderDetail }) => {
           <ul>
             {console.log(order)}
             <div>
-              {orderDetail.adress.city && <h6>{orderDetail.adress.city}</h6>}
-              {orderDetail.adress.country && (
-                <h6>{orderDetail.adress.country}</h6>
+              {order.adress?.city && <h6>{"city: " + order.adress?.city}</h6>}
+              {order.adress?.country && <h6>{"country: " +order.adress?.country}</h6>}
+              {order.adress?.line1 && <h6>{"line1: " +order?.adress?.line1}</h6>}
+              {order.adress?.line2 && <h6>{"line2: " +order?.adress?.line2}</h6>}
+              {order.adress?.postal_code && (
+                <h6>{"postal code: " +order.adress?.postal_code}</h6>
               )}
-              {orderDetail.adress.line1 && <h6>{orderDetail.adress.line1}</h6>}
-              {orderDetail.adress.line2 && <h6>{orderDetail.adress.line2}</h6>}
-              {orderDetail.adress.postal_code && (
-                <h6>{orderDetail.adress.postal_code}</h6>
-              )}
-              {orderDetail.adress.state && <h6>{orderDetail.adress.state}</h6>}
+              {order.adress?.state && <h6>{"state: " +order?.adress?.state}</h6>}
             </div>
           </ul>
         </div>
@@ -47,11 +45,7 @@ const OrderDetail = ({ orderDetail }) => {
           <ul className={styles.cartItems}>
             {order?.cart?.map((item, index) => (
               <li key={index}>
-                <h6>{item.productName}</h6>
-                <h6>{item.quantity}</h6>
-                <h6>{item.productName}</h6>
-                <h6>{item.productName}</h6>
-                <h6>{item.productName}</h6>
+                <h6>{item.productName + " * " + item.quantity}</h6>
               </li>
             ))}
           </ul>
