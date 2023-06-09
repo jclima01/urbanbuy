@@ -7,7 +7,7 @@ import Avatar from "../Avatares/AvatarUser";
 import Modal from "react-modal";
 import { logOutUser } from "../../redux/actions";
 import { Dropdown } from "react-bootstrap";
-import CartWidget from "./CartWidget/CartWidget";
+import CartWidget from "./cartWidget/CartWidget";
 
 function NavEcommerce({ clientAdmin }) {
   const [searchValue, setSearchValue] = useState("");
