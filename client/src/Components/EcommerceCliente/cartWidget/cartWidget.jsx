@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { BsCart } from "react-icons/bs";
 import { useNavigate } from "react-router";
 import styles from "./CartWidget.module.css";
