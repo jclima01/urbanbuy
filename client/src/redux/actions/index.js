@@ -606,8 +606,9 @@ export const updateOrder = (orderId, status, adress,clientId) => {
   }
 };
 
-export const sortOrdersByDate = () => ({
-  type: SORT_ORDERS_BY_DATE
+export const sortOrdersByDate = (valor) => ({
+  type: SORT_ORDERS_BY_DATE,
+  payload: valor,
 });
 
 export const filterOrders =(status) => (

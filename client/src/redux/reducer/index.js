@@ -362,9 +362,21 @@ const rootReducer = (state = initialState, { type, payload }) => {
       case SORT_ORDERS_BY_DATE:
         // Utiliza el spread operator (...) para crear una copia de la lista de órdenes actual
         const sortedOrders = [...state.orders];
-
+      if(payload === "total_min") {
+        sortedOrders.sort((a, b) => a.total - b.total)
+      }
+      if(payload === "total_max") {
+        sortedOrders.sort((a, b) => b.total - a.total)
+      }
+      if(payload === "date_asc"){
         // Ordena la lista de órdenes por fecha (suponiendo que tienes una propiedad "date" en cada objeto de orden)
-        sortedOrders.sort((a, b) => a.date - b.date);
+        sortedOrders.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+      }
+      if(payload === "date_des"){
+        // Ordena la lista de órdenes por fecha (suponiendo que tienes una propiedad "date" en cada objeto de orden)
+        sortedOrders.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
+      }
+
 
         return {
           ...state,

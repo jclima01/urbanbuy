@@ -22,6 +22,7 @@ const DashBoardShipping = () => {
   const handleShow = () => setShow(true);
 
   const [orderSelected, setOrderSelected] = useState("");
+  const [filterSelected, setFilterSelected] = useState("All");
 
   const estadosOrden = [
     "Pending",
@@ -60,6 +61,7 @@ const DashBoardShipping = () => {
   };
 
   const handleFilter = (e) => {
+    setFilterSelected(e.target.value);
     if(e.target.value==='All'){
       dispatch(orderClient(clientAdminId));
     }
@@ -68,6 +70,7 @@ const DashBoardShipping = () => {
 
   useEffect(() => {
     dispatch(orderClient(clientAdminId));
+  
   }, [dispatch, clientAdminId]);
 
   return (
@@ -89,7 +92,7 @@ const DashBoardShipping = () => {
                 ref={order}
                 onChange={OrdenamientoOrders}
               >
-                <option value="default">Ordenamiento</option>
+                <option value="default">Ordering</option>
                 <option value="total_min">Total Min </option>
                 <option value="total_max">Total Max </option>
                 <option value="date_asc">Date Asc</option>
@@ -146,7 +149,7 @@ const DashBoardShipping = () => {
                 <tr key={order._id}>
                   {/* <td>{order._id}</td> */}
                   <td>
-                    <select
+                    {/* <select
                       disabled
                       name={"status-" + order._id}
                       className="seleccion"
@@ -160,7 +163,8 @@ const DashBoardShipping = () => {
                           {estado}
                         </option>
                       ))}
-                    </select>
+                    </select> */}
+                    {order.status}
                   </td>
                   <td>{order?.fullName}</td>
                   <td>{order?.email}</td>
@@ -185,12 +189,12 @@ const DashBoardShipping = () => {
                     >
                       Edit
                     </button>
-                    <button
+                    {/* <button
                       className="btn-boton"
                       onClick={() => dispatch(deleteOrder(order._id))}
                     >
                       Delete
-                    </button>
+                    </button> */}
                   </td>
                 </tr>
               ))}
