@@ -1,6 +1,5 @@
 const { updateOrder } = require("../controllers/WebhookController");
 
-
 const webhookHandler = async (req, res) => {
   try {
     const event = req.body;
@@ -8,10 +7,13 @@ const webhookHandler = async (req, res) => {
     switch (event.type) {
       case "checkout.session.completed":
         const checkoutSessionCompleted = event.data.object;
-        // Lógica para manejar el evento payment_intent.created
-
+        console.log(checkoutSessionCompleted);
         //agregar el adress
-        const updatedOrder = updateOrder(checkoutSessionCompleted.id, checkoutSessionCompleted.payment_status)
+        const updatedOrder = updateOrder(
+          checkoutSessionCompleted.id,
+          checkoutSessionCompleted.payment_status,
+          checkoutSessionCompleted.customer_details.address
+        );
         res.status(200).json(updatedOrder);
         break;
       case "payment_intent.created":
@@ -22,7 +24,6 @@ const webhookHandler = async (req, res) => {
 
       case "payment_intent.succeeded":
         const paymentIntentSucceeded = event.data.object;
-
 
         res.status(200).json(paymentIntentSucceeded);
         break;

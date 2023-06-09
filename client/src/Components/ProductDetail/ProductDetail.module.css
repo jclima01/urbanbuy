@@ -3,8 +3,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 80%;
-  height: 700px; /* Altura fija del contenedor principal */
+  width: 100vw;
+  height: 100vh; /* Altura fija del contenedor principal */
   gap: 20px;
   align-self: center;
   
@@ -13,12 +13,12 @@
 .navButtons {
   display: flex;
   justify-content: space-between;
-  width: 100%;
+  width: 80%;
 }
 
 .cardContainer {
   box-sizing: border-box;
-  width: 100%;
+  width: 80%;
   height: 800px;
   display: flex;
   flex-direction: row;
