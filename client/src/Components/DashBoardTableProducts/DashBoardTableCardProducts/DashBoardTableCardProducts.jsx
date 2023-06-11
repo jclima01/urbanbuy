@@ -12,16 +12,12 @@ const DashBoardTableCardProducts = ({
   stocks,
   price,
   rating,
-  id,
+  _id,
   setIsActive,
+  
 }) => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
-
-  const clientAdminStorage =
-  JSON.parse(localStorage.getItem("clientAdmin")) ?? false;
-const clientAdminId = clientAdminStorage._id;
-  
   const handleShow = () => setShow(true);
   const [idReference, setIdReference] = useState("");
   const dispatch = useDispatch();
@@ -36,7 +32,7 @@ const clientAdminId = clientAdminStorage._id;
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        setIdReference(id);
+        setIdReference(_id);
         Swal.fire("Deleted!", "Your file has been deleted.", "success");
       }
     });
@@ -45,6 +41,7 @@ const clientAdminId = clientAdminStorage._id;
 
   useEffect(() => {
     dispatch(deleteProduct(idReference));
+    dispatch(getAllProducts());
   }, [dispatch, idReference]);
   return (
     <tbody>
@@ -78,7 +75,7 @@ const clientAdminId = clientAdminStorage._id;
         </td>
         <td>{productName}</td>
         <td className={styles.flexwrap}>
-          {categories?.map((element) => element.categoryName).join(", ")}
+          {categories.map((element) => element.categoryName).join("-")}
         </td>
         <td>{stocks}</td>
         <td>{price}</td>
@@ -87,9 +84,9 @@ const clientAdminId = clientAdminStorage._id;
           <button className={styles.button} onClick={handleDelete}>
             delete
           </button>
-          <button className={styles.button} onClick={handleShow}>
+          {/* <button className={styles.button} onClick={handleShow}>
             Edit
-          </button>
+          </button> */}
         </td>
       </tr>
 
@@ -103,7 +100,7 @@ const clientAdminId = clientAdminStorage._id;
       stocks={stocks}
       price={price}
       rating={rating}
-      id={id}
+      _id={_id}
       />
     </tbody>
   );

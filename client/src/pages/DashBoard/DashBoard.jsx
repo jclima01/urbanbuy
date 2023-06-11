@@ -7,52 +7,40 @@ import { Products, User, categoryProducts } from "../../data";
 import { Link } from "react-router-dom";
 import { IoMdAddCircleOutline } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
-import {
-  addDomainToClientAdmin,
-  getAllProducts,
-  getClientAdminUsers,
-} from "../../redux/actions";
+import { useEffect } from "react";
+import { getAllProducts, getClientAdminUsers } from "../../redux/actions";
 import LoginAuth from "../../Components/FormLogin/LoginAuth";
-import alt from "./DashBoard.module.css";
-
-//Importante: Las modificiaciones al boton "go site View" estan hechas para que cuando no este definido el dominio se deshabilite el link
-
 const DashBoard = () => {
   const products = useSelector((state) => state.products);
-  const clientAdminDomain = useSelector((state) => state.clientAdminDomain);
+
+  const users = useSelector((state) => state.users);
   const clientAdmin = useSelector((state) => state.clientAdmin);
   const productsSlice = products.slice(0, 4);
   const clientAdminStorage =
     JSON.parse(localStorage.getItem("clientAdmin")) ?? false;
+  console.log(clientAdminStorage);
+  const adminStorage = clientAdminStorage ? clientAdminStorage : clientAdmin;
   const dispatch = useDispatch();
+
+
   useEffect(() => {
     dispatch(getAllProducts(clientAdminStorage._id));
     dispatch(getClientAdminUsers(clientAdminStorage._id));
   }, []);
 
-  const [domain, setDomain] = useState("");
-  const handleInputChange = (e) => {
-    setDomain(e.target.value);
-  };
-  const addDomain = (e) => {
-    e.preventDefault();
-    dispatch(addDomainToClientAdmin(domain, clientAdminStorage._id));
-  };
-
   return (
-    <div className="vh-100 w-100 d-flex justify-content-center align-items-center overflow-hidden ">
+    <div className="vh-100 w-100 d-flex justify-content-center overflow-hidden ">
       <div className="contianer-home">
-        <div className="d-flex h-50 d-flex justify-content-center align-items-center  ">
+        <div className="d-flex h-100 w-100">
           <div className="freaturedSettion">
             <div
               style={{
                 height: "100%",
-                width: "90%",
+                width: "70%",
                 marginLeft: 30,
               }}
             >
-              <p
+              {/* <p
                 style={{
                   padding: 5,
                   background: "#eee6e6cc",
@@ -61,8 +49,8 @@ const DashBoard = () => {
                   borderRadius: 15,
                 }}
               >
-                Apr 11 2023 3:00 pm
-              </p>
+                Apr 11 2023 3:00 pm{" "}
+              </p> */}
               <p></p>
               <h1
                 style={{
@@ -74,34 +62,10 @@ const DashBoard = () => {
               <p style={{ fontSize: 20 }}>
                 Improve your products in our section.
               </p>
-              {clientAdmin.domain !== undefined ? (
-                <Link to={`/${clientAdmin.domain}`}>
-                  <button
-                    className={`${alt.button} ${
-                      clientAdmin.domain === "" ? alt.disabled : ""
-                    }`}
-                    style={{
-                      cursor: "pointer",
-                      fontSize: 20,
-                      width: 200,
-                      marginTop: 15,
-                      padding: 15,
-                      borderRadius: 15,
-                      background: "#ff7f2a",
-                      border: "none",
-                      color: "white",
-                      fontWeight: 400,
-                    }}
-                    disabled={clientAdmin.domain === ""}
-                  >
-                    Go Site View.
-                  </button>
-                </Link>
-              ) : (
+              <Link to={"/homecliente"}>
                 <button
-                  className={`${alt.button} ${alt.disabled}`}
                   style={{
-                    cursor: "not-allowed",
+                    cursor: "pointer",
                     fontSize: 20,
                     width: 200,
                     marginTop: 15,
@@ -112,11 +76,10 @@ const DashBoard = () => {
                     color: "white",
                     fontWeight: 400,
                   }}
-                  disabled={true}
                 >
                   Go Site View.
                 </button>
-              )}
+              </Link>
             </div>
 
             <div style={{ width: "30%", height: "100%" }}>
@@ -133,47 +96,26 @@ const DashBoard = () => {
               />
             </div>
           </div>
-          <div className="freaturedSettion2">
+          {/* <div className="freaturedSettion2">
             <div className=" d-flex w-100 h-75 gap-4  align-items-center">
-                {/* <div className="container-image-logo">
-                  <img src={logo} alt="" />
-                </div> */}
+              <div className="container-image-logo">
+                <img src={logo} alt="" />
+              </div>
               <div className="d-flex flex-column h-50">
                 <h1 className="TextlogoFreatured">UrbanBuy</h1>
                 <p className="Text2Freatured">Ecommerce</p>
-                <p style={{ fontSize: 15, fontWeight: 500, textAlign: "left" }}>
-                  El dominio es la dirección única de tu tienda en línea.
-                  Registra un dominio para que los clientes puedan acceder
-                  fácilmente a tu tienda.
-                </p>
               </div>
             </div>
-
-            <div className="d-flex h">
-              <input
-                type="text"
-                placeholder="Ej: Papa Jhones"
-                style={{
-                  width: "80%",
-                  height: 30,
-                  border: "1px solid ligthgray",
-                  marginTop: "20px",
-                }}
-                onChange={handleInputChange}
-              />
-              <button className={alt.addButton}
-                onClick={addDomain}
-              >
-                Add{" "}
-              </button>
+            <div className=" Todayshoppingvalue ">
+              <h4>Today</h4>
+              <h4>$ 350.000 CLP</h4>
             </div>
-          </div>
+          </div> */}
         </div>
         <div
           style={{
             display: "flex",
             alignItems: "center",
-            justifyContent: "space-between",
             height: "100%",
             width: "100%",
             padding: 20,
@@ -182,13 +124,13 @@ const DashBoard = () => {
           <div
             style={{
               height: "100%",
-              width: "50%",
+              width: "70%",
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
             }}
           >
-            {/*  <div
+            {/* <div
               style={{
                 width: "100%",
                 height: "25px",
@@ -239,7 +181,7 @@ const DashBoard = () => {
                 </div>
               )}
             </div> */}
-            {/*  <div
+            <div
               style={{
                 width: "100%",
                 height: 40,
@@ -255,14 +197,14 @@ const DashBoard = () => {
                 </h4>
               </div>
 
-              <div style={{ cursor: "pointer" }}>View all</div>
-            </div> */}
+              {/* <div style={{ cursor: "pointer" }}>View all</div> */}
+            </div>
 
             <div
               style={{
                 display: "flex",
                 width: "100%",
-                height: "60%",
+                height: "100%",
                 alignItems: "end",
                 justifyContent: "space-around",
               }}
@@ -275,7 +217,7 @@ const DashBoard = () => {
               ))}
             </div>
           </div>
-          {/*  <div
+          {/* <div
             style={{
               height: "100%",
               width: "35%",

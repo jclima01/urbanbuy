@@ -76,14 +76,11 @@ const SignIn = () => {
     validateConfirmPassword(value);
   };
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    await dispatch(registerClientAdmin(fullName, email, password))
-    .then(()=> {alert("Usuario creado con exito"); navigate("/login");})
-    .catch((error)=> alert("Error al crear el ususario"))
-    //.finally(() => {
-    //  navigate("/login");
-    //});
+    dispatch(registerClientAdmin(fullName, email, password)).finally(() => {
+      navigate("/login");
+    });
   };
 
   const validateConfirmPassword = (value) => {

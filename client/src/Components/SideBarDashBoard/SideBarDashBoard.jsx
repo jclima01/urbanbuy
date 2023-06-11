@@ -60,7 +60,7 @@ const SideBarDashBoard = () => {
                   <CiEdit size={30} />
                 </li>
               </Link>
-              <Link to={"dashboard/Products"} className="custom-link">
+              <Link to={"dashboard/products"} className="custom-link">
                 <li
                   onClick={() => handleIsActiveHover("Products")}
                   className={isActive === "Products" ? "isActive" : " btn"}

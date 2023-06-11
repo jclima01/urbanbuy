@@ -27,8 +27,10 @@ import {
   ADD_PRODUCT_TO_CART,
   REMOVE_PRODUCT_FROM_CART,
   GET_CART_FROM_LS,
+
   PAGO_EXITOSO,
   PAGO_FALLIDO,
+
   SET_THEME,
   SET_SLIDER_THEME,
   SET_SEARCH_BAR_THEME,
@@ -39,21 +41,6 @@ import {
   SORT_ORDERS_BY_DATE,
   FILTER_ORDERS,
   SEARCH_ORDERS,
-
-  SET_REVIEW,
-  GET_REVIEWS,
-
-  LOADING_PRODUCTS,
-  CREATE_CHECKOUT_SESSION,
-  ADD_DOMAIN,
-  GET_CLIENT_ADMIN_BY_DOMAIN,
-  CREATE_ORDER,
-  GET_LAST_ORDER_FROM_USER,
-  DELETE_PRODUCT_FROM_CART,
-  REDUCE_QUANTITY_FROM_CART,
-  INCREASE_QUANTITY_FROM_CART,
-  CLEAR_CART,
-
 } from "../actions/index.js";
 
 const initialState = {
@@ -67,72 +54,23 @@ const initialState = {
   ordersByUser: [],
   ordersByClient:[],
 
-  reviews:[],
-  loading: null,
   theme: "urbanBuy",
   sliderTheme: "urbanBuy",
+
   clientAdminUsers: [],
+  cart: [],
+
   cargando: false,
   cargo: null,
   error: null,
+
   searchBarTheme: "styleOne",
   cardStyle: "",
   orders: [],
-  checkoutUrl: "",
-  clientAdminDomain: "",
-  order: {},
 };
 
 const rootReducer = (state = initialState, { type, payload }) => {
   switch (type) {
-    case CLEAR_CART:
-      const orderCart = {...state.order}
-      orderCart.cart = []
-      orderCart.total = 0
-      return {
-        ...state,
-        order: { ...orderCart },
-      };
-    case GET_CLIENT_ADMIN_BY_DOMAIN:
-      return {
-        ...state,
-        clientAdmin: { ...payload },
-      };
-    case ADD_DOMAIN:
-      return {
-        ...state,
-        clientAdminDomain: payload.domain,
-        clientAdmin: payload,
-      };
-    case REDUCE_QUANTITY_FROM_CART:
-      return {
-        ...state,
-        order: { ...payload.orderSaved },
-        product: { ...payload.itemSaved },
-      };
-    case INCREASE_QUANTITY_FROM_CART:
-      return {
-        ...state,
-        order: { ...payload.orderSaved },
-        product: { ...payload.itemSaved },
-      };
-    case DELETE_PRODUCT_FROM_CART:
-      return {
-        ...state,
-        order: { ...payload.orderSaved },
-        product: { ...payload.itemSaved },
-      };
-    case GET_LAST_ORDER_FROM_USER:
-      return {
-        ...state,
-        order: { ...payload },
-      };
-    case CREATE_ORDER:
-      return {
-        ...state,
-        order: { ...payload.orderSaved },
-        product: { ...payload.itemSaved },
-      };
     case GET_CART_FROM_LS:
       JSON.parse(localStorage.getItem("cart"));
       return {
@@ -150,10 +88,26 @@ const rootReducer = (state = initialState, { type, payload }) => {
         cart: cartWhitOutProduct,
       };
     case ADD_PRODUCT_TO_CART:
+      const item = state.products.find(
+        (product) => product._id === payload.productId
+      );
+      const inCart = state.cart.some(
+        (product) => product._id === payload.productId
+      );
+
+      const newCart = inCart
+        ? state.cart.map((product) =>
+            product._id === item._id
+              ? { ...item, quantity: product.quantity + payload.quantity }
+              : item
+          )
+        : [...state.cart, { ...item, quantity: payload.quantity }];
+
+      localStorage.setItem("cart", JSON.stringify(newCart));
+
       return {
         ...state,
-        order: { ...payload.orderSaved },
-        product: { ...payload.itemSaved },
+        cart: newCart,
       };
     case GET_USER_BY_ID:
       return {
@@ -213,6 +167,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
       };
 
     case EDIT_CATEGORY:
+  
       return {
         ...state,
         categories: state.categories.map((category) => {
@@ -252,12 +207,36 @@ const rootReducer = (state = initialState, { type, payload }) => {
     case EDIT_PRODUCT:
       return {
         ...state,
-        products: payload,
+        products: state.products.map((item) => {
+          if (item._id === payload._id) {
+            return {
+              ...item,
+              ...payload,
+            };
+          }
+          return item;
+        }),
       };
     case POST_NEW_PRODUCT:
+      const updatedCategories = payload.categories.map((category) => {
+        const foundCategory = state.categories.find((c) => c._id === category);
+        if (foundCategory) {
+          return {
+            categoryId: category,
+            categoryName: foundCategory.categoryName,
+          };
+        }
+        return null;
+      });
+
+      const newProduct = {
+        ...payload,
+        categories: updatedCategories.filter((category) => category !== null),
+      };
+
       return {
         ...state,
-        products: [...state.products, payload],
+        products: [...state.products, newProduct],
       };
     case GET_PRODUCT_BY_ID:
       return {
@@ -268,12 +247,6 @@ const rootReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         products: [...payload],
-        loading: false,
-      };
-    case LOADING_PRODUCTS:
-      return {
-        ...state,
-        loading: payload,
       };
     case LOGIN_ADMIN:
       return {
@@ -325,20 +298,20 @@ const rootReducer = (state = initialState, { type, payload }) => {
         user: {},
         UserSession: false,
       };
-    case PAGO_EXITOSO:
-      return {
-        ...state,
-        cargando: false,
-        cargo: payload,
-        error: null,
-      };
-    case PAGO_FALLIDO:
-      return {
-        ...state,
-        cargando: false,
-        cargo: null,
-        error: payload,
-      };
+      case PAGO_EXITOSO:
+        return {
+          ...state,
+          cargando: false,
+          cargo: payload,
+          error: null,
+        };
+      case PAGO_FALLIDO:
+        return {
+          ...state,
+          cargando: false,
+          cargo: null,
+          error: payload,
+        };
 
     case SET_THEME:
       return {
@@ -425,29 +398,6 @@ const rootReducer = (state = initialState, { type, payload }) => {
               ...state,
               orders: [...searchOrders],
             };
-
-
-    case SET_REVIEW:
-      return {
-        ...state,
-      };
-
-    case GET_REVIEWS:
-      return {
-        ...state,
-        reviews: payload,
-      };
-    case CREATE_CHECKOUT_SESSION:
-      const order = { ...state.order };
-    
-      order.cart = [];
-     
-      return {
-        ...state,
-        checkoutUrl: payload,
-        order: order,
-
-      };
 
     default:
       return {

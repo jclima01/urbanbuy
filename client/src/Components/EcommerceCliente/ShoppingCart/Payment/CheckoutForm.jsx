@@ -47,8 +47,10 @@ const CheckoutForm = () => {
          setSaveId(id)
        try {
          dispatch(iniciarPago(body))
+         console.log('Pago Exitoso')
          return {success : true}
        } catch (error) {
+         console.log(error)
          return { success : false, error: error.message }
        }
         })

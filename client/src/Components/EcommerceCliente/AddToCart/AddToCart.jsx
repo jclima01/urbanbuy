@@ -1,17 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addProductToCart, getLastOrderFromUser } from "../../../redux/actions";
+import { addProductToCart } from "../../../redux/actions";
 import styles from "./AddToCart.module.css";
 import { GrAddCircle, GrSubtractCircle } from "react-icons/gr";
 import Swal from "sweetalert2";
-const AddToCart = ({ stock }) => {
-  const user = useSelector((state) => state.user);
-  const product = useSelector((state) => state.product);
-  const order = useSelector((state) => state.order);
-  useEffect(() => {
-    dispatch(getLastOrderFromUser(user._id));
-  }, []);
-
+const AddToCart = ({ product, stock }) => {
   const [quantity, setQuantity] = useState(1);
   const dispatch = useDispatch();
   const handleQuantityChange = (operation) => {
@@ -23,23 +16,13 @@ const AddToCart = ({ stock }) => {
   };
 
   const handleDispatch = (productId, quantity) => {
-    dispatch(
-      addProductToCart(
-        productId,
-        quantity,
-        user.fullName,
-        user.email,
-        user._id,
-        order._id
-      )
-    ).then(
-      Swal.fire({
-        title: "Product added to Cart",
-        // text: 'Do you want to continue',
-        icon: "success",
-        confirmButtonText: "Ok",
-      })
-    );
+    dispatch(addProductToCart(productId, quantity));
+    Swal.fire({
+      title: 'Product added to Cart',
+      // text: 'Do you want to continue',
+      icon: 'success',
+      confirmButtonText: 'Ok'
+    })
   };
 
   return (

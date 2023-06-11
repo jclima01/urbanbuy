@@ -1,59 +1,43 @@
 const ClientAdmin = require("../models/Users/ClientAdmin.js");
-const User = require("../models/Users/User.js");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
-const { errorMonitor } = require("nodemailer/lib/xoauth2/index.js");
+
+// const transporter = require("../email/emailService.js");
 require("dotenv").config();
-const sgMail = require('@sendgrid/mail');
+
+// const sendWelcomeEmail = (fullName, email) => {
+//   const mailOptions = {
+//     from: 'urbanbuy8@gmail.com',
+//     to: email,
+//     subject: '¡Bienvenido a nuestro sitio!',
+//     text: `Hola ${fullName}, gracias por registrarte en nuestro sitio.`,
+//   };
+
+//   transporter.sendMail(mailOptions, (error, info) => {
+//     if (error) {
+//       console.error("Error al enviar el correo electrónico de bienvenida:", error);
+//     } else {
+//       console.log("Correo electrónico de bienvenida enviado:", info.response);
+//     }
+//   });
+// };
 
 
-// Configurar el transporte de correo
-sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-
-const welcomeEmail = async (fullname, email) => {
-
+const ClientAdminRegister = async (fullName, email, password) => {
   try {
-    const msg = {
-      to: email,
-      from: 'urbanbuy8@gmail.com', // Tu dirección de correo electrónico verificada en SendGrid
-      subject: 'Bienvenido a UrbanBuy',
-      text: `Hola ${fullname}.
+    if (!email) throw new Error("Email is required");
+    if (!password) throw new Error("Password is required");
+    if (!fullName) throw new Error("FullName is required");
+    const admin = await ClientAdmin.findOne({ email });
+    if (admin) throw new Error("User already registered");
+    var salt = bcrypt.genSaltSync(10);
+    var hash = bcrypt.hashSync(password, salt);
 
-      Gracias por unirte a UrbanBuy. UrbanBuy es un sitio web de comercio electrónico diseñado para facilitar la creación y gestión de tu propia tienda en línea. Con UrbanBuy, tienes acceso a una amplia gama de características y opciones que te permiten personalizar y administrar tu tienda de manera sencilla y eficiente.
-      
-      Aquí hay algunas características destacadas de UrbanBuy:
-      - Edición de estilos: Puedes personalizar el aspecto y la apariencia de tu página web utilizando opciones de edición de estilos. Cambia los colores, las fuentes, los diseños y más para reflejar la identidad de tu marca.
-      - Gestión de productos: UrbanBuy te permite cargar y administrar fácilmente tus productos. Puedes agregar descripciones, imágenes, categorías y precios para presentar tus productos de manera atractiva.
-      - Pasarelas de pago incorporadas: Facilitamos la incorporación de pasarelas de pago para que tus clientes puedan realizar compras de forma segura y conveniente. Aceptamos múltiples métodos de pago, como tarjetas de crédito y más.
-      - Carrito de compras: UrbanBuy proporciona un carrito de compras intuitivo y fácil de usar. Tus clientes pueden agregar productos, ver el resumen de su compra y finalizar el proceso de pago de manera rápida y sencilla.
-      - Administración de pedidos: Mantén un seguimiento de tus pedidos con la funcionalidad de administración de pedidos de UrbanBuy. Puedes ver y gestionar el estado de los pedidos, realizar seguimiento de envíos y comunicarte con los clientes.
-      
-      No esperes más, ¡únete a UrbanBuy y comienza a vender tus productos hoy mismo!
-      
-      Gracias por elegir UrbanBuy!
-      Vamos al sitio web: https://urban-buy.netlify.app/`,
-    };
-    
-    await sgMail.send(msg);
-  } catch (error) {
-    throw new Error('Error al enviar el correo electrónico de bienvenida');
-  }
-};       
-        const ClientAdminRegister = async (fullName, email, password) => {
-          try {
-            if (!email) throw new Error("Email is required");
-            if (!password) throw new Error("Password is required");
-            if (!fullName) throw new Error("FullName is required");
-            const admin = await ClientAdmin.findOne({ email });
-            if (admin) throw new Error("User already registered");
-            var salt = bcrypt.genSaltSync(10);
-            var hash = bcrypt.hashSync(password, salt);
-            
-            const newAdmin = new ClientAdmin({ fullName, email, password: hash });
+    const newAdmin = new ClientAdmin({ fullName, email, password: hash });
 
     const savedAdmin = await newAdmin.save();
 
-    welcomeEmail(fullName, email);
+    // sendWelcomeEmail(fullName, email);
 
     return savedAdmin;
   } catch (error) {
@@ -73,6 +57,7 @@ const ClientAdminLogin = async (email, password) => {
     const token = jwt.sign({ id: clientAdmin._id }, process.env.KEY_JWT, {
       expiresIn: "1h",
     });
+    console.log({ token, ...clientAdmin._doc });
     return await ClientAdmin.findOne({ email });
   } catch (error) {
     throw new Error(error.message);
@@ -103,26 +88,6 @@ const ClientDelete = async (clientId) => {
     throw new Error(error.message);
   }
 };
-const addDomain = async (domain, clientAdminId) => {
-  try {
-    const clientAdmin = await ClientAdmin.findById(clientAdminId);
-    clientAdmin.domain = domain;
-    const savedClientAdmin = await clientAdmin.save();
-    return savedClientAdmin;
-  } catch (error) {
-    throw new Error(error.message);
-  }
-};
-const getClientAdminByDomain = async (domain) => {
-  try {
-    const clientAdmin = await ClientAdmin.findOne({ domain: domain });
-    // const savedClientAdmin = await clientAdmin.save();
-    return clientAdmin;
-  } catch (error) {
-    throw new Error(error.message);
-  }
-};
-
 
 
 
@@ -131,7 +96,5 @@ module.exports = {
   ClientAdminLogin,
   ClientUpdate,
   ClientDelete,
-  addDomain,
-  getClientAdminByDomain
-
+ 
 };

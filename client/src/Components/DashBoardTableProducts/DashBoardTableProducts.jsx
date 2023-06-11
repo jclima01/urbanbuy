@@ -1,18 +1,29 @@
 import Table from "react-bootstrap/esm/Table";
 import DashBoardTableCardProducts from "./DashBoardTableCardProducts/DashBoardTableCardProducts";
-/* import s from "./DashBoardTableProducts.module.css"; */
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getAllProducts } from "../../redux/actions";
 
 const DashBoardTableProducts = ({
   setIsActive,
   searchInput,
   productsPerPage,
   setActualPage,
-  sort
+  sort,
 }) => {
-  //Use Selector Products and loading
+  //USER SESSION
+  const clientAdminStorage =
+    JSON.parse(localStorage.getItem("clientAdmin")) ?? false;
+  const clientAdminId = clientAdminStorage._id;
+
+  //Use Selector Products and Dispatch Actions
+  const dispatch = useDispatch();
   const products = useSelector((state) => state.products);
- /*  const loading = useSelector((state) => state.loading); */
+
+  //Get all Products
+  useEffect(() => {
+    dispatch(getAllProducts(clientAdminId));
+  }, [dispatch]);
 
   //InputToLowerCase for Fitler
   const searchInputLowerCase = searchInput.toLowerCase();
@@ -22,8 +33,6 @@ const DashBoardTableProducts = ({
   const firstUserIndex = lastUserIndex - productsPerPage;
   const productsSlice = products.slice(firstUserIndex, lastUserIndex);
   // Pagination
-
-
 
   return (
     <Table
@@ -44,7 +53,6 @@ const DashBoardTableProducts = ({
           <th>Options</th>
         </tr>
       </thead>
-
       {productsSlice
         ?.filter((item) =>
           item.productName.toLowerCase().includes(searchInputLowerCase)
@@ -80,7 +88,7 @@ const DashBoardTableProducts = ({
             stocks={product.stocks}
             price={product.price}
             rating={product.rating}
-            id={product._id}
+            _id={product._id}
             setIsActive={setIsActive}
           />
         ))}

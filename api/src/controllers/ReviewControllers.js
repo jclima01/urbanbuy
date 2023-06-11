@@ -1,12 +1,11 @@
 const Review = require("../models/Review.js");
 
-const postReview = async (productId, userId, text, rating) => {
+const postReview = async (productId, userId, text) => {
   try {
     const newReview = new Review({
       text: text,
       user: userId,
       product: productId,
-      rating: rating
     });
 
     const savedReview = await newReview.save();
@@ -20,8 +19,7 @@ const postReview = async (productId, userId, text, rating) => {
 
 const getProductReviews = async (productId) => {
   try {
-    const reviews = await Review.find({ product: productId });
-    
+    const reviews = await Review.find({ product: productId }).populate("user");
     return reviews;
   } catch (error) {
     throw new Error(error.message);

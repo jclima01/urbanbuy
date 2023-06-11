@@ -1,6 +1,5 @@
 const cloudinary = require("cloudinary").v2;
 const Product = require("../models/Product");
-const Category = require('../models/Category');
 const ClientAdmin = require("../models/Users/ClientAdmin");
 const mongoose = require("mongoose");
 
@@ -67,7 +66,7 @@ const createNewProduct = async (
   price,
   rating,
   clientAdminId
-  ) => {
+) => {
   try {
     const uploadResult = await cloudinary.uploader.upload(
       imageUrl /*,{optiones}*/
@@ -104,53 +103,44 @@ const updateProduct = async (
   imageUrl,
   price,
   rating
-  ) => {
-    
-   
+) => {
+  try {
+    const uploadResult = await cloudinary.uploader.upload(
+      imageUrl /*,{optiones}*/
+    );
 
-
-    try {
-      const uploadResult = await cloudinary.uploader.upload(imageUrl /*,{optiones}*/);
-  
-      const updatedProduct = await Product.findByIdAndUpdate(
-        productId,
-        {
-          productName,
-          description,
-          stocks,
-          imageUrl: uploadResult.secure_url,
-          price,
-          rating,
-        },
-        { new: true, upsert: true }
-      );
-      
-      if (!updatedProduct) {
-        throw new Error("Producto no encontrado");
-      }
-      
-      // Eliminamos todas las categorías del producto
-      await Product.findByIdAndUpdate(productId, { $set: { categories: [] } });
-      
-      // Agregamos las categorías nuevas al producto
-      if (categoriesIds.length > 0) {
-        await Product.findByIdAndUpdate(productId, { $addToSet: { categories: { $each: categoriesIds } } });
-      }
-      
-      const products = await Product.find({ clientAdmin: updatedProduct.clientAdmin })
-        .populate("categories") // Popula las categorías
-        .exec();
-      
-      return products;
-
-
-    } catch (error) {
-      throw new Error(error.message);
+    const updatedProduct = await Product.findById(productId);
+    if (!updatedProduct) {
+      // El producto no existe, puedes lanzar un error o manejarlo de otra manera
+      throw new Error("Producto no encontrado");
     }
+    if (updatedProduct.categories === categoriesIds) {
+      updatedProduct.productName = productName;
+      updatedProduct.description = description;
+      updatedProduct.stocks = stocks;
+      updatedProduct.imageUrl = uploadResult.secure_url;
+      updatedProduct.price = price;
+      updatedProduct.rating = rating;
+    }
+    updatedProduct.productName = productName;
+    updatedProduct.description = description;
+    updatedProduct.categories = [...updatedProduct.categories + categoriesIds];
+    updatedProduct.stocks = stocks;
+    updatedProduct.imageUrl = uploadResult.secure_url;
+    updatedProduct.price = price;
+    updatedProduct.rating = rating;
+
+    const savedProduct = await updatedProduct.save();
+    // savedProduct.populate('categories')
+    return savedProduct;
+  } catch (error) {
+    throw new Error(error.message);
+  }
 };
 
 //DELETE
 const deleteProduct = async (productId) => {
+  console.log(productId);
   try {
     const deletedProduct = await Product.findByIdAndDelete(productId);
     return deletedProduct;

@@ -5,7 +5,7 @@ const {
   postReviewHandler,
 } = require("../handlers/ReviewHandlers.js");
 
-ReviewRouter.get("/:productId", getReviewsHandler);
+ReviewRouter.get("/", getReviewsHandler);
 ReviewRouter.post("/", postReviewHandler);
 
 module.exports = ReviewRouter;
