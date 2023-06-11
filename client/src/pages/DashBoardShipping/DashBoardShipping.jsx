@@ -2,7 +2,9 @@
 
 const DashBoardShipping = () => {
   return (
-    <h1>Upcoming...</h1>
+    <h1>Nueva Rama Orders Client Admin
+
+    </h1>
   )
 }
 
