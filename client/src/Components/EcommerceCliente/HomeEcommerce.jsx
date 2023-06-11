@@ -127,10 +127,9 @@ function HomeEcommerce() {
 
 
   return (
-
     <div className={containerClass}>
-
       <NavEcommerce clientAdmin={clientAdmin} />
+
       <div className={style.switchContainer}>
         <label className={style.switch}>
         <input

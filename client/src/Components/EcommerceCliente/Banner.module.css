@@ -1,0 +1,19 @@
+.bannerText {
+    font-size: 24px; /* Puedes ajustar este valor según tus necesidades */
+    color: white;
+    text-align: center;
+  }
+
+  .bannerBackground {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  
+  .bannerBackgroundBlue {
+    background-image: url("ruta_de_la_imagen_blue.jpg");
+  }
+  
+  .bannerBackgroundPink {
+    background-image: url("ruta_de_la_imagen_pink.jpg");
+  }

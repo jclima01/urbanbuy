@@ -47,6 +47,9 @@ import {
   REDUCE_QUANTITY_FROM_CART,
   INCREASE_QUANTITY_FROM_CART,
   CLEAR_CART,
+  SET_BANNER,
+  POST_BANNER,
+  GET_BANNER,
 
 } from "../actions/index.js";
 
@@ -72,6 +75,7 @@ const initialState = {
   checkoutUrl: "",
   clientAdminDomain: "",
   order: {},
+  banner: {},
 };
 
 const rootReducer = (state = initialState, { type, payload }) => {
@@ -377,6 +381,24 @@ const rootReducer = (state = initialState, { type, payload }) => {
         order: order,
 
       };
+
+    case SET_BANNER:
+      return {
+        ...state,
+        banner: payload,
+      };
+
+    case  POST_BANNER:
+      return {
+        ...state,
+        banner: payload,
+      };
+
+    case GET_BANNER:
+      return {
+        ...state,
+        banner: payload,
+      }
 
     default:
       return {

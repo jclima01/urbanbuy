@@ -13,6 +13,10 @@
   margin-bottom: 50px;
 }
 
+.fixSize{
+  width: 100%;
+}
+
 @keyframes highlight {
   0% {
     background-color: rgb(245, 175, 62);
@@ -166,7 +170,7 @@ margin-bottom: 10px;
   padding: 50px;
   margin-top: 50px;
   position:absolute;
-  width: 88.8%;
+  width: 100%;
   display: flex;
   justify-content: center;
   text-align: center;

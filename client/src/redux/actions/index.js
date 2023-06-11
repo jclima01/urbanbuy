@@ -46,7 +46,12 @@ export const REDUCE_QUANTITY_FROM_CART = "REDUCE_QUANTITY_FROM_CART";
 export const INCREASE_QUANTITY_FROM_CART = "INCREASE_QUANTITY_FROM_CART";
 export const CLEAR_CART = "CLEAR_CART";
 export const SET_REVIEW = "SET_REVIEW";
-export const GET_REVIEWS = "GET_REVIEWS"
+export const GET_REVIEWS = "GET_REVIEWS";
+export const SET_BANNER = "SET_BANNER";
+export const GET_BANNER = "GET_BANNER";
+export const POST_BANNER = "POST_BANNER";
+
+
 
 
 
@@ -775,3 +780,50 @@ export const createCheckoutSession = (cart) => {
   };
 };
 
+export const setBanner = (bannerId, bannerText) => {
+  try {
+    return async function (dispatch) {
+      const { data } = await axios.put(`/banner/${bannerId}`, {
+        bannerText,
+      });
+      return dispatch({
+        type: SET_BANNER,
+        payload: data,
+      });
+    };
+    // eslint-disable-next-line no-unreachable
+  } catch (err) {
+    throw new Error(err.message);
+  }
+};
+
+
+export const getBanner = (clientAdminId) => {
+  try {
+    return async function (dispatch) {
+      const { data } = await axios.get(`/dashboard/Edit`); // `/dashboard/Edit${clientAdminId}`
+      return dispatch({
+        type: GET_BANNER,
+        payload: data,
+      });
+    };
+  } catch (err) {
+    throw new Error(err.message);
+  }
+};
+
+export const postBanner = (bannerText, clientAdminId) => {
+  try {
+    return async function (dispatch) {
+      const { data } = await axios.post(`/dashboard/Edit`, bannerText); // `/dashboard/Edit${clientAdminId}`
+      console.log(" Data action :", data );
+      return dispatch({
+        type: POST_BANNER,
+        payload: data,
+      });
+    };
+    // eslint-disable-next-line no-unreachable
+  } catch (err) {
+    throw new Error(err.message);
+  }
+};
