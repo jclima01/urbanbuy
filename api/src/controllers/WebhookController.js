@@ -1,14 +1,16 @@
 const Order = require("../models/Order.js");
 
-const updateOrder = async (sessionId, paymentStatus) => {
+const updateOrder = async (sessionId, paymentStatus, address) => {
   try {
     const order = await Order.findOne({ sessionId });
     order.status = paymentStatus === "paid" ? "sending products" : "pending";
     order.payment = paymentStatus === "paid" ? true : false;
     // order.cart = paymentStatus === "paid" ? [] : order.cart;
     //agregar el adress
-    // order.adress = customerDetails;
+
+    order.adress = address;
     const savedOrder = await order.save();
+   console.log(savedOrder)
     return savedOrder;
   } catch (error) {
     throw new Error(error.message);

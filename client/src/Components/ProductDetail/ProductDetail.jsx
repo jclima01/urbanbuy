@@ -6,15 +6,12 @@ import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import AddToCart from "../EcommerceCliente/AddToCart/AddToCart";
 import ProductReview from "../../Components/ProductReview/ProductReview";
-
+import NavEcommerce from "../EcommerceCliente/NavEcommerce";
 
 const ProductDetail = () => {
   const product = useSelector((state) => state.product);
-
   const reviews = useSelector((state) => state.reviews);
-
   const users = useSelector((state) => state.clientAdminUsers);
-
   const clientAdmin = useSelector((state) => state.clientAdmin)
 
 
@@ -29,10 +26,6 @@ const ProductDetail = () => {
     return { text: review.text, userName };
   }) : [];
 
-  console.log('ReviewsUser:', reviews)
-  console.log('Admin:', clientAdmin)
-  console.log('UsersId:', users)
-
 
   const { productId } = useParams();
   const dispatch = useDispatch();
@@ -43,14 +36,12 @@ const ProductDetail = () => {
     dispatch(getReviews(productId))
   }, [product.stocks]);
 
-
   return (
     <>
+    <NavEcommerce clientAdmin={clientAdmin}/>
       <div className={style.detailContainer}>
         <div className={style.navButtons}>
-
           <Link to={`/${clientAdmin.domain}`}>
-
             <button className={style.button}>go back</button>
           </Link>
 
@@ -58,6 +49,7 @@ const ProductDetail = () => {
             <button className={style.button}>go cart</button>
           </Link>
         </div>
+
         <div className={style.cardContainer}>
           <div>
             <h2 className={style.h2}>{product.productName}</h2>
@@ -76,6 +68,7 @@ const ProductDetail = () => {
                   <p>Comment by: {comment.userName}</p>
                   <p>{comment.text}</p>
                 </li>
+
               ))}
             </ul>
           </div>

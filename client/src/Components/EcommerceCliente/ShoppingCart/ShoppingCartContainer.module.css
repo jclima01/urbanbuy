@@ -1,5 +1,6 @@
 .container {
-  /* background-image: url(../../../Img/fondoecommerce.jpg);
-  background-size: cover;
-  background-repeat: no-repeat; */
+display: flex;
+flex-direction: column;
+width: 100vw;
+  
 }

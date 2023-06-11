@@ -1,22 +1,23 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
-import logoBlanco from '../../Img/logoBlanco.png';
-import style from '../EcommerceCliente/NavEcommerce.module.css';
-import Avatar from '../Avatares/AvatarUser';
-import Modal from 'react-modal';
-import { logOutUser } from '../../redux/actions';
-import { Dropdown } from 'react-bootstrap';
+import React, { useState, useEffect, useRef } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import logoBlanco from "../../Img/logoBlanco.png";
+import style from "../EcommerceCliente/NavEcommerce.module.css";
+import Avatar from "../Avatares/AvatarUser";
+import Modal from "react-modal";
+import { logOutUser } from "../../redux/actions";
+import { Dropdown } from "react-bootstrap";
+import CartWidget from "./CartWidget/CartWidget.jsx";
 
 function NavEcommerce({ clientAdmin }) {
-  const [searchValue, setSearchValue] = useState('');
+  const [searchValue, setSearchValue] = useState("");
   const products = useSelector((state) => state.products);
   const categories = useSelector((state) => state.categories);
   const user = useSelector((state) => state.user);
   const [darkMode, setDarkMode] = useState(false);
 
   const dispatch = useDispatch();
-  const [selectedCategory, setSelectedCategory] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState("");
   const [showMenu, setShowMenu] = useState(false);
   const navigate = useNavigate();
   const dropdownRef = useRef();
@@ -30,16 +31,16 @@ function NavEcommerce({ clientAdmin }) {
     setSelectedCategory(selectedCategory);
     const queryString = selectedCategory
       ? `?category=${encodeURIComponent(selectedCategory)}`
-      : '';
+      : "";
     navigate(`/${clientAdmin.domain}/s${queryString}`);
   };
 
   const handleKeyPress = (event) => {
-    if (event.key === 'Enter') {
+    if (event.key === "Enter") {
       const queryString = selectedCategory
-        ? `?search=${encodeURIComponent(searchValue)}&category=${encodeURIComponent(
-            selectedCategory
-          )}`
+        ? `?search=${encodeURIComponent(
+            searchValue
+          )}&category=${encodeURIComponent(selectedCategory)}`
         : `?search=${encodeURIComponent(searchValue)}`;
       navigate(`/${clientAdmin.domain}/s${queryString}`);
     }
@@ -52,9 +53,9 @@ function NavEcommerce({ clientAdmin }) {
   };
 
   useEffect(() => {
-    document.addEventListener('click', handleOutsideClick);
+    document.addEventListener("click", handleOutsideClick);
     return () => {
-      document.removeEventListener('click', handleOutsideClick);
+      document.removeEventListener("click", handleOutsideClick);
     };
   }, []);
 
@@ -75,7 +76,7 @@ function NavEcommerce({ clientAdmin }) {
   return (
     <div className={style.container}>
       <div className={style.leftSection}>
-        <img src={logoBlanco} alt='' className={style.logoClient} />
+        <img src={logoBlanco} alt="" className={style.logoClient} />
         <select
           className={`${style.select} ${style.categorias}`}
           value={selectedCategory}
@@ -108,27 +109,28 @@ function NavEcommerce({ clientAdmin }) {
             <div className={style.avatar} onClick={openMenu}>
               <Avatar size={40} />
             </div>
+
+
+            <CartWidget />
             {showMenu && (
               <div className={style.dropdownContainer}>
                 <div className={style.dropdownMenu}>
-              <Dropdown show={showMenu} onClose={closeMenu}>
-                {/* <Dropdown.Toggle variant="light" id="avatar-dropdown" /> */}
-                <Dropdown.Menu className={style.dropdownMenu}>
-                  <Dropdown.Item href="#opcion1">Opción 1</Dropdown.Item>
-                  <Dropdown.Item href="#opcion2">Opción 2</Dropdown.Item>
-                  {/* Agrega aquí más opciones según tus necesidades */}
-                  <Dropdown.Divider className={style.dropdownDivider} />
-                  <Dropdown.Item onClick={closeMenu}>Cerrar</Dropdown.Item>
-                  <Dropdown.Divider className={style.dropdownDivider}  />
-                  <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
-                  
- 
-
-                </Dropdown.Menu>
-              </Dropdown>
+                  <Dropdown show={showMenu} onClose={closeMenu}>
+                    {/* <Dropdown.Toggle variant="light" id="avatar-dropdown" /> */}
+                    <Dropdown.Menu className={style.dropdownMenu}>
+                      <Dropdown.Item href="#opcion1">Opción 1</Dropdown.Item>
+                      <Dropdown.Item href="#opcion2">Opción 2</Dropdown.Item>
+                      {/* Agrega aquí más opciones según tus necesidades */}
+                      <Dropdown.Divider className={style.dropdownDivider} />
+                      <Dropdown.Item onClick={closeMenu}>Cerrar</Dropdown.Item>
+                      <Dropdown.Divider className={style.dropdownDivider} />
+                      <Dropdown.Item onClick={handleLogout}>
+                        Logout
+                      </Dropdown.Item>
+                    </Dropdown.Menu>
+                  </Dropdown>
+                </div>
               </div>
-            </div>
-            
             )}
           </div>
         ) : (

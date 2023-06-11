@@ -1,3 +1,8 @@
+.homeEcommerceContainer{
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+}
 .h2 {
   display: inline-block;
   justify-content: center;
@@ -166,7 +171,7 @@ margin-bottom: 10px;
   padding: 50px;
   margin-top: 50px;
   position:absolute;
-  width: 88.8%;
+  width: 100%;
   display: flex;
   justify-content: center;
   text-align: center;
@@ -250,7 +255,7 @@ margin-bottom: 10px;
   position: relative;
   width: 60px;
   height: 34px;
-  margin-left: 910px;
+  margin-left: 1800px;
   margin-top: -80px;
   transform: scale(0.7);
 }
