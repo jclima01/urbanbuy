@@ -46,7 +46,13 @@ export const REDUCE_QUANTITY_FROM_CART = "REDUCE_QUANTITY_FROM_CART";
 export const INCREASE_QUANTITY_FROM_CART = "INCREASE_QUANTITY_FROM_CART";
 export const CLEAR_CART = "CLEAR_CART";
 export const SET_REVIEW = "SET_REVIEW";
-export const GET_REVIEWS = "GET_REVIEWS"
+export const GET_REVIEWS = "GET_REVIEWS";
+export const ORDER_CLIENT = "ORDER_CLIENT";
+export const DELETE_ORDER = "DELETE_ORDER";
+export const UPDATE_ORDER = "UPDATE_ORDER";
+export const SORT_ORDERS_BY_DATE = "SORT_ORDERS_BY_DATE";
+export const FILTER_ORDERS = "FILTER_ORDERS";
+export const SEARCH_ORDERS = "SEARCH_ORDERS";
 
 
 
@@ -774,4 +780,36 @@ export const createCheckoutSession = (cart) => {
     }
   };
 };
+
+export const updateOrder = (orderId, status, adress,clientId) => {
+  try {
+  return async function (dispatch) {
+      const {data} = await axios.put(`/orders/${orderId}`, {status, adress,clientId});
+      
+      return dispatch ({
+        type: UPDATE_ORDER,
+        payload: data,
+      });
+    }
+  } catch (error) {
+    throw new Error(error.message)
+  }
+};
+
+export const sortOrdersByDate = (valor) => ({
+  type: SORT_ORDERS_BY_DATE,
+  payload: valor,
+});
+
+export const filterOrders =(status) => (
+{
+  type: FILTER_ORDERS,
+  payload: status
+  }
+);
+
+export const searchOrders = (searchTerm) => ({
+  type: SEARCH_ORDERS,
+  payload: searchTerm,
+})
 
