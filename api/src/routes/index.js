@@ -11,7 +11,7 @@ const CategoryRoutes = require("./CategoryRoutes.js");
 const ReviewRouter = require("./ReviewRoutes.js");
 const OrderRouter = require("./OrderRoutes.js");
 const WebhookRouter = require("./WebhookRoutes.js");
-const BannerRoutes =  require("./BannerTextRoutes.js")
+
 
 const mainRouter = Router();
 
@@ -25,6 +25,6 @@ mainRouter.use("/category", CategoryRoutes);
 mainRouter.use("/reviews", ReviewRouter);
 mainRouter.use("/orders", OrderRouter);
 mainRouter.use("/webhook", WebhookRouter);
-mainRouter.use("/banner", BannerRoutes)
+
 
 module.exports = mainRouter;

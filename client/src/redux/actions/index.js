@@ -780,45 +780,14 @@ export const createCheckoutSession = (cart) => {
   };
 };
 
-export const setBanner = (bannerId, bannerText) => {
+export const setBannerText = (bannerText, clientAdminId) => {
   try {
     return async function (dispatch) {
-      const { data } = await axios.put(`/banner/${bannerId}`, {
+      const { data } = await axios.put(`/clientAdmin/banner/${clientAdminId}`, {
         bannerText,
       });
       return dispatch({
         type: SET_BANNER,
-        payload: data,
-      });
-    };
-    // eslint-disable-next-line no-unreachable
-  } catch (err) {
-    throw new Error(err.message);
-  }
-};
-
-
-export const getBanner = (clientAdminId) => {
-  try {
-    return async function (dispatch) {
-      const { data } = await axios.get(`/dashboard/Edit`); // `/dashboard/Edit${clientAdminId}`
-      return dispatch({
-        type: GET_BANNER,
-        payload: data,
-      });
-    };
-  } catch (err) {
-    throw new Error(err.message);
-  }
-};
-
-export const postBanner = (bannerText, clientAdminId) => {
-  try {
-    return async function (dispatch) {
-      const { data } = await axios.post(`/dashboard/Edit`, bannerText); // `/dashboard/Edit${clientAdminId}`
-      console.log(" Data action :", data );
-      return dispatch({
-        type: POST_BANNER,
         payload: data,
       });
     };
