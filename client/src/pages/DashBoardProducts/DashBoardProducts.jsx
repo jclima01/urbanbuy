@@ -2,18 +2,19 @@ import { CiSearch } from "react-icons/ci";
 import DashBoardTableProducts from "../../Components/DashBoardTableProducts/DashBoardTableProducts";
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteCategory, getAllProducts, getCategories } from "../../redux/actions";
+import { getAllProducts } from "../../redux/actions";
 import DashBoardAddProducts from "../../Components/DashBoardAddProducts/DashBoardAddProducts";
 import DashBoardModalAddCategories from "../../Components/DashBoardModalAddCategories/DashBoardModalAddCategories";
 
 import styles from "./DashBoardProducts.module.css";
 import DashBoardEditProduct from "../../Components/DashBoardEditProduct/DashBoardEditProduct";
 import Pagination from "../../../src/pages/DashBoardUser/Pagination/Pagination";
+
 import DashBoardSetCategory from "../../Components/DashBoardSetCategory/DashBoardSetCategory";
+
 const DashBoardProducts = () => {
   //Variables
-   const categories = useSelector((state) => state.categories);
-  const [cateriatest, settest] = useState(null);
+  const categories = useSelector((state) => state.categories);
   const dispatch = useDispatch();
   const clientAdminStorage =
     JSON.parse(localStorage.getItem("clientAdmin")) ?? false;
@@ -21,7 +22,7 @@ const DashBoardProducts = () => {
   const refTransitionAddProduct = useRef();
   const products = useSelector((state) => state.products);
   const [isActive, setIsActive] = useState(1200);
-
+  const [refresh, setIsRefresh] = useState(false);
   // Pagination
   const [productsPerPage, setProductsPerPage] = useState(6);
   const [setActualPage, setSetActualPage] = useState(1);
@@ -41,7 +42,7 @@ const DashBoardProducts = () => {
   //Get All products
   useEffect(() => {
     dispatch(getAllProducts(clientAdminId));
-  }, [cateriatest]);
+  }, [refresh]);
 
   return (
     <div
@@ -89,6 +90,8 @@ const DashBoardProducts = () => {
           <DashBoardAddProducts
             setIsActive={setIsActive}
             clientAdminId={clientAdminId}
+            setIsRefresh={setIsRefresh}
+            refresh={refresh}
           />
 
           <DashBoardModalAddCategories show={show} setShow={setShow} />
@@ -123,7 +126,7 @@ const DashBoardProducts = () => {
             </span>
             <span className={styles.spanTotalProducst}>{products.length}</span>
           </div>
-        
+
           <div
             style={{
               width: 900,
@@ -136,20 +139,17 @@ const DashBoardProducts = () => {
               justifyContent: "center",
             }}
           >
-
-<div className={styles.containertablecategories}>
+            <div className={styles.containertablecategories}>
               <div className={styles.containertable}>
                 <h5>Categories</h5>
                 <div className={styles.ulcategories}>
                   {categories?.map((item) => (
-                    <DashBoardSetCategory key={item._id} item={item}  cateriatest={cateriatest} settest={settest}/>
+                    <DashBoardSetCategory key={item._id} item={item} />
                   ))}
                 </div>
               </div>
             </div>
-
-            
-          </div> 
+          </div>
 
           <div
             style={{
@@ -164,7 +164,6 @@ const DashBoardProducts = () => {
               borderRadius: 20,
             }}
           >
-           
             <button
               className={styles.button1}
               onClick={() => handleActiveAddProduct(isActive)}
@@ -272,6 +271,8 @@ const DashBoardProducts = () => {
             overflow: "hidden",
             overflowY: "auto",
             overflowX: "hidden",
+            display: "flex",
+            flexDirection: "column",
           }}
         >
           <DashBoardTableProducts
@@ -282,7 +283,9 @@ const DashBoardProducts = () => {
             sort={sort}
           />
         </div>
+        
       </div>
+      
     </div>
   );
 };

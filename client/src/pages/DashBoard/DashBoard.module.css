@@ -1,0 +1,29 @@
+.emptyLink {
+    background-color: gray;
+  }
+  
+  .disabled {
+    pointer-events: none;
+    opacity: 0.3;
+  }
+  
+  .description{
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .addButton {
+    background-color: orange;
+    color: white;
+    margin: 10px;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  .addButton:hover {
+    background-color: white;
+    color: orange;
+  }

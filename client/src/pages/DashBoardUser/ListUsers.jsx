@@ -16,6 +16,11 @@ const DashBoardListUsers = ({
   const [selectedUser, setSelectedUser] = useState(null);
   const dispatch = useDispatch();
   const clientAdmin = useSelector((state) => state.clientAdmin);
+  // const users = useSelector(state => state.clientAdminUsers)
+
+  useEffect(() => {
+    dispatch(getClientAdminUsers(clientAdmin._id));
+  }, []);
 
   const handleClick = (user) => {
     setSelectedUser(user);
@@ -41,7 +46,7 @@ const DashBoardListUsers = ({
         </ul>
 
         <ul className="datosUser">
-          {users.map((user) => (
+          {users?.map((user) => (
             <li className="liUsers" key={user._id}>
               <h6>
                 <img
