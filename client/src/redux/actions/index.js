@@ -816,9 +816,11 @@ export const orderClient = (clientId) => {
   return async (dispatch) => {
     try {
       const {data} = await axios.get(`/clientAdmin/orders/${clientId}`);
+      console.log(data);
       dispatch({
         type: ORDER_CLIENT,
         payload: data,
+        
       });
     } catch (error) {
      

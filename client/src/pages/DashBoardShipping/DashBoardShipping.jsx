@@ -13,6 +13,7 @@ const DashBoardShipping = () => {
     JSON.parse(localStorage.getItem("clientAdmin")) ?? false;
   const clientAdminId = clientAdminStorage._id;
   const orders = useSelector((state) => state.orders);
+
   const filter=useRef(null);
   const order=useRef(null);
 
@@ -73,20 +74,21 @@ const DashBoardShipping = () => {
   
   }, [dispatch, clientAdminId]);
 
+console.log(clientAdminId);
   return (
     <>
       <div className="containerTodoDashboarShipping">
-        <OrderView
+        {/* <OrderView
           show={show}
           setShow={setShow}
           orderSelected={orderSelected}
           clientId={clientAdminId}
-        />
+        /> */}
         <h1>{clientAdminStorage.fullName} Orders</h1>
 
         <div className="containerOrders">
           <div className="contentOrderSearchAndFilters">
-            <div className="contentOrdenamiento">
+            {/* <div className="contentOrdenamiento">
               <select
                 className="ordenamientoUsers"
                 ref={order}
@@ -98,11 +100,11 @@ const DashBoardShipping = () => {
                 <option value="date_asc">Date Asc</option>
                 <option value="date_des">Date Des</option>
 
-                {/* test */}
+            
               </select>
-            </div>
+            </div> */}
 
-            <div className="contentSearchUsers">
+            {/* <div className="contentSearchUsers">
               <div className=" input-container-navbar inputSearchUser">
                 <input
                   type="text"
@@ -113,9 +115,9 @@ const DashBoardShipping = () => {
                 <hr />
                 <CiSearch size={25} cursor={"pointer"} />
               </div>
-            </div>
+            </div> */}
 
-            <div className="filter">
+            {/* <div className="filter">
               <select className="filters" ref={filter}  onChange={handleFilter}>
                 <option value="All">All</option>
               {estadosOrden.map((estado, index) => (
@@ -128,7 +130,7 @@ const DashBoardShipping = () => {
                         </option>
                       ))}
               </select>
-            </div>
+            </div> */}
           </div>
           <table className="datosUser">
             <thead>
@@ -145,59 +147,8 @@ const DashBoardShipping = () => {
               </tr>
             </thead>
             <tbody>
-              {orders?.map((order) => (
-                <tr key={order._id}>
-                  {/* <td>{order._id}</td> */}
-                  <td>
-                    {/* <select
-                      disabled
-                      name={"status-" + order._id}
-                      className="seleccion"
-                    >
-                      {estadosOrden.map((estado, index) => (
-                        <option
-                          value={estado}
-                          key={index}
-                          selected={order?.status === estado}
-                        >
-                          {estado}
-                        </option>
-                      ))}
-                    </select> */}
-                    {order.status}
-                  </td>
-                  <td>{order?.fullName}</td>
-                  <td>{order?.email}</td>
-                  <td>{order?.adress}</td>
-                  <td>${order?.total}</td>
-                  <td className="carrito">
-                    {order?.cart?.map((prod) => (
-                      //eslint(react/jsx-key)
-                      <React.Fragment>
-                        {prod}
-                        {/* //hace falta ver el tema de como vienen el producto desde la base de datos */}
-                        <br />
-                      </React.Fragment>
-                    ))}
-                  </td>
-                  <td>{order?.createdAt.slice(0, 10)}</td>
-                  <td>{order?.payment === true ? "Yes" : "No"}</td>
-                  <td>
-                    <button
-                      className="btn-boton"
-                      onClick={() => handlerClick(order._id)}
-                    >
-                      Edit
-                    </button>
-                    {/* <button
-                      className="btn-boton"
-                      onClick={() => dispatch(deleteOrder(order._id))}
-                    >
-                      Delete
-                    </button> */}
-                  </td>
-                </tr>
-              ))}
+              {console.log(orders)}
+             
             </tbody>
           </table>
         </div>
