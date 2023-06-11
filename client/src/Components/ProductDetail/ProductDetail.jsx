@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import style from "./ProductDetail.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { getProductById, getReviews } from "../../redux/actions/index.js";
+import { getProductById, getReviews, getClientAdminUsers } from "../../redux/actions/index.js";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import AddToCart from "../EcommerceCliente/AddToCart/AddToCart";
@@ -10,26 +10,30 @@ import NavEcommerce from "../EcommerceCliente/NavEcommerce";
 
 const ProductDetail = () => {
   const product = useSelector((state) => state.product);
-
   const reviews = useSelector((state) => state.reviews);
-  //const sumRatings = reviews.reduce((acc, review) => acc + review.rating, 0); // Suma de los elementos del array
-  // const averageRatings = sumRatings / reviews.length; // Promedio de las revisiones
-  const sumRatings =
-    reviews.length > 0
-      ? reviews.reduce((acc, review) => acc + review.rating, 0)
-      : 0;
-  const averageRatings = reviews.length > 0 ? sumRatings / reviews.length : 0;
-  const comments = reviews.map((review) => review.text);
+  const users = useSelector((state) => state.clientAdminUsers);
+  const clientAdmin = useSelector((state) => state.clientAdmin)
 
-  const clientAdmin = useSelector((state) => state.clientAdmin);
+
+
+  const sumRatings = reviews.length > 0 ? reviews.reduce((acc, review) => acc + review.rating, 0) : 0;
+  const averageRatings = reviews.length > 0 ? sumRatings / reviews.length : 0;
+  //const comments = reviews.length > 0 ? reviews.map((review) => review.text) : [];
+
+  const comments = reviews.length > 0 ? reviews.map((review) => {
+    const user = users.find((user) => user._id === review.user);
+    const userName = user ? user.fullName : 'Unknown User';
+    return { text: review.text, userName };
+  }) : [];
+
 
   const { productId } = useParams();
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getProductById(productId));
-
-    dispatch(getReviews(productId));
+    dispatch(getClientAdminUsers(clientAdmin._id))
+    dispatch(getReviews(productId))
   }, [product.stocks]);
 
   return (
@@ -60,7 +64,11 @@ const ProductDetail = () => {
             <p>Comments:</p>
             <ul>
               {comments.map((comment, index) => (
-                <li key={index}>{comment}</li>
+                <li key={index}>
+                  <p>Comment by: {comment.userName}</p>
+                  <p>{comment.text}</p>
+                </li>
+
               ))}
             </ul>
           </div>
@@ -75,7 +83,6 @@ const ProductDetail = () => {
 
           <AddToCart stock={product.stocks} />
         </div>
-        
         <ProductReview />
       </div>
     </>
