@@ -4,11 +4,11 @@ const {
   loginClientAdminHandler,
   registerClientAdminHandler,
   updateClientHandler,
-
   deleteClientHandler ,
   domainHandler,
   getClientAdminByDomainHandler
 } = require("../handlers/ClientAdminHandlers.js");
+const {orders} = require("../handlers/OrderHandlers.js");
 
 
 
@@ -21,6 +21,8 @@ clientAdminRouter.put('/domain/:clientAdminId', domainHandler)
 
 clientAdminRouter.put('/:clientId', updateClientHandler)
 
+//traerOrdenes
+clientAdminRouter.get('/orders/:clientId',getAllOrdersClient)
 
 //DELETE
 

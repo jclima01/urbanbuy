@@ -46,6 +46,15 @@ const getOrdersByUser = async (userId) => {
     throw new Error(error.message);
   }
 };
+// const deleteOrder = async (orderId) => {
+//   try {
+//     const orders = await Order.findByIdAndDelete(orderId);
+//     return orders;
+//   } catch (error) {
+//     throw new Error(error.message);
+//   }
+// };
+
 
 const createCheckoutSession = async (orderId) => {
   try {
@@ -271,13 +280,66 @@ const increaseQuantity = async (orderId, productId) => {
     throw new Error(error.message);
   }
 };
+const ordersByClient = async (clientId) => {
+  try {
+    const clientAdmin = await ClientAdmin.findOne({ _id: clientId })
+      .populate("users")
+      .populate({
+        path: "users",
+        populate: {
+          path: "orders",
+          model: "Order",
+        },
+      })
+      .exec();
+
+    if (!clientAdmin) {
+      console.log("ClientAdmin no encontrado");
+      return;
+    }
+
+    const orders = clientAdmin.users.reduce(
+      (result, user) => result.concat(user.orders),
+      []
+    );
+
+    console.log("Órdenes del ClientAdmin:", orders);
+    return orders;
+  } catch (error) {
+    console.error(error);
+    throw new Error("Error al obtener las órdenes del ClientAdmin");
+  }
+};
+
+const updateOrderByClient = async(orderId, status, adress,clientId) => {
+  try {
+   const updatedOrder = await Order.findById(orderId);
+
+    if (!updatedOrder) {
+      
+      throw new Error("Order no encontrada");
+    }
+    
+    updatedOrder.status = status;
+    updatedOrder.adress = adress;
+  
+    const savedOrder = await updatedOrder.save();
+    
+    const orderAll = await OrdersClient(clientId);
+    return orderAll;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
 
 module.exports = {
   postOrder,
   getOrdersByUser,
+  ordersByClient,
   createCheckoutSession,
   createOrder,
   updateOrder,
+  updateOrderByClient,
   removeProductFormCart,
   reduceQuantity,
   increaseQuantity,

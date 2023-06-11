@@ -3,11 +3,11 @@ const {
   ClientAdminRegister,
   ClientUpdate,
   ClientDelete,
-
   addDomain,
   getClientAdminByDomain,
-  getAllOrders,
+ 
 } = require("../controllers/ClientAdminControllers.js");
+const {ordersByClient} = require("../controllers/OrdersController.js");
 
 const loginClientAdminHandler = async (req, res) => {
   try {

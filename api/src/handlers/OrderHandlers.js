@@ -7,6 +7,8 @@ const {
   removeProductFormCart,
   reduceQuantity,
   increaseQuantity,
+  ordersByClient,
+  updateOrderByClient
 } = require("../controllers/OrderControllers.js");
 const { getLastOrderFromUser } = require("../controllers/UserControllers.js");
 
