@@ -48,7 +48,7 @@ export const CLEAR_CART = "CLEAR_CART";
 export const SET_REVIEW = "SET_REVIEW";
 export const GET_REVIEWS = "GET_REVIEWS";
 export const ORDER_CLIENT = "ORDER_CLIENT";
-export const DELETE_ORDER = "DELETE_ORDER";
+// export const DELETE_ORDER = "DELETE_ORDER";
 export const UPDATE_ORDER = "UPDATE_ORDER";
 export const SORT_ORDERS_BY_DATE = "SORT_ORDERS_BY_DATE";
 export const FILTER_ORDERS = "FILTER_ORDERS";
@@ -812,4 +812,17 @@ export const searchOrders = (searchTerm) => ({
   type: SEARCH_ORDERS,
   payload: searchTerm,
 })
+export const orderClient = (clientId) => {
+  return async (dispatch) => {
+    try {
+      const {data} = await axios.get(`/clientAdmin/orders/${clientId}`);
+      dispatch({
+        type: ORDER_CLIENT,
+        payload: data,
+      });
+    } catch (error) {
+     
+      throw new Error("Error al obtener las órdenes del ClientAdmin");
+    }
+  }}
 

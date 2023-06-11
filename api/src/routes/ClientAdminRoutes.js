@@ -6,9 +6,10 @@ const {
   updateClientHandler,
   deleteClientHandler ,
   domainHandler,
-  getClientAdminByDomainHandler
+  getClientAdminByDomainHandler,
+  getAllOrdersClient
 } = require("../handlers/ClientAdminHandlers.js");
-const {orders} = require("../handlers/OrderHandlers.js");
+
 
 
 

@@ -388,11 +388,11 @@ const rootReducer = (state = initialState, { type, payload }) => {
           ordersByClient: payload,
           orders: payload,
         };
-        case DELETE_ORDER:
-      return {
-        ...state,
-        orders:state.orders.filter((e)=>e._id!==payload)
-      };
+      //   case DELETE_ORDER:
+      // return {
+      //   ...state,
+      //   orders:state.orders.filter((e)=>e._id!==payload)
+      // };
       case UPDATE_ORDER:
       
       return {
