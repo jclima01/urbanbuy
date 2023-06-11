@@ -433,7 +433,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
           case SEARCH_ORDERS:
             let searchOrders;
             searchOrders = state.orders.filter((ord) =>
-              ord.adress.toLowerCase().includes(payload.toLowerCase())
+              ord.fullName.toLowerCase().includes(payload.toLowerCase())
             );
             return {
               ...state,

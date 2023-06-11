@@ -781,10 +781,10 @@ export const createCheckoutSession = (cart) => {
   };
 };
 
-export const updateOrder = (orderId, status, adress,clientId) => {
+export const updateOrder = (orderId, status,clientId) => {
   try {
   return async function (dispatch) {
-      const {data} = await axios.put(`/orders/${orderId}`, {status, adress,clientId});
+      const {data} = await axios.put(`/orders/orders/${orderId}`, {status,clientId});
       
       return dispatch ({
         type: UPDATE_ORDER,

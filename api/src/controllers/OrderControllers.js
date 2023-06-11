@@ -312,7 +312,7 @@ const ordersByClient = async (clientId) => {
   }
 };
 
-const updateOrderByClient = async(orderId, status, adress,clientId) => {
+const updateStatusOrder = async(orderId, status, clientId) => {
   try {
    const updatedOrder = await Order.findById(orderId);
 
@@ -322,11 +322,12 @@ const updateOrderByClient = async(orderId, status, adress,clientId) => {
     }
     
     updatedOrder.status = status;
-    updatedOrder.adress = adress;
+    
   
     const savedOrder = await updatedOrder.save();
     
-    const orderAll = await OrdersClient(clientId);
+    const orderAll = await ordersByClient(clientId);
+    console.log(orderAll);
     return orderAll;
   } catch (error) {
     throw new Error(error.message);
@@ -340,7 +341,7 @@ module.exports = {
   createCheckoutSession,
   createOrder,
   updateOrder,
-  updateOrderByClient,
+  updateStatusOrder,
   removeProductFormCart,
   reduceQuantity,
   increaseQuantity,

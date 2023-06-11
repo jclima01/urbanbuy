@@ -1,7 +1,12 @@
-import React, { useEffect, useState,useRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
- import { orderClient, sortOrdersByDate, filterOrders, searchOrders } from "../../redux/actions";
+import {
+  orderClient,
+  sortOrdersByDate,
+  filterOrders,
+  searchOrders,
+} from "../../redux/actions";
 import OrderView from "./OrderView";
 import { CiSearch } from "react-icons/ci";
 
@@ -13,10 +18,9 @@ const DashBoardShipping = () => {
     JSON.parse(localStorage.getItem("clientAdmin")) ?? false;
   const clientAdminId = clientAdminStorage._id;
   const orders = useSelector((state) => state.orders);
-
-  const filter=useRef(null);
-  const order=useRef(null);
-
+  // console.log("response", clientAdminStorage)
+  const filter = useRef(null);
+  const order = useRef(null);
 
   const [show, setShow] = useState(false);
   //eslint-disable-next-line
@@ -42,18 +46,14 @@ const DashBoardShipping = () => {
     setShow(!show);
   };
 
-
- const handleInputChange = (e) =>{
-  
-    if(e.target.value!==''){
+  const handleInputChange = (e) => {
+    if (e.target.value !== "") {
       dispatch(searchOrders(e.target.value));
-
-    }else{
+    } else {
       dispatch(orderClient(clientAdminId));
     }
-  
- }
-  
+  };
+
   const OrdenamientoOrders = (e) => {
     //(e)=>dispatch(orderClientUsers(e.target.value))
     //status - date -
@@ -63,32 +63,32 @@ const DashBoardShipping = () => {
 
   const handleFilter = (e) => {
     setFilterSelected(e.target.value);
-    if(e.target.value==='All'){
+    if (e.target.value === "All") {
       dispatch(orderClient(clientAdminId));
+    } else {
+      dispatch(filterOrders(e.target.value));
     }
-    else{dispatch(filterOrders(e.target.value))}
-  }
+  };
 
   useEffect(() => {
     dispatch(orderClient(clientAdminId));
-  
   }, [dispatch, clientAdminId]);
 
-console.log(clientAdminId);
+  console.log(clientAdminId);
   return (
     <>
       <div className="containerTodoDashboarShipping">
-        {/* <OrderView
+        <OrderView
           show={show}
           setShow={setShow}
           orderSelected={orderSelected}
           clientId={clientAdminId}
-        /> */}
+        />
         <h1>{clientAdminStorage.fullName} Orders</h1>
 
         <div className="containerOrders">
           <div className="contentOrderSearchAndFilters">
-            {/* <div className="contentOrdenamiento">
+            <div className="contentOrdenamiento">
               <select
                 className="ordenamientoUsers"
                 ref={order}
@@ -99,38 +99,32 @@ console.log(clientAdminId);
                 <option value="total_max">Total Max </option>
                 <option value="date_asc">Date Asc</option>
                 <option value="date_des">Date Des</option>
-
-            
               </select>
-            </div> */}
+            </div>
 
-            {/* <div className="contentSearchUsers">
+            <div className="contentSearchUsers">
               <div className=" input-container-navbar inputSearchUser">
                 <input
                   type="text"
-                  placeholder="Search Orders by address..."
+                  placeholder="Search Orders by fullname..."
                   className="inputsearch-navbar"
                   onChange={handleInputChange}
                 />
                 <hr />
                 <CiSearch size={25} cursor={"pointer"} />
               </div>
-            </div> */}
+            </div>
 
-            {/* <div className="filter">
-              <select className="filters" ref={filter}  onChange={handleFilter}>
+            <div className="filter">
+              <select className="filters" ref={filter} onChange={handleFilter}>
                 <option value="All">All</option>
-              {estadosOrden.map((estado, index) => (
-                        <option
-                          value={estado}
-                          key={index}
-                    
-                        >
-                          {estado}
-                        </option>
-                      ))}
+                {estadosOrden.map((estado, index) => (
+                  <option value={estado} key={index}>
+                    {estado}
+                  </option>
+                ))}
               </select>
-            </div> */}
+            </div>
           </div>
           <table className="datosUser">
             <thead>
@@ -138,7 +132,7 @@ console.log(clientAdminId);
                 <th>Status</th>
                 <th>Full Name</th>
                 <th>Email</th>
-                <th>Address</th>
+                {/* <th>Address</th> */}
                 <th>Total</th>
                 <th>Cart</th>
                 <th>Date</th>
@@ -147,8 +141,36 @@ console.log(clientAdminId);
               </tr>
             </thead>
             <tbody>
-              {console.log(orders)}
-             
+              {console.log("eze", orders)}
+              {orders?.map((order) => (
+                <>
+                  <tr>
+                    <td>{order?.status}</td>
+                    <td>{order?.fullName}</td>
+                    <td>{order?.email}</td>
+                    {/* <td>{order?.adress}</td> */}
+                    <td>{order?.total}</td>
+                    <td className="carrito">
+                      {order?.cart?.map((prod) => (
+                        <React.Fragment>
+                          {prod.productName}
+                          <br />
+                        </React.Fragment>
+                      ))}
+                    </td>
+                    <td>{order?.createdAt.slice(0, 10)}</td>
+                    <td>{order?.payment === true ? "yes" : "no"}</td>
+                    <td>
+                      <button
+                        className="btn-boton"
+                        onClick={() => handlerClick(order._id)}
+                      >
+                        Edit
+                      </button>
+                    </td>
+                  </tr>
+                </>
+              ))}
             </tbody>
           </table>
         </div>

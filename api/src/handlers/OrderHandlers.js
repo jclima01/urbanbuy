@@ -8,7 +8,7 @@ const {
   reduceQuantity,
   increaseQuantity,
   ordersByClient,
-  updateOrderByClient
+  updateStatusOrder
 } = require("../controllers/OrderControllers.js");
 const { getLastOrderFromUser } = require("../controllers/UserControllers.js");
 
@@ -104,6 +104,21 @@ const getLastOrderFromUserHandler = async (req, res) => {
   }
 };
 
+const updateStatusOrderHandler = async (req, res) => {
+try {
+  const { orderId } = req.params;
+const {status, clientId} = req.body;
+
+const updateOrder = await updateStatusOrder(orderId, status, clientId)
+res.status(200).json(updateOrder);
+
+
+} catch (error) {
+  res.status(400).json({ error: error.message });
+}
+
+};
+
 module.exports = {
   getOrderHandlers,
   postOrderHandlers,
@@ -111,4 +126,5 @@ module.exports = {
   createOrderHandler,
   getLastOrderFromUserHandler,
   updateOrderHandler,
+  updateStatusOrderHandler
 };
