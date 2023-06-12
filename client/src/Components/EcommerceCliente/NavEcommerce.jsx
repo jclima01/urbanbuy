@@ -79,7 +79,7 @@ function NavEcommerce({ clientAdmin }) {
       <div className={style.leftSection}>
         <img src={logoBlanco} alt='' className={style.logoClient} />
         <select
-          className={`${style.select} ${style.categorias}`}
+          className={`${style.select} ${style[theme.select]}`}
           value={selectedCategory}
           onChange={handleCategoryChange}
         >
