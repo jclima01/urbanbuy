@@ -57,6 +57,8 @@ app.get("/profile", requiresAuth(), (req, res) => {
   res.send(JSON.stringify(req.oidc.user));
 });*/
 
+app.use(mainRouter);
+
 //Server Listen
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
