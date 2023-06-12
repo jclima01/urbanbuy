@@ -195,7 +195,7 @@ margin-bottom: 10px;
 }
 .darkMode {
   background-color: rgb(36, 35, 35);
-  color: white;
+  color: inherit;
 }
 
 .pagos{

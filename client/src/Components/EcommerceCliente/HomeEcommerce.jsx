@@ -131,7 +131,7 @@ function HomeEcommerce() {
     <div className={style.homeEcommerceContainer}>
       <div className={containerClass}>
         <NavEcommerce clientAdmin={clientAdmin} />
-        <div className={style.switchContainer}>
+        {/* <div className={style.switchContainer}>
           <label className={style.switch}>
             <input
               type="checkbox"
@@ -140,7 +140,7 @@ function HomeEcommerce() {
             />
             <span className={style.slider}></span>
           </label>
-        </div>
+        </div> */}
 
         <Routes>
           <Route
