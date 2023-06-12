@@ -48,7 +48,7 @@ const ProductDetail = () => {
       <NavEcommerce clientAdmin={clientAdmin} />
       <div className={style.detailContainer}>
         <div className={style.containerDetails}>
-        {/*   <div className={style.navButtons}>
+          {/*   <div className={style.navButtons}>
             <Link to={`/${clientAdmin.domain}`}>
               <button className={style.button}>go back</button>
             </Link>
@@ -67,12 +67,11 @@ const ProductDetail = () => {
               />
             </div>
 
-           {/*  <div className="">
+            {/*  <div className="">
               <h2 className={style.h2}>{product.productName}</h2>
 
-              <p>Rating: {averageRatings.toFixed(1)} </p>
-              <p>Stock: {product.stocks}</p>
-              <p>Price: ${product.price}</p>
+                              
+             
               <p>Comments:</p>
               <ul>
                 {comments.map((comment, index) => (
@@ -85,16 +84,34 @@ const ProductDetail = () => {
             </div> */}
           </div>
           <div className={style.descriptionContainer}>
-            <p className={style.description}>{product.description}</p>
-            <div>
-              {product.categories?.map((categorie) => {
-                return <div>{categorie.categoryName}</div>;
-              })}
+            <div className={style.containertext}>
+              <h1 className={style.hproductname}>{product.productName}</h1>
+              <p className={style.description}>{product.description}</p>
+              <div className={style.detailsproductsall}>
+                <p className={style.pricedetail}> ${product.price}</p>
+                <p> <strong>Stocks: </strong>  {product.stocks}</p>
+                <p><strong>Rating: </strong>  {averageRatings.toFixed(1)} </p>
+              </div>
+            </div>
+            <div className={style.categoryRowContainer}>
+              <div className="">
+                <strong>Categories</strong>
+                {product.categories?.map((categorie) => {
+                  return (
+                    <div className={style.categoryRow}>
+                      {categorie.categoryName}
+                    </div>
+                  );
+                })}
+              </div>
+
+              <div className="">
+                <AddToCart stock={product.stocks} />
+              </div>
             </div>
           </div>
-
-          <AddToCart stock={product.stocks} />
         </div>
+        <hr className={style.hrdivisor} />
         <ProductReview />
       </div>
     </>
