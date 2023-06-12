@@ -28,7 +28,7 @@ export default function ShoppingCart() {
     );
 
     window.open(data.url, "_blank");
-    dispatch(clearCart()).then(navigate(`/${clientAdmin.domain}`));
+    navigate(`/${clientAdmin.domain}`).then(() => dispatch(clearCart()));
   };
 
   const removeProductFromCart = (productId, orderId) => {
