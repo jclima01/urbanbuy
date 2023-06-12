@@ -3,11 +3,11 @@ const {
   ClientAdminRegister,
   ClientUpdate,
   ClientDelete,
-
   addDomain,
   getClientAdminByDomain,
-  getAllOrders,
+ 
 } = require("../controllers/ClientAdminControllers.js");
+const {ordersByClient} = require("../controllers/OrderControllers.js");
 
 const loginClientAdminHandler = async (req, res) => {
   try {
@@ -77,12 +77,25 @@ const getClientAdminByDomainHandler = async (req, res) => {
   }
 };
 
+const getAllOrdersClient = async (req, res) => {
+  try {
+    const { clientId } = req.params;
+    const orders = await ordersByClient(clientId)
+    res.status(200).json(orders);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Error al obtener las órdenes del ClientAdmin" });
+   // res.status(400).json({ error: error.message });
+
+  }
+};
+
 module.exports = {
   loginClientAdminHandler,
   registerClientAdminHandler,
   updateClientHandler,
   deleteClientHandler,
-
+  getAllOrdersClient,
   domainHandler,
   getClientAdminByDomainHandler,
 };
