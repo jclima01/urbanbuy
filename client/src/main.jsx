@@ -7,8 +7,8 @@ import store from "./redux/store/index.js";
 import Auth0ProviderWithHistory from "./auth0-provider-with-history.jsx";
 import axios from "axios";
 
-//axios.defaults.baseURL = "https://urbaybuy-back.up.railway.app";
-axios.defaults.baseURL = "http://localhost:2800";
+axios.defaults.baseURL = "https://urbaybuy-back.up.railway.app";
+//axios.defaults.baseURL = "http://localhost:2800";
 
 ReactDOM.render(
 
