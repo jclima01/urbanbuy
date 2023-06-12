@@ -17,8 +17,7 @@ const DashBoardEdit = () => {
   const theme = useSelector((state) => state.theme);
   const cardStyle = useSelector((state) => state.cardStyle);
   const [banner, setBanner] = useState("");
-
-  const clientAdmin = useSelector((state) => state.clientAdmin);
+const clientAdmin = useSelector((state) => state.clientAdmin);
 
   const dispatch = useDispatch();
 

@@ -796,3 +796,4 @@ export const setBannerText = (bannerText, clientAdminId) => {
     throw new Error(err.message);
   }
 };
+

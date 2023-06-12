@@ -7,11 +7,11 @@ import {useSelector} from "react-redux";
 
 function Banner() {
  const clientAdmin = useSelector((state) => state.clientAdmin)
+ const theme = useSelector((state) => state.theme);
 
   return (
-    <div>
-      <h3>Componente Baneer</h3>
-      <h1>{clientAdmin.bannerText && clientAdmin.bannerText}</h1>
+    <div className= {style[theme]}>
+      <h1 className={style.bannerText}>{clientAdmin.bannerText && clientAdmin.bannerText}</h1>
     </div>
   );
 }

@@ -1,19 +1,33 @@
 .bannerText {
-    font-size: 24px; /* Puedes ajustar este valor según tus necesidades */
-    color: white;
-    text-align: center;
-  }
+  font-size: 24px; /* Puedes ajustar este valor según tus necesidades */
+  color: white;
+  text-align: center;
+  padding: 15px;
+}
 
-  .bannerBackground {
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-  }
-  
-  .bannerBackgroundBlue {
-    background-image: url("ruta_de_la_imagen_blue.jpg");
-  }
-  
-  .bannerBackgroundPink {
-    background-image: url("ruta_de_la_imagen_pink.jpg");
-  }
+.floral {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: auto;
+  background-image: url("../../Img/WhaterPinkBanner.jpeg");
+  margin-top: 3%;
+}
+
+.marino {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: auto;
+  background-image: url("../../Img/BlueBanner.jpeg");
+  margin-top: 3%;
+}
+
+.urbanBuy {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: auto;
+  background-color: orange;
+  margin-top: 3%;
+}
