@@ -17,21 +17,20 @@ function Home(props) {
   const { isAuthenticated } = useAuth0();
   const clientAdmin = useSelector((state) => state.clientAdmin);
   const navigate = useNavigate()
- 
   const dispatch = useDispatch()
+ 
   useEffect(() => {
     if (isAuthenticated)
-    dispatch(loginClientAdmin(user.email, "123asdASD")).finally(() => {
       navigate("/dashboard");
-    });
-    if (isAuthenticated && user)
+/*    if (isAuthenticated && user)
       dispatch(
         registerClientAdmin(user.given_name, user.email, "123asdASD")
       ).finally(
         dispatch(loginClientAdmin(user.email, "123asdASD")).finally(() => {
           if (clientAdmin) navigate("/dashboard");
         })
-      );
+      );*/
+    console.log(user)
   }, [user, isAuthenticated]);
   
   return (

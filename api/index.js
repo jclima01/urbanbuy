@@ -10,14 +10,14 @@ const { auth, requiresAuth } = require("express-openid-connect");
 // const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 //Auth0
-const config = {
+/*const config = {
   authRequired: false,
   auth0Logout: true,
   secret: process.env.AUTH0_SECRET,
-  baseURL: "https://dev.urbanbuy.online",
+  baseURL: "http://localhost:5173", //"https://dev.urbanbuy.online",
   clientID: process.env.AUTH0_CLIENT_ID,
   issuerBaseURL: "https://dev-bfw0nojmxixvtvfn.us.auth0.com",
-};
+};*/
 
 // Middleware
 app.use(express.json());
@@ -39,13 +39,23 @@ app.use((req, res, next) => {
 app.use(mainRouter);
 
 //Auth0
-app.use(auth(config));
+/*app.use(auth(config));
 app.get("/", (req, res) => {
   res.send(req.oidc.isAuthenticated() ? "Logged in" : "Logged out");
 });
-app.get("/dashboard", requiresAuth, (req, res) => {
-  res.send(json.stringify(req.oidc.user));
+app.get("/login", (req, res) => {
+  console.log(req.oidc);
+  res.oidc.login({
+    returnTo: "/dashboard",
+  });
 });
+app.get("/dashboard", requiresAuth, (req, res) => {
+  console.log("here");
+  res.send(JSON.stringify(req.oidc.user));
+});
+app.get("/profile", requiresAuth(), (req, res) => {
+  res.send(JSON.stringify(req.oidc.user));
+});*/
 
 //Server Listen
 app.listen(PORT, () => {
