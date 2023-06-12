@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styles from "./ShoppingCart.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { BsArrowLeftSquareFill } from "react-icons/bs";
@@ -18,19 +18,18 @@ export default function ShoppingCart() {
   const order = useSelector((state) => state.order);
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
-
-
+  const navigate = useNavigate();
   const clientAdmin = useSelector((state) => state.clientAdmin);
 
-const checkout = async (orderId) => {
-  const { data } = await axios.post(
-    "orders/checkout/create-checkout-session",
-    { orderId: orderId }
-  );
+  const checkout = async (orderId) => {
+    const { data } = await axios.post(
+      "orders/checkout/create-checkout-session",
+      { orderId: orderId }
+    );
 
-  window.open(data.url, "_blank");
-  dispatch(clearCart());
-};
+    window.open(data.url, "_blank");
+    dispatch(clearCart()).then(navigate(`/${clientAdmin.domain}`));
+  };
 
   const removeProductFromCart = (productId, orderId) => {
     dispatch(deleteProductFromCart(productId, orderId));
