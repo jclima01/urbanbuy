@@ -10,7 +10,7 @@ function EcommerceUser() {
   // const {domain} = useParams()
   const clientAdmin = useSelector(state => state.clientAdmin)
   const clientAdminId = clientAdmin._id;
-const dispatch = useDispatch()
+  const dispatch = useDispatch()
 
   useEffect(() => {
     // dispatch(getClientAdminByDomain(domain));
@@ -33,12 +33,13 @@ const dispatch = useDispatch()
     const categoryValue = urlSearchParams.get('category');
 
     let filteredResult = products;
-
+    console.log(searchValue);
     if (searchValue) {
       filteredResult = filteredResult.filter((product) =>
         product.productName.toLowerCase().includes(searchValue.toLowerCase())
       );
     }
+
 
     if (categoryValue) {
       filteredResult = filteredResult.filter((product) =>
