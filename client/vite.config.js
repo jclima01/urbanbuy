@@ -5,9 +5,6 @@ export default defineConfig({
   plugins: [
     react(),
   ],
-  build: {
-    sourcemap: true,
-  },
   resolve: {
     alias: {
       'redux-persist/integration/react': 'redux-persist/es/integration/react',
