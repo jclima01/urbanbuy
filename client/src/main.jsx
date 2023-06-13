@@ -4,14 +4,14 @@ import { Auth0Provider } from "@auth0/auth0-react";
 import App from "./App.jsx";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
-import store from "./redux/store/index.js";
 
 import axios from "axios";
 
+import { PersistGate } from 'redux-persist/integration/react';
+import { store, persistor } from './redux/store/index.js';
 
-
-axios.defaults.baseURL = "https://urbaybuy-back.up.railway.app";
-// axios.defaults.baseURL = "http://localhost:2800";
+// axios.defaults.baseURL = "https://urbaybuy-back.up.railway.app";
+axios.defaults.baseURL = "http://localhost:2800";
 
 
 
@@ -31,7 +31,9 @@ ReactDOM.render(
         }}
       >
         <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
           <App />
+        </PersistGate>
         </Provider>
       </Auth0Provider>
     </BrowserRouter>
