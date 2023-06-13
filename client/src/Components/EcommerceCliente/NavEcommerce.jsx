@@ -8,6 +8,7 @@ import Modal from "react-modal";
 import { logOutUser } from "../../redux/actions";
 import { Dropdown } from "react-bootstrap";
 import CartWidget from "./CartWidget/CartWidget.jsx";
+import UserArea from "./UserArea/UserArea";
 
 function NavEcommerce({ clientAdmin }) {
   const [searchValue, setSearchValue] = useState("");
@@ -118,7 +119,9 @@ function NavEcommerce({ clientAdmin }) {
                   <Dropdown show={showMenu} onClose={closeMenu}>
                     {/* <Dropdown.Toggle variant="light" id="avatar-dropdown" /> */}
                     <Dropdown.Menu className={style.dropdownMenu}>
-                      <Dropdown.Item href="#opcion1">Opción 1</Dropdown.Item>
+                      <Link to='/userArea'>
+                      <Dropdown.Item href="#opcion1">Area Usuario</Dropdown.Item>
+                      </Link>
                       <Dropdown.Item href="#opcion2">Opción 2</Dropdown.Item>
                       {/* Agrega aquí más opciones según tus necesidades */}
                       <Dropdown.Divider className={style.dropdownDivider} />

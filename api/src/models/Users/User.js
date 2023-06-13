@@ -8,6 +8,7 @@ const UserSchema = new Schema(
     password: { type: String, required: true },
     permissions: { type: String , default: "User"},
     orders: [{ type: Schema.Types.ObjectId, ref: "Order" }],
+    avatarName:{ type: String }
   },
   { timestamps: true }
 );

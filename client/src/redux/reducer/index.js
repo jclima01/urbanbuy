@@ -47,6 +47,7 @@ import {
   REDUCE_QUANTITY_FROM_CART,
   INCREASE_QUANTITY_FROM_CART,
   CLEAR_CART,
+  UPDATE_USER
 
 } from "../actions/index.js";
 
@@ -378,11 +379,20 @@ const rootReducer = (state = initialState, { type, payload }) => {
 
       };
 
+      case UPDATE_USER:
+      return {
+        ...state,
+        user: {...payload},
+      };
+
     default:
       return {
         ...state,
       };
+
+
+  
   }
-};
+ }
 
 export default rootReducer;
