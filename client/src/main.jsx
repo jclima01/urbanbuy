@@ -6,10 +6,10 @@ import { Provider } from "react-redux";
 import { store, persistor } from "./redux/store/index.js";
 import Auth0ProviderWithHistory from "./auth0-provider-with-history.jsx";
 import axios from "axios";
-import { PersistGate } from "redux-persist/es/integration/react";
+import { PersistGate } from "redux-persist/integration/react";
 
-axios.defaults.baseURL = "https://urbaybuy-back.up.railway.app";
-// axios.defaults.baseURL = "http://localhost:2800";
+// axios.defaults.baseURL = "https://urbaybuy-back.up.railway.app";
+axios.defaults.baseURL = "http://localhost:2800";
 
 ReactDOM.render(
   <React.StrictMode>
