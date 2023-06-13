@@ -14,7 +14,7 @@ const navigate = useNavigate();
   const [comment, setComment] = useState('');
    
   const productId = useSelector((state) => state.product)._id;
-  const userId  = useSelector((state) => state.clientAdmin)._id; // cambiar clientAdmin por user cuando el componente se implente desde la page del user.
+  const userId  = useSelector((state) => state.user)._id; 
 
 
   const handleRatingChange = (event) => {

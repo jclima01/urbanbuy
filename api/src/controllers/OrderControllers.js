@@ -2,6 +2,7 @@ const { default: Stripe } = require("stripe");
 const Order = require("../models/Order.js");
 const User = require("../models/Users/User.js");
 const Product = require("../models/Product.js");
+const ClientAdmin = require("../models/Users/ClientAdmin.js");
 const { default: mongoose } = require("mongoose");
 require("dotenv").config();
 const stripe = require("stripe")(process.env.STRIPE_KEY);
@@ -46,6 +47,15 @@ const getOrdersByUser = async (userId) => {
     throw new Error(error.message);
   }
 };
+// const deleteOrder = async (orderId) => {
+//   try {
+//     const orders = await Order.findByIdAndDelete(orderId);
+//     return orders;
+//   } catch (error) {
+//     throw new Error(error.message);
+//   }
+// };
+
 
 const createCheckoutSession = async (orderId) => {
   try {
@@ -66,8 +76,8 @@ const createCheckoutSession = async (orderId) => {
     const session = await stripe.checkout.sessions.create({
       line_items: line_items,
       mode: "payment",
-      success_url: "http://localhost:5173/paymentSuccess?success=true",
-      cancel_url: "http://localhost:5173/paymentCanceled?canceled=true",
+      success_url: "https://urbanbuy.netlify.app/paymentSuccess?success=true",
+      cancel_url: "https://urbanbuy.netlify.app/paymentCanceled?canceled=true",
       shipping_address_collection: {
         allowed_countries: ["AR"], // Specify the allowed countries for shipping
       },
@@ -271,13 +281,67 @@ const increaseQuantity = async (orderId, productId) => {
     throw new Error(error.message);
   }
 };
+const ordersByClient = async (clientId) => {
+  try {
+    const clientAdmin = await ClientAdmin.findOne({ _id: clientId })
+      .populate("users")
+      .populate({
+        path: "users",
+        populate: {
+          path: "orders",
+          model: "Order",
+        },
+      })
+      .exec();
+
+    if (!clientAdmin) {
+      console.log("ClientAdmin no encontrado");
+      return;
+    }
+
+    const orders = clientAdmin.users.reduce(
+      (result, user) => result.concat(user.orders),
+      []
+    );
+
+    console.log("Órdenes del ClientAdmin:", orders);
+    return orders;
+  } catch (error) {
+    console.error(error);
+    throw new Error("Error al obtener las órdenes del ClientAdmin");
+  }
+};
+
+const updateStatusOrder = async(orderId, status, clientId) => {
+  try {
+   const updatedOrder = await Order.findById(orderId);
+
+    if (!updatedOrder) {
+      
+      throw new Error("Order no encontrada");
+    }
+    
+    updatedOrder.status = status;
+    
+  
+    const savedOrder = await updatedOrder.save();
+    
+    const orderAll = await ordersByClient(clientId);
+    console.log(orderAll);
+    return orderAll;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
 
 module.exports = {
   postOrder,
   getOrdersByUser,
+  ordersByClient,
   createCheckoutSession,
   createOrder,
   updateOrder,
+  updateStatusOrder,
   removeProductFormCart,
   reduceQuantity,
   increaseQuantity,

@@ -8,8 +8,9 @@ const {
   domainHandler,
   getClientAdminByDomainHandler,
   putBannerTextHandler,
-
+  getAllOrdersClient
 } = require("../handlers/ClientAdminHandlers.js");
+
 
 
 
@@ -22,6 +23,8 @@ clientAdminRouter.put('/banner/:clientAdminId', putBannerTextHandler)
 
 clientAdminRouter.put('/:clientId', updateClientHandler)
 
+//traerOrdenes
+clientAdminRouter.get('/orders/:clientId',getAllOrdersClient)
 
 //DELETE
 

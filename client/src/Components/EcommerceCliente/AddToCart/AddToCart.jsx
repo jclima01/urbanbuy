@@ -57,7 +57,7 @@ const AddToCart = ({ stock }) => {
           onClick={() => handleQuantityChange("decrement")}
           className={styles.btn}
         >
-          {" "}
+          
         </GrSubtractCircle>
       </div>
 

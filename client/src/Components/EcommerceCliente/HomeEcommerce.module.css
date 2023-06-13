@@ -1,3 +1,8 @@
+.homeEcommerceContainer{
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+}
 .h2 {
   display: inline-block;
   justify-content: center;
@@ -194,7 +199,7 @@ margin-bottom: 10px;
 }
 .darkMode {
   background-color: rgb(36, 35, 35);
-  color: white;
+  color: inherit;
 }
 
 .pagos{
@@ -254,7 +259,7 @@ margin-bottom: 10px;
   position: relative;
   width: 60px;
   height: 34px;
-  margin-left: 910px;
+  margin-left: 1800px;
   margin-top: -80px;
   transform: scale(0.7);
 }

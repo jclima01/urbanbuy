@@ -44,19 +44,15 @@ const DashBoardUser = () => {
     marginRight: "8px",
   };
 
- 
-  const [activeTab, setActiveTab] = useState('allUsers');
-
-
+  const [activeTab, setActiveTab] = useState("allUsers");
 
   const users = useSelector((state) => state.clientAdminUsers);
-
 
   const [actualPage, setActualPage] = useState(1);
   const [usersPerPage, setUsersPerPage] = useState(3);
 
-  const handleView = () => {
-    setActiveTab(!activeTab);
+  const handleView = (pestanea) => {
+    setActiveTab(pestanea);
   };
 
   const dispatch = useDispatch();
@@ -66,44 +62,44 @@ const DashBoardUser = () => {
 
   const usersSlice = users.slice(firstUserIndex, lastUserIndex);
 
-  const clientAdmin = JSON.parse(localStorage.getItem("clientAdmin")) ?? false;
+  const clientAdmin = useSelector((state) => state.clientAdmin);
   const [selectedOrder, setSelectedOrder] = useState(null);
 
   const handleOrderSelect = (order) => {
-    setSelectedOrder(order);
-    setActiveTab('orderDetail');
+    setSelectedOrder({ ...order });
+    setActiveTab("orderDetail");
   };
-  
-  useEffect(() => {
-   dispatch(getClientAdminUsers(clientAdmin._id))
-  }, []);
 
+  useEffect(() => {
+    dispatch(getClientAdminUsers(clientAdmin._id));
+  }, []);
+console.log("ema", activeTab)
   return (
     <>
       <div className="contieneTodoDashboardUsers">
         <div className="navegateUser">
-        <div style={navTab}>
-        <button
-          style={activeTab === 'allUsers' ? tabActive : tab}
-          onClick={() => handleView('allUsers')}
-        >
-          All Users
-        </button>
-        <button
-          disabled={!selectedOrder}
-          style={activeTab === 'userDetail' ? tabActive : tab}
-          onClick={() => handleView('userDetail')}
-        >
-          User Detail
-        </button>
-        <button
-          disabled={!selectedOrder} 
-          style={activeTab === 'orderDetail' ? tabActive : tab}
-          onClick={() => handleView('orderDetail')}
-        >
-          Order Detail
-        </button>
-      </div>
+          <div style={navTab}>
+            <button
+              style={activeTab === "allUsers" ? tabActive : tab}
+              onClick={() => handleView("allUsers")}
+            >
+              All Users
+            </button>
+            <button
+              disabled={!selectedOrder}
+              style={activeTab === "userDetail" ? tabActive : tab}
+              onClick={() => handleView("userDetail")}
+            >
+              User Detail
+            </button>
+            <button
+              disabled={!selectedOrder}
+              style={activeTab === "orderDetail" ? tabActive : tab}
+              onClick={() => handleView("orderDetail")}
+            >
+              Order Detail
+            </button>
+          </div>
 
           <div className="paginationUsers">
             {activeTab ? (
@@ -114,25 +110,39 @@ const DashBoardUser = () => {
               />
             ) : null}
           </div>
-
         </div>
 
         <div className="contentDashboardUsers">
-              {activeTab === 'allUsers' && <><DashBoardUsersConteiner
+          {activeTab === "allUsers" && (
+            <>
+              <DashBoardUsersConteiner
                 setActiveTab={setActiveTab}
                 activeTab={activeTab}
                 users={usersSlice}
                 setActualPage={setActualPage}
-                /></>}
-      
-              {activeTab === 'userDetail' && <><DashBoardUserDetail   onOrderSelect={handleOrderSelect}   setActiveTab={setActiveTab}
-                activeTab={activeTab} /></>}
-      
-              {activeTab === 'orderDetail' && <><OrderDetail  orderDetail={selectedOrder}  setActiveTab={setActiveTab}
-                activeTab={activeTab}/></>}
-         
-            
-         
+              />
+            </>
+          )}
+
+          {activeTab === "userDetail" && (
+            <>
+              <DashBoardUserDetail
+                onOrderSelect={handleOrderSelect}
+                setActiveTab={setActiveTab}
+                activeTab={activeTab}
+              />
+            </>
+          )}
+
+          {activeTab === "orderDetail" && (
+            <>
+              <OrderDetail
+                orderDetail={selectedOrder}
+                setActiveTab={setActiveTab}
+                activeTab={activeTab}
+              />
+            </>
+          )}
         </div>
       </div>
     </>

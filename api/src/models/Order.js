@@ -9,11 +9,11 @@ const OrderSchema = new Schema(
     // permissions: { type: String },
     email: { type: String },
     cart: { type: Array, required: true },
-    total: { type: Number},
+    total: { type: Number },
     //agregar el adress
-    // adress: { type: String },
+    adress: { type: Object },
     user: { type: Schema.Types.ObjectId, ref: "User" },
-    sessionId: { type: String},
+    sessionId: { type: String },
   },
   { timestamps: true }
 );
