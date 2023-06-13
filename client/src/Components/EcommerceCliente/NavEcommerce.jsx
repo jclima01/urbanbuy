@@ -139,10 +139,28 @@ function NavEcommerce({ clientAdmin }) {
         ) : (
           <div className={style.SingnIn}>
             <Link to="/signInClient">
-              <button className={style.button1}>Sign In</button>
+              <button style={{
+                border:'none', 
+                backgroundColor:'black', 
+                color:'white', 
+                height:'40px',
+                width:'100px',
+                borderRadius:'10PX',
+                marginRight:'10px'
+      
+                }}>Sign In</button>
             </Link>
             <Link to="/loginClient">
-              <button className={style.button2}>Login</button>
+              <button style={{
+                border:'none', 
+                backgroundColor:'black', 
+                color:'white', 
+                height:'40px',
+                width:'100px',
+                borderRadius:'10PX',
+                marginRight:'10px'
+      
+                }}>Login</button>
             </Link>
           </div>
         )}
