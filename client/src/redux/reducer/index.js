@@ -33,10 +33,8 @@ import {
   SET_SLIDER_THEME,
   SET_SEARCH_BAR_THEME,
   SET_CARD_STYLE,
-
   SET_REVIEW,
   GET_REVIEWS,
-
   LOADING_PRODUCTS,
   CREATE_CHECKOUT_SESSION,
   ADD_DOMAIN,
@@ -47,7 +45,13 @@ import {
   REDUCE_QUANTITY_FROM_CART,
   INCREASE_QUANTITY_FROM_CART,
   CLEAR_CART,
-  UPDATE_USER
+  UPDATE_USER,
+  SEARCH_ORDERS,
+  FILTER_ORDERS,
+  UPDATE_ORDER,
+  ORDER_CLIENT,
+  SORT_ORDERS_BY_DATE
+
 
 } from "../actions/index.js";
 
@@ -378,6 +382,63 @@ const rootReducer = (state = initialState, { type, payload }) => {
         order: order,
 
       };
+      case ORDER_CLIENT:
+        return {
+          ...state,
+          ordersByClient: payload,
+          orders: payload,
+        };
+      //   case DELETE_ORDER:
+      // return {
+      //   ...state,
+      //   orders:state.orders.filter((e)=>e._id!==payload)
+      // };
+      case UPDATE_ORDER:
+      
+      return {
+        ...state,
+        orders:[...payload]
+      };
+
+      case SORT_ORDERS_BY_DATE:
+        // Utiliza el spread operator (...) para crear una copia de la lista de órdenes actual
+        const sortedOrders = [...state.orders];
+      if(payload === "total_min") {
+        sortedOrders.sort((a, b) => a.total - b.total)
+      }
+      if(payload === "total_max") {
+        sortedOrders.sort((a, b) => b.total - a.total)
+      }
+      if(payload === "date_asc"){
+        // Ordena la lista de órdenes por fecha (suponiendo que tienes una propiedad "date" en cada objeto de orden)
+        sortedOrders.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+      }
+      if(payload === "date_des"){
+        // Ordena la lista de órdenes por fecha (suponiendo que tienes una propiedad "date" en cada objeto de orden)
+        sortedOrders.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
+      }
+
+
+        return {
+          ...state,
+          orders: sortedOrders
+        };
+        case FILTER_ORDERS:
+          
+          return{
+            ...state,
+             orders: state.orders.filter((e)=>e.status==payload)
+          }
+
+          case SEARCH_ORDERS:
+            let searchOrders;
+            searchOrders = state.orders.filter((ord) =>
+              ord.fullName.toLowerCase().includes(payload.toLowerCase())
+            );
+            return {
+              ...state,
+              orders: [...searchOrders],
+            };
 
       case UPDATE_USER:
       return {

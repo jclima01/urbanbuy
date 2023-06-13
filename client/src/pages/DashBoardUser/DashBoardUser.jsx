@@ -51,8 +51,8 @@ const DashBoardUser = () => {
   const [actualPage, setActualPage] = useState(1);
   const [usersPerPage, setUsersPerPage] = useState(3);
 
-  const handleView = () => {
-    setActiveTab(!activeTab);
+  const handleView = (pestanea) => {
+    setActiveTab(pestanea);
   };
 
   const dispatch = useDispatch();
@@ -73,7 +73,7 @@ const DashBoardUser = () => {
   useEffect(() => {
     dispatch(getClientAdminUsers(clientAdmin._id));
   }, []);
-
+console.log("ema", activeTab)
   return (
     <>
       <div className="contieneTodoDashboardUsers">
