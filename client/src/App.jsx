@@ -21,6 +21,7 @@ import EcommerceUser from "./Components/EcommerceCliente/EcommerceUser";
 import PaymentSuccess from "./Components/EcommerceCliente/ShoppingCart/Payment/PaymentSuccess";
 import PaymentCanceled from "./Components/EcommerceCliente/ShoppingCart/Payment/PaymentCanceled";
 import { useSelector } from "react-redux";
+import UserArea from "./Components/EcommerceCliente/UserArea/UserArea";
 
 function App() {
   const location = useLocation();
@@ -61,7 +62,7 @@ function App() {
             <Route path="/dashBoard/Products" element={<DashBoardProducts />} />
             <Route path="/dashBoard/Shipping" element={<DashBoardShipping />} />
             <Route path="/dashBoard/Settings" element={<DashBoardSettings />} />
-
+<Route path="/userArea" element={<UserArea/>}/>
             <Route path="/homecliente" element={<HomeEcommerce />} />
             <Route path="/:domain" element={<HomeEcommerce />} />
             <Route path="/product/:productId" element={<ProductDetail />} />

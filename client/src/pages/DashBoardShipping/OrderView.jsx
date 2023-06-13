@@ -34,7 +34,7 @@ const OrderView = ({ setShow, show, orderSelected, clientId }) => {
     "Dispatched",
     "Cancelled",
     "Received",
-    "Reembold",
+    "Refund",
     "Proccess",
   ];
 
