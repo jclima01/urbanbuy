@@ -99,7 +99,7 @@ const ProductDetail = () => {
         </div>
         <hr className={style.hrdivisor} />
         <ProductReview />
-        <div className="">
+        {/* <div className="">
               <h2 className={style.h2}>{product.productName}</h2>
 
                               
@@ -113,7 +113,7 @@ const ProductDetail = () => {
                   </li>
                 ))}
               </ul>
-            </div>
+            </div> */}
       </div>
     </>
   );
