@@ -31,7 +31,7 @@ const DashBoardUserDetail = ({
         <ul className={styles.listUl}>
           <li>status:</li>
           <li>date:</li>
-          <li>created:</li>
+          {/* <li>created:</li> */}
           <li>prod:</li>
           <li>price:</li>
           <li>payment</li>
