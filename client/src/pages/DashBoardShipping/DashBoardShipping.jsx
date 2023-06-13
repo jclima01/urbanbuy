@@ -36,7 +36,7 @@ const DashBoardShipping = () => {
     "Dispatched",
     "Cancelled",
     "Received",
-    "Reembold",
+    "Refund",
     "Proccess",
   ];
 
