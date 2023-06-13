@@ -111,7 +111,6 @@ function NavEcommerce({ clientAdmin }) {
               <Avatar size={40} />
             </div>
 
-
             <CartWidget />
             {showMenu && (
               <div className={style.dropdownContainer}>
@@ -119,13 +118,15 @@ function NavEcommerce({ clientAdmin }) {
                   <Dropdown show={showMenu} onClose={closeMenu}>
                     {/* <Dropdown.Toggle variant="light" id="avatar-dropdown" /> */}
                     <Dropdown.Menu className={style.dropdownMenu}>
-                      <Link to='/userArea'>
-                      <Dropdown.Item href="#opcion1">Area Usuario</Dropdown.Item>
+                      <Link to="/userArea">
+                        <Dropdown.Item href="#opcion1">User Area</Dropdown.Item>
                       </Link>
-                      <Dropdown.Item href="#opcion2">Opción 2</Dropdown.Item>
+                      <Link to="/myOrders">
+                      <Dropdown.Item href="#opcion2">My Orders</Dropdown.Item>
+                      </Link>
                       {/* Agrega aquí más opciones según tus necesidades */}
                       <Dropdown.Divider className={style.dropdownDivider} />
-                      <Dropdown.Item onClick={closeMenu}>Cerrar</Dropdown.Item>
+                      <Dropdown.Item onClick={closeMenu}>Close</Dropdown.Item>
                       <Dropdown.Divider className={style.dropdownDivider} />
                       <Dropdown.Item onClick={handleLogout}>
                         Logout
