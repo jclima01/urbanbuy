@@ -51,7 +51,6 @@ export const SET_BANNER = "SET_BANNER";
 export const GET_BANNER = "GET_BANNER";
 export const POST_BANNER = "POST_BANNER";
 export const UPDATE_USER = 'UPDATE_USER'
-export const GET_REVIEWS = "GET_REVIEWS";
 export const ORDER_CLIENT = "ORDER_CLIENT";
 // export const DELETE_ORDER = "DELETE_ORDER";
 export const UPDATE_ORDER = "UPDATE_ORDER";
