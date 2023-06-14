@@ -1,0 +1,15 @@
+.authBtn {
+  margin: 3vw 0;
+  border: solid;
+  border-width: 2px;
+  border-color: rgb(243, 156, 18);
+  padding: 1vw;
+  border-radius: 10px;
+  color: rgb(243, 156, 18);
+  background-color: whitesmoke;
+  transition: ease-in 0.3s;
+}
+
+.authBtn:hover {
+  box-shadow: 0 0 10px rgb(243, 156, 18);
+}

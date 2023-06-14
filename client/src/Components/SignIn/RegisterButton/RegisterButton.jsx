@@ -1,6 +1,7 @@
 import React from "react";
 import { useAuth0 } from "@auth0/auth0-react";
-import style from "../../SignIn/SignIn.module.css";
+import style from "./RegisterButton.module.css";
+import googleImg from "../../../assets/Google-Logo.png"
 
 const RegisterButton = () => {
   const { loginWithRedirect } = useAuth0();
@@ -15,7 +16,7 @@ const RegisterButton = () => {
 
   return (
     <button className={style.buttonGoogle} onClick={handleRegister}>
-      Registrarse con Google
+    <img width="85px" src={googleImg} />
     </button>
   );
 };
