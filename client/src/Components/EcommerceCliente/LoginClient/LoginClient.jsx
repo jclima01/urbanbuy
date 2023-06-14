@@ -3,7 +3,7 @@ import logo2 from "../../../Img/logo2.png";
 import style from "../../FormLogin/FormLogin.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import ventas from "../../../Img/ventas.png";
+import imagencompra from "../../../Img/imagencompra.png";
 import { loginUser } from "../../../redux/actions";
 import LoginAuth from "../../FormLogin/LoginAuth";
 // import { useAuth0 } from "@auth0/auth0-react";
@@ -61,7 +61,7 @@ const FormLogin = () => {
   return (
     <div className={style.container}>
       <img
-        src={ventas}
+        src={imagencompra}
         alt=""
         style={{ width: "40vw", marginLeft: "-250px", marginRight: "50px" }}
       />
@@ -101,7 +101,7 @@ const FormLogin = () => {
             </button>
           </form>
           <div>
-            <LoginAuth />
+            {/* <LoginAuth /> */}
           </div>
         </div>
       </div>
