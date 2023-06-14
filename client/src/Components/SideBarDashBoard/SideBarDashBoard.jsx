@@ -12,15 +12,15 @@ import { useAuth0 } from "@auth0/auth0-react";
 const SideBarDashBoard = () => {
   const [isActive, setisActive] = useState("Home");
   const dispatch = useDispatch();
-  const { logout, isAuthenticated } = useAuth0()
+  const { logout, isAuthenticated } = useAuth0();
   const handleIsActiveHover = (value) => {
     setisActive(value);
   };
 
- const handleLogout = () => {
-   dispatch(logOutClientAdmin())
-   logout()
- }
+  const handleLogout = () => {
+    dispatch(logOutClientAdmin());
+    logout();
+  };
 
   return (
     <div>
@@ -78,7 +78,7 @@ const SideBarDashBoard = () => {
                 >
                   <BsGraphUpArrow size={25} />
                 </li>
-              </Link> 
+              </Link>
               {/* <Link to={"dashboard/settings"} className="custom-link">
                 <li
                   onClick={() => handleIsActiveHover("Settings")}
