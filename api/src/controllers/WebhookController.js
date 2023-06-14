@@ -3,7 +3,7 @@ const Order = require("../models/Order.js");
 const updateOrder = async (sessionId, paymentStatus, address) => {
   try {
     const order = await Order.findOne({ sessionId });
-    order.status = paymentStatus === "paid" ? "sending products" : "pending";
+    order.status = paymentStatus === "paid" ? "Proccess" : "Pending";
     order.payment = paymentStatus === "paid" ? true : false;
     // order.cart = paymentStatus === "paid" ? [] : order.cart;
     //agregar el adress

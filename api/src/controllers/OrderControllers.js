@@ -114,7 +114,7 @@ const createOrder = async (productId, quantity, fullName, email, userId) => {
     );
     const newOrder = new Order({
       fullName: fullName,
-      status: "pending",
+      status: "Pending",
       email: email,
       cart: cart,
       total: total,
