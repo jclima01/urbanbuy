@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { updateUser } from "../../../redux/actions/index.js";
-import { useNavigate, Link } from 'react-router-dom';
-import UploadAvatar from '../UploadAvatar/UploadAvatar.jsx'; 
-import style from './UserArea.module.css';
-
+import { useNavigate, Link } from "react-router-dom";
+import UploadAvatar from "../UploadAvatar/UploadAvatar.jsx";
+import style from "./UserArea.module.css";
 
 function UserArea() {
   const user = useSelector((state) => state.user);
@@ -34,7 +33,9 @@ function UserArea() {
 
   const handleUpdate = (e) => {
     e.preventDefault();
-    dispatch(updateUser(user._id, newUsername, newEmail, newPassword, newAvatar))
+    dispatch(
+      updateUser(user._id, newUsername, newEmail, newPassword, newAvatar)
+    )
       .then(() => {
         setNewUsername("");
         setNewEmail("");
@@ -46,14 +47,17 @@ function UserArea() {
         console.error("Error al actualizar los datos del usuario:", error);
       });
   };
-  console.log("newAvatar:", newAvatar)
+  console.log("newAvatar:", newAvatar);
   return (
-   
-    <div className={style.container} >
+    <div className={style.container}>
       <h1>Área de Usuario</h1>
-      <img src={newAvatar || user?.avatarName} alt="Avatar" className={style.avatar} />
-      <div className={style.data}> 
-        <p style={{marginTop:'15px'}}>Email: {user?.email}</p>
+      <img
+        src={newAvatar || user?.avatarName}
+        alt="Avatar"
+        className={style.avatar}
+      />
+      <div className={style.data}>
+        <p style={{ marginTop: "15px" }}>Email: {user?.email}</p>
         <p>Nombre de Usuario: {user?.fullName}</p>
         {/* <p>Contraseña: {user?.password}</p> */}
       </div>
@@ -72,7 +76,7 @@ function UserArea() {
         onChange={handleEmailChange}
         placeholder="Nuevo correo electrónico"
         className={style.user}
-      /> 
+      />
 
       <input
         type="password"
@@ -82,17 +86,15 @@ function UserArea() {
         className={style.user}
       />
       <div className={style.upload}>
-        <UploadAvatar
-          avatarName={newAvatar}
-          setavatarName={setNewAvatar}
-        />
+        <UploadAvatar avatarName={newAvatar} setavatarName={setNewAvatar} />
       </div>
-      <button onClick={handleUpdate} className={style.actualizar}>Actualizar datos</button>
-      <Link to='/:domain'>
+      <button onClick={handleUpdate} className={style.actualizar}>
+        Actualizar datos
+      </button>
+      <Link to="/:domain">
         <button className={style.go}>Go Back</button>
       </Link>
     </div>
-    
   );
 }
 

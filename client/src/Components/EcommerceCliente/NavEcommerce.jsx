@@ -104,14 +104,13 @@ function NavEcommerce({ clientAdmin }) {
       <div className={style.rightSection}>
         {Object.entries(user).length !== 0 ? (
           <div className={style.userContainer}>
+            <CartWidget />
             <h4 className={style.hola}>
               Hola <strong>{user.fullName}!</strong>
             </h4>
             <div className={style.avatar} onClick={openMenu}>
               <Avatar size={40} />
             </div>
-
-            <CartWidget />
             {showMenu && (
               <div className={style.dropdownContainer}>
                 <div className={style.dropdownMenu}>

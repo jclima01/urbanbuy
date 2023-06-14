@@ -7,17 +7,20 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { logOutClientAdmin } from "../../redux/actions";
 import { useDispatch } from "react-redux";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const SideBarDashBoard = () => {
   const [isActive, setisActive] = useState("Home");
   const dispatch = useDispatch();
+  const { logout } = useAuth0()
   const handleIsActiveHover = (value) => {
     setisActive(value);
   };
 
-  const logout = () => {
-    dispatch(logOutClientAdmin());
-  };
+  //const logout = () => {
+    
+    //dispatch(logOutClientAdmin());
+  //};
 
   return (
     <div>
@@ -68,14 +71,14 @@ const SideBarDashBoard = () => {
                   <CiPenpot size={30} />
                 </li>
               </Link>
-              {/* <Link to={"dashboard/Shipping"} className="custom-link">
+              <Link to={"dashboard/Shipping"} className="custom-link">
                 <li
                   onClick={() => handleIsActiveHover("Shipping")}
                   className={isActive === "Shipping" ? "isActive" : "btn"}
                 >
                   <BsGraphUpArrow size={25} />
                 </li>
-              </Link> */}
+              </Link> 
               {/* <Link to={"dashboard/settings"} className="custom-link">
                 <li
                   onClick={() => handleIsActiveHover("Settings")}
@@ -86,7 +89,9 @@ const SideBarDashBoard = () => {
               </Link> */}
             </ul>
           </div>
-          <div onClick={logout}>
+          <div onClick={() => logout({
+            returnTo: window.location.origin
+            })}>
             <div className="mb-5 btn cursor-pointer ">
               <RiLogoutCircleRLine size={30} />
             </div>
