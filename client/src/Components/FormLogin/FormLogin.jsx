@@ -1,24 +1,23 @@
 import { useEffect, useState } from "react";
 import logo2 from "../../Img/logo2.png";
 import style from "./FormLogin.module.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import ventas from "../../Img/ventas.png";
 import { loginClientAdmin } from "../../redux/actions";
 import LoginAuth from "./LoginAuth";
 import { useAuth0 } from "@auth0/auth0-react";
+import LoginAurhButton from "./LoginAurhButton";
 
 // Falta crear una funcion que asocie email y contraseña para dar acceso
 
 const FormLogin = () => {
-  const { user } = useAuth0();
-
-  // useEffect(() => {
-  //   if (isAuthenticated)
-  //     dispatch(loginClientAdmin("jc@123.com", "123asdASD")).finally(() => {
-  //       navigate("/dashboard");
-  //     });
-  // }, [user]);
+  const { user,isAuthenticated } = useAuth0();
+const clientAdmin = useSelector(state => state.clientAdmin);
+  useEffect(() => {
+    if (isAuthenticated)
+      dispatch(loginClientAdmin(user.email, import.meta.env.VITE_AUTH0_PWD)).then(clientAdmin &&navigate("/dashboard"));
+  }, [user]);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -52,8 +51,7 @@ const FormLogin = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Aquí puedes agregar la lógica para procesar el inicio de sesión
-    dispatch(loginClientAdmin(email,password)).finally(() => {
-
+    dispatch(loginClientAdmin(email, password)).finally(() => {
       navigate("/dashboard");
     });
   };
@@ -100,9 +98,10 @@ const FormLogin = () => {
               Iniciar sesión
             </button>
           </form>
-          <div >
-      <LoginAuth />
-      </div>
+          <div>
+            {/* <LoginAuth /> */}
+            <LoginAurhButton />
+          </div>
         </div>
       </div>
     </div>

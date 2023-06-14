@@ -9,18 +9,20 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 const SignIn = () => {
 
-  // const { user } = useAuth0();
+  const { user,isAuthenticated } = useAuth0();
+  useEffect(()=>{
+    if(isAuthenticated){
+     
+      dispatch(registerClientAdmin(user.given_name, user.email, import.meta.env.VITE_AUTH0_PWD));
+     
+      navigate("/login");
+    }
+    
+        
+      
 
-  // useEffect(() => {
-  //   if (user)
-  //     dispatch(registerClientAdmin(user?.email, "12345"))
-  //     // .finally(() => {
-  //     //   navigate("/login");
-  //     // });
-  // }, [user]);
-
-
-
+    
+  }, [user]);
 
   //   const [username, setUsername] = useState("");
   //   const [userError, setUserError] = useState("");

@@ -18,11 +18,9 @@ const SideBarDashBoard = () => {
   };
 
  const handleLogout = () => {
- if (isAuthenticated) {
-   logout({
-     returnTo: window.location.origin
-   }).then(() => dispatch(logOutClientAdmin()));
- }}
+   dispatch(logOutClientAdmin())
+   logout()
+ }
 
   return (
     <div>
