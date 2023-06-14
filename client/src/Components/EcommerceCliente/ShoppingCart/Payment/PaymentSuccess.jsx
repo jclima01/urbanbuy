@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { clearCart } from "../../../../redux/actions";
-import paymentSuccess from "../../../../Img/PaymentSuccess.png";
+import paymentSuccess from "../../../../Img/paymentSuccess.png";
 import style from "./PaymentSuccess.module.css";
 
 const PaymentSuccess = ({clientAdmin, user}) => {
