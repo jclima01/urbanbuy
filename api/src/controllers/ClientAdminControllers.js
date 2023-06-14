@@ -121,6 +121,7 @@ const getClientAdminByDomain = async (domain) => {
   }
 };
 
+
 const setBannerText = async (bannerText, clientAdminId) => {
   //findByIdAndUpdate para buscar y actualizar el banner de texto correspondiente en la base de datos. Si no se encuentra el banner de texto, se arroja una excepción indicando que no se encontró el texto del banner. Por último, devuelve el objeto actualizado del banner de texto.
   try {

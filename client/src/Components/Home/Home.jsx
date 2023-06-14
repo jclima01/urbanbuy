@@ -20,18 +20,15 @@ function Home(props) {
   const dispatch = useDispatch()
  
   useEffect(() => {
-    if (isAuthenticated)
-      navigate("/dashboard");
-/*    if (isAuthenticated && user)
+    if (isAuthenticated && user)
       dispatch(
-        registerClientAdmin(user.given_name, user.email, "123asdASD")
-      ).finally(
-        dispatch(loginClientAdmin(user.email, "123asdASD")).finally(() => {
+        registerClientAdmin(user.given_name, user.email, import.meta.env.VITE_AUTH0_PWD)
+      ).then(() => dispatch(loginClientAdmin(user.email, import.meta.env.VITE_AUTH0_PWD)).then(() => {
           if (clientAdmin) navigate("/dashboard");
         })
-      );*/
+      );
     console.log(user)
-  }, [user, isAuthenticated]);
+  }, [isAuthenticated, dispatch, clientAdmin,navigate, user]);
   
   return (
     <div className="home-landing">
