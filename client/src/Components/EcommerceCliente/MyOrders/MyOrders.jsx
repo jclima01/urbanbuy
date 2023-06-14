@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import './MyOrders.module.css';
+import style from './MyOrders.module.css';
 import { getOrdersByUser } from "../../../redux/actions";
+import { useNavigate, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 const MyOrders = () => {
@@ -8,7 +9,7 @@ const MyOrders = () => {
   const dispatch = useDispatch();
   const userOrders = useSelector((state)=> state.ordersByUser);
   const user = useSelector((state) => state.user);
-  
+  const navigate = useNavigate();
 
   useEffect(() => {
     
@@ -21,11 +22,13 @@ const MyOrders = () => {
 
 
   return (
-    <div>
+    <div className={style.container}>
      
       <h5>My Orders</h5>
       {userOrders?.length > 0 ? (
-        <table className="datosUser">
+        <>
+        <div className={style.data}>
+        <table className={style.datosUser}>
         <thead>
           <tr>
             <th>Status</th>
@@ -47,9 +50,8 @@ const MyOrders = () => {
                 <td>{order?.status}</td>
                 <td>{order?.fullName}</td>
                 <td>{order?.email}</td>
-                {/* <td>{order?.adress}</td> */}
                 <td>{order?.total}</td>
-                <td className="carrito">
+                <td className={style.carrito}>
                   {order?.cart?.map((prod) => (
                     <React.Fragment>
                       {prod.productName}
@@ -66,6 +68,11 @@ const MyOrders = () => {
         </tbody>
       </table>
       
+      </div>
+      <Link to="/:domain">
+        <button className={style.go}>Go Back</button>
+      </Link>
+      </>
       ) : (
         <div>No orders found.</div>
       )}
