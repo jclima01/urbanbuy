@@ -11,8 +11,7 @@ const DashBoardModalAddCategories = ({ show, setShow }) => {
   const handleClose = () => setShow(false);
   const dispatch = useDispatch();
   const categories = useSelector((state) => state.categories);
-  const clientAdminStorage =
-    JSON.parse(localStorage.getItem("clientAdmin")) ?? false;
+  const clientAdmin = useSelector(state => state.clientAdmin);
 
   const [input, setInput] = useState("");
 
@@ -20,12 +19,12 @@ const DashBoardModalAddCategories = ({ show, setShow }) => {
     e.preventDefault();
     if (!input) return;
 
-    dispatch(addCategory(input, clientAdminStorage._id));
+    dispatch(addCategory(input, clientAdmin._id));
 
     setInput("");
   };
   useEffect(() => {
-    dispatch(getCategories(clientAdminStorage._id));
+    dispatch(getCategories(clientAdmin._id));
   }, []);
   return (
     <Modal show={show} onHide={handleClose}>
