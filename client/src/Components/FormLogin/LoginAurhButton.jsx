@@ -5,10 +5,10 @@ const LoginAurhButton = () => {
 const {loginWithRedirect} = useAuth0()
 const handleClick = () => {
     loginWithRedirect({
-        redirectUri: "http://localhost:5173/login"
+        redirectUri: "https://urbanbuy.netlify.app/login"
     })
 }
-
+//.
   return (
     <button onClick={handleClick}>LoginAurhButton</button>
   )
