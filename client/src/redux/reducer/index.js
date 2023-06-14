@@ -45,14 +45,13 @@ import {
   REDUCE_QUANTITY_FROM_CART,
   INCREASE_QUANTITY_FROM_CART,
   CLEAR_CART,
+  SET_BANNER,
   UPDATE_USER,
   SEARCH_ORDERS,
   FILTER_ORDERS,
   UPDATE_ORDER,
   ORDER_CLIENT,
   SORT_ORDERS_BY_DATE
-
-
 } from "../actions/index.js";
 
 const initialState = {
@@ -445,6 +444,13 @@ const rootReducer = (state = initialState, { type, payload }) => {
         ...state,
         user: {...payload},
       };
+
+    case SET_BANNER:
+      return {
+        ...state,
+        clientAdmin: {...payload},
+      };
+
 
     default:
       return {

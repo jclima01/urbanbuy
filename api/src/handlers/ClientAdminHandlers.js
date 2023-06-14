@@ -3,6 +3,7 @@ const {
   ClientAdminRegister,
   ClientUpdate,
   ClientDelete,
+  setBannerText,
   addDomain,
   getClientAdminByDomain,
  
@@ -77,6 +78,17 @@ const getClientAdminByDomainHandler = async (req, res) => {
   }
 };
 
+const putBannerTextHandler = async (req, res) => {
+  try { //putBannerTextHandler es un controlador para manejar una solicitud PUT para actualizar un banner de texto existente. Extrae el bannerId de los parámetros de la solicitud y el bannerText del cuerpo de la solicitud. Llama a la función setBannerText para actualizar el texto del banner correspondiente al bannerId
+    const { clientAdminId } = req.params;
+    const { bannerText } = req.body;
+    const editBannerText = await setBannerText(bannerText, clientAdminId);
+    res.status(201).json(editBannerText);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+}
+
 const getAllOrdersClient = async (req, res) => {
   try {
     const { clientId } = req.params;
@@ -95,6 +107,7 @@ module.exports = {
   registerClientAdminHandler,
   updateClientHandler,
   deleteClientHandler,
+  putBannerTextHandler,
   getAllOrdersClient,
   domainHandler,
   getClientAdminByDomainHandler,

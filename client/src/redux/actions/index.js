@@ -46,8 +46,11 @@ export const REDUCE_QUANTITY_FROM_CART = "REDUCE_QUANTITY_FROM_CART";
 export const INCREASE_QUANTITY_FROM_CART = "INCREASE_QUANTITY_FROM_CART";
 export const CLEAR_CART = "CLEAR_CART";
 export const SET_REVIEW = "SET_REVIEW";
-export const UPDATE_USER = 'UPDATE_USER'
 export const GET_REVIEWS = "GET_REVIEWS";
+export const SET_BANNER = "SET_BANNER";
+export const GET_BANNER = "GET_BANNER";
+export const POST_BANNER = "POST_BANNER";
+export const UPDATE_USER = 'UPDATE_USER'
 export const ORDER_CLIENT = "ORDER_CLIENT";
 // export const DELETE_ORDER = "DELETE_ORDER";
 export const UPDATE_ORDER = "UPDATE_ORDER";
@@ -77,6 +80,7 @@ export const updateUser = (userId, fullName, email, password,avatarName) => {
     }
   };
 };
+
 
 export const clearCart = () => {
   try {
@@ -801,6 +805,23 @@ export const createCheckoutSession = (cart) => {
       throw new Error(error.message);
     }
   };
+};
+
+export const setBannerText = (bannerText, clientAdminId) => {
+  try {
+    return async function (dispatch) {
+      const { data } = await axios.put(`/clientAdmin/banner/${clientAdminId}`, {
+        bannerText,
+      });
+      return dispatch({
+        type: SET_BANNER,
+        payload: data,
+      });
+    };
+    // eslint-disable-next-line no-unreachable
+  } catch (err) {
+    throw new Error(err.message);
+  }
 };
 
 export const updateOrder = (orderId, status,clientId) => {

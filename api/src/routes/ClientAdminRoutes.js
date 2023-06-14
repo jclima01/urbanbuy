@@ -7,6 +7,7 @@ const {
   deleteClientHandler ,
   domainHandler,
   getClientAdminByDomainHandler,
+  putBannerTextHandler,
   getAllOrdersClient
 } = require("../handlers/ClientAdminHandlers.js");
 
@@ -17,7 +18,7 @@ clientAdminRouter.get('/:domain', getClientAdminByDomainHandler)
 clientAdminRouter.post('/login', loginClientAdminHandler)
 clientAdminRouter.post('/register', registerClientAdminHandler)
 clientAdminRouter.put('/domain/:clientAdminId', domainHandler)
-
+clientAdminRouter.put('/banner/:clientAdminId', putBannerTextHandler)
 //PUT   
 
 clientAdminRouter.put('/:clientId', updateClientHandler)

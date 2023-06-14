@@ -19,6 +19,7 @@ import pagos from "../../Img/pagos.png";
 import envios from "../../Img/envios.png";
 import { Route, Routes } from "react-router-dom";
 import EcommerceUser from "./EcommerceUser";
+import Banner from "./Banner";
 
 function HomeEcommerce() {
   const { domain } = useParams();
@@ -128,6 +129,7 @@ function HomeEcommerce() {
     : style.fondo;
 
   return (
+
     <div className={style.homeEcommerceContainer}>
       <div className={containerClass}>
         <NavEcommerce clientAdmin={clientAdmin} />
@@ -149,9 +151,9 @@ function HomeEcommerce() {
             element={<EcommerceUser />}
           />
         </Routes>
-        <div>
-          <img src={BANNER} className={style.banner} alt="Banner"></img>
-        </div>
+      <div>
+      <Banner></Banner>
+      </div>
 
         <h1 className={style.h1}> LOS MAS VENDIDOS</h1>
 

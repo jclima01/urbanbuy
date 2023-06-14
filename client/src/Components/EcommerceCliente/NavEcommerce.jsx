@@ -22,6 +22,8 @@ function NavEcommerce({ clientAdmin }) {
   const [showMenu, setShowMenu] = useState(false);
   const navigate = useNavigate();
   const dropdownRef = useRef();
+  const theme = useSelector((state) => state.theme);
+
 
   const handleInputChange = (event) => {
     setSearchValue(event.target.value);
@@ -75,11 +77,11 @@ function NavEcommerce({ clientAdmin }) {
   };
 
   return (
-    <div className={style.container}>
+    <div className={`${style.containerNav} ${style[theme]}`}> 
       <div className={style.leftSection}>
         <img src={logoBlanco} alt="" className={style.logoClient} />
         <select
-          className={`${style.select} ${style.categorias}`}
+          className={`${style.select} ${style[theme.select]}`}
           value={selectedCategory}
           onChange={handleCategoryChange}
         >
@@ -98,7 +100,7 @@ function NavEcommerce({ clientAdmin }) {
           onChange={handleInputChange}
           onKeyPress={handleKeyPress}
           className={style.inputSearch}
-          placeholder="Buscar producto"
+          placeholder="Buscar producto..."
         />
       </div>
       <div className={style.rightSection}>
@@ -139,10 +141,10 @@ function NavEcommerce({ clientAdmin }) {
         ) : (
           <div className={style.SingnIn}>
             <Link to="/signInClient">
-              <button className={style.button1}>Sign In</button>
+              <button className={style.buttonSL}>Sign In</button>
             </Link>
             <Link to="/loginClient">
-              <button className={style.button2}>Login</button>
+              <button className={style.buttonSL}>Login</button>
             </Link>
           </div>
         )}

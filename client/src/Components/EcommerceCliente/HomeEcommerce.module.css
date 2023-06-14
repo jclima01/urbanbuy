@@ -18,6 +18,10 @@
   margin-bottom: 50px;
 }
 
+.fixSize{
+  width: 100%;
+}
+
 @keyframes highlight {
   0% {
     background-color: rgb(245, 175, 62);
