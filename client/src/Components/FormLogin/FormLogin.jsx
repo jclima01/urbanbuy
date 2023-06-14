@@ -16,9 +16,10 @@ const FormLogin = () => {
 const clientAdmin = useSelector(state => state.clientAdmin);
   useEffect(() => {
     if (isAuthenticated)
-      dispatch(loginClientAdmin(user.email, import.meta.env.VITE_AUTH0_PWD)).then(clientAdmin &&navigate("/dashboard"));
+      dispatch(loginClientAdmin(user.email, import.meta.env.VITE_AUTH0_PWD)).then(clientAdmin && navigate("/dashboard"));
   }, [user]);
 
+  
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState("");

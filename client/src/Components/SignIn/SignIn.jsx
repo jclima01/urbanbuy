@@ -2,28 +2,41 @@ import React, { useEffect, useState } from "react";
 import logo2 from "../../Img/logo2.png";
 import style from "./SignIn.module.css";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { registerClientAdmin } from "../../redux/actions";
+import { useDispatch, useSelector } from "react-redux";
+import { loginClientAdmin, registerClientAdmin } from "../../redux/actions";
 import RegisterButton from "./RegisterButton/RegisterButton";
 import { useAuth0 } from "@auth0/auth0-react";
 
 const SignIn = () => {
+  const { user, isAuthenticated } = useAuth0();
+  const clientAdmin = useSelector((state) => state.clientAdmin);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (isAuthenticated && user)
+      dispatch(
+        registerClientAdmin(
+          user.given_name,
+          user.email,
+          import.meta.env.VITE_AUTH0_PWD
+        )
+      )
+        .then(() => {
+          dispatch(
+            loginClientAdmin(user.email, import.meta.env.VITE_AUTH0_PWD)
+          );
+          console.log("dispatch login client admin");
+        })
+        .then(clientAdmin && navigate("/dashboard"));
+  }, [isAuthenticated, dispatch, clientAdmin, navigate, user]);
 
-  const { user,isAuthenticated } = useAuth0();
-  useEffect(()=>{
-    if(isAuthenticated){
-     
-      dispatch(registerClientAdmin(user.given_name, user.email, import.meta.env.VITE_AUTH0_PWD));
-     
-      navigate("/login");
-    }
-    
-        
-      
-
-    
-  }, [user]);
-
+  // useEffect(() => {
+  //   if (clientAdmin._id) {
+  //     dispatch(
+  //       loginClientAdmin(user.email, import.meta.env.VITE_AUTH0_PWD)
+  //     ).then(navigate("/dashboard"));
+  //   }
+  // }, [clientAdmin]);
   //   const [username, setUsername] = useState("");
   //   const [userError, setUserError] = useState("");
   const [password, setPassword] = useState("");
@@ -41,8 +54,6 @@ const SignIn = () => {
   //     setUsername(value);
   //   };
 
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const handleEmailChange = (e) => {
     const value = e.target.value;
@@ -78,11 +89,14 @@ const SignIn = () => {
     validateConfirmPassword(value);
   };
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     await dispatch(registerClientAdmin(fullName, email, password))
-    .then(()=> {alert("Usuario creado con exito"); navigate("/login");})
-    .catch((error)=> alert("Error al crear el ususario"))
+      .then(() => {
+        alert("Usuario creado con exito");
+        navigate("/login");
+      })
+      .catch((error) => alert("Error al crear el ususario"));
     //.finally(() => {
     //  navigate("/login");
     //});
@@ -193,9 +207,8 @@ const SignIn = () => {
               Registrarse
             </button>
           </form>
-            <RegisterButton />
+          <RegisterButton />
         </div>
-
       </div>
     </div>
   );
