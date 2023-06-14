@@ -1,0 +1,33 @@
+.bannerText {
+  font-size: 24px; /* Puedes ajustar este valor según tus necesidades */
+  color: white;
+  text-align: center;
+  padding: 15px;
+}
+
+.floral {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: auto;
+  background-image: url("../../Img/WhaterPinkBanner.jpeg");
+  margin-top: 3%;
+}
+
+.marino {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: auto;
+  background-image: url("../../Img/BlueBanner.jpeg");
+  margin-top: 3%;
+}
+
+.urbanBuy {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: auto;
+  background-color: orange;
+  margin-top: 3%;
+}
