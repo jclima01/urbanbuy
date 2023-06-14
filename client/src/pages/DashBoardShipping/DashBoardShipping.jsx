@@ -14,11 +14,10 @@ import "./DashBoardShipping.css";
 
 const DashBoardShipping = () => {
   const dispatch = useDispatch();
-  const clientAdminStorage =
-    JSON.parse(localStorage.getItem("clientAdmin")) ?? false;
-  const clientAdminId = clientAdminStorage._id;
+  const clientAdmin = useSelector((state) => state.clientAdmin);
+  const clientAdminId = clientAdmin._id;
   const orders = useSelector((state) => state.orders);
-  // console.log("response", clientAdminStorage)
+  // console.log("response", clientAdmin)
   const filter = useRef(null);
   const order = useRef(null);
 
@@ -84,7 +83,7 @@ const DashBoardShipping = () => {
           orderSelected={orderSelected}
           clientId={clientAdminId}
         />
-        <h1>{clientAdminStorage.fullName} Orders</h1>
+        <h1>{clientAdmin.fullName} Orders</h1>
 
         <div className="containerOrders">
           <div className="contentOrderSearchAndFilters">
