@@ -1,47 +1,78 @@
 import React, { useState, useEffect } from "react";
-import style from './MyOrders.module.css';
+import './MyOrders.module.css';
 import { getOrdersByUser } from "../../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 
 const MyOrders = () => {
+
   const dispatch = useDispatch();
-  const orders = useSelector((state) => state.orders);
+  const userOrders = useSelector((state)=> state.ordersByUser);
   const user = useSelector((state) => state.user);
-  const [loading, setLoading] = useState(false);
+  
 
   useEffect(() => {
-    if (user && user._id) {
-      setLoading(true);
-      dispatch(getOrdersByUser(user._id))
-        .then(() => setLoading(false))
-        .catch(() => setLoading(false));
-    }
-  }, [dispatch, user]);
+    
+   
+    dispatch(getOrdersByUser(user._id))
+  
+  }, [dispatch]);
 
-  if (!user) {
-    return <div>Please log in to view your orders.</div>;
-  }
+  
 
-  if (loading) {
-    return <div>Loading orders...</div>;
-  }
 
-  const userOrders = orders?.filter((order) => order.userId === user._id);
-console.log("ema", orders)
   return (
     <div>
+     
       <h5>My Orders</h5>
       {userOrders?.length > 0 ? (
-        <ul>
-          {userOrders.map((order) => (
-            <li key={order.id}>{order.title}</li>
+        <table className="datosUser">
+        <thead>
+          <tr>
+            <th>Status</th>
+            <th>Full Name</th>
+            <th>Email</th>
+           
+            <th>Total</th>
+            <th>Cart</th>
+            <th>Date</th>
+            <th>Payment</th>
+          
+          </tr>
+        </thead>
+        <tbody>
+          
+          {userOrders?.map((order) => (
+            <>
+              <tr>
+                <td>{order?.status}</td>
+                <td>{order?.fullName}</td>
+                <td>{order?.email}</td>
+                {/* <td>{order?.adress}</td> */}
+                <td>{order?.total}</td>
+                <td className="carrito">
+                  {order?.cart?.map((prod) => (
+                    <React.Fragment>
+                      {prod.productName}
+                      <br />
+                    </React.Fragment>
+                  ))}
+                </td>
+                <td>{order?.createdAt.slice(0, 10)}</td>
+                <td>{order?.payment === true ? "yes" : "no"}</td>
+               
+              </tr>
+            </>
           ))}
-        </ul>
+        </tbody>
+      </table>
+      
       ) : (
         <div>No orders found.</div>
       )}
     </div>
+    
   );
+  
 };
 
 export default MyOrders;

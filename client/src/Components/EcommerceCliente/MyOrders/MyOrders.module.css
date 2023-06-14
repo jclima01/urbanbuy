@@ -1,0 +1,36 @@
+.datosUser {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .datosUser th,
+  .datosUser td {
+    padding: 10px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .datosUser th {
+    background-color: antiquewhite;
+  }
+  
+  .datosUser tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  .datosUser tbody tr:hover {
+    background-color: #e6e6e6;
+  }
+  .datosUser tbody tr td:last-child{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+  }
+  .carrito{
+    display: flex;
+    overflow: auto;
+    max-height: 50px;
+  }
