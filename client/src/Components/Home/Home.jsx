@@ -19,15 +19,15 @@ function Home(props) {
   const navigate = useNavigate()
   const dispatch = useDispatch()
  
+ 
   useEffect(() => {
     if (isAuthenticated && user)
       dispatch(
         registerClientAdmin(user.given_name, user.email, import.meta.env.VITE_AUTH0_PWD)
-      ).then(() => dispatch(loginClientAdmin(user.email, import.meta.env.VITE_AUTH0_PWD)).then(() => {
-          if (clientAdmin) navigate("/dashboard");
-        })
-      );
-    console.log(user)
+      )
+      .then(dispatch(loginClientAdmin(user.email, import.meta.env.VITE_AUTH0_PWD)))
+      .then(clientAdmin && navigate("/dashboard"))
+      
   }, [isAuthenticated, dispatch, clientAdmin,navigate, user]);
   
   return (
