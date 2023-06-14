@@ -18,8 +18,8 @@ const SideBarDashBoard = () => {
   };
 
   const handleLogout = () => {
-    logout({ redirectUri: "https://urbanbuy.netlify.app/" });
     dispatch(logOutClientAdmin());
+    logout();
   };
 
   return (
