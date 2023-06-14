@@ -8,6 +8,7 @@ import Modal from "react-modal";
 import { logOutUser } from "../../redux/actions";
 import { Dropdown } from "react-bootstrap";
 import CartWidget from "./CartWidget/CartWidget.jsx";
+import UserArea from "./UserArea/UserArea";
 
 function NavEcommerce({ clientAdmin }) {
   const [searchValue, setSearchValue] = useState("");
@@ -21,6 +22,8 @@ function NavEcommerce({ clientAdmin }) {
   const [showMenu, setShowMenu] = useState(false);
   const navigate = useNavigate();
   const dropdownRef = useRef();
+  const theme = useSelector((state) => state.theme);
+
 
   const handleInputChange = (event) => {
     setSearchValue(event.target.value);
@@ -74,11 +77,11 @@ function NavEcommerce({ clientAdmin }) {
   };
 
   return (
-    <div className={style.container}>
+    <div className={`${style.containerNav} ${style[theme]}`}> 
       <div className={style.leftSection}>
         <img src={logoBlanco} alt="" className={style.logoClient} />
         <select
-          className={`${style.select} ${style.categorias}`}
+          className={`${style.select} ${style[theme.select]}`}
           value={selectedCategory}
           onChange={handleCategoryChange}
         >
@@ -97,7 +100,7 @@ function NavEcommerce({ clientAdmin }) {
           onChange={handleInputChange}
           onKeyPress={handleKeyPress}
           className={style.inputSearch}
-          placeholder="Buscar producto"
+          placeholder="Buscar producto..."
         />
       </div>
       <div className={style.rightSection}>
@@ -110,19 +113,21 @@ function NavEcommerce({ clientAdmin }) {
             <div className={style.avatar} onClick={openMenu}>
               <Avatar size={40} />
             </div>
-
-
             {showMenu && (
               <div className={style.dropdownContainer}>
                 <div className={style.dropdownMenu}>
                   <Dropdown show={showMenu} onClose={closeMenu}>
                     {/* <Dropdown.Toggle variant="light" id="avatar-dropdown" /> */}
                     <Dropdown.Menu className={style.dropdownMenu}>
-                      <Dropdown.Item href="#opcion1">Opción 1</Dropdown.Item>
-                      <Dropdown.Item href="#opcion2">Opción 2</Dropdown.Item>
+                      <Link to="/userArea">
+                        <Dropdown.Item href="#opcion1">User Area</Dropdown.Item>
+                      </Link>
+                      <Link to="/myOrders">
+                      <Dropdown.Item href="#opcion2">My Orders</Dropdown.Item>
+                      </Link>
                       {/* Agrega aquí más opciones según tus necesidades */}
                       <Dropdown.Divider className={style.dropdownDivider} />
-                      <Dropdown.Item onClick={closeMenu}>Cerrar</Dropdown.Item>
+                      <Dropdown.Item onClick={closeMenu}>Close</Dropdown.Item>
                       <Dropdown.Divider className={style.dropdownDivider} />
                       <Dropdown.Item onClick={handleLogout}>
                         Logout
@@ -136,10 +141,28 @@ function NavEcommerce({ clientAdmin }) {
         ) : (
           <div className={style.SingnIn}>
             <Link to="/signInClient">
-              <button className={style.button1}>Sign In</button>
+              <button style={{
+                border:'none', 
+                backgroundColor:'black', 
+                color:'white', 
+                height:'40px',
+                width:'100px',
+                borderRadius:'10PX',
+                marginRight:'10px'
+      
+                }}>Sign In</button>
             </Link>
             <Link to="/loginClient">
-              <button className={style.button2}>Login</button>
+              <button style={{
+                border:'none', 
+                backgroundColor:'black', 
+                color:'white', 
+                height:'40px',
+                width:'100px',
+                borderRadius:'10PX',
+                marginRight:'10px'
+                }}>Login</button>
+
             </Link>
           </div>
         )}

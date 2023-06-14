@@ -38,8 +38,9 @@ const registerUserHandler = async (req, res) => {
 const updateUserHandler = async (req, res) => {
   try {
     const { userId } = req.params;
-    const { fullName, email, password } = req.body;
-    const userUpdated = await UserUpdate(userId, fullName, email, password);
+    const { fullName, email, password, avatarName } = req.body;
+    console.log(avatarName)
+    const userUpdated = await UserUpdate(userId, fullName, email, password, avatarName);
     res.status(200).json(userUpdated);
   } catch (error) {
     res.status(400).json({ error: error.message });

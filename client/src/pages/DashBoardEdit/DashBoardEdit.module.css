@@ -23,7 +23,9 @@
   width: 150px;
   height: 50px;
   font-family: "Poppins", sans-serif;
-  font-weight: 500; 
+  font-weight: 500;
+  margin-bottom: 25px; 
+  margin-top: 20px;
 }
 
 .navy-blue-button:hover {
@@ -33,7 +35,7 @@
 }
 
 .floral-button {
-  background-image: url("../../Img/botonFloral.jfif");
+  background-image: url("../../Img/NavFloral.avif");
   background-size: cover;
   color: #000000;
   border: none;
@@ -44,6 +46,8 @@
   height: 50px;
   font-family: "Poppins", sans-serif;
   font-weight: 500; 
+  margin-bottom: 25px;
+  margin-top: 20px;
 }
 
 .floral-button:hover {
@@ -68,6 +72,7 @@
   height: 50px;
   font-family: "Poppins", sans-serif;
   font-weight: 500;
+  margin-left: 20px;
 }
 
 .urbanBuy:hover {
@@ -128,6 +133,38 @@
     height: 50px;
     font-family: "Poppins", sans-serif;
     font-weight: 500;
+  }
+
+  .inputBanner {
+    width: 80%;
+    height: 40px; /* Puedes ajustar la altura según tus necesidades */
+    font-size: 16px; /* Puedes ajustar el tamaño de la fuente según tus necesidades */
+    color: black; /* Establece el color del texto en negro */
+    border-radius: 5px; /* Suaviza los bordes utilizando un radio de borde */
+    border: 1px solid #ccc; /* Establece un borde de 1 píxel sólido de color gris claro */
+    padding: 5px; /* Añade un espacio interno alrededor del texto dentro del input */
+  }
+
+  .whaterPink-button {
+    background-image: url("../../Img/NavFloral.avif");
+    background-size: cover;
+    color: #000000;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    transition: transform 0.3s;
+    width: 150px;
+    height: 50px;
+    font-family: "Poppins", sans-serif;
+    font-weight: 500; 
+    margin-bottom: 25px;
+    margin-top: 20px;
+  }
+  
+  .whaterPink-button:hover {
+    transform: scale(1.1);
+    opacity: 0.8;
+    transition: transform 0.3s, opacity 0.3s;
   }
 
  

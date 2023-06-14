@@ -1,4 +1,4 @@
-const User = require("../models/Users/User.js");
+const User = require("../models/Users/User");
 const ClientAdmin = require("../models/Users/ClientAdmin.js");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
@@ -43,20 +43,26 @@ const UserLogin = async (email, password) => {
   }
 };
 
-const UserUpdate = async (userId, fullName, email, password) => {
+const UserUpdate = async (userId, fullName, email, password,avatarName) => {
   try {
     const user = await User.findById(userId);
+    var salt = bcrypt.genSaltSync(10);
+    var hash = bcrypt.hashSync(password, salt);
     if (user) {
       user.fullName = fullName;
       user.email = email;
-      user.password = password;
+      user.password = hash;
+      user.avatarName = avatarName;
+      const updatedUser = await user.save();
+      return updatedUser;
+    } else {
+      throw new Error('User not found');
     }
-    const updatedUser = await user.save();
-    return updatedUser;
   } catch (error) {
     throw new Error(error.message);
   }
 };
+
 
 const UserDelete = async (userId) => {
   try {
