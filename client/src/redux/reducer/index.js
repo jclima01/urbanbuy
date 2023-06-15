@@ -337,7 +337,9 @@ const rootReducer = (state = initialState, { type, payload }) => {
     case SET_THEME:
       return {
         ...state,
-        theme: payload,
+        clientAdmin: {...payload},
+        theme: state.clientAdmin.theme !== "" ? state.clientAdmin.theme : "urbanBuy",
+        //theme: payload,
       };
 
     case SET_SLIDER_THEME:

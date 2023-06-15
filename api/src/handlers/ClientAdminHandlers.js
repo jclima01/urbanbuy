@@ -6,6 +6,7 @@ const {
   setBannerText,
   addDomain,
   getClientAdminByDomain,
+  setTheme,
  
 } = require("../controllers/ClientAdminControllers.js");
 const {ordersByClient} = require("../controllers/OrderControllers.js");
@@ -102,6 +103,17 @@ const getAllOrdersClient = async (req, res) => {
   }
 };
 
+const putThemeHandler = async (req, res) => {
+  try { 
+    const { clientAdminId } = req.params;
+    const { theme } = req.body;
+    const editTheme = await setTheme(theme, clientAdminId);
+    res.status(201).json(editTheme);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+}
+
 module.exports = {
   loginClientAdminHandler,
   registerClientAdminHandler,
@@ -111,4 +123,5 @@ module.exports = {
   getAllOrdersClient,
   domainHandler,
   getClientAdminByDomainHandler,
+  putThemeHandler,
 };

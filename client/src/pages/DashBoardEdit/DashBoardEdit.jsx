@@ -12,25 +12,26 @@ import {
   setBannerText,
 } from "../../redux/actions";
 import Banner from "../../Components/EcommerceCliente/Banner";
+import axios from "axios";
 
 const DashBoardEdit = () => {
   const theme = useSelector((state) => state.theme);
   const cardStyle = useSelector((state) => state.cardStyle);
   const [banner, setBanner] = useState("");
-const clientAdmin = useSelector((state) => state.clientAdmin);
+  const clientAdmin = useSelector((state) => state.clientAdmin);
 
   const dispatch = useDispatch();
 
   const handleThemeChange = (selectedTheme) => {
-    dispatch(setTheme(selectedTheme));
+    dispatch(setTheme(selectedTheme, clientAdmin._id));
   };
-  const handleSliderThemeChange = (selectedSliderTheme) => {
-    dispatch(setSliderTheme(selectedSliderTheme));
-  };
+  // const handleSliderThemeChange = (selectedSliderTheme) => {
+  //   dispatch(setSliderTheme(selectedSliderTheme));
+  // };
 
-  const handleSearchBarThemeChange = (selectedSearchBarTheme) => {
-    dispatch(setSearchBarTheme(selectedSearchBarTheme));
-  };
+  // const handleSearchBarThemeChange = (selectedSearchBarTheme) => {
+  //   dispatch(setSearchBarTheme(selectedSearchBarTheme));
+  // };
 
   const handleCardChange = (selectedCardStyle) => {
     dispatch(setCardStyle(selectedCardStyle));
@@ -47,7 +48,7 @@ const clientAdmin = useSelector((state) => state.clientAdmin);
 
   const handlerSubmitBanner = (e) => {
     e.preventDefault();
-    console.log(banner), console.log(clientAdmin._id);;
+    console.log(banner), console.log(clientAdmin._id);
     dispatch(setBannerText(banner, clientAdmin._id));
   };
 
@@ -105,7 +106,8 @@ const clientAdmin = useSelector((state) => state.clientAdmin);
          <button className={`${styles["SearchButton"]} ${searchBarTheme === "styleThree" ? styles.active : ""}`}
           onClick={() => handleSearchBarThemeChange("styleThree")}>Retro</button>
           <SearchBar searchBarTheme={searchBarTheme}/> */}
-        <h1>Visualizacion del producto</h1>
+          
+        {/* <h1>Visualizacion del producto</h1>
         <button
           className={`${styles["cardButtonClassic"]} ${
             cardStyle === "clasico" ? styles.active : ""
@@ -121,7 +123,7 @@ const clientAdmin = useSelector((state) => state.clientAdmin);
           onClick={() => handleCardChange("baby")}
         >
           Baby
-        </button>
+        </button> */}
       </div>
       {/* <UploadWidget /> */}
     </div>

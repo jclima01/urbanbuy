@@ -135,6 +135,19 @@ const setBannerText = async (bannerText, clientAdminId) => {
   }
 };
 
+const setTheme = async (theme, clientAdminId) => {
+  //findByIdAndUpdate para buscar y actualizar el banner de texto correspondiente en la base de datos. Si no se encuentra el banner de texto, se arroja una excepción indicando que no se encontró el texto del banner. Por último, devuelve el objeto actualizado del banner de texto.
+  try {
+    const clientAdmin = await ClientAdmin.findById(clientAdminId);
+    clientAdmin.theme = theme;
+    const savedAdmin = await clientAdmin.save();
+    return savedAdmin;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+
+
 module.exports = {
   ClientAdminRegister,
   ClientAdminLogin,
@@ -143,4 +156,5 @@ module.exports = {
   addDomain,
   getClientAdminByDomain,
   setBannerText,
+  setTheme,
 };
