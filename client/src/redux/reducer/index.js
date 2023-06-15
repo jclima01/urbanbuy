@@ -283,7 +283,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         clientAdmin: { ...payload },
-        UserSession: true,
+        clientAdminSession: true,
       };
     case REGISTER_CLIENT_ADMIN:
       return {
@@ -293,6 +293,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         user: { ...payload },
+        UserSession: true,
       };
     case REGISTER_USER:
       return {
@@ -303,14 +304,13 @@ const rootReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         admin: {},
-        UserSession: false,
       };
 
     case LOGOUT_CLIENT_ADMIN:
       return {
         ...state,
         clientAdmin: {},
-        UserSession: false,
+        clientAdminSession: false,
       };
 
     case LOGOUT_USER:
