@@ -1,0 +1,58 @@
+.faq {
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.6);
+  height: 150px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.iconopagos {
+  width: 60px;
+  height: 60px;
+  margin-top: 40px;
+  margin-right: 20px;
+}
+
+.iconoenvios {
+  margin-left: 400px;
+  width: 110px;
+  height: 110px;
+  margin-top: 5px;
+}
+
+.pagos {
+  font-size: 35px;
+  color: #ff9900;
+  margin-top: 50px;
+}
+
+.envios {
+  font-size: 35px;
+  color: #ff9900;
+  margin-left: 20px;
+  margin-top: 50px;
+}
+
+.cerrar1 {
+  background-color: #ff9900;
+  border: none;
+  width: 100px;
+  height: 50px;
+  border-radius: 10px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+.floral {
+  font-size: 35px;
+  color: #b634ca;
+  margin-left: 20px;
+  margin-top: 50px;
+}
+
+.marino {
+  font-size: 35px;
+  color: #3762b7;
+  margin-left: 20px;
+  margin-top: 50px;
+}
+

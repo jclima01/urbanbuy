@@ -17,6 +17,7 @@ const ProductDetail = () => {
   const reviews = useSelector((state) => state.reviews);
   const users = useSelector((state) => state.clientAdminUsers);
   const clientAdmin = useSelector((state) => state.clientAdmin);
+ const theme = useSelector((state) => state.theme);
 
   const sumRatings =
     reviews.length > 0
@@ -74,7 +75,7 @@ const ProductDetail = () => {
               <h1 className={style.hproductname}>{product.productName}</h1>
               <p className={style.description}>{product.description}</p>
               <div className={style.detailsproductsall}>
-                <p className={style.pricedetail}> ${product.price}</p>
+                <p className={`${style.pricedetail} ${style[theme]}`} > ${product.price}</p>
                 <p> <strong>Stocks: </strong>  {product.stocks}</p>
                 <p><strong>Rating: </strong>  {averageRatings.toFixed(1)} </p>
               </div>

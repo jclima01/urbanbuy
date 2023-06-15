@@ -155,3 +155,20 @@ height: 100%;
 .descriptionContainer::-webkit-scrollbar-track {
   background-color: #f1f1f1; /* Color del track (fondo del scroll) */
 }
+
+
+.floral{
+  padding: 8px;
+  border-radius: 10px;
+  background-color: transparent;
+  border:1px solid #6e349d;
+  font-size: 30px;
+}
+
+.marino{
+  padding: 8px;
+  border-radius: 10px;
+  background-color: transparent;
+  border:1px solid #59c7a9;
+  font-size: 30px;
+}
