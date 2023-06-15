@@ -1,0 +1,24 @@
+.urbanBuy {
+  margin-top: 50px;
+  color: #ff9900;
+  font-size: 40px;
+  display: flex;
+  justify-content: center;
+}
+
+.floral {
+  margin-top: 50px;
+  color: #b634ca;
+  font-size: 40px;
+  font-family: 'Times New Roman', Times, serif;
+  display: flex;
+  justify-content: center;
+}
+.marino {
+  margin-top: 50px;
+  color: #3762b7;
+  font-size: 40px;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  display: flex;
+  justify-content: center;
+}

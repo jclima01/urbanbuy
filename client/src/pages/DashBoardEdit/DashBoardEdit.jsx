@@ -106,7 +106,8 @@ const DashBoardEdit = () => {
          <button className={`${styles["SearchButton"]} ${searchBarTheme === "styleThree" ? styles.active : ""}`}
           onClick={() => handleSearchBarThemeChange("styleThree")}>Retro</button>
           <SearchBar searchBarTheme={searchBarTheme}/> */}
-        <h1>Visualizacion del producto</h1>
+          
+        {/* <h1>Visualizacion del producto</h1>
         <button
           className={`${styles["cardButtonClassic"]} ${
             cardStyle === "clasico" ? styles.active : ""
@@ -122,7 +123,7 @@ const DashBoardEdit = () => {
           onClick={() => handleCardChange("baby")}
         >
           Baby
-        </button>
+        </button> */}
       </div>
       {/* <UploadWidget /> */}
     </div>

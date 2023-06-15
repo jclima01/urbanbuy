@@ -20,19 +20,22 @@ import envios from "../../Img/envios.png";
 import { Route, Routes } from "react-router-dom";
 import EcommerceUser from "./EcommerceUser";
 import Banner from "./Banner";
+import TextoPrev from "./TextoPrev";
+import FooterEcommerce from "./FooterEcommerce";
 
 function HomeEcommerce() {
   const { domain } = useParams();
   const clientAdmin = useSelector((state) => state.clientAdmin);
   const products = useSelector((state) => state.products);
   const categories = useSelector((state) => state.categories);
+  const theme = useSelector((state) => state.theme);
   const dispatch = useDispatch();
   const clientAdminId = clientAdmin._id;
   const [filteredProduct, setFilteredProducts] = useState([]);
   const [searchTerm, setSearchTerm] = useState([]);
   const [orderedProduct, setOrderedProduct] = useState([]);
-  const theme = useSelector((state) => state.theme);
   const [isDarkMode, setIsDarkMode] = useState(false);
+  
 
   useEffect(() => {
     dispatch(getClientAdminByDomain(domain));
@@ -129,7 +132,6 @@ function HomeEcommerce() {
     : style.fondo;
 
   return (
-
     <div className={style.homeEcommerceContainer}>
       <div className={containerClass}>
         <NavEcommerce clientAdmin={clientAdmin} />
@@ -151,11 +153,10 @@ function HomeEcommerce() {
             element={<EcommerceUser />}
           />
         </Routes>
-      <div>
-      <Banner></Banner>
-      </div>
-
-        <h1 className={style.h1}> LOS MAS VENDIDOS</h1>
+        <div>
+          <Banner></Banner>
+        </div>
+        <TextoPrev></TextoPrev>
 
         <div className={style.card}>
           <Card products={currentProducts} maxRating={rating} />
@@ -302,11 +303,8 @@ function HomeEcommerce() {
       </div> */}
 
         <div>
-          <footer className={style.footer}>
-            <h2>
-              Todos los derechos reservados. {clientAdmin.businessName} &copy;
-            </h2>
-          </footer>
+          
+       <FooterEcommerce/>
         </div>
       </div>
     </div>
