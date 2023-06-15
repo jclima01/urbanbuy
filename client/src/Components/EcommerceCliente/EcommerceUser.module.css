@@ -49,6 +49,7 @@
   flex-direction: row;
   flex-wrap: nowrap;
   align-items: flex-start;
+  margin-right: 200px;
 }
 
 .pagination button {
@@ -57,5 +58,8 @@
   background-color: rgba(241, 120, 7, 0.7);
   color: white;
   margin: 0 5px;
+  margin-top: 450px;
+  
+  
 }
 
