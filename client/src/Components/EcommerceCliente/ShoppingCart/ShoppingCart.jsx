@@ -95,7 +95,7 @@ export default function ShoppingCart() {
           </div>
         ))}
         <div className={styles.total}>Total: ${order.total}</div>
-        <button onClick={() => checkout(order._id)}>COMPRAR</button>
+        <button className={styles.btnPay} onClick={() => checkout(order._id)}>COMPRAR</button>
       </div>
     </div>
   );
