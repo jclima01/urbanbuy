@@ -5,6 +5,8 @@ import styles from "./AddToCart.module.css";
 import { GrAddCircle, GrSubtractCircle } from "react-icons/gr";
 import Swal from "sweetalert2";
 const AddToCart = ({ stock }) => {
+  const clientAdmin = useSelector((state) => state.clientAdmin)
+  const theme = useSelector((state) => state.theme);
   const user = useSelector((state) => state.user);
   const product = useSelector((state) => state.product);
   const order = useSelector((state) => state.order);
@@ -64,7 +66,7 @@ const AddToCart = ({ stock }) => {
       <div>
         <button
           onClick={() => handleDispatch(product._id, quantity)}
-          className={styles.addToCartBtn}
+          className={`${styles.addToCartBtn} ${styles[theme]}`}
         >
           Add to Cart
         </button>
