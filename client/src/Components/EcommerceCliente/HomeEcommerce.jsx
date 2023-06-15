@@ -153,10 +153,11 @@ function HomeEcommerce() {
             element={<EcommerceUser />}
           />
         </Routes>
+
         <div>
-          <Banner></Banner>
+          <Banner/>
         </div>
-        <TextoPrev></TextoPrev>
+        <TextoPrev/>
 
         <div className={style.card}>
           <Card products={currentProducts} maxRating={rating} />
@@ -237,10 +238,24 @@ function HomeEcommerce() {
         </Modal>
 
         <Modal isOpen={isModalOpenS} onRequestClose={closeModalS}>
-          <h2>Información sobre formas de envio</h2>
+          <h2>Información sobre compra segura</h2>
           <p>
-            Aquí puedes agregar el contenido que deseas mostrar en la ventana
-            emergente.
+          ¡Compra con confianza en nuestro ecommerce!
+<br/>
+<br/>
+En nuestro ecommerce, la seguridad de tus compras es nuestra máxima prioridad. Sabemos lo importante que es para ti sentirte protegido y confiado al realizar tus transacciones en línea, y es por eso que hemos implementado las más avanzadas medidas de seguridad para garantizar una compra segura en cada paso del proceso.
+<br/>
+<br/>
+Nuestro sistema de encriptación de datos protege toda tu información personal y financiera, asegurando que tus datos sean confidenciales y no sean accesibles para terceros. Además, trabajamos en estrecha colaboración con proveedores de pago confiables y reconocidos, lo que significa que tus transacciones se realizan a través de plataformas seguras y de confianza.
+<br/>
+<br/>
+También hemos implementado medidas adicionales para protegerte contra posibles fraudes en línea. Nuestro equipo de expertos en seguridad mantiene una vigilancia constante sobre todas las actividades en nuestro ecommerce, detectando cualquier comportamiento sospechoso y tomando las acciones necesarias para protegerte.
+<br/>
+<br/>
+Además de garantizar la seguridad de tus compras, nos esforzamos por ofrecerte una experiencia de compra excepcional. Navegar por nuestro sitio web es fácil y sencillo, y nuestro proceso de pago es rápido y conveniente. Si tienes alguna pregunta o inquietud durante tu compra, nuestro equipo de atención al cliente estará encantado de ayudarte en todo momento.
+<br/>
+<br/>
+En resumen, en nuestro ecommerce puedes comprar con total tranquilidad, sabiendo que tu seguridad es nuestra prioridad. Nos comprometemos a brindarte una experiencia de compra segura, confiable y conveniente. ¡Explora nuestro catálogo hoy mismo y descubre la comodidad de comprar en línea sin preocupaciones!
           </p>
           <button onClick={closeModalS} className={style.cerrar1}>
             Cerrar

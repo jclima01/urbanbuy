@@ -2,7 +2,7 @@ import { CiSearch } from "react-icons/ci";
 import DashBoardTableProducts from "../../Components/DashBoardTableProducts/DashBoardTableProducts";
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllProducts } from "../../redux/actions";
+import { getAllProducts, getCategories } from "../../redux/actions";
 import DashBoardAddProducts from "../../Components/DashBoardAddProducts/DashBoardAddProducts";
 import DashBoardModalAddCategories from "../../Components/DashBoardModalAddCategories/DashBoardModalAddCategories";
 
@@ -16,9 +16,8 @@ const DashBoardProducts = () => {
   //Variables
   const categories = useSelector((state) => state.categories);
   const dispatch = useDispatch();
-  const clientAdminStorage =
-    JSON.parse(localStorage.getItem("clientAdmin")) ?? false;
-  const clientAdminId = clientAdminStorage._id;
+  const clientAdmin = useSelector(state => state.clientAdmin);
+  const clientAdminId = clientAdmin._id;
   const refTransitionAddProduct = useRef();
   const products = useSelector((state) => state.products);
   const [isActive, setIsActive] = useState(1200);
@@ -42,6 +41,7 @@ const DashBoardProducts = () => {
   //Get All products
   useEffect(() => {
     dispatch(getAllProducts(clientAdminId));
+    dispatch(getCategories(clientAdminId));
   }, [refresh]);
 
   return (

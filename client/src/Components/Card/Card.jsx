@@ -4,7 +4,6 @@ import styles from "./Card.module.css";
 import { FaStar } from "react-icons/fa";
 import { useSelector } from "react-redux";
 
-
 /* eslint-disable react/prop-types */
 
 const Card = ({products}) => {
@@ -12,7 +11,6 @@ const Card = ({products}) => {
   const theme = useSelector((state) => state.theme);
   return (
     <div className={`${styles.cardContainer} ${styles[theme]}`}>
-      {" "}
       {/* eslint-disable react/prop-types */}
       {products && products.map((product) => (
         <Link
@@ -28,7 +26,9 @@ const Card = ({products}) => {
             />
             <p className={`${styles.productPrice} ${styles[theme]}`}>Price: $ {product.price}</p>
             <p><FaStar className={`${styles.starIcon} ${styles[theme]}`}/>{product.rating}</p>
-            <p>{product.productName}</p>
+              <div className={styles.productDescription}> {/* Contenedor del texto */}
+                <p>{product.productName}</p>
+              </div>
           </div>
         </Link>
       ))}

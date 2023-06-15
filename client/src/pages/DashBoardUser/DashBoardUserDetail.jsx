@@ -54,7 +54,12 @@ const DashBoardUserDetail = ({
                   {order.adress.state && <h6>{order.adress.state}</h6>}
                 </div> */}
 
-                <h5>{order.cart.length}</h5>
+                <h5>
+                  {order.cart.reduce(
+                    (count, product) => (count += product.quantity),
+                    0
+                  )}
+                </h5>
                 <h5 className={styles.orderPrice}> {order.total}</h5>
                 <h5
                   className={

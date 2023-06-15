@@ -88,7 +88,8 @@ function UserArea() {
         />
       </div>
       <button onClick={handleUpdate} className={style.actualizar}>Actualizar datos</button>
-      <Link to='/:domain'>
+      <Link to={`/${clientAdmin.domain}`}>
+      {/* <Link to='/:domain'> */}
         <button className={style.go}>Go Back</button>
       </Link>
     </div>

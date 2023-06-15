@@ -548,7 +548,6 @@ export const loginClientAdmin = (email, password) => {
         email,
         password,
       });
-      localStorage.setItem("clientAdmin", JSON.stringify(data));
       return dispatch({
         type: LOGIN_CLIENT_ADMIN,
         payload: data,
@@ -603,7 +602,6 @@ export const registerClientAdmin = (fullName, email, password) => {
         email,
         password,
       });
-
       return dispatch({
         type: REGISTER_CLIENT_ADMIN,
       });

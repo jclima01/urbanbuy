@@ -186,3 +186,15 @@
   color: yellow;
   margin-right: 5px;
 }
+
+.productDescription {
+  height: 50px; /* Ajusta la altura máxima del contenedor de texto */
+  overflow: auto;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* Número de líneas deseadas */
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+}
+
+
+

@@ -16,20 +16,27 @@ function Home(props) {
   const { user } = useAuth0();
   const { isAuthenticated } = useAuth0();
   const clientAdmin = useSelector((state) => state.clientAdmin);
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
- 
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   useEffect(() => {
     if (isAuthenticated && user)
       dispatch(
-        registerClientAdmin(user.given_name, user.email, import.meta.env.VITE_AUTH0_PWD)
-      ).then(() => dispatch(loginClientAdmin(user.email, import.meta.env.VITE_AUTH0_PWD)).then(() => {
-          if (clientAdmin) navigate("/dashboard");
+        registerClientAdmin(
+          user.given_name,
+          user.email,
+          import.meta.env.VITE_AUTH0_PWD
+        )
+      )
+        .then(() => {
+          dispatch(
+            loginClientAdmin(user.email, import.meta.env.VITE_AUTH0_PWD)
+          );
+          console.log("dispatch login client admin");
         })
-      );
-    console.log(user)
-  }, [isAuthenticated, dispatch, clientAdmin,navigate, user]);
-  
+        .then(clientAdmin && navigate("/dashboard"));
+  }, [isAuthenticated, dispatch, clientAdmin, navigate, user]);
+
   return (
     <div className="home-landing">
       <AppNavbar />
