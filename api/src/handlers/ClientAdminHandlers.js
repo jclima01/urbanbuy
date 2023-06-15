@@ -3,8 +3,10 @@ const {
   ClientAdminRegister,
   ClientUpdate,
   ClientDelete,
+  setBannerText,
   addDomain,
   getClientAdminByDomain,
+  setTheme,
  
 } = require("../controllers/ClientAdminControllers.js");
 const {ordersByClient} = require("../controllers/OrderControllers.js");
@@ -77,6 +79,17 @@ const getClientAdminByDomainHandler = async (req, res) => {
   }
 };
 
+const putBannerTextHandler = async (req, res) => {
+  try { //putBannerTextHandler es un controlador para manejar una solicitud PUT para actualizar un banner de texto existente. Extrae el bannerId de los parámetros de la solicitud y el bannerText del cuerpo de la solicitud. Llama a la función setBannerText para actualizar el texto del banner correspondiente al bannerId
+    const { clientAdminId } = req.params;
+    const { bannerText } = req.body;
+    const editBannerText = await setBannerText(bannerText, clientAdminId);
+    res.status(201).json(editBannerText);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+}
+
 const getAllOrdersClient = async (req, res) => {
   try {
     const { clientId } = req.params;
@@ -90,12 +103,25 @@ const getAllOrdersClient = async (req, res) => {
   }
 };
 
+const putThemeHandler = async (req, res) => {
+  try { 
+    const { clientAdminId } = req.params;
+    const { theme } = req.body;
+    const editTheme = await setTheme(theme, clientAdminId);
+    res.status(201).json(editTheme);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+}
+
 module.exports = {
   loginClientAdminHandler,
   registerClientAdminHandler,
   updateClientHandler,
   deleteClientHandler,
+  putBannerTextHandler,
   getAllOrdersClient,
   domainHandler,
   getClientAdminByDomainHandler,
+  putThemeHandler,
 };

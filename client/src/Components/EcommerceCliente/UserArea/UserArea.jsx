@@ -88,10 +88,9 @@ function UserArea() {
       <div className={style.upload}>
         <UploadAvatar avatarName={newAvatar} setavatarName={setNewAvatar} />
       </div>
-      <button onClick={handleUpdate} className={style.actualizar}>
-        Actualizar datos
-      </button>
-      <Link to="/:domain">
+      <button onClick={handleUpdate} className={style.actualizar}>Actualizar datos</button>
+      <Link to={`/${clientAdmin.domain}`}>
+      {/* <Link to='/:domain'> */}
         <button className={style.go}>Go Back</button>
       </Link>
     </div>

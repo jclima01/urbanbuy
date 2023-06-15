@@ -187,7 +187,7 @@ const SignInClient = () => {
               Registrarse
             </button>
           </form>
-          <RegisterButton />
+          {/* <RegisterButton /> */}
         </div>
       </div>
     </div>

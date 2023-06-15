@@ -49,7 +49,7 @@ const DashBoardUser = () => {
   const users = useSelector((state) => state.clientAdminUsers);
 
   const [actualPage, setActualPage] = useState(1);
-  const [usersPerPage, setUsersPerPage] = useState(3);
+  const [usersPerPage, setUsersPerPage] = useState(6);
 
   const handleView = (pestanea) => {
     setActiveTab(pestanea);

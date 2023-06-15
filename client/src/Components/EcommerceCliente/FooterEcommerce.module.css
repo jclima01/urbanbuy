@@ -1,9 +1,29 @@
-.container{
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100vw;
-    background-color: rgb(218, 219, 215);
-    padding: 20px;
-    text-align: center;
+.urbanBuy {
+  height: 150px;
+  color: whitesmoke;
+  background-color: #ff9900;
+  font-size: 28px;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+
+.marino {
+  background-color: #1465bb;
+  height: 150px;
+  color: whitesmoke;
+  font-size: 28px;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+
+.floral {
+  background-color: #c33b80;
+  height: 150px;
+  color: whitesmoke;
+  font-size: 28px;
+  align-items: center;
+justify-content: center;
+display: flex;
 }

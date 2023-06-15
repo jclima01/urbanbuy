@@ -9,7 +9,8 @@ import axios from "axios";
 import { PersistGate } from "redux-persist/integration/react";
 
 
-axios.defaults.baseURL = "https://urbaybuy-back.up.railway.app";
+
+axios.defaults.baseURL = "https://urbaybuy-back.up.railway.app"; 
 // axios.defaults.baseURL = "http://localhost:2800";
 
 

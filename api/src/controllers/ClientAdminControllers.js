@@ -4,19 +4,17 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const { errorMonitor } = require("nodemailer/lib/xoauth2/index.js");
 require("dotenv").config();
-const sgMail = require('@sendgrid/mail');
-
+const sgMail = require("@sendgrid/mail");
 
 // Configurar el transporte de correo
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 const welcomeEmail = async (fullname, email) => {
-
   try {
     const msg = {
       to: email,
-      from: 'urbanbuy8@gmail.com', // Tu dirección de correo electrónico verificada en SendGrid
-      subject: 'Bienvenido a UrbanBuy',
+      from: "urbanbuy8@gmail.com", // Tu dirección de correo electrónico verificada en SendGrid
+      subject: "Bienvenido a UrbanBuy",
       text: `Hola ${fullname}.
 
       Gracias por unirte a UrbanBuy. UrbanBuy es un sitio web de comercio electrónico diseñado para facilitar la creación y gestión de tu propia tienda en línea. Con UrbanBuy, tienes acceso a una amplia gama de características y opciones que te permiten personalizar y administrar tu tienda de manera sencilla y eficiente.
@@ -33,23 +31,23 @@ const welcomeEmail = async (fullname, email) => {
       Gracias por elegir UrbanBuy!
       Vamos al sitio web: https://urban-buy.netlify.app/`,
     };
-    
+
     await sgMail.send(msg);
   } catch (error) {
-    throw new Error('Error al enviar el correo electrónico de bienvenida');
+    throw new Error("Error al enviar el correo electrónico de bienvenida");
   }
-};       
-        const ClientAdminRegister = async (fullName, email, password) => {
-          try {
-            if (!email) throw new Error("Email is required");
-            if (!password) throw new Error("Password is required");
-            if (!fullName) throw new Error("FullName is required");
-            const admin = await ClientAdmin.findOne({ email });
-            if (admin) throw new Error("User already registered");
-            var salt = bcrypt.genSaltSync(10);
-            var hash = bcrypt.hashSync(password, salt);
-            
-            const newAdmin = new ClientAdmin({ fullName, email, password: hash });
+};
+const ClientAdminRegister = async (fullName, email, password) => {
+  try {
+    if (!email) throw new Error("Email is required");
+    if (!password) throw new Error("Password is required");
+    if (!fullName) throw new Error("FullName is required");
+    const admin = await ClientAdmin.findOne({ email });
+    if (admin) throw new Error("User already registered");
+    var salt = bcrypt.genSaltSync(10);
+    var hash = bcrypt.hashSync(password, salt);
+
+    const newAdmin = new ClientAdmin({ fullName, email, password: hash });
 
     const savedAdmin = await newAdmin.save();
 
@@ -124,12 +122,39 @@ const getClientAdminByDomain = async (domain) => {
 };
 
 
+const setBannerText = async (bannerText, clientAdminId) => {
+  //findByIdAndUpdate para buscar y actualizar el banner de texto correspondiente en la base de datos. Si no se encuentra el banner de texto, se arroja una excepción indicando que no se encontró el texto del banner. Por último, devuelve el objeto actualizado del banner de texto.
+  try {
+    const clientAdmin = await ClientAdmin.findById(clientAdminId);
+    clientAdmin.bannerText = bannerText;
+    const savedAdmin = await clientAdmin.save();
+    console.log(bannerText, clientAdminId);
+    return savedAdmin;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+
+const setTheme = async (theme, clientAdminId) => {
+  //findByIdAndUpdate para buscar y actualizar el banner de texto correspondiente en la base de datos. Si no se encuentra el banner de texto, se arroja una excepción indicando que no se encontró el texto del banner. Por último, devuelve el objeto actualizado del banner de texto.
+  try {
+    const clientAdmin = await ClientAdmin.findById(clientAdminId);
+    clientAdmin.theme = theme;
+    const savedAdmin = await clientAdmin.save();
+    return savedAdmin;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+
+
 module.exports = {
   ClientAdminRegister,
   ClientAdminLogin,
   ClientUpdate,
   ClientDelete,
   addDomain,
-  getClientAdminByDomain
-
+  getClientAdminByDomain,
+  setBannerText,
+  setTheme,
 };

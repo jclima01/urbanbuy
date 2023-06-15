@@ -20,16 +20,14 @@ import alt from "./DashBoard.module.css";
 
 const DashBoard = () => {
   const products = useSelector((state) => state.products);
-  const clientAdminDomain = useSelector((state) => state.clientAdminDomain);
   const clientAdmin = useSelector((state) => state.clientAdmin);
-  const productsSlice = products.slice(0, 4);
-  const clientAdminStorage =
-    JSON.parse(localStorage.getItem("clientAdmin")) ?? false;
+  const productsSlice = products?.slice(0, 4);
+
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getAllProducts(clientAdminStorage._id));
-    dispatch(getClientAdminUsers(clientAdminStorage._id));
-  }, []);
+    dispatch(getAllProducts(clientAdmin._id));
+    dispatch(getClientAdminUsers(clientAdmin._id));
+  }, [clientAdmin]);
 
   const [domain, setDomain] = useState("");
   const handleInputChange = (e) => {
@@ -37,7 +35,7 @@ const DashBoard = () => {
   };
   const addDomain = (e) => {
     e.preventDefault();
-    dispatch(addDomainToClientAdmin(domain, clientAdminStorage._id));
+    dispatch(addDomainToClientAdmin(domain, clientAdmin._id));
   };
 
   return (
@@ -69,7 +67,7 @@ const DashBoard = () => {
                   fontWeight: 400,
                 }}
               >
-                Hello <strong>{clientAdminStorage.fullName} </strong>
+                Hello <strong>{clientAdmin.fullName} </strong>
               </h1>
               <p style={{ fontSize: 20 }}>
                 Improve your products in our section.
@@ -267,7 +265,7 @@ const DashBoard = () => {
                 justifyContent: "space-around",
               }}
             >
-              {productsSlice?.map((item, i) => (
+              {products?.slice(0, 4).map((item, i) => (
                 <DashBoardCardProducts
                   key={`cardproducts-${i}`}
                   products={item}
