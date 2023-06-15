@@ -4,31 +4,34 @@ import styles from "./Card.module.css";
 import { FaStar } from "react-icons/fa";
 import { useSelector } from "react-redux";
 
-const Card = ({ products }) => {
-  const cardStyle = useSelector((state) => state.cardStyle);
+/* eslint-disable react/prop-types */
+
+const Card = ({products}) => {
+  const clientAdmin = useSelector((state) => state.clientAdmin)
+  const theme = useSelector((state) => state.theme);
   return (
-    <div className={`${styles.cardContainer} ${styles[cardStyle]}`}>
-      {products &&
-        products.map((product) => (
-          <Link
-            to={`/product/${product._id}`}
-            key={product._id}
-            className={`${styles.productLink} ${styles[cardStyle]}`}
-          >
-            <div className={`${styles.productCard} ${styles[cardStyle.productCard]}`}>
-              <img
-                src={product.imageUrl}
-                alt="Product"
-                className={styles.productImage}
-              />
-              <p className={`${styles.productPrice} ${styles[cardStyle]}`}>Price: $ {product.price}</p>
-              <p><FaStar className={`${styles.starIcon} ${styles[cardStyle]}`}/>{product.rating}</p>
+    <div className={`${styles.cardContainer} ${styles[theme]}`}>
+      {/* eslint-disable react/prop-types */}
+      {products && products.map((product) => (
+        <Link
+          to={`/product/${product._id}`}
+          key={product._id}
+          className={`${styles.productLink} ${styles[theme]}`}
+        >
+          <div className={`${styles.productCard} ${styles[theme.productCard]}`}>
+            <img
+              src={product.imageUrl}
+              alt="Product"
+              className={styles.productImage}
+            />
+            <p className={`${styles.productPrice} ${styles[theme]}`}>Price: $ {product.price}</p>
+            <p><FaStar className={`${styles.starIcon} ${styles[theme]}`}/>{product.rating}</p>
               <div className={styles.productDescription}> {/* Contenedor del texto */}
                 <p>{product.productName}</p>
               </div>
-            </div>
-          </Link>
-        ))}
+          </div>
+        </Link>
+      ))}
     </div>
   );
 };

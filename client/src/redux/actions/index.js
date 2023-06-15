@@ -57,6 +57,7 @@ export const UPDATE_ORDER = "UPDATE_ORDER";
 export const SORT_ORDERS_BY_DATE = "SORT_ORDERS_BY_DATE";
 export const FILTER_ORDERS = "FILTER_ORDERS";
 export const SEARCH_ORDERS = "SEARCH_ORDERS";
+//export const SET_THEME1 = "SET_THEME1"
 
 export const updateUser = (userId, fullName, email, password,avatarName) => {
   return async (dispatch) => {
@@ -694,12 +695,7 @@ export const searchUsers = (searchTerm) => ({
   payload: searchTerm,
 });
 
-export const setTheme = (theme) => {
-  return {
-    type: SET_THEME,
-    payload: theme,
-  };
-};
+
 
 export const iniciarPago = (body) => {
   return async (dispatch) => {
@@ -869,3 +865,26 @@ export const orderClient = (clientId) => {
     }
   }}
 
+  // export const setTheme = (theme) => {
+  //   return {
+  //     type: SET_THEME,
+  //     payload: theme,
+  //   };
+  // };
+
+  export const setTheme = (theme, clientAdminId) => {
+    try {
+      return async function (dispatch) {
+        const { data } = await axios.put(`/clientAdmin/theme/${clientAdminId}`, {
+          theme,
+        });
+        return dispatch({
+          type: SET_THEME,
+          payload: data,
+        });
+      };
+      // eslint-disable-next-line no-unreachable
+    } catch (err) {
+      throw new Error(err.message);
+    }
+  };

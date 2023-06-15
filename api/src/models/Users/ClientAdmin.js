@@ -13,7 +13,8 @@ const ClientAdminSchema = new Schema(
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     permissions: { type: String, default: "ClientAdmin" },
-    domain: { type: String }
+    domain: { type: String },
+    theme: { type: String },
   },
   { timestamps: true }
 );
