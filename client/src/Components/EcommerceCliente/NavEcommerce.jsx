@@ -24,7 +24,6 @@ function NavEcommerce({ clientAdmin }) {
   const dropdownRef = useRef();
   const theme = useSelector((state) => state.theme);
 
-
   const handleInputChange = (event) => {
     setSearchValue(event.target.value);
   };
@@ -77,7 +76,7 @@ function NavEcommerce({ clientAdmin }) {
   };
 
   return (
-    <div className={`${style.containerNav} ${style[theme]}`}> 
+    <div className={`${style.containerNav} ${style[theme]}`}>
       <div className={style.leftSection}>
         <img src={logoBlanco} alt="" className={style.logoClient} />
         <select
@@ -106,10 +105,13 @@ function NavEcommerce({ clientAdmin }) {
       <div className={style.rightSection}>
         {Object.entries(user).length !== 0 ? (
           <div className={style.userContainer}>
-            <CartWidget />
-            <h4 className={style.hola}>
-              Hola <strong>{user.fullName}!</strong>
-            </h4>
+            <div className={style.cartwidget}>
+              <CartWidget/>
+              <h4 className={style.hola}>
+                Hello <strong>{user.fullName}!</strong>
+              </h4>
+            </div>
+
             <div className={style.avatar} onClick={openMenu}>
               <Avatar size={40} />
             </div>
@@ -123,7 +125,7 @@ function NavEcommerce({ clientAdmin }) {
                         <Dropdown.Item href="#opcion1">User Area</Dropdown.Item>
                       </Link>
                       <Link to="/myOrders">
-                      <Dropdown.Item href="#opcion2">My Orders</Dropdown.Item>
+                        <Dropdown.Item href="#opcion2">My Orders</Dropdown.Item>
                       </Link>
                       {/* Agrega aquí más opciones según tus necesidades */}
                       <Dropdown.Divider className={style.dropdownDivider} />
@@ -145,7 +147,6 @@ function NavEcommerce({ clientAdmin }) {
             </Link>
             <Link to="/loginClient">
               <button className={style.buttonSL}>Login</button>
-
             </Link>
           </div>
         )}
