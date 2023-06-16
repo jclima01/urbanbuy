@@ -12,7 +12,7 @@ const CartWidget = () => {
 
   useEffect(() => {
     dispatch(getLastOrderFromUser(user._id));
-  }, []);
+  }, [order.cart]);
 
   const calculateTotalQuantity = () => {
     const totalQuantity = order?.cart?.reduce(
@@ -22,20 +22,18 @@ const CartWidget = () => {
     return totalQuantity;
   };
   return (
-    <div  className={styles.cartWidgetContainer}>
-      
-      <span className={styles.calculateTotal}>
-        {calculateTotalQuantity() > 0 && <div>{calculateTotalQuantity()}</div>}
-      </span>
-   
-   
-    <div
-     
-      onClick={() => navigate("/cart")}
-    >
-      
-      <BsCart  />
-    </div>
+    <div className={styles.cartWidgetContainer}>
+      {order.cart.length > 0 && (
+        <span className={styles.calculateTotal}>
+          {calculateTotalQuantity() > 0 && (
+            <div>{calculateTotalQuantity()}</div>
+          )}
+        </span>
+      )}
+
+      <div onClick={() => navigate("/cart")}>
+        <BsCart />
+      </div>
     </div>
   );
 };
