@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { setReview } from "../../redux/actions";
+import { getReviews, setReview } from "../../redux/actions";
 import style from "./ProductReview.module.css";
 
 const ProductReview = () => {
@@ -14,6 +14,7 @@ const ProductReview = () => {
 
   const productId = useSelector((state) => state.product)._id;
   const userId = useSelector((state) => state.user)._id;
+  const review = useSelector((state) => state.review)
 
   const handleRatingChange = (event) => {
     setRating(event.target.value);
@@ -23,6 +24,9 @@ const ProductReview = () => {
     setComment(event.target.value);
   };
 
+  useEffect(() => {
+    dispatch(getReviews(productId));
+  }, [review]);
   const handleSubmit = (event) => {
     event.preventDefault();
     if (rating === 0 || comment === "") {
@@ -31,13 +35,8 @@ const ProductReview = () => {
       );
       return;
     }
-    dispatch(setReview(productId, userId, comment, rating)).finally(() => {
-      navigate(`/${clientAdmin.domain}`);
-    });
-    console.log("Rating:", rating);
-    console.log("Comment:", comment);
-    console.log("UserId:", userId);
-    console.log("ProductId:", productId);
+    dispatch(setReview(productId, userId, comment, rating));
+
     // Reiniciamos los campos después de enviar la reseña
     setRating(0);
     setComment("");
