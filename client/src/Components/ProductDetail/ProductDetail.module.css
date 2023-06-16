@@ -20,6 +20,7 @@
   justify-content: space-between;
   width: 80%;
 }
+
 .Link {
   color: #f57a07;
   text-decoration: none;
@@ -120,6 +121,7 @@
 
 .description {
   padding: 10px;
+  text-align: flex-start;
   font-weight: 400;
   height: 400px;
   white-space: wrap; /* Evita el ajuste de línea del texto */
@@ -161,6 +163,9 @@
   background-color: #f57a07; /* Color del scroll thumb (barra de desplazamiento) */
 }
 
+
+
+
 .floral {
   padding: 8px;
   border-radius: 10px;
@@ -176,3 +181,43 @@
   border: 1px solid #59c7a9;
   font-size: 30px;
 }
+
+.divFormComm {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-evenly;
+}
+
+.commentDiv {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  width: 50%;
+}
+
+.commentDiv ul {
+  list-style-type: none;
+}
+
+.autor {
+  font-weight: bold;
+}
+
+.commentTitle {
+  background-color: rgb(243, 156, 18);
+  padding: 10px 45%;
+  border-radius: 10px;
+  color: whitesmoke;
+  font-weight: bolder;
+  font-size: x-large;
+}
+
+.commentLi {
+  border: solid thin;
+  border-color: orange;
+  border-radius: 15px;
+  padding: 10px 25px;
+  margin-top: 10px;
+}
+

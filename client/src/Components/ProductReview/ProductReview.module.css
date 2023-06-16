@@ -1,0 +1,56 @@
+.formReview {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  text-align: center;
+}
+
+.selectReview {
+  background-color: rgb(243, 156, 18);
+  color: whitesmoke;
+  border-radius: 5px;
+  padding: 10px;
+  border: none;
+  margin-bottom: 5px;
+  cursor: pointer;
+}
+
+.selectReview option {
+  color: yellow;
+  border: none;
+}
+
+.optionOne {
+  color: whitesmoke;
+}
+
+.textareaReview {
+  border-radius: 5px;
+  padding: 15px;
+  width: 500px;
+  height: 150px;
+}
+
+.btnReview {
+  border: none;
+  border-radius: 5px;
+  padding: 25px;
+  width: fit-content;
+  margin: 25px 0;
+  font-weight: bold;
+  background-color: rgb(243, 156, 18);
+  color: whitesmoke;
+  transition: ease-in-out 0.3s;
+}
+
+.btnReview:hover {
+  color: #ff7f2a;
+  background-color: whitesmoke;
+  box-shadow: 0 0 25px rgb(243, 156, 18);
+}
+
+.divCal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
