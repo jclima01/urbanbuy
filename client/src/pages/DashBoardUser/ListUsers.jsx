@@ -69,7 +69,7 @@ const DashBoardListUsers = ({
          </ul>
          </>
         ):(
-          <div className="centrado">No orders found.</div>
+          <div className="centrado">No users found.</div>
         )}
        
       </div>

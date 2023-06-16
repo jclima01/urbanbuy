@@ -100,4 +100,8 @@
   width: 100%;
   text-align: center;
 }
+.centrado{
+  text-align: center;
+  align-items: center;
+}
 

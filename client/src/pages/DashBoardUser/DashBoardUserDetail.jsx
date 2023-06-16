@@ -28,6 +28,8 @@ const DashBoardUserDetail = ({
 
       <div className={styles.contentAllOrders}>
         <h2 className={styles.titleOrder}>User orders:</h2>
+        {user.orders.length > 0 ? (
+        <>
         <ul className={styles.listUl}>
           <li>status:</li>
           <li>date:</li>
@@ -82,6 +84,10 @@ const DashBoardUserDetail = ({
             );
           })}
         </ul>
+        </>):(<>
+          <div className="centrado">No orders found.</div>
+        </>)}
+        
       </div>
     </div>
   );
