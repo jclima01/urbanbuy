@@ -6,6 +6,7 @@
   background-color: #ff9900;
   height: 80px;
   margin-bottom: 40px;
+  align-items: center;
 }
 
 .logoClient {
@@ -156,7 +157,7 @@
 }
 
 .marino .select {
-  background-color:#1465bb;
+  background-color: #1465bb;
   margin-left: 60px;
   height: 40px;
   color: white;
@@ -169,3 +170,4 @@
   border-radius: 10px;
   padding: 5px;
 }
+

@@ -122,18 +122,18 @@ const dispatch = useDispatch()
     <div className={styles.container}>
 
       <div className={styles.filters}>
-        <div className={styles.filtercontainer}>
-          <button onClick={handleSortByAZ}>A-Z</button>
-          <button onClick={handleSortByZA}>Z-A</button>
-          <button onClick={handleSortByPrice}>Mayor a Menor Precio</button>
-          <button onClick={handleSortByPriceReverse}>Menor a Mayor Precio</button>
-          <button onClick={handleSortByRating}>Menor a Mayor Rating</button>
-          <button onClick={handleSortByRatingReverse}>Menor a Mayor Rating</button>
-        </div>
-      </div>
-      <div className={styles.cards}>
-        <Card products={currentProducts} />
-      </div>
+          <div className={styles.filtercontainer}>
+            <button onClick={handleSortByAZ}>A-Z</button>
+            <button onClick={handleSortByZA}>Z-A</button>
+            <button onClick={handleSortByPrice}>Mayor a Menor Precio</button>
+            <button onClick={handleSortByPriceReverse}>Menor a Mayor Precio</button>
+            <button onClick={handleSortByRating}>Menor a Mayor Rating</button>
+            <button onClick={handleSortByRatingReverse}>Menor a Mayor Rating</button>
+          </div>
+          <div className={styles.cards}>
+            <Card products={currentProducts} />
+          </div>
+      </div>  
       <div className={styles.pagination}>
         {Array.from({ length: totalPages }, (_, index) => (
           <button
