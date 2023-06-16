@@ -6,7 +6,7 @@ const LoginButton = () => {
   const { loginWithRedirect } = useAuth0();
 
   return (
-    <button  className={style.logAuth}onClick={() => loginWithRedirect({redirectUri: "http://localhost:5173/login"})}>Iniciar sesión con Google</button>
+    <button  className={style.logAuth}onClick={() => loginWithRedirect({redirectUri: "https://urbanbuy.netlify.app/login"})}>Iniciar sesión con Google</button>
   );
 };
 
