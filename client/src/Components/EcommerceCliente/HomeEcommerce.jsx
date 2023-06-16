@@ -149,7 +149,7 @@ function HomeEcommerce() {
         <Routes>
           <Route
             exact
-            path={`/${clientAdmin.domain}/s`}
+            path={`${clientAdmin.domain}/s`}
             element={<EcommerceUser />}
           />
         </Routes>
