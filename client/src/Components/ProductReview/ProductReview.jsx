@@ -31,9 +31,7 @@ const ProductReview = () => {
       );
       return;
     }
-    dispatch(setReview(productId, userId, comment, rating)).finally(() => {
-      navigate(`/${clientAdmin.domain}`);
-    });
+    dispatch(setReview(productId, userId, comment, rating));
     console.log("Rating:", rating);
     console.log("Comment:", comment);
     console.log("UserId:", userId);

@@ -16,6 +16,7 @@ import { TfiBackLeft } from "react-icons/tfi";
 const ProductDetail = () => {
   const product = useSelector((state) => state.product);
   const reviews = useSelector((state) => state.reviews);
+  const review = useSelector((state) => state.review);
   const users = useSelector((state) => state.clientAdminUsers);
   const clientAdmin = useSelector((state) => state.clientAdmin);
   const theme = useSelector((state) => state.theme);
@@ -43,7 +44,8 @@ const ProductDetail = () => {
     dispatch(getProductById(productId));
     dispatch(getClientAdminUsers(clientAdmin._id));
     dispatch(getReviews(productId));
-  }, [product.stocks]);
+    console.log("effect")
+  }, [product.stocks,review]);
 
   return (
     <>

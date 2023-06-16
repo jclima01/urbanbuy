@@ -64,6 +64,7 @@ const initialState = {
   categories: [],
   ordersByUser: [],
   reviews: [],
+  review: {},
   loading: null,
   theme: "urbanBuy",
   sliderTheme: "urbanBuy",
@@ -365,6 +366,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
     case SET_REVIEW:
       return {
         ...state,
+        review: payload
       };
 
     case GET_REVIEWS:
