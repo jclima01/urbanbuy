@@ -37,34 +37,41 @@ const DashBoardListUsers = ({
   return (
     <div className="contentAllUser">
       <div>
-        <ul className="listUl">
-          <li>Avatar </li>
-          <li>FullName </li>
-          <li>Email </li>
-          <li>Permision </li>
-          <li>Options</li>
-        </ul>
-
-        <ul className="datosUser">
-          {users?.map((user) => (
-            <li className="liUsers" key={user._id}>
-              <h6>
-                <img
-                  src={avatar}
-                  alt={user.fullName}
-                  width="50px"
-                  className="imgAvatar"
-                />
-              </h6>
-              <h6>{user.fullName}</h6>
-              <h6>{user.email}</h6>
-              <h6>{user.permissions}</h6>
-              <button className="buttonView" onClick={() => handleClick(user)}>
-                View User
-              </button>
-            </li>
-          ))}
-        </ul>
+        {users.length>0?(
+          <>
+           <ul className="listUl">
+           <li>Avatar </li>
+           <li>FullName </li>
+           <li>Email </li>
+           <li>Permision </li>
+           <li>Options</li>
+         </ul>
+ 
+         <ul className="datosUser">
+           {users?.map((user) => (
+             <li className="liUsers" key={user._id}>
+               <h6>
+                 <img
+                   src={avatar}
+                   alt={user.fullName}
+                   width="50px"
+                   className="imgAvatar"
+                 />
+               </h6>
+               <h6>{user.fullName}</h6>
+               <h6>{user.email}</h6>
+               <h6>{user.permissions}</h6>
+               <button className="buttonView" onClick={() => handleClick(user)}>
+                 View User
+               </button>
+             </li>
+           ))}
+         </ul>
+         </>
+        ):(
+          <div className="centrado">No orders found.</div>
+        )}
+       
       </div>
     </div>
   );
