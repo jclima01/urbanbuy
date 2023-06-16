@@ -11,6 +11,8 @@ import { Link } from "react-router-dom";
 import AddToCart from "../EcommerceCliente/AddToCart/AddToCart";
 import ProductReview from "../../Components/ProductReview/ProductReview";
 import NavEcommerce from "../EcommerceCliente/NavEcommerce";
+import {  TfiBackLeft } from 'react-icons/tfi'
+
 
 const ProductDetail = () => {
   const product = useSelector((state) => state.product);
@@ -73,7 +75,10 @@ const ProductDetail = () => {
           <div className={style.descriptionContainer}>
             <div className={style.containertext}>
               <h1 className={style.hproductname}>{product.productName}</h1>
-              <p className={style.description}>{product.description}</p>
+              <div className={style.description}>
+              <p >{product.description}</p>
+              </div>
+           
               <div className={style.detailsproductsall}>
                 <p className={`${style.pricedetail} ${style[theme]}`} > ${product.price}</p>
                 <p> <strong>Stocks: </strong>  {product.stocks}</p>
@@ -91,7 +96,13 @@ const ProductDetail = () => {
                   );
                 })}
               </div>
-
+              <Link  className={style.Link}to={`/${clientAdmin.domain}`}>
+            
+                <div className={style.backarrow}>
+                  <TfiBackLeft size={30}/>
+                 <strong>Back </strong> 
+                </div>
+            </Link>
               <div className="">
                 <AddToCart stock={product.stocks} />
               </div>
