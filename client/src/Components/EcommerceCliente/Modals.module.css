@@ -11,6 +11,7 @@
   height: 60px;
   margin-top: 40px;
   margin-right: 20px;
+  cursor: pointer;
 }
 
 .iconoenvios {
@@ -18,12 +19,14 @@
   width: 110px;
   height: 110px;
   margin-top: 5px;
+  cursor: pointer;
 }
 
 .pagos {
   font-size: 35px;
   color: #ff9900;
   margin-top: 50px;
+  cursor: pointer;
 }
 
 .envios {
@@ -31,6 +34,7 @@
   color: #ff9900;
   margin-left: 20px;
   margin-top: 50px;
+  cursor: pointer;
 }
 
 .cerrar1 {
