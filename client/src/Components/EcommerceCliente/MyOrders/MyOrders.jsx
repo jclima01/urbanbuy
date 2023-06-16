@@ -23,6 +23,7 @@ const MyOrders = () => {
 
 
   return (
+    <>
     <div className={style.container}>
      
       <h5>My Orders</h5>
@@ -70,15 +71,15 @@ const MyOrders = () => {
       </table>
       
       </div>
-      <Link to={`/${clientAdmin.domain}`}>
-        <button className={style.go}>Go Back</button>
-      </Link>
       </>
       ) : (
         <div>No orders found.</div>
       )}
+      <Link to={`/${clientAdmin.domain}`}>
+        <button className={style.go}>Go Back</button>
+      </Link>
     </div>
-    
+    </>
   );
   
 };
