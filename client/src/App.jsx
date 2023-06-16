@@ -56,7 +56,6 @@ function App() {
                 <PaymentCanceled clientAdmin={clientAdmin} user={user} />
               }
             />
-            <Route path="/payment" element={<Payment />} />
             <Route path="/" element={<Home />} /> {/* LadingPage */}
             <Route path="/login" element={<FormLogin />} />
             <Route path="/loginClient" element={<LoginClient />} />
