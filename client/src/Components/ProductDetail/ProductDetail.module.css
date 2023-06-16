@@ -15,18 +15,18 @@
   width: 80%;
 }
 
-.containerDetails{
-display: flex; 
+.containerDetails {
+  display: flex;
 
-width: 1600px;
-height: 100%;
+  width: 1600px;
+  height: 100%;
 }
 
-.concaintercardDetails{
+.concaintercardDetails {
   display: flex;
 }
 
-.imageDetail{
+.imageDetail {
   background-color: rgba(191, 186, 186, 0.348);
   width: 800px;
   height: 100%;
@@ -35,7 +35,7 @@ height: 100%;
   box-shadow: 20px 10px 43px rgba(0, 0, 0, 0.2);
 }
 
-.image{
+.image {
   width: 100%;
   height: 100%;
   object-fit: contain;
@@ -51,7 +51,6 @@ height: 100%;
   gap: 20px;
   padding: 40px;
   color: rgb(53, 53, 53);
-
 }
 
 .h2 {
@@ -74,12 +73,12 @@ height: 100%;
   justify-content: center;
   gap: 50px;
 }
-.hproductname{
+.hproductname {
   font-size: 35px;
   font-weight: 700;
 }
 
-.categoryRowContainer{
+.categoryRowContainer {
   display: flex;
   width: 100%;
   height: 200px;
@@ -87,29 +86,28 @@ height: 100%;
   justify-content: space-evenly;
 }
 
-
-.containertext{
+.containertext {
   display: flex;
   flex-direction: column;
   padding: 30px;
   width: 100%;
   height: 450px;
 }
-.detailsproductsall{
+.detailsproductsall {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 30px;
 }
 
-.pricedetail{
+.pricedetail {
   padding: 8px;
   border-radius: 10px;
   background-color: transparent;
-  border:1px solid #f57a07;
+  border: 1px solid #f57a07;
   font-size: 30px;
 }
-.categoryRow{
+.categoryRow {
   display: flex;
   font-weight: 400;
   gap: 10px;
@@ -118,10 +116,10 @@ height: 100%;
 .description {
   padding: 10px;
   text-align: flex-start;
-   font-weight: 400;
+  font-weight: 400;
 }
 
-.hrdivisor{
+.hrdivisor {
   height: 1px;
   width: 98%;
   color: black;
@@ -156,19 +154,57 @@ height: 100%;
   background-color: #f1f1f1; /* Color del track (fondo del scroll) */
 }
 
-
-.floral{
+.floral {
   padding: 8px;
   border-radius: 10px;
   background-color: transparent;
-  border:1px solid #6e349d;
+  border: 1px solid #6e349d;
   font-size: 30px;
 }
 
-.marino{
+.marino {
   padding: 8px;
   border-radius: 10px;
   background-color: transparent;
-  border:1px solid #59c7a9;
+  border: 1px solid #59c7a9;
   font-size: 30px;
 }
+.divFormComm {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-evenly;
+}
+
+.commentDiv {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  width: 50%;
+}
+
+.commentDiv ul {
+  list-style-type: none;
+}
+
+.autor {
+  font-weight: bold;
+}
+
+.commentTitle {
+  background-color: rgb(243, 156, 18);
+  padding: 10px 45%;
+  border-radius: 10px;
+  color: whitesmoke;
+  font-weight: bolder;
+  font-size: x-large;
+}
+
+.commentLi {
+  border: solid thin;
+  border-color: orange;
+  border-radius: 15px;
+  padding: 10px 25px;
+  margin-top: 10px;
+}
+

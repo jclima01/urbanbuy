@@ -99,22 +99,21 @@ const ProductDetail = () => {
           </div>
         </div>
         <hr className={style.hrdivisor} />
+        <div className={style.divFormComm}>
         <ProductReview />
-        {/* <div className="">
-              <h2 className={style.h2}>{product.productName}</h2>
-
-                              
-             
-              <p>Comments:</p>
-              <ul>
+        <div className={style.commentDiv}>
+          { /* <h2 className={style.h2}>{product.productName}</h2>*/}
+           <p className={style.commentTitle}>Comentarios</p>
+             <ul>
                 {comments.map((comment, index) => (
-                  <li key={index}>
-                    <p>Comment by: {comment.userName}</p>
-                    <p>{comment.text}</p>
-                  </li>
+               <li className={style.commentLi} key={index}>
+                  <p className={style.autor}>Comentario de {comment.userName}</p>
+                  <p>{comment.text}</p>
+               </li>
                 ))}
-              </ul>
-            </div> */}
+             </ul>
+        </div>
+        </div> 
       </div>
     </>
   );
