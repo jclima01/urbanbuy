@@ -23,13 +23,13 @@ const CartWidget = () => {
   };
   return (
     <div className={styles.cartWidgetContainer}>
-      {order.cart.length > 0 && (
+      
         <span className={styles.calculateTotal}>
           {calculateTotalQuantity() > 0 && (
             <div>{calculateTotalQuantity()}</div>
           )}
         </span>
-      )}
+    
 
       <div onClick={() => navigate("/cart")}>
         <BsCart />
