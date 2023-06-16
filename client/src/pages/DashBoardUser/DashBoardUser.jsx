@@ -101,7 +101,13 @@ console.log("ema", activeTab)
             </button>
           </div>
 
-          <div className="paginationUsers">
+         
+        </div>
+
+        <div className="contentDashboardUsers">
+          {activeTab === "allUsers" && (
+            <>
+             <div className="paginationUsers">
             {activeTab ? (
               <Pagination
                 usersPerPage={usersPerPage}
@@ -110,11 +116,6 @@ console.log("ema", activeTab)
               />
             ) : null}
           </div>
-        </div>
-
-        <div className="contentDashboardUsers">
-          {activeTab === "allUsers" && (
-            <>
               <DashBoardUsersConteiner
                 setActiveTab={setActiveTab}
                 activeTab={activeTab}
