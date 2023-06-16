@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { loginClientAdmin, registerClientAdmin } from "../../redux/actions";
 import RegisterButton from "./RegisterButton/RegisterButton";
 import { useAuth0 } from "@auth0/auth0-react";
+import Swal from "sweetalert2";
 
 const SignIn = () => {
   const { user, isAuthenticated } = useAuth0();
@@ -54,7 +55,6 @@ const SignIn = () => {
   //     setUsername(value);
   //   };
 
-
   const handleEmailChange = (e) => {
     const value = e.target.value;
     setEmail(value);
@@ -92,14 +92,18 @@ const SignIn = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     await dispatch(registerClientAdmin(fullName, email, password))
-      .then(() => {
-        alert("Usuario creado con exito");
+      .then(
+        Swal.fire({
+          title: "Usuario creado con exito",
+          // text: 'Do you want to continue',
+          icon: "success",
+          confirmButtonText: "Ok",
+        })
+      )
+      .catch((error) => alert("Error al crear el ususario"))
+      .finally(() => {
         navigate("/login");
-      })
-      .catch((error) => alert("Error al crear el ususario"));
-    //.finally(() => {
-    //  navigate("/login");
-    //});
+      });
   };
 
   const validateConfirmPassword = (value) => {
