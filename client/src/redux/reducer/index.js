@@ -51,7 +51,7 @@ import {
   FILTER_ORDERS,
   UPDATE_ORDER,
   ORDER_CLIENT,
-  SORT_ORDERS_BY_DATE
+  SORT_ORDERS_BY_DATE,
 } from "../actions/index.js";
 
 const initialState = {
@@ -63,7 +63,7 @@ const initialState = {
   product: {},
   categories: [],
   ordersByUser: [],
-  reviews:[],
+  reviews: [],
   loading: null,
   theme: "urbanBuy",
   sliderTheme: "urbanBuy",
@@ -76,14 +76,15 @@ const initialState = {
   checkoutUrl: "",
   clientAdminDomain: "",
   order: {},
+  clientAdminSession: false,
 };
 
 const rootReducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case CLEAR_CART:
-      const orderCart = {...state.order}
-      orderCart.cart = []
-      orderCart.total = 0
+      const orderCart = { ...state.order };
+      orderCart.cart = [];
+      orderCart.total = 0;
       return {
         ...state,
         order: { ...orderCart },
@@ -283,7 +284,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         clientAdmin: { ...payload },
-        UserSession: true,
+        clientAdminSession: true,
       };
     case REGISTER_CLIENT_ADMIN:
       return {
@@ -293,6 +294,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         user: { ...payload },
+        UserSession: true,
       };
     case REGISTER_USER:
       return {
@@ -303,14 +305,13 @@ const rootReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         admin: {},
-        UserSession: false,
       };
 
     case LOGOUT_CLIENT_ADMIN:
       return {
         ...state,
         clientAdmin: {},
-        UserSession: false,
+        clientAdminSession: false,
       };
 
     case LOGOUT_USER:
@@ -337,8 +338,9 @@ const rootReducer = (state = initialState, { type, payload }) => {
     case SET_THEME:
       return {
         ...state,
-        clientAdmin: {...payload},
-        theme: state.clientAdmin.theme !== "" ? state.clientAdmin.theme : "urbanBuy",
+        clientAdmin: { ...payload },
+        theme:
+          state.clientAdmin.theme !== "" ? state.clientAdmin.theme : "urbanBuy",
         //theme: payload,
       };
 
@@ -360,7 +362,6 @@ const rootReducer = (state = initialState, { type, payload }) => {
         cardStyle: payload,
       };
 
-
     case SET_REVIEW:
       return {
         ...state,
@@ -373,94 +374,90 @@ const rootReducer = (state = initialState, { type, payload }) => {
       };
     case CREATE_CHECKOUT_SESSION:
       const order = { ...state.order };
-    
+
       order.cart = [];
-     
+
       return {
         ...state,
         checkoutUrl: payload,
         order: order,
-
       };
-      case ORDER_CLIENT:
-        return {
-          ...state,
-          ordersByClient: payload,
-          orders: payload,
-        };
-      //   case DELETE_ORDER:
-      // return {
-      //   ...state,
-      //   orders:state.orders.filter((e)=>e._id!==payload)
-      // };
-      case UPDATE_ORDER:
-      
+    case ORDER_CLIENT:
       return {
         ...state,
-        orders:[...payload]
+        ordersByClient: payload,
+        orders: payload,
       };
-
-      case SORT_ORDERS_BY_DATE:
-        // Utiliza el spread operator (...) para crear una copia de la lista de órdenes actual
-        const sortedOrders = [...state.orders];
-      if(payload === "total_min") {
-        sortedOrders.sort((a, b) => a.total - b.total)
-      }
-      if(payload === "total_max") {
-        sortedOrders.sort((a, b) => b.total - a.total)
-      }
-      if(payload === "date_asc"){
-        // Ordena la lista de órdenes por fecha (suponiendo que tienes una propiedad "date" en cada objeto de orden)
-        sortedOrders.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-      }
-      if(payload === "date_des"){
-        // Ordena la lista de órdenes por fecha (suponiendo que tienes una propiedad "date" en cada objeto de orden)
-        sortedOrders.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
-      }
-
-
-        return {
-          ...state,
-          orders: sortedOrders
-        };
-        case FILTER_ORDERS:
-          
-          return{
-            ...state,
-             orders: state.orders.filter((e)=>e.status==payload)
-          }
-
-          case SEARCH_ORDERS:
-            let searchOrders;
-            searchOrders = state.orders.filter((ord) =>
-              ord.fullName.toLowerCase().includes(payload.toLowerCase())
-            );
-            return {
-              ...state,
-              orders: [...searchOrders],
-            };
-
-      case UPDATE_USER:
+    //   case DELETE_ORDER:
+    // return {
+    //   ...state,
+    //   orders:state.orders.filter((e)=>e._id!==payload)
+    // };
+    case UPDATE_ORDER:
       return {
         ...state,
-        user: {...payload},
+        orders: [...payload],
+      };
+
+    case SORT_ORDERS_BY_DATE:
+      // Utiliza el spread operator (...) para crear una copia de la lista de órdenes actual
+      const sortedOrders = [...state.orders];
+      if (payload === "total_min") {
+        sortedOrders.sort((a, b) => a.total - b.total);
+      }
+      if (payload === "total_max") {
+        sortedOrders.sort((a, b) => b.total - a.total);
+      }
+      if (payload === "date_asc") {
+        // Ordena la lista de órdenes por fecha (suponiendo que tienes una propiedad "date" en cada objeto de orden)
+        sortedOrders.sort(
+          (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+        );
+      }
+      if (payload === "date_des") {
+        // Ordena la lista de órdenes por fecha (suponiendo que tienes una propiedad "date" en cada objeto de orden)
+        sortedOrders.sort(
+          (a, b) => new Date(a.createdAt) - new Date(b.createdAt)
+        );
+      }
+
+      return {
+        ...state,
+        orders: sortedOrders,
+      };
+    case FILTER_ORDERS:
+      return {
+        ...state,
+        orders: state.orders.filter((e) => e.status == payload),
+      };
+
+    case SEARCH_ORDERS:
+      let searchOrders;
+      searchOrders = state.orders.filter((ord) =>
+        ord.fullName.toLowerCase().includes(payload.toLowerCase())
+      );
+      return {
+        ...state,
+        orders: [...searchOrders],
+      };
+
+    case UPDATE_USER:
+      return {
+        ...state,
+        user: { ...payload },
       };
 
     case SET_BANNER:
       return {
         ...state,
-        clientAdmin: {...payload},
+        clientAdmin: { ...payload },
       };
-
 
     default:
       return {
         ...state,
       };
-
-
-  
   }
- }
+};
 
 export default rootReducer;

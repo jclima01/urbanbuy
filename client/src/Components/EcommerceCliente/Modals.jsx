@@ -92,7 +92,7 @@ export default function Modals() {
           <br />
           ¡Gracias por elegirnos y disfruta de tus compras en nuestro ecommerce!
         </p>
-        <button onClick={closeModal} className={`${style.cerrar1} ${style[theme].cerrar1}`}>
+        <button onClick={closeModal} className={style.cerrar1}>
           Cerrar
         </button>
       </Modal>
