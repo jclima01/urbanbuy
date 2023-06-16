@@ -50,7 +50,7 @@ export const GET_REVIEWS = "GET_REVIEWS";
 export const SET_BANNER = "SET_BANNER";
 export const GET_BANNER = "GET_BANNER";
 export const POST_BANNER = "POST_BANNER";
-export const UPDATE_USER = 'UPDATE_USER'
+export const UPDATE_USER = "UPDATE_USER";
 export const ORDER_CLIENT = "ORDER_CLIENT";
 // export const DELETE_ORDER = "DELETE_ORDER";
 export const UPDATE_ORDER = "UPDATE_ORDER";
@@ -59,29 +59,27 @@ export const FILTER_ORDERS = "FILTER_ORDERS";
 export const SEARCH_ORDERS = "SEARCH_ORDERS";
 //export const SET_THEME1 = "SET_THEME1"
 
-export const updateUser = (userId, fullName, email, password,avatarName) => {
+export const updateUser = (userId, fullName, email, password, avatarName) => {
   return async (dispatch) => {
     try {
-      console.log(avatarName)
-      const {data} =axios.put(`/users/${userId}`,{
+      console.log(avatarName);
+      const { data } = axios.put(`/users/${userId}`, {
         fullName,
-      email,
-      password,
-      avatarName,
-      })
-   
-        dispatch({
-          type: UPDATE_USER,
-          payload: {...data},
-        });
-     
+        email,
+        password,
+        avatarName,
+      });
+
+      dispatch({
+        type: UPDATE_USER,
+        payload: { ...data },
+      });
     } catch (error) {
-      console.log('Error updating user:', error);
+      console.log("Error updating user:", error);
       // Puedes agregar lógica adicional aquí, como despachar una acción de error.
     }
   };
 };
-
 
 export const clearCart = () => {
   try {
@@ -95,7 +93,6 @@ export const clearCart = () => {
     throw new Error(err.message);
   }
 };
-
 
 export const increasePoductQuantityInCart = (productId, orderId, increase) => {
   try {
@@ -695,8 +692,6 @@ export const searchUsers = (searchTerm) => ({
   payload: searchTerm,
 });
 
-
-
 export const iniciarPago = (body) => {
   return async (dispatch) => {
     try {
@@ -744,20 +739,19 @@ export const dataEditProduct = (obj) => ({
   payload: obj,
 });
 
-
-
 export const setReview = (productId, userId, text, rating) => {
   try {
     return async function (dispatch) {
-      await axios.post("/reviews/", {
+      const { data } = await axios.post("/reviews/", {
         productId,
         userId,
         text,
-        rating
+        rating,
       });
 
       return dispatch({
         type: SET_REVIEW,
+        payload: data,
       });
     };
     // eslint-disable-next-line no-unreachable
@@ -781,8 +775,6 @@ export const getReviews = (productId) => {
     throw new Error(err.message);
   }
 };
-
-
 
 export const createCheckoutSession = (cart) => {
   return async (dispatch) => {
@@ -818,18 +810,21 @@ export const setBannerText = (bannerText, clientAdminId) => {
   }
 };
 
-export const updateOrder = (orderId, status,clientId) => {
+export const updateOrder = (orderId, status, clientId) => {
   try {
-  return async function (dispatch) {
-      const {data} = await axios.put(`/orders/orders/${orderId}`, {status,clientId});
-      
-      return dispatch ({
+    return async function (dispatch) {
+      const { data } = await axios.put(`/orders/orders/${orderId}`, {
+        status,
+        clientId,
+      });
+
+      return dispatch({
         type: UPDATE_ORDER,
         payload: data,
       });
-    }
+    };
   } catch (error) {
-    throw new Error(error.message)
+    throw new Error(error.message);
   }
 };
 
@@ -838,53 +833,50 @@ export const sortOrdersByDate = (valor) => ({
   payload: valor,
 });
 
-export const filterOrders =(status) => (
-{
+export const filterOrders = (status) => ({
   type: FILTER_ORDERS,
-  payload: status
-  }
-);
+  payload: status,
+});
 
 export const searchOrders = (searchTerm) => ({
   type: SEARCH_ORDERS,
   payload: searchTerm,
-})
+});
 export const orderClient = (clientId) => {
   return async (dispatch) => {
     try {
-      const {data} = await axios.get(`/clientAdmin/orders/${clientId}`);
+      const { data } = await axios.get(`/clientAdmin/orders/${clientId}`);
       console.log(data);
       dispatch({
         type: ORDER_CLIENT,
         payload: data,
-        
       });
     } catch (error) {
-     
       throw new Error("Error al obtener las órdenes del ClientAdmin");
     }
-  }}
-
-  // export const setTheme = (theme) => {
-  //   return {
-  //     type: SET_THEME,
-  //     payload: theme,
-  //   };
-  // };
-
-  export const setTheme = (theme, clientAdminId) => {
-    try {
-      return async function (dispatch) {
-        const { data } = await axios.put(`/clientAdmin/theme/${clientAdminId}`, {
-          theme,
-        });
-        return dispatch({
-          type: SET_THEME,
-          payload: data,
-        });
-      };
-      // eslint-disable-next-line no-unreachable
-    } catch (err) {
-      throw new Error(err.message);
-    }
   };
+};
+
+// export const setTheme = (theme) => {
+//   return {
+//     type: SET_THEME,
+//     payload: theme,
+//   };
+// };
+
+export const setTheme = (theme, clientAdminId) => {
+  try {
+    return async function (dispatch) {
+      const { data } = await axios.put(`/clientAdmin/theme/${clientAdminId}`, {
+        theme,
+      });
+      return dispatch({
+        type: SET_THEME,
+        payload: data,
+      });
+    };
+    // eslint-disable-next-line no-unreachable
+  } catch (err) {
+    throw new Error(err.message);
+  }
+};

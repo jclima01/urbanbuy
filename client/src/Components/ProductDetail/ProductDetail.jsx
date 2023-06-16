@@ -45,7 +45,7 @@ const ProductDetail = () => {
     dispatch(getClientAdminUsers(clientAdmin._id));
     dispatch(getReviews(productId));
     console.log("effect")
-  }, [product.stocks,review]);
+  }, [product.stocks,ProductReview]);
 
   return (
     <>
