@@ -9,7 +9,7 @@ const RegisterButton = () => {
     loginWithRedirect({
         connection: "google-oauth2",
         screen_hint: "signup",
-        redirectUri: "https://urbanbuy.netlify/singin",
+        redirectUri: "https://urbanbuy.netlify.app/singin",
       });
    
   };
