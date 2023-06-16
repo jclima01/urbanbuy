@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from "react";
 import style from './MyOrders.module.css';
 import { getOrdersByUser } from "../../../redux/actions";
-import { useNavigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 const MyOrders = () => {
 
   const dispatch = useDispatch();
+  const clientAdmin = useSelector((state) => state.clientAdmin);
   const userOrders = useSelector((state)=> state.ordersByUser);
   const user = useSelector((state) => state.user);
-  const navigate = useNavigate();
+  
 
   useEffect(() => {
     
@@ -69,7 +70,7 @@ const MyOrders = () => {
       </table>
       
       </div>
-      <Link to="/:domain">
+      <Link to={`/${clientAdmin.domain}`}>
         <button className={style.go}>Go Back</button>
       </Link>
       </>

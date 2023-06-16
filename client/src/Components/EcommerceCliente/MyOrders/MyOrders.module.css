@@ -62,6 +62,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   width: max-content;
+  min-width: 400px;
   height: 90%;
   background-color: whitesmoke;
   border-radius: 20px;
