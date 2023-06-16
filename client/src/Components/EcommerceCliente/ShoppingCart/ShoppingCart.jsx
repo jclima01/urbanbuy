@@ -20,6 +20,7 @@ export default function ShoppingCart() {
   const user = useSelector((state) => state.user);
   const navigate = useNavigate();
   const clientAdmin = useSelector((state) => state.clientAdmin);
+  const theme = useSelector((state) => state.theme);
 
   const checkout = async (orderId) => {
     const { data } = await axios.post(
@@ -63,7 +64,7 @@ export default function ShoppingCart() {
 
       <div className={styles.listContainer}>
         {order?.cart?.map((product) => (
-          <div key={product._id} className={styles.cardProduct}>
+          <div key={product._id} className={`${styles.cardProduct} ${styles[theme]}`}>
             <img
               src={product.imageUrl}
               alt={product.productName}
@@ -95,7 +96,7 @@ export default function ShoppingCart() {
           </div>
         ))}
         <div className={styles.total}>Total: ${order.total}</div>
-        <button onClick={() => checkout(order._id)}>COMPRAR</button>
+        <button className={`${styles.btnPay} ${styles[theme.btnPay]}`} onClick={() => checkout(order._id)}>COMPRAR</button>
       </div>
     </div>
   );

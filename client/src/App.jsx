@@ -15,7 +15,6 @@ import HomeEcommerce from "./Components/EcommerceCliente/HomeEcommerce";
 import ProductDetail from "./Components/ProductDetail/ProductDetail";
 import ShoppingCartContainer from "./Components/EcommerceCliente/ShoppingCart/ShoppingCartContainer";
 import LoginClient from "./Components/EcommerceCliente/LoginClient/LoginClient";
-import Payment from "./Components/EcommerceCliente/ShoppingCart/Payment/Payment";
 import SignInClient from "./Components/EcommerceCliente/SignInClient/SignInClient";
 import EcommerceUser from "./Components/EcommerceCliente/EcommerceUser";
 import PaymentSuccess from "./Components/EcommerceCliente/ShoppingCart/Payment/PaymentSuccess";
@@ -28,6 +27,10 @@ function App() {
   const location = useLocation();
   const user = useSelector((state) => state.user);
   const clientAdmin = useSelector((state) => state.clientAdmin);
+  const clientAdminSession = useSelector((state) => state.clientAdminSession);
+  const userSession = useSelector((state) => state.UserSession);
+
+
   return (
     <>
       <div className="d-flex w-100">
@@ -57,7 +60,6 @@ function App() {
                 <PaymentCanceled clientAdmin={clientAdmin} user={user} />
               }
             />
-            <Route path="/payment" element={<Payment />} />
             <Route path="/" element={<Home />} /> {/* LadingPage */}
             <Route path="/login" element={<FormLogin />} />
             <Route path="/loginClient" element={<LoginClient />} />
@@ -79,6 +81,7 @@ function App() {
             <Route path="/cart" element={<ShoppingCartContainer />} />
             {/* <Route path="*" element={<Navigate to="/" />} /> */}
           </Routes>
+
         </div>
       </div>
     </>
