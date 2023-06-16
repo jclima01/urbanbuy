@@ -14,8 +14,7 @@ import SignIn from "./Components/SignIn/SignIn";
 import HomeEcommerce from "./Components/EcommerceCliente/HomeEcommerce";
 import ProductDetail from "./Components/ProductDetail/ProductDetail";
 import ShoppingCartContainer from "./Components/EcommerceCliente/ShoppingCart/ShoppingCartContainer";
-import LoginClient from './Components/EcommerceCliente/LoginClient/LoginClient'
-import Payment from "./Components/EcommerceCliente/ShoppingCart/Payment/Payment";
+import LoginClient from "./Components/EcommerceCliente/LoginClient/LoginClient";
 import SignInClient from "./Components/EcommerceCliente/SignInClient/SignInClient";
 import EcommerceUser from "./Components/EcommerceCliente/EcommerceUser";
 import PaymentSuccess from "./Components/EcommerceCliente/ShoppingCart/Payment/PaymentSuccess";
@@ -25,8 +24,12 @@ import UserArea from "./Components/EcommerceCliente/UserArea/UserArea";
 
 function App() {
   const location = useLocation();
-  const user = useSelector(state => state.user)
-  const clientAdmin = useSelector(state => state.clientAdmin)
+  const user = useSelector((state) => state.user);
+  const clientAdmin = useSelector((state) => state.clientAdmin);
+  const clientAdminSession = useSelector((state) => state.clientAdminSession);
+  const userSession = useSelector((state) => state.UserSession);
+  console.log(clientAdminSession);
+  console.log(userSession);
   return (
     <>
       <div className="d-flex w-100">
@@ -45,30 +48,127 @@ function App() {
           {location.pathname === "/dashboard/Shipping" && <NavBarDashBoard />}
           {location.pathname === "/dashboard/Settings" && <NavBarDashBoard />}
 
-          <Routes>
-            <Route path="/paymentSuccess" element={<PaymentSuccess clientAdmin={clientAdmin} user={user} />} />
-            <Route path="/paymentCanceled" element={<PaymentCanceled clientAdmin={clientAdmin} user={user}/>} />
-            <Route path="/payment" element={<Payment />} />
-            <Route path="/" element={<Home />} /> {/* LadingPage */}
-            <Route path="/login" element={<FormLogin />} />
-            <Route path="/loginClient" element={<LoginClient/>}/>
-            <Route path="/singin" element={<SignIn />} />
+          {clientAdminSession && !userSession ? (
+            <Routes>
+              <Route
+                path="/paymentSuccess"
+                element={
+                  <PaymentSuccess clientAdmin={clientAdmin} user={user} />
+                }
+              />
+              <Route
+                path="/paymentCanceled"
+                element={
+                  <PaymentCanceled clientAdmin={clientAdmin} user={user} />
+                }
+              />
 
-            <Route path="/signInClient" element={<SignInClient/>}/>
-            <Route path="/:domain/s" element={<EcommerceUser/>}/>
-            <Route path="/dashBoard" element={<DashBoard />} />
-            <Route path="/dashBoard/User" element={<DashBoardUser />} />
-            <Route path="/dashBoard/Edit" element={<DashBoardEdit />} />
-            <Route path="/dashBoard/Products" element={<DashBoardProducts />} />
-            <Route path="/dashBoard/Shipping" element={<DashBoardShipping />} />
-            <Route path="/dashBoard/Settings" element={<DashBoardSettings />} />
-<Route path="/userArea" element={<UserArea/>}/>
-            <Route path="/homecliente" element={<HomeEcommerce />} />
-            <Route path="/:domain" element={<HomeEcommerce />} />
-            <Route path="/product/:productId" element={<ProductDetail />} />
-            <Route path="/cart" element={<ShoppingCartContainer />} />
-            {/* <Route path="*" element={<Navigate to="/" />} /> */}
-          </Routes>
+              <Route path="/dashboard" element={<DashBoard />} />
+              <Route path="/dashboard/User" element={<DashBoardUser />} />
+              <Route path="/dashboard/Edit" element={<DashBoardEdit />} />
+              <Route
+                path="/dashboard/Products"
+                element={<DashBoardProducts />}
+              />
+              <Route
+                path="/dashboard/Shipping"
+                element={<DashBoardShipping />}
+              />
+              <Route
+                path="/dashboard/Settings"
+                element={<DashBoardSettings />}
+              />
+              <Route path="/loginClient" element={<LoginClient />} />
+              <Route path="/signInClient" element={<SignInClient />} />
+              <Route path="/:domain" element={<HomeEcommerce />} />
+              <Route path="/:domain/s" element={<EcommerceUser />} />
+              <Route path="*" element={<Navigate to="/dashboard" />} />
+            </Routes>
+          ) : null}
+
+          {!clientAdminSession && !userSession ? (
+            <Routes>
+              <Route path="/:domain" element={<HomeEcommerce />} />
+              <Route path="/:domain/s" element={<EcommerceUser />} />
+              <Route path="/" element={<Home />} /> {/* LadingPage */}
+              <Route path="/login" element={<FormLogin />} />
+              <Route path="/loginClient" element={<LoginClient />} />
+              <Route path="/singin" element={<SignIn />} />
+              <Route path="/signInClient" element={<SignInClient />} />
+              <Route path="/product/:productId" element={<ProductDetail />} />
+            </Routes>
+          ) : null}
+
+          {userSession && !clientAdminSession && (
+            <Routes>
+              <Route
+                path="/paymentSuccess"
+                element={
+                  <PaymentSuccess clientAdmin={clientAdmin} user={user} />
+                }
+              />
+              <Route
+                path="/paymentCanceled"
+                element={
+                  <PaymentCanceled clientAdmin={clientAdmin} user={user} />
+                }
+              />
+              <Route path="/userArea" element={<UserArea />} />
+              <Route path="/cart" element={<ShoppingCartContainer />} />
+              <Route path="/:domain" element={<HomeEcommerce />} />
+              <Route path="/:domain/s" element={<EcommerceUser />} />
+              <Route path="/product/:productId" element={<ProductDetail />} />
+              <Route
+                path="*"
+                element={<Navigate to={`/${clientAdmin.domain}`} />}
+              />
+            </Routes>
+          )}
+          {userSession && clientAdminSession && (
+            <Routes>
+              <Route
+                path="/paymentSuccess"
+                element={
+                  <PaymentSuccess clientAdmin={clientAdmin} user={user} />
+                }
+              />
+              <Route
+                path="/paymentCanceled"
+                element={
+                  <PaymentCanceled clientAdmin={clientAdmin} user={user} />
+                }
+              />
+              <Route path="/dashboard" element={<DashBoard />} />
+              <Route path="/dashboard/User" element={<DashBoardUser />} />
+              <Route path="/dashboard/Edit" element={<DashBoardEdit />} />
+              <Route
+                path="/dashboard/Products"
+                element={<DashBoardProducts />}
+              />
+              <Route
+                path="/dashboard/Shipping"
+                element={<DashBoardShipping />}
+              />
+              <Route
+                path="/dashboard/Settings"
+                element={<DashBoardSettings />}
+              />
+              <Route path="/userArea" element={<UserArea />} />
+              <Route path="/cart" element={<ShoppingCartContainer />} />
+              <Route path="/:domain" element={<HomeEcommerce />} />
+              <Route path="/:domain/s" element={<EcommerceUser />} />
+              <Route path="/product/:productId" element={<ProductDetail />} />
+              <Route path="/login" element={<FormLogin />} />
+              <Route path="/loginClient" element={<LoginClient />} />
+              <Route path="/singin" element={<SignIn />} />
+              <Route path="/signInClient" element={<SignInClient />} />
+              <Route path="/product/:productId" element={<ProductDetail />} />
+              <Route
+                path="*"
+                element={<Navigate to={`/dashboard`} />}
+              />
+            </Routes>
+          )}
         </div>
       </div>
     </>
