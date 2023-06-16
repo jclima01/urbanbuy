@@ -5,8 +5,9 @@
   align-items: center;
   width: 100vw;
   height: 100vh; /* Altura fija del contenedor principal */
-  gap: 20px;
+ margin-top: 30px;
   align-self: center;
+  position: relative;
 }
 
 .navButtons {
@@ -14,7 +15,11 @@
   justify-content: space-between;
   width: 80%;
 }
-
+ .Link{
+  color: #f57a07;
+  text-decoration: none;
+  outline: none;
+}
 .containerDetails{
 display: flex; 
 
@@ -29,7 +34,7 @@ height: 100%;
 .imageDetail{
   background-color: rgba(191, 186, 186, 0.348);
   width: 800px;
-  height: 100%;
+  height: 800px;
   box-shadow: #888888;
   border-radius: 25px;
   box-shadow: 20px 10px 43px rgba(0, 0, 0, 0.2);
@@ -60,9 +65,9 @@ height: 100%;
   font-size: 20px;
 }
 .descriptionContainer {
-  width: 100%;
-  height: 100%;
-  overflow: scroll;
+  width: 1000px;
+  height: 800px;
+  overflow: hidden;
   border-radius: 10px;
   font-size: 20px;
   color: rgb(53, 53, 53);
@@ -71,8 +76,9 @@ height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
   gap: 50px;
+ 
 }
 .hproductname{
   font-size: 35px;
@@ -84,7 +90,7 @@ height: 100%;
   width: 100%;
   height: 200px;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: space-between;
 }
 
 
@@ -92,8 +98,10 @@ height: 100%;
   display: flex;
   flex-direction: column;
   padding: 30px;
-  width: 100%;
-  height: 450px;
+  width: 800px;
+  height: 550px;
+  gap: 50px;
+
 }
 .detailsproductsall{
   display: flex;
@@ -117,15 +125,28 @@ height: 100%;
 
 .description {
   padding: 10px;
-  text-align: flex-start;
-   font-weight: 400;
+  font-weight: 400;
+  white-space: wrap; /* Evita el ajuste de línea del texto */
+  overflow-y: auto; /* Oculta el texto que excede el ancho */
+  text-overflow: ellipsis; /* Muestra tres puntos suspensivos (...) */
+  text-align: left; /* Alinea el texto a la izquierda */
+
 }
 
 .hrdivisor{
   height: 1px;
-  width: 98%;
+  width: 100%;
   color: black;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.6);
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.6);
+  margin-bottom: 50px;
+}
+.backarrow{
+  display: flex;
+  position: absolute;
+  top: 30px;
+  left: 220px;
+  gap: 10px;
+  cursor: pointer;
 }
 
 .button {
@@ -136,12 +157,6 @@ height: 100%;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.6);
 }
 
-.descriptionContainer {
-  overflow-y: auto; /* Habilitar el scroll vertical */
-  overflow-x: auto; /* Habilitar el scroll vertical */
-  scrollbar-width: thin; /* Ancho del scroll (solo para navegadores que admiten esta propiedad) */
-  scrollbar-color: #888888 #f1f1f1; /* Color del scroll (solo para navegadores que admiten esta propiedad) */
-}
 
 /* Estilos para el scroll en navegadores webkit (Chrome, Safari) */
 .descriptionContainer::-webkit-scrollbar {
@@ -152,9 +167,6 @@ height: 100%;
   background-color: #f57a07; /* Color del scroll thumb (barra de desplazamiento) */
 }
 
-.descriptionContainer::-webkit-scrollbar-track {
-  background-color: #f1f1f1; /* Color del track (fondo del scroll) */
-}
 
 
 .floral{
