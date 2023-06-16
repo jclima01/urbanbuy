@@ -1,6 +1,7 @@
 .datosUser {
     width: 100%;
     border-collapse: collapse;
+  
   }
   
   .datosUser th,
@@ -68,6 +69,7 @@
   border-radius: 20px;
   border: 2px solid orange;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);
+
   
   
 }
@@ -79,4 +81,13 @@
   margin-bottom: 10px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);
   margin-top: 10px;
+  overflow: scroll;
+  overflow-x: hidden;
+}
+
+.pageContainner{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
 }
