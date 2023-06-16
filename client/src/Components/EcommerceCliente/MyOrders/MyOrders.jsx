@@ -1,100 +1,87 @@
-import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import {  } from "../../../redux/actions/index.js";
-import { useNavigate, Link } from 'react-router-dom';
-
+import React, { useState, useEffect } from "react";
 import style from './MyOrders.module.css';
-
-
+import { getOrdersByUser } from "../../../redux/actions";
+import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
 const MyOrders = () => {
-    const user = useSelector((state) => state.user);
-    const [newUsername, setNewUsername] = useState("");
-    const [newEmail, setNewEmail] = useState("");
-    const [newPassword, setNewPassword] = useState("");
-    const [newAvatar, setNewAvatar] = useState("");
-    const dispatch = useDispatch();
-    const clientAdmin = useSelector((state) => state.clientAdmin);
-    const navigate = useNavigate();
+
+  const dispatch = useDispatch();
+  const clientAdmin = useSelector((state) => state.clientAdmin);
+  const userOrders = useSelector((state)=> state.ordersByUser);
+  const user = useSelector((state) => state.user);
   
-    const handleUsernameChange = (event) => {
-      setNewUsername(event.target.value);
-    };
+
+  useEffect(() => {
+    
+   
+    dispatch(getOrdersByUser(user._id))
   
-    const handleEmailChange = (event) => {
-      setNewEmail(event.target.value);
-    };
+  }, [dispatch]);
+
   
-    const handlePasswordChange = (event) => {
-      setNewPassword(event.target.value);
-    };
-  
-    const handleAvatarChange = (event) => {
-      setNewAvatar(event.target.value);
-    };
-  
-    const handleUpdate = (e) => {
-      e.preventDefault();
-      dispatch(updateUser(user._id, newUsername, newEmail, newPassword, newAvatar))
-        .then(() => {
-          setNewUsername("");
-          setNewEmail("");
-          setNewPassword("");
-          setNewAvatar("");
-        })
-        .then(navigate(`/${clientAdmin.domain}`))
-        .catch((error) => {
-          console.error("Error al actualizar los datos del usuario:", error);
-        });
-    };
-    console.log("newAvatar:", newAvatar)
-    return (
+
+
+  return (
+    <>
+    <div className={style.container}>
      
-      <div className={style.container} >
-        <h1>Área de Usuario</h1>
-        <img src={newAvatar || user?.avatarName} alt="Avatar" className={style.avatar} />
-        <div className={style.data}> 
-          <p style={{marginTop:'15px'}}>Email: {user?.email}</p>
-          <p>Nombre de Usuario: {user?.fullName}</p>
-          {/* <p>Contraseña: {user?.password}</p> */}
-        </div>
-        <h5>Actualiza tus datos</h5>
-        <input
-          type="text"
-          value={newUsername}
-          onChange={handleUsernameChange}
-          placeholder="Nuevo nombre de usuario"
-          className={style.user}
-        />
-  
-        <input
-          type="text"
-          value={newEmail}
-          onChange={handleEmailChange}
-          placeholder="Nuevo correo electrónico"
-          className={style.user}
-        /> 
-  
-        <input
-          type="password"
-          value={newPassword}
-          onChange={handlePasswordChange}
-          placeholder="Nueva contraseña"
-          className={style.user}
-        />
-        <div className={style.upload}>
-          <UploadAvatar
-            avatarName={newAvatar}
-            setavatarName={setNewAvatar}
-          />
-        </div>
-        <button onClick={handleUpdate} className={style.actualizar}>Actualizar datos</button>
-        <Link to='/:domain'>
-          <button className={style.go}>Go Back</button>
-        </Link>
-      </div>
+      <h5>My Orders</h5>
+      {userOrders?.length > 0 ? (
+        <>
+        <div className={style.data}>
+        <table className={style.datosUser}>
+        <thead>
+          <tr>
+            <th>Status</th>
+            <th>Full Name</th>
+            <th>Email</th>
+           
+            <th>Total</th>
+            <th>Cart</th>
+            <th>Date</th>
+            <th>Payment</th>
+          
+          </tr>
+        </thead>
+        <tbody>
+          
+          {userOrders?.map((order) => (
+            <>
+              <tr>
+                <td>{order?.status}</td>
+                <td>{order?.fullName}</td>
+                <td>{order?.email}</td>
+                <td>{order?.total}</td>
+                <td className={style.carrito}>
+                  {order?.cart?.map((prod) => (
+                    <React.Fragment>
+                      {prod.productName}
+                      <br />
+                    </React.Fragment>
+                  ))}
+                </td>
+                <td>{order?.createdAt.slice(0, 10)}</td>
+                <td>{order?.payment === true ? "yes" : "no"}</td>
+               
+              </tr>
+            </>
+          ))}
+        </tbody>
+      </table>
       
-    );
-  }
+      </div>
+      </>
+      ) : (
+        <div>No orders found.</div>
+      )}
+      <Link to={`/${clientAdmin.domain}`}>
+        <button className={style.go}>Go Back</button>
+      </Link>
+    </div>
+    </>
+  );
+  
+};
 
 export default MyOrders;
