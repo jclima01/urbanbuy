@@ -1,0 +1,12 @@
+.container {
+    background-color: #ffffff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    display: flex;
+    justify-content: center;
+    max-width: 800px; /* Establece el ancho máximo deseado para el contenido */
+    margin: 0 auto; /* Centra el contenedor horizontalmente */
+    padding: 20px; /* Ajusta el espacio interno del contenedor */
+    margin-top: 50px;
+
+
+  }

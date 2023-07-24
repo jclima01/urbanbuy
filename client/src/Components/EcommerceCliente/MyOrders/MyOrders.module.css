@@ -1,0 +1,93 @@
+.datosUser {
+    width: 100%;
+    border-collapse: collapse;
+  
+  }
+  
+  .datosUser th,
+  .datosUser td {
+    padding: 10px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .datosUser th {
+    background-color: antiquewhite;
+  }
+  
+  .datosUser tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  .datosUser tbody tr:hover {
+    background-color: #e6e6e6;
+  }
+  .datosUser tbody tr td:last-child{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+  }
+  .carrito{
+    display: flex;
+    overflow: auto;
+    max-height: 50px;
+  }
+
+  .go{
+    margin-top: 50px;
+    border: none;
+    background-color: rgb(245, 133, 6);
+    height: 50px;
+    border-radius: 10px;
+    color: white;
+    margin-bottom: 10px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);
+  }
+  
+  .go:hover{
+    background-color: rgb(19, 18, 18);
+  }
+  
+.container {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: max-content;
+  min-width: 400px;
+  height: 90%;
+  background-color: whitesmoke;
+  border-radius: 20px;
+  border: 2px solid orange;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);
+
+  
+  
+}
+.data{
+  border: 1px solid rgb(27, 27, 27, 0.2);
+  border-radius: 10px;
+  width: max-content;
+  height: max-content;
+  margin-bottom: 10px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);
+  margin-top: 10px;
+  overflow: scroll;
+  overflow-x: hidden;
+}
+
+.pageContainner{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+}

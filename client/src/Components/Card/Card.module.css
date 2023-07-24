@@ -1,0 +1,200 @@
+.cardContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  box-shadow: 0 0 5px rgba(250, 123, 5, 1);
+  margin-top: 50px;
+  border-radius: 5px;
+}
+
+.productLink {
+  text-decoration: none;
+  color: inherit;
+  margin: 10px;
+}
+
+.productCard {
+  background-color: #ffffff;
+  border-radius: 5px;
+  padding: 10px;
+  width: 200px;
+  height: 300px;
+  transition: transform 0.3s;
+  position: relative;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+.productCard:hover {
+  transform: scale(1.1); /* Aumenta el tamaño de la tarjeta al pasar el mouse */
+}
+
+.productImage {
+  width: 100%;
+  height: 70%; /* Ajusta la altura de la imagen */
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.productPrice {
+  color: white;
+  font-weight: bold;
+  margin: 10px; /* Agregamos margen */
+  position: absolute; /* Agregamos posicionamiento absoluto */
+  top: 0; /* Posicionamos en la parte superior */
+  left: 0; /* Posicionamos en la parte izquierda */
+  background-color: rgba(241, 120, 7, 0.7); /* Fondo gris transparente */
+  padding: 5px; /* Agregamos un pequeño padding */
+  border-radius: 5px;
+}
+
+.productRating {
+  opacity: 0; /* Oculta el rating por defecto */
+  transition: opacity 0.3s; /* Agrega una transición suave para el efecto */
+  color: black;
+}
+
+.productCard:hover .productRating {
+  opacity: 1; /* Muestra el rating al pasar el mouse sobre la tarjeta */
+}
+
+.starIcon {
+  color: rgb(0, 0, 0);
+  margin-right: 5px;
+}
+
+.floral.cardContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  box-shadow: 0 0 5px rgb(187, 20, 209);
+  margin-top: 50px;
+  border-radius: 5px;
+}
+
+.floral Link {
+  text-decoration: none;
+  color: inherit;
+  margin: 10px;
+}
+
+.floral .productCard {
+  background-image: url("../../Img/BabyPink.jfif");
+  border-radius: 5px;
+  padding: 10px;
+  width: 200px;
+  height: 300px;
+  transition: transform 0.3s;
+  position: relative;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+.floral .productCard:hover {
+  transform: scale(1.1); /* Aumenta el tamaño de la tarjeta al pasar el mouse */
+}
+
+.floral .productImage {
+  width: 100%;
+  height: 70%; /* Ajusta la altura de la imagen */
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.floral.productPrice {
+  color: white;
+  font-weight: bold;
+  margin: 10px; /* Agregamos margen */
+  background-color: rgba(109, 45, 134, 0.7); /* Fondo gris transparente */
+  padding: 5px; /* Agregamos un pequeño padding */
+  border-radius: 5px;
+}
+
+.floral .productRating {
+  opacity: 0; /* Oculta el rating por defecto */
+  transition: opacity 0.3s; /* Agrega una transición suave para el efecto */
+  color: rgb(255, 255, 255);
+}
+
+.floral.productCard:hover .productRating {
+  opacity: 1; /* Muestra el rating al pasar el mouse sobre la tarjeta */
+}
+
+.floral .starIcon {
+  color: rgb(77, 5, 83);
+  margin-right: 5px;
+}
+
+
+.marino.cardContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  box-shadow: 0 0 5px rgb(45, 145, 135);
+  margin-top: 50px;
+  border-radius: 5px;
+  color: white;
+}
+
+.marino Link {
+  text-decoration: none;
+  color: inherit;
+  margin: 10px;
+}
+
+.marino .productCard {
+  background-image: url("../../Img/CardNavy.jfif");
+  border-radius: 5px;
+  padding: 10px;
+  width: 200px;
+  height: 300px;
+  transition: transform 0.3s;
+  position: relative;
+  box-shadow: 0 0 15px rgba(47, 227, 194, 0.3);
+}
+
+.marino .productCard:hover {
+  transform: scale(1.1); /* Aumenta el tamaño de la tarjeta al pasar el mouse */
+}
+
+.marino .productImage {
+  width: 100%;
+  height: 70%; /* Ajusta la altura de la imagen */
+  object-fit: cover;
+  border-radius: 25px;
+  opacity: 0.8;
+}
+
+.marino.productPrice {
+  color: white;
+  font-weight: none;
+  margin: 10px; /* Agregamos margen */
+  background-color: rgba(13, 107, 112, 0.7); /* Fondo gris transparente */
+  padding: 5px; /* Agregamos un pequeño padding */
+  border-radius: 5px;
+}
+
+.marino .productRating {
+  opacity: 0; /* Oculta el rating por defecto */
+  transition: opacity 0.3s; /* Agrega una transición suave para el efecto */
+  color: rgb(255, 255, 255);
+}
+
+.marino.productCard:hover .productRating {
+  opacity: 1; /* Muestra el rating al pasar el mouse sobre la tarjeta */
+}
+
+.marino .starIcon {
+  color: yellow;
+  margin-right: 5px;
+}
+
+.productDescription {
+  height: 50px; /* Ajusta la altura máxima del contenedor de texto */
+  overflow: auto;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* Número de líneas deseadas */
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+}
+
+
+

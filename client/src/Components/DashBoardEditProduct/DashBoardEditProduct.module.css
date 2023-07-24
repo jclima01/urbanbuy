@@ -1,0 +1,27 @@
+.categoriescheked{
+ display: flex;
+ gap: 10px;
+}
+
+.containercategorias{
+    width: 470px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    overflow-y: auto;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.containercate{
+    background-color:orange ;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 150px;
+    height: 30px;
+    border-radius: 10px;
+    color: whitesmoke;
+}

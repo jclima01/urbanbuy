@@ -1,0 +1,96 @@
+.container {
+  background-image: url(../../Img/fondo-01.png);
+  background-size: 100% 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-position: center;
+  width: 100vw;
+  height: 100vh;
+}
+
+.logo2 {
+  display: block;
+  margin: 0 auto;
+  width: 30vw;
+  height: auto;
+  margin-bottom: 5vw;
+  padding: 10px;
+}
+
+.form {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  max-width: 30vw;
+  align-items: center;
+  background-color: whitesmoke;
+  margin-top: 40px;
+  margin-bottom: 50px;
+  border-radius: 20px;
+}
+
+.button {
+  margin-top: 3vw;
+  border: none;
+  padding: 1vw;
+  border-radius: 10px;
+  background-color: rgb(243, 156, 18);
+  color: whitesmoke;
+}
+.button:hover {
+  background-color: black;
+}
+
+.input {
+  border-radius: 5px;
+  border: none;
+  padding: 5px;
+  background-color: peachpuff; /* Cambiar a color durazno */
+  color: black; /* Cambiar a color negro */
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);
+  margin-bottom: 15px;
+}
+
+.ventas {
+  width: 5vw;
+  margin-left: -100px;
+}
+
+.errorbutton {
+    margin-top: 3vw;
+    border: none;
+    padding: 1vw;
+    border-radius: 10px;
+    background-color: lightgray;
+    color: white;
+  }
+  .errorbutton:hover {
+    background-color: lightgray;
+  }
+
+  .h2{
+    margin-top: 10px;
+  }
+
+  .error {
+    color: red;
+    text-align: center;
+    margin: 10px;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+
+  .buttonGoogle{
+    margin-bottom: 20px;
+    padding: 10px;
+    border: none;
+    background-color: black;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);
+    color:white;
+    border-radius: 10px;
+  }
+
+  .buttonGoogle:hover{
+    background-color: rgb(243, 156, 18);
+  }

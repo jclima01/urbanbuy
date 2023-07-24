@@ -1,0 +1,66 @@
+
+.listUl{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: stretch;
+    align-items: center;
+    color: #474646;
+}
+.listUl li{
+    padding-bottom: 5px;
+    margin-bottom: 5px;
+    border-right: 1px solid  #474646;;
+    width: 20%;
+    text-align: center;
+}
+.listUl li:last-child {
+    border-right: none; /* Aplica un estilo diferente o elimina el borde derecho del último elemento */
+  }
+
+.datosUser li{
+   
+    text-align: center;
+}
+
+.liUsers{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: stretch;
+    justify-content: space-around;
+    align-items: center;
+    color: #474646;
+    background-color: #DAd7d6;
+    border-radius: 15px;
+    margin-bottom: 10px;
+}
+
+.buttonView{
+    background-color: rgb(255, 127, 42);
+    width: max-content;
+    border-radius: 10px;
+    padding: 6px;
+    border: none;
+    color: white;
+    padding-left: 10px;
+    text-align: center;
+    cursor: pointer;
+    padding-right: 10px;
+
+}
+
+.imgAvatar{
+    margin-top: 10px;
+    border-radius: 25px;
+}
+.centrado{
+    text-align: center;
+    align-items: center;
+}

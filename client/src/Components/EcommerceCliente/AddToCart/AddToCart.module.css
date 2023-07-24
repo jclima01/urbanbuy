@@ -1,0 +1,50 @@
+.addToCartContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  gap: 10px;
+  font-size: 20px;
+}
+
+.counterButtons {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 20px;
+}
+.addToCartBtn {
+  background-color: #f57a07;
+  border: none;
+  color: whitesmoke;
+  padding: 15px;
+  border-radius: 7px;
+  width: 100%;
+}
+
+.btn{
+    cursor:pointer;
+}
+
+.quantity{
+    font-size: 20px;
+}
+
+.floral {
+  background-color: #b876de;
+  border: none;
+  color: whitesmoke;
+  padding: 15px;
+  border-radius: 7px;
+  width: 100%;
+}
+
+.marino {
+  background-color: #434ce9;
+  border: none;
+  color: whitesmoke;
+  padding: 15px;
+  border-radius: 7px;
+  width: 100%;
+}

@@ -1,0 +1,39 @@
+.bannerText {
+  font-size: 24px; /* Puedes ajustar este valor según tus necesidades */
+  color: rgb(254, 254, 254);
+  text-align: center;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+.floral {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 230px;
+  background-image: url("../../Img/WhaterPinkBanner.jpeg");
+  margin-top: 3%;
+  background-size: cover;
+  border-radius: 15px;
+}
+
+.marino {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 230px;
+  background-image: url("../../Img/BlueBanner.jpeg");
+  margin-top: 3%;
+  background-size: cover;
+  border-radius: 15px;
+}
+
+.urbanBuy {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 230px;
+  background-color: orange;
+  margin-top: 3%;
+  background-size: cover;
+  border-radius: 15px;
+}

@@ -1,0 +1,170 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap");
+
+.container {
+  display: flex;
+  flex-direction: row;
+}
+
+.title {
+  margin-right: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.navy-blue-button {
+  background-image: url("../../Img/botonMarino.jfif");
+  background-size: cover;
+  color: #030303;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 10px;
+  transition: transform 0.3s;
+  margin-right: 10px;
+  width: 150px;
+  height: 50px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  margin-bottom: 25px; 
+  margin-top: 20px;
+}
+
+.navy-blue-button:hover {
+  transform: scale(1.1);
+  opacity: 0.8;
+  transition: transform 0.3s, opacity 0.3s;
+}
+
+.floral-button {
+  background-image: url("../../Img/NavFloral.avif");
+  background-size: cover;
+  color: #000000;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 10px;
+  transition: transform 0.3s;
+  width: 150px;
+  height: 50px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500; 
+  margin-bottom: 25px;
+  margin-top: 20px;
+}
+
+.floral-button:hover {
+  transform: scale(1.1);
+  opacity: 0.8;
+  transition: transform 0.3s, opacity 0.3s;
+}
+
+.containerButtons {
+  align-items: center;
+}
+
+.urbanBuy {
+  background: linear-gradient(to right, #ffa500, #ff8c00);
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 10px;
+  transition: transform 0.3s;
+  margin-right: 10px;
+  width: 150px;
+  height: 50px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  margin-left: 20px;
+}
+
+.urbanBuy:hover {
+  transform: scale(1.1);
+  opacity: 0.8;
+  transition: transform 0.3s, opacity 0.3s;
+}
+
+.active {
+    font-weight: bold;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);;
+  }
+
+  .SearchButton {
+    padding: 10px 20px;
+    margin: 0 10px;
+    background-color: #bd6f45; 
+    color: white;
+    font-weight: normal;
+    transition: all 0.3s ease;
+    border: none; 
+    border-radius: 5px; 
+  }
+  
+  .SearchButton:hover {
+    transform: scale(1.1);
+    font-weight: bold;
+  }
+  
+  .SearchButton.active {
+    font-weight: bold;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);;
+  }
+  
+  .cardButtonClassic {
+    background: linear-gradient(to right, #ffa500, #ff8c00);
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    transition: transform 0.3s;
+    margin-right: 10px;
+    width: 150px;
+    height: 50px;
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+  }
+
+  .babyButton{
+    background-image: url("../../Img/BabyPink.jfif");
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    transition: transform 0.3s;
+    margin-right: 10px;
+    width: 150px;
+    height: 50px;
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+  }
+
+  .inputBanner {
+    width: 80%;
+    height: 40px; /* Puedes ajustar la altura según tus necesidades */
+    font-size: 16px; /* Puedes ajustar el tamaño de la fuente según tus necesidades */
+    color: black; /* Establece el color del texto en negro */
+    border-radius: 5px; /* Suaviza los bordes utilizando un radio de borde */
+    border: 1px solid #ccc; /* Establece un borde de 1 píxel sólido de color gris claro */
+    padding: 5px; /* Añade un espacio interno alrededor del texto dentro del input */
+  }
+
+  .whaterPink-button {
+    background-image: url("../../Img/NavFloral.avif");
+    background-size: cover;
+    color: #000000;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    transition: transform 0.3s;
+    width: 150px;
+    height: 50px;
+    font-family: "Poppins", sans-serif;
+    font-weight: 500; 
+    margin-bottom: 25px;
+    margin-top: 20px;
+  }
+  
+  .whaterPink-button:hover {
+    transform: scale(1.1);
+    opacity: 0.8;
+    transition: transform 0.3s, opacity 0.3s;
+  }
+
+ 

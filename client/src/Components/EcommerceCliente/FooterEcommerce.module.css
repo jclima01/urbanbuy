@@ -1,0 +1,29 @@
+.urbanBuy {
+  height: 150px;
+  color: whitesmoke;
+  background-color: #ff9900;
+  font-size: 28px;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+
+.marino {
+  background-color: #1465bb;
+  height: 150px;
+  color: whitesmoke;
+  font-size: 28px;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+
+.floral {
+  background-color: #c33b80;
+  height: 150px;
+  color: whitesmoke;
+  font-size: 28px;
+  align-items: center;
+justify-content: center;
+display: flex;
+}

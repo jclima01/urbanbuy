@@ -1,0 +1,64 @@
+.slider {
+  background-color: rgba(255, 255, 255, 0);
+}
+.img {
+  width: 100%; /* Ancho del contenedor */
+  height: 300px; /* Altura deseada */
+  border-radius: 12px;
+  object-fit: contain; /* Ajustar imagen sin distorsión */
+  object-position: center; /* Centrar imagen horizontalmente */
+}
+
+.sliderTitle {
+  position: absolute;
+  z-index: 1;
+  background-color: rgba(243, 148, 7, 0.9);
+  color: white;
+  padding: 10px;
+  margin: 0;
+  border-radius: 0 10px 10px 0;
+}
+.carousel-indicators {
+  bottom: 10px;
+}
+
+.carousel-indicators li {
+  background-color: #f7a902; /* Color de fondo para las indicaciones */
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.carousel-indicators .active {
+  background-color: #333; /* Color de fondo para la indicación activa */
+}
+
+.urbanBuy {
+  position: absolute;
+  z-index: 1;
+  background-color: rgba(243, 148, 7, 0.9);
+  color: white;
+  padding: 10px;
+  margin: 0;
+  border-radius: 0 10px 10px 0;
+}
+
+.marino {
+  position: absolute;
+  z-index: 1;
+  background-color: #112233;
+  color: white;
+  padding: 10px;
+  margin: 0;
+  border-radius: 0 10px 10px 0;
+}
+
+.floral {
+  position: absolute;
+  z-index: 1;
+  background-color: #793a96;
+  color: white;
+  padding: 10px;
+  margin: 0;
+  border-radius: 0 10px 10px 0;
+}

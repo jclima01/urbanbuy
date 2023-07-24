@@ -1,0 +1,194 @@
+.containerNav {
+  display: flex;
+  width: 100vw;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ff9900;
+  height: 80px;
+  margin-bottom: 40px;
+  align-items: center;
+}
+
+.logoClient {
+  width: 50px;
+  margin-left: 20px;
+}
+
+.rightSection{
+  width: 300px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin-right: 20px;
+}
+
+.select {
+  background-color: #ff9900;
+  margin-left: 60px;
+  height: 40px;
+  color: white;
+  font-size: 20px;
+  border: none;
+  outline: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.middleSection {
+  flex-grow: 1;
+}
+
+.inputSearch {
+  width: 70%;
+  height: 40px;
+  border-radius: 10px;
+  border: none;
+  padding: 0 10px;
+  margin-left: 15%;
+}
+.cartwidget{
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 20px;
+}
+.userContainer {
+  width: 300px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 20px;
+  position: relative; /* Agregado para establecer el contexto de posicionamiento */
+}
+
+.hola {
+  font-size: 18px;
+  margin:20px
+}
+
+.avatar {
+  position: relative;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.dropdownContainer {
+  position: absolute;
+  top: 100%; /* Posiciona el menú desplegable justo debajo del avatar */
+  right: 0;
+  margin-top: 5px; /* Ajusta el margen superior para separarlo del avatar */
+}
+
+.dropdownMenu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #e9e7eb;
+  width: 200px;
+  border-radius: 5px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.dropdownItem {
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.dropdownItem:hover {
+  background-color: #d3d0d4;
+}
+
+.dropdownDivider {
+  margin: 5px 0;
+  border-top: 1px solid #d3d0d4;
+  color: #ff9900;
+}
+
+.dropdownItem:last-child {
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.buttonSL {
+  background-color: transparent;
+  border: none;
+  padding: 10px 20px;
+  margin: 10px;
+  transition: transform 0.3s, box-shadow 0.3s;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+}
+
+.buttonSL:hover {
+  transform: scale(1.1);
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+}
+
+.floral {
+  display: flex;
+  width: 100vw;
+  justify-content: space-between;
+  align-items: center;
+  background-image: url("../../Img/NavFloral.avif");
+  height: 80px;
+  margin-bottom: 40px;
+}
+
+.marino {
+  display: flex;
+  width: 100vw;
+  justify-content: space-between;
+  align-items: center;
+  background-image: url("../../Img/botonMarino.jfif");
+  height: 80px;
+  margin-bottom: 40px;
+}
+
+.floral .select {
+  background-color: #c33b80;
+  margin-left: 60px;
+  height: 40px;
+  color: white;
+  font-size: 20px;
+  border: none;
+  outline: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: 10px;
+  padding: 5px;
+}
+
+.urbanBuy .select {
+  background-color: #ff9900;
+  margin-left: 60px;
+  height: 40px;
+  color: white;
+  font-size: 20px;
+  border: none;
+  outline: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: 10px;
+  padding: 5px;
+}
+
+.marino .select {
+  background-color: #1465bb;
+  margin-left: 60px;
+  height: 40px;
+  color: white;
+  font-size: 20px;
+  border: none;
+  outline: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: 10px;
+  padding: 5px;
+}
+
