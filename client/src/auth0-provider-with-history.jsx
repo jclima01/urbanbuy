@@ -28,5 +28,6 @@ const Auth0ProviderWithHistory = ({ children }) => {
     </Auth0Provider>
   );
 };
+export const a = 0;
 
 export default Auth0ProviderWithHistory;
